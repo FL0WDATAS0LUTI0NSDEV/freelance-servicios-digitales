@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reporte de ventas</title>
+<style>
+:root{--bg:#f7f8fa;--card:#fff;--text:#1d2433;--muted:#5b6475;--accent:#2563eb;--line:#e3e6ec}
+@media (prefers-color-scheme:dark){:root{--bg:#11151c;--card:#1a202b;--text:#e8ecf3;--muted:#a3adbf;--accent:#60a5fa;--line:#2a3140}}
+body{margin:0;font-family:system-ui,sans-serif;background:var(--bg);color:var(--text)}
+main{max-width:900px;margin:auto;padding:32px 16px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:20px 0}
+.kpi,.card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.kpi b{display:block;font-size:1.6rem} .kpi span,.muted{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+table{width:100%;border-collapse:collapse;font-size:.92rem} th,td{text-align:left;padding:6px 4px;border-bottom:1px solid var(--line)}
+td.num{text-align:right;white-space:nowrap} .bar{height:4px;background:var(--accent);border-radius:2px;margin-top:3px;margin-left:auto}
+ul{line-height:1.7}
+</style></head><body><main>
+<h1>Reporte de ventas — Distribuidora (datos ficticios)</h1>
+<p class="muted">Período: 01/01/2026 al 27/03/2026 · Generado automáticamente el 08/11/2026</p>
+<div class="kpis">
+  <div class="kpi"><span>Ventas totales</span><b>$ 2.862.400</b></div>
+  <div class="kpi"><span>Pedidos</span><b>70</b></div>
+  <div class="kpi"><span>Ticket promedio</span><b>$ 40.891</b></div>
+  <div class="kpi"><span>Marzo vs. Febrero</span><b>-65,8 %</b></div>
+</div>
+<div class="card"><h2>Lo más importante</h2><ul>
+  <li>El mejor cliente fue <b>Kiosco La Esquina</b> con $ 871.300 (30 % del total).</li>
+  <li>El producto que más facturó fue <b>Café 500g</b> (208 unidades).</li>
+  <li>Las ventas de marzo bajaron un 65,8 % respecto de febrero.</li>
+</ul></div>
+<h2>Detalle</h2>
+<div class="grid">
+  <div class="card"><h3>Por mes</h3><table><tr><th>Mes</th><th>Monto</th></tr><tr><td>Enero</td><td class='num'>$ 1.023.600<div class='bar' style='width:75%'></div></td></tr><tr><td>Febrero</td><td class='num'>$ 1.370.000<div class='bar' style='width:100%'></div></td></tr><tr><td>Marzo</td><td class='num'>$ 468.800<div class='bar' style='width:34%'></div></td></tr></table></div>
+  <div class="card"><h3>Por cliente</h3><table><tr><th>Cliente</th><th>Monto</th></tr><tr><td>Kiosco La Esquina</td><td class='num'>$ 871.300<div class='bar' style='width:100%'></div></td></tr><tr><td>Almacén Don Pepe</td><td class='num'>$ 537.600<div class='bar' style='width:62%'></div></td></tr><tr><td>Supermercado Sol</td><td class='num'>$ 443.900<div class='bar' style='width:51%'></div></td></tr><tr><td>Bar El Faro</td><td class='num'>$ 421.100<div class='bar' style='width:48%'></div></td></tr><tr><td>Dietética Natura</td><td class='num'>$ 408.300<div class='bar' style='width:47%'></div></td></tr><tr><td>Rotisería Doña Rosa</td><td class='num'>$ 180.200<div class='bar' style='width:21%'></div></td></tr></table></div>
+  <div class="card"><h3>Por producto</h3><table><tr><th>Producto</th><th>Unidades</th><th>Monto</th></tr><tr><td>Café 500g</td><td>208</td><td class='num'>$ 1.414.400<div class='bar' style='width:100%'></div></td></tr><tr><td>Aceite 900ml</td><td>247</td><td class='num'>$ 765.700<div class='bar' style='width:54%'></div></td></tr><tr><td>Yerba 1kg</td><td>80</td><td class='num'>$ 336.000<div class='bar' style='width:24%'></div></td></tr><tr><td>Azúcar 1kg</td><td>137</td><td class='num'>$ 205.500<div class='bar' style='width:15%'></div></td></tr><tr><td>Harina 1kg</td><td>128</td><td class='num'>$ 140.800<div class='bar' style='width:10%'></div></td></tr></table></div>
+  <div class="card"><h3>Por vendedor</h3><table><tr><th>Vendedor</th><th>Monto</th></tr><tr><td>Laura Gómez</td><td class='num'>$ 1.194.600<div class='bar' style='width:100%'></div></td></tr><tr><td>Martín Ruiz</td><td class='num'>$ 1.037.500<div class='bar' style='width:87%'></div></td></tr><tr><td>Sofía Paz</td><td class='num'>$ 630.300<div class='bar' style='width:53%'></div></td></tr></table></div>
+  <div class="card"><h3>Por provincia</h3><table><tr><th>Provincia</th><th>Monto</th></tr><tr><td>Córdoba</td><td class='num'>$ 1.435.300<div class='bar' style='width:100%'></div></td></tr><tr><td>Buenos Aires</td><td class='num'>$ 866.900<div class='bar' style='width:60%'></div></td></tr><tr><td>Santa Fe</td><td class='num'>$ 560.200<div class='bar' style='width:39%'></div></td></tr></table></div>
+</div>
+<p class="muted">Ejemplo de portafolio de FlowData Solutions. Todos los datos son ficticios.</p>
+</main></body></html>

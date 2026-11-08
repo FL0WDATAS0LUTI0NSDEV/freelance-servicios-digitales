@@ -1,0 +1,71 @@
+Fecha,Cliente,Producto,Cantidad,Monto,Vendedor,Provincia
+2026-01-01,Almacén Don Pepe,Yerba 1kg,9,37800.0,Martín Ruiz,Córdoba
+2026-01-02,Supermercado Sol,Aceite 900ml,7,21700.0,Sofía Paz,Córdoba
+2026-01-03,Almacén Don Pepe,Harina 1kg,14,15400.0,Sofía Paz,Buenos Aires
+2026-01-03,Kiosco La Esquina,Azúcar 1kg,14,21000.0,Laura Gómez,Buenos Aires
+2026-01-04,Dietética Natura,Aceite 900ml,23,71300.0,Martín Ruiz,Córdoba
+2026-01-05,Dietética Natura,Azúcar 1kg,4,6000.0,Martín Ruiz,Santa Fe
+2026-01-06,Almacén Don Pepe,Azúcar 1kg,15,22500.0,Martín Ruiz,Córdoba
+2026-01-06,Kiosco La Esquina,Azúcar 1kg,2,3000.0,Laura Gómez,Córdoba
+2026-01-08,Rotisería Doña Rosa,Harina 1kg,2,2200.0,Sofía Paz,Córdoba
+2026-01-09,Almacén Don Pepe,Yerba 1kg,1,4200.0,Sofía Paz,Santa Fe
+2026-01-10,Bar El Faro,Aceite 900ml,5,15500.0,Laura Gómez,Santa Fe
+2026-01-11,Bar El Faro,Café 500g,16,108800.0,Sofía Paz,Buenos Aires
+2026-01-11,Rotisería Doña Rosa,Azúcar 1kg,21,31500.0,Sofía Paz,Córdoba
+2026-01-11,Supermercado Sol,Harina 1kg,3,3300.0,Laura Gómez,Córdoba
+2026-01-12,Rotisería Doña Rosa,Azúcar 1kg,3,4500.0,Martín Ruiz,Buenos Aires
+2026-01-15,Almacén Don Pepe,Café 500g,24,163200.0,Martín Ruiz,Córdoba
+2026-01-16,Kiosco La Esquina,Café 500g,10,68000.0,Laura Gómez,Córdoba
+2026-01-19,Kiosco La Esquina,Aceite 900ml,21,65100.0,Sofía Paz,Santa Fe
+2026-01-20,Supermercado Sol,Café 500g,3,20400.0,Laura Gómez,Córdoba
+2026-01-22,Kiosco La Esquina,Aceite 900ml,12,37200.0,Martín Ruiz,Buenos Aires
+2026-01-24,Almacén Don Pepe,Harina 1kg,18,19800.0,Sofía Paz,Santa Fe
+2026-01-24,Dietética Natura,Aceite 900ml,16,49600.0,Laura Gómez,Córdoba
+2026-01-26,Almacén Don Pepe,Café 500g,4,27200.0,Martín Ruiz,Córdoba
+2026-01-26,Kiosco La Esquina,Café 500g,23,156400.0,Laura Gómez,Santa Fe
+2026-01-27,Kiosco La Esquina,Azúcar 1kg,21,31500.0,Laura Gómez,Córdoba
+2026-01-27,Supermercado Sol,Harina 1kg,15,16500.0,Martín Ruiz,Buenos Aires
+2026-02-03,Bar El Faro,Aceite 900ml,9,27900.0,Sofía Paz,Buenos Aires
+2026-02-05,Almacén Don Pepe,Aceite 900ml,21,65100.0,Laura Gómez,Santa Fe
+2026-02-05,Bar El Faro,Harina 1kg,1,1100.0,Martín Ruiz,Santa Fe
+2026-02-06,Dietética Natura,Azúcar 1kg,5,7500.0,Martín Ruiz,Buenos Aires
+2026-02-06,Supermercado Sol,Aceite 900ml,21,65100.0,Laura Gómez,Santa Fe
+2026-02-08,Kiosco La Esquina,Café 500g,3,20400.0,Laura Gómez,Buenos Aires
+2026-02-09,Bar El Faro,Café 500g,23,156400.0,Martín Ruiz,Córdoba
+2026-02-10,Bar El Faro,Café 500g,3,20400.0,Sofía Paz,Buenos Aires
+2026-02-10,Dietética Natura,Harina 1kg,10,11000.0,Martín Ruiz,Córdoba
+2026-02-15,Kiosco La Esquina,Café 500g,4,27200.0,Laura Gómez,Buenos Aires
+2026-02-15,Rotisería Doña Rosa,Azúcar 1kg,3,4500.0,Laura Gómez,Córdoba
+2026-02-16,Kiosco La Esquina,Azúcar 1kg,3,4500.0,Laura Gómez,Santa Fe
+2026-02-17,Dietética Natura,Harina 1kg,7,7700.0,Martín Ruiz,Buenos Aires
+2026-02-17,Kiosco La Esquina,Café 500g,18,122400.0,Laura Gómez,Córdoba
+2026-02-18,Almacén Don Pepe,Aceite 900ml,5,15500.0,Sofía Paz,Córdoba
+2026-02-18,Bar El Faro,Azúcar 1kg,20,30000.0,Martín Ruiz,Buenos Aires
+2026-02-18,Rotisería Doña Rosa,Harina 1kg,7,7700.0,Laura Gómez,Buenos Aires
+2026-02-20,Dietética Natura,Aceite 900ml,19,58900.0,Laura Gómez,Buenos Aires
+2026-02-20,Rotisería Doña Rosa,Yerba 1kg,9,37800.0,Sofía Paz,Santa Fe
+2026-02-21,Kiosco La Esquina,Aceite 900ml,2,6200.0,Laura Gómez,Buenos Aires
+2026-02-21,Kiosco La Esquina,Café 500g,20,136000.0,Laura Gómez,Córdoba
+2026-02-22,Dietética Natura,Aceite 900ml,18,55800.0,Sofía Paz,Córdoba
+2026-02-22,Kiosco La Esquina,Yerba 1kg,20,84000.0,Martín Ruiz,Buenos Aires
+2026-02-23,Supermercado Sol,Aceite 900ml,22,68200.0,Laura Gómez,Córdoba
+2026-02-24,Supermercado Sol,Café 500g,14,95200.0,Martín Ruiz,Córdoba
+2026-02-25,Almacén Don Pepe,Café 500g,20,136000.0,Laura Gómez,Buenos Aires
+2026-02-25,Supermercado Sol,Yerba 1kg,16,67200.0,Sofía Paz,Córdoba
+2026-02-28,Almacén Don Pepe,Yerba 1kg,5,21000.0,Martín Ruiz,Santa Fe
+2026-02-28,Kiosco La Esquina,Aceite 900ml,3,9300.0,Martín Ruiz,Córdoba
+2026-03-01,Bar El Faro,Yerba 1kg,7,29400.0,Martín Ruiz,Buenos Aires
+2026-03-01,Supermercado Sol,Azúcar 1kg,9,13500.0,Laura Gómez,Córdoba
+2026-03-02,Supermercado Sol,Café 500g,7,47600.0,Laura Gómez,Buenos Aires
+2026-03-03,Bar El Faro,Harina 1kg,2,2200.0,Laura Gómez,Córdoba
+2026-03-04,Kiosco La Esquina,Harina 1kg,24,26400.0,Martín Ruiz,Buenos Aires
+2026-03-04,Supermercado Sol,Yerba 1kg,6,25200.0,Laura Gómez,Buenos Aires
+2026-03-05,Dietética Natura,Café 500g,16,108800.0,Martín Ruiz,Córdoba
+2026-03-06,Bar El Faro,Yerba 1kg,7,29400.0,Martín Ruiz,Santa Fe
+2026-03-08,Dietética Natura,Azúcar 1kg,11,16500.0,Martín Ruiz,Santa Fe
+2026-03-17,Rotisería Doña Rosa,Harina 1kg,16,17600.0,Martín Ruiz,Buenos Aires
+2026-03-17,Rotisería Doña Rosa,Aceite 900ml,24,74400.0,Sofía Paz,Buenos Aires
+2026-03-18,Dietética Natura,Azúcar 1kg,6,9000.0,Laura Gómez,Buenos Aires
+2026-03-18,Kiosco La Esquina,Aceite 900ml,17,52700.0,Sofía Paz,Santa Fe
+2026-03-25,Dietética Natura,Aceite 900ml,2,6200.0,Laura Gómez,Córdoba
+2026-03-27,Almacén Don Pepe,Harina 1kg,9,9900.0,Sofía Paz,Córdoba
