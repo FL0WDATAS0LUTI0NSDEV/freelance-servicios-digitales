@@ -7,13 +7,15 @@
 - **Seguimiento de facturación**: control de cobros pendientes, recordatorios de pago, planilla de ingresos.
 
 ## Modalidades
-| Modalidad | Detalle |
-|---|---|
-| Por hora | Tareas puntuales |
-| Bolsa de horas mensual | Ej.: 10 / 20 / 40 horas al mes |
-| Mensual fijo | Tareas recurrentes definidas |
+| Modalidad | Detalle | Precio |
+|---|---|---|
+| Por hora | Tareas puntuales | USD 6/h |
+| 10 horas al mes | Bolsa de horas mensual | USD 60 |
+| 20 horas al mes | Bolsa de horas mensual | USD 110 |
+| 40 horas al mes | Bolsa de horas mensual | USD 200 |
+| Mensual fijo | Tareas recurrentes definidas | A convenir |
 
-_Precios: [completar]_
+_Precios de lanzamiento._
 
 ## Herramientas
 Gmail / Outlook, Google Calendar, Google Workspace, Notion, Trello, WhatsApp Business.
