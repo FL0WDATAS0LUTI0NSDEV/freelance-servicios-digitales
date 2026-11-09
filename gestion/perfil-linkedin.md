@@ -24,8 +24,8 @@
 | Tipo | `Autónomo` / `Empresa privada` |
 | Eslogan (máx. 120 caracteres) | ver abajo |
 
-3. **Logo:** el isotipo de la web (cuadrado con el flujo de datos en cian/azul) sobre fondo `#0B1325`, 400 × 400 px. Se puede armar en Canva.
-4. **Portada (1128 × 191 px):** fondo `#0B1325` con el texto `Automatización de Procesos & Soluciones de Datos` y, más chico, `Power BI · Python · SQL · Dashboards`.
+3. **Logo:** `marca/isotipo-400.png` (400 × 400 px, listo).
+4. **Portada:** `marca/linkedin-portada-1128x191.png` (1128 × 191 px, lista).
 
 ### Eslogan (elegí uno)
 ```
@@ -33,6 +33,9 @@ Automatización de Procesos & Soluciones de Datos para PYMEs
 ```
 ```
 Dashboards en Power BI, reportes automáticos y apps web para PYMEs
+```
+```
+Power BI, facturas PDF a Excel y reportes automáticos para PYMEs
 ```
 
 ---
@@ -43,6 +46,7 @@ FlowData Solutions ayuda a pequeñas y medianas empresas a usar mejor sus datos:
 
 🔹 Qué hacemos
 • Dashboards en Power BI: modelo de datos, medidas DAX y diseño a medida.
+• Facturas y comprobantes en PDF a Excel: Libro IVA con controles de CUIT, duplicados y totales.
 • Limpieza y organización de planillas y bases de datos (Python, SQL, Excel).
 • Reportes automáticos que se generan con un clic, en Excel o en formato web.
 • Análisis de datos y modelos simples de pronóstico y segmentación.
@@ -55,7 +59,7 @@ Mantenemos tus reportes y dashboards actualizados y funcionando, con horas inclu
 Entendemos el problema, proponemos una solución con alcance, plazo y precio cerrados, y entregamos por etapas. Al final queda la herramienta funcionando y documentada.
 
 🔹 Portafolio
-Ejemplos con datos ficticios: dashboard interactivo, limpieza de datos y reportes automáticos.
+Ejemplos con datos ficticios: dashboard interactivo, facturas PDF a Excel, limpieza de datos y reportes automáticos.
 👉 https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/
 
 📩 flowdata.solutions.dev@gmail.com
@@ -65,7 +69,7 @@ Ejemplos con datos ficticios: dashboard interactivo, limpieza de datos y reporte
 
 ### Especialidades (hasta 20)
 ```
-Power BI, Análisis de datos, Business Intelligence, Dashboards, DAX, Power Query, Python, SQL, Limpieza de datos, Automatización de reportes, Excel, Visualización de datos, Ciencia de datos, Desarrollo web, PYMEs
+Power BI, Análisis de datos, Business Intelligence, Dashboards, DAX, Power Query, Python, SQL, Limpieza de datos, Automatización de reportes, Extracción de datos de PDF, Libro IVA, Excel, Visualización de datos, Ciencia de datos, Desarrollo web, PYMEs
 ```
 
 ### Botón personalizado
@@ -106,7 +110,7 @@ Como la página no puede escribirle primero a nadie, la estrategia cambia:
 
 **Cuando pide precio de entrada:**
 ```
-Depende del alcance, pero como referencia: limpieza de una planilla desde USD 40, un reporte automático desde USD 120 y un dashboard en Power BI desde USD 150. Con un ejemplo de tus datos te paso el precio exacto, sin compromiso.
+Depende del alcance, pero como referencia: pasar hasta 50 facturas PDF a Excel desde USD 40, limpieza de una planilla desde USD 40, un reporte automático desde USD 120 y un dashboard en Power BI desde USD 150. Con un ejemplo de tus datos te paso el precio exacto, sin compromiso.
 ```
 
 **Para que el contacto siga por la plataforma que prefiera:** si el cliente viene de LinkedIn, el trabajo se puede contratar directo (sin comisión): acordá alcance, plazo y forma de pago por escrito (podés usar `plantillas/propuesta-comercial.md`).
@@ -121,6 +125,7 @@ Ideas que funcionan para una página de datos:
 3. **Tip de Power BI** para PYMEs: una medida DAX útil explicada en 5 líneas.
 4. **Tip de Excel:** cómo evitar los errores más comunes en planillas de ventas.
 5. **Caso del portafolio:** el dashboard interactivo, qué problema resuelve.
+5 bis. **Facturas PDF a Excel:** "¿Tu equipo copia facturas a mano todos los meses?" con la imagen del ejemplo 6 (14 PDF, 1 duplicado y 1 CUIT erróneo detectados).
 6. **Pregunta a la comunidad:** "¿Cuántas horas por mes le dedica tu equipo a armar reportes?" (encuesta).
 7. **Mini guía:** "3 indicadores que toda PYME debería mirar cada mes".
 
@@ -132,6 +137,7 @@ Muchas PYMEs pierden horas cada mes armando reportes a mano, corrigiendo planill
 
 Para eso estamos:
 📊 Dashboards en Power BI con los indicadores que importan.
+🧾 Facturas en PDF convertidas en Excel, listas para el Libro IVA.
 🧹 Planillas y bases de datos ordenadas y confiables.
 ⚙️ Reportes que se generan solos.
 💻 Herramientas web a medida.
