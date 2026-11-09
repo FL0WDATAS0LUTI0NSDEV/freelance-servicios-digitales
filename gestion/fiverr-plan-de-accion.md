@@ -166,7 +166,13 @@ Herramientas: Python (pandas), Excel.
 
 Con precios de lanzamiento el neto ronda 9-11 USD/h: la meta de USD 1.500 netos/mes exigiría ~12 pedidos Estándar (~140 h). **Revisar el 30/11:** tras 5 reseñas, subir a ~65/200/400 y sumar extras (entrega rápida, página adicional, actualización mensual).
 
-## Segundo gig propuesto: facturas PDF a Excel (09/11/2026)
+## Segundo gig: facturas PDF a Excel — PUBLICADO el 09/11/2026
+Verificado con el conector: activo, 40 / 90 / 180, descripción completa. Textos finales en `gestion/gig-facturas-fiverr.md`.
+
+### Pendiente del gig de Power BI
+- [ ] Corregir "HHasta" en la descripción del paquete Premium (detectado con el conector el 09/11).
+
+### Idea original
 Idea del dueño: lo hace todo el tiempo en su trabajo (se vende la habilidad; el código del ejemplo se escribió desde cero, sin nada del empleador).
 Competencia (conector de Fiverr, 09/11): en inglés hay vendedores fuertes (saifmahin 280 pedidos, khan937 80) con "PDF to Excel"; **en español no apareció ninguno especializado**, solo perfiles generales de automatización. Diferencial: español + formato argentino (CUIT, alícuotas, percepciones, Libro IVA) + controles de calidad. Público: comercios, estudios contables, administraciones. Es un trabajo **recurrente** (todos los meses).
 Ejemplo de portafolio: `portafolio/06-facturas-pdf-a-excel/`.
