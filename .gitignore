@@ -1,5 +1,7 @@
 # Datos sensibles de clientes: no subir
 clientes-privado/
+*-privado.xlsx
+*-privado.csv
 *.env
 # Python
 __pycache__/
