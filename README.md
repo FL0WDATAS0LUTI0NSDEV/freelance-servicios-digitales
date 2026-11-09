@@ -22,6 +22,7 @@ Ejemplos con datos ficticios: [limpieza de una planilla](portafolio/01-limpieza-
 ├── index.html            # Página web / portafolio (publicable con GitHub Pages)
 ├── servicios/            # Descripción de cada servicio
 ├── portafolio/           # Ejemplos de trabajo (datos ficticios)
+├── referencias/          # Caso de prueba completo con los agentes (datos ficticios)
 ├── plantillas/           # Kit de propuestas, propuesta comercial, presupuesto, reporte de entrega
 ├── .claude/skills/       # Skills de Claude (diseño de marca + find-skills)
 ├── .claude/agents/       # Agentes: propuestas, datos, reportes, calidad, LinkedIn
