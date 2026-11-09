@@ -3,7 +3,7 @@
 Texto listo para copiar y pegar en cada campo del perfil.
 Las partes entre corchetes `[ ]` se completan con datos reales. **No pongas experiencia, clientes ni títulos que no tengas**: Workana y los clientes lo verifican.
 
-> **Privacidad:** Workana pide verificar tu identidad y muestra tu nombre (en general, nombre e inicial del apellido) y tu foto a los clientes; no se puede usar un perfil anónimo. Lo que sí controlás: **no menciones a tu empleador** en ningún campo, usá el mail de FlowData Solutions y, en "Experiencia laboral", poné tu empleo actual solo como "Analista de datos · Empresa del sector energético (confidencial)" o dejalo afuera.
+> **Privacidad:** Workana pide verificar tu identidad y muestra tu nombre (en general, nombre e inicial del apellido) y tu foto a los clientes; no se puede usar un perfil anónimo. Lo que sí controlás: **no menciones a tu empleador** en ningún campo, usá el mail de FlowData Solutions y, en "Experiencia laboral", poné tu empleo actual solo como "Desarrollador analista de datos · Empresa privada (confidencial)" o dejalo afuera.
 
 ---
 
