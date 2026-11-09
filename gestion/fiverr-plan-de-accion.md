@@ -165,3 +165,15 @@ Herramientas: Python (pandas), Excel.
 | Limpieza de planilla | 4 | 45 | 36 | 9 |
 
 Con precios de lanzamiento el neto ronda 9-11 USD/h: la meta de USD 1.500 netos/mes exigiría ~12 pedidos Estándar (~140 h). **Revisar el 30/11:** tras 5 reseñas, subir a ~65/200/400 y sumar extras (entrega rápida, página adicional, actualización mensual).
+
+## Segundo gig propuesto: facturas PDF a Excel (09/11/2026)
+Idea del dueño: lo hace todo el tiempo en su trabajo (se vende la habilidad; el código del ejemplo se escribió desde cero, sin nada del empleador).
+Competencia (conector de Fiverr, 09/11): en inglés hay vendedores fuertes (saifmahin 280 pedidos, khan937 80) con "PDF to Excel"; **en español no apareció ninguno especializado**, solo perfiles generales de automatización. Diferencial: español + formato argentino (CUIT, alícuotas, percepciones, Libro IVA) + controles de calidad. Público: comercios, estudios contables, administraciones. Es un trabajo **recurrente** (todos los meses).
+Ejemplo de portafolio: `portafolio/06-facturas-pdf-a-excel/`.
+
+| | Básico — USD 40 | Estándar — USD 90 | Premium — USD 180 |
+|---|---|---|---|
+| Alcance | Hasta 50 facturas, hasta 2 diseños de proveedor | Hasta 200 facturas, hasta 6 diseños, controles de CUIT, duplicados y totales | Hasta 500 facturas + script reutilizable para los meses siguientes y guía de uso |
+| Entrega / revisiones | 2 días / 1 | 4 días / 2 | 7 días / 3 |
+
+Título tentativo: `I will extract data from PDF invoices to excel in spanish`. Extras: entrega rápida, facturas escaneadas (OCR), proceso mensual.

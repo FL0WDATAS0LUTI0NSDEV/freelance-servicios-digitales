@@ -9,5 +9,6 @@ Ejemplos de trabajo real con **datos y negocios ficticios**, para mostrar cómo 
 | 3 | [Textos para la web de un taller](03-redaccion-web/) | ✍️ Redacción y contenido | Antes y después de la sección de inicio de una web |
 | 4 | [Dashboard de ventas interactivo](04-dashboard-interactivo/) | 📊 Datos y automatización | Tablero con filtros, indicadores, gráficos y tabla exportable ([abrirlo](https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/portafolio/04-dashboard-interactivo/)) |
 | 5 | [Dashboard en Power BI](05-dashboard-power-bi/) *(en construcción)* | 📊 Datos y BI | Modelo estrella, Power Query, medidas DAX, objetivos y formato condicional |
+| 6 | [Facturas PDF a Libro IVA en Excel](06-facturas-pdf-a-excel/) | 📊 Datos y automatización | 14 facturas en PDF de distintos proveedores leídas automáticamente, con control de CUIT, duplicados y totales |
 
 ¿Tenés un problema parecido? Escribime a **flowdata.solutions.dev@gmail.com**.

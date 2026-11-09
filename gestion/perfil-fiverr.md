@@ -166,3 +166,19 @@ Qué hice:
 
 Resultado: de 77 filas desordenadas a una base confiable, lista para analizar o para cargar en Power BI.
 ```
+
+### 4. Facturas en PDF a Libro IVA en Excel
+Imagen: `4-facturas-pdf-excel-4x3.png` · Costo: 90 · Duración: menos de 1 semana · Inicio: 11/2026 · Categorías: Data Entry, Data Processing, Data Cleaning, Data Analytics.
+```
+Ejemplo de portafolio con datos ficticios.
+
+Problema: un comercio recibe todos los meses decenas de facturas de compra en PDF, cada proveedor con su propio diseño, y las copiaba a mano en Excel para el Libro IVA.
+
+Qué hice:
+- Script en Python que lee la carpeta de PDF y extrae fecha, tipo, punto de venta, número, CUIT, razón social, neto e IVA por alícuota, percepciones y total.
+- Reconoce distintos diseños de factura.
+- Controles automáticos: CUIT con dígito verificador inválido, facturas duplicadas, sumas que no cierran y fechas fuera del período.
+- Excel con el Libro IVA Compras, resumen por proveedor con fórmulas y hoja de controles.
+
+Resultado: 14 PDF procesados en segundos, 1 duplicado y 1 CUIT erróneo detectados, 0 diferencias contra los importes originales.
+```
