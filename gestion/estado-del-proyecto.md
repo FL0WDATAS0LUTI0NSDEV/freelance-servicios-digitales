@@ -15,8 +15,8 @@
 ### Fiverr
 - [ ] Reportar a **eva8090** y **bearlion3378** (estafa con archivo .html; no se abrió) y después archivar los chats.
 - [ ] Verificar que la **primera imagen de la galería** sea `1-portada-power-bi-es.png`.
-- [ ] Perfil: sacar **inglés** de idiomas, título en español, nivel de **Python en Intermedio**.
-- [ ] Cargar el **portafolio de muestra** del perfil (3 imágenes de `portafolio/capturas/`).
+- [x] Perfil: idioma solo español, "Acerca de" en español y certificación cargada.
+- [ ] Resto del perfil y cambios del gig: checklist en **`gestion/fiverr-plan-de-accion.md`** (título del perfil, experiencia, habilidades con Python en Intermedio, portfolio, video, paquetes, tags, FAQ).
 - [ ] **Verificación de identidad**. W-9: **no corresponde** (no es persona de EE. UU.); si piden, W-8BEN.
 - [ ] Confirmar que el gig quede **Activo**.
 
