@@ -22,6 +22,7 @@ Ejemplos con datos ficticios: [limpieza de una planilla](portafolio/01-limpieza-
 ├── servicios/            # Descripción de cada servicio
 ├── portafolio/           # Ejemplos de trabajo (datos ficticios)
 ├── plantillas/           # Propuesta comercial, presupuesto, reporte de entrega
+├── .claude/skills/       # Skills de Claude: frontend-design y top-design
 └── gestion/              # Plan de lanzamiento, perfiles (Workana, LinkedIn, Fiverr), seguimiento de clientes
 ```
 
