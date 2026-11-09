@@ -174,7 +174,7 @@ Message me with your project and I'll be happy to help!
 
 **Título**
 ```
-I will be your spanish virtual assistant for email, calendar and customer support
+I will be your spanish virtual assistant for email, calendar and support
 ```
 
 **Tags:**
