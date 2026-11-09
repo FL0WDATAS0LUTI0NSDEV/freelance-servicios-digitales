@@ -111,7 +111,7 @@ Q: Do I need to install Python?
 A: No. You receive the final file. The script is optional, for re-running it yourself.
 ```
 
-**Imagen del gig (1280 × 769 px):** captura de antes y después de la planilla del portafolio, con el texto "Messy data → Clean data" (se arma en Canva).
+**Imagen del gig (1280 × 769 px):** diseño en Canva: https://canva.link/0m988trwn6vrw4n — idea original: captura de antes y después de la planilla del portafolio, con el texto "Messy data → Clean data" (se arma en Canva).
 
 ---
 
@@ -194,7 +194,7 @@ Q: Can you publish it for my team?
 A: Yes, if you give me access to your workspace. Otherwise I'll guide you step by step.
 ```
 
-**Imagen del gig (1280 × 769 px):** una captura de tu dashboard de Power BI (cuando lo termines, del ejemplo 5 del portafolio) con el texto "Power BI Dashboards". Mientras tanto, podés usar una captura del dashboard interactivo del ejemplo 4.
+**Imagen del gig (1280 × 769 px):** diseño en Canva listo para revisar y descargar: https://canva.link/b13jgckuz5svk4w — más adelante, reemplazala o complementala con una captura de tu dashboard de Power BI (cuando lo termines, del ejemplo 5 del portafolio) con el texto "Power BI Dashboards". Mientras tanto, podés usar una captura del dashboard interactivo del ejemplo 4.
 
 > Cuando tengas listo el ejemplo de Power BI (`portafolio/05-dashboard-power-bi/`), reemplazá el link del EXAMPLE por las capturas o el video de ese reporte: es más convincente mostrar Power BI real.
 
