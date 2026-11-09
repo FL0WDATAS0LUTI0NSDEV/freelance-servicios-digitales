@@ -114,3 +114,17 @@ R: El servicio es en español.
 - **Revisá la sección "Buyer Requests" / "Briefs"** si te la habilitan, y mandá ofertas personalizadas.
 - **Pedí reseñas** al terminar cada pedido y entregá antes del plazo cuando puedas.
 - **Nunca saques la conversación ni el pago fuera de Fiverr**: está prohibido y te pueden suspender la cuenta.
+
+---
+
+## Portafolio del perfil (3 proyectos)
+Todos son **ejemplos con datos ficticios**: decilo en cada descripción. Sin links, mails ni datos de contacto.
+
+| # | Título | Imagen | Descripción |
+|---|---|---|---|
+| 1 | Dashboard de ventas interactivo | `portafolio/capturas/1-dashboard-interactivo.png` | Tablero de ventas con filtros por período, provincia, vendedor y producto. Indicadores clave comparados con el período anterior, gráficos clicables y exportación a CSV. Ejemplo con datos ficticios. |
+| 2 | De la planilla desordenada al reporte | `portafolio/capturas/2-caso-completo-reporte.png` | Caso completo: exportación de ventas con fechas mezcladas, duplicados y faltantes. Limpieza reproducible, reporte web y en Excel, y control de calidad final con el total conciliado. Ejemplo con datos ficticios. |
+| 3 | Limpieza de una planilla de ventas | `portafolio/capturas/3-limpieza-de-datos.png` | Unifiqué 58 formas distintas de escribir clientes, productos y provincias, completé datos faltantes y eliminé duplicados. De 77 filas desordenadas a una base confiable, lista para analizar. Ejemplo con datos ficticios. |
+
+Habilidades por proyecto: 1) Power BI, Visualización de datos, Dashboard · 2) Python, Excel, Análisis de datos · 3) Python, Pandas, Limpieza de datos.
+Gig relacionado: el de Power BI en los tres.
