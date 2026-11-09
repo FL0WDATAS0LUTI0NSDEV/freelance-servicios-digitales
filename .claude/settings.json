@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git:*)",
+      "Bash(python3:*)",
+      "Bash(node:*)",
+      "Bash(pip install:*)",
+      "Bash(npx skills find:*)",
+      "Bash(npx skills add:*)",
+      "Bash(npx skills update:*)"
+    ],
+    "deny": [
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)"
+    ]
+  }
+}
