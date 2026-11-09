@@ -118,13 +118,51 @@ R: El servicio es en español.
 ---
 
 ## Portafolio del perfil (3 proyectos)
-Todos son **ejemplos con datos ficticios**: decilo en cada descripción. Sin links, mails ni datos de contacto.
+Formulario de Fiverr: nombre (máx. 50), industria (máx. 6), duración, costo (vacío: son ejemplos), fecha de inicio, descripción (máx. 1400) y adjuntos (1024×768, 4:3).
+Imágenes listas en `portafolio/capturas/fiverr/portafolio-4x3/`. Todos son **ejemplos con datos ficticios**; sin links ni contacto.
 
-| # | Título | Imagen | Descripción |
-|---|---|---|---|
-| 1 | Dashboard de ventas interactivo | `portafolio/capturas/1-dashboard-interactivo.png` | Tablero de ventas con filtros por período, provincia, vendedor y producto. Indicadores clave comparados con el período anterior, gráficos clicables y exportación a CSV. Ejemplo con datos ficticios. |
-| 2 | De la planilla desordenada al reporte | `portafolio/capturas/2-caso-completo-reporte.png` | Caso completo: exportación de ventas con fechas mezcladas, duplicados y faltantes. Limpieza reproducible, reporte web y en Excel, y control de calidad final con el total conciliado. Ejemplo con datos ficticios. |
-| 3 | Limpieza de una planilla de ventas | `portafolio/capturas/3-limpieza-de-datos.png` | Unifiqué 58 formas distintas de escribir clientes, productos y provincias, completé datos faltantes y eliminé duplicados. De 77 filas desordenadas a una base confiable, lista para analizar. Ejemplo con datos ficticios. |
+### 1. Dashboard de ventas interactivo
+Imagen: `1-dashboard-ventas-4x3.png` · Duración: menos de 1 semana · Inicio: 11/2026 · Industria: comercio mayorista / minorista.
+```
+Ejemplo de portafolio con datos ficticios de una distribuidora.
 
-Habilidades por proyecto: 1) Power BI, Visualización de datos, Dashboard · 2) Python, Excel, Análisis de datos · 3) Python, Pandas, Limpieza de datos.
-Gig relacionado: el de Power BI en los tres.
+Objetivo: que el dueño vea en una sola pantalla cómo van las ventas, sin armar planillas a mano cada mes.
+
+Qué hice:
+- Tablero con filtros por período, provincia, vendedor, producto y cliente.
+- Indicadores clave: ventas, pedidos, ticket promedio y unidades, comparados con el período anterior.
+- Gráficos clicables: al tocar un mes o un cliente, todo el tablero se filtra.
+- Exportación a CSV de los datos filtrados.
+
+Resultado: una vista clara del negocio que se actualiza con los datos nuevos, lista para revisar en minutos.
+```
+
+### 2. De la planilla desordenada al reporte
+Imagen: `2-caso-completo-4x3.png` · Duración: menos de 1 semana · Inicio: 11/2026 · Industria: comercio minorista.
+```
+Caso completo con datos ficticios de una ferretería.
+
+Punto de partida: una exportación de ventas con fechas en distintos formatos, filas duplicadas y datos faltantes.
+
+Qué hice:
+- Limpieza reproducible: el mismo proceso sirve para los meses siguientes.
+- Reporte mensual en formato web y en Excel, con indicadores, rankings y conclusiones.
+- Control de calidad final: total conciliado contra el archivo original y sin errores bloqueantes.
+
+Resultado: de un archivo en el que no se podía confiar a un reporte listo para tomar decisiones.
+```
+
+### 3. Limpieza de una planilla de ventas
+Imagen: `3-limpieza-4x3.png` · Duración: menos de 1 semana · Inicio: 11/2026 · Industria: comercio minorista.
+```
+Ejemplo de portafolio con datos ficticios.
+
+Problema: una planilla de ventas cargada a mano por varias personas. El mismo cliente, producto o provincia estaba escrito de muchas formas distintas, con datos faltantes y filas repetidas.
+
+Qué hice:
+- Unifiqué 58 variantes de nombres de clientes, productos y provincias.
+- Completé los datos faltantes que se podían deducir y marqué los que no.
+- Eliminé los duplicados.
+
+Resultado: de 77 filas desordenadas a una base confiable, lista para analizar o para cargar en Power BI.
+```
