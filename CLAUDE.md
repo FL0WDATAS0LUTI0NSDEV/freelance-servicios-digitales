@@ -10,6 +10,9 @@ Este repo define cinco skills en `.claude/skills/`:
 
 **Directiva de ejecución:** al crear o modificar cualquier código de interfaz (por ejemplo `index.html`, los reportes HTML del portafolio o componentes nuevos), aplicar **siempre** los criterios combinados de `frontend-design` y `top-design`, con los tokens de `theme-factory` y las reglas de `brand-guidelines`.
 
+## Agentes del proyecto
+En `.claude/agents/` hay cinco agentes: `redactor-propuestas`, `analista-datos`, `generador-reportes`, `control-calidad` y `contenido-linkedin` (detalle en `gestion/agentes.md`). Usalos cuando la tarea coincida. Los datos de clientes van solo en `clientes-privado/<cliente>/` (ignorado por git).
+
 ## Contexto del repo
 - Web pública servida con GitHub Pages desde `main` (raíz): https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/
 - Repo público: no subir datos reales de clientes, contratos ni facturas.
