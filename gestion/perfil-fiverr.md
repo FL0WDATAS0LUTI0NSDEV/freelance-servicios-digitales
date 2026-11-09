@@ -21,17 +21,17 @@ flowdata_dev
 
 **Profile description** (máx. 600 caracteres)
 ```
-Hi! I'm [your name], founder of FlowData Solutions. I help small businesses and freelancers turn messy spreadsheets into clean, reliable data and automate the reports they build by hand every month.
+Hi! I'm [your name], a data analyst and founder of FlowData Solutions. I build Power BI dashboards, clean messy spreadsheets and automate the reports small businesses build by hand every month.
 
-I work with Python (pandas), Excel and Google Sheets. I also write and proofread Spanish content for websites and business proposals.
+I work with Power BI (DAX, Power Query), Python (pandas), SQL and Excel. I also write Spanish content for websites.
 
 Clear communication, on-time delivery and revisions included. Check my portfolio: https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/
 ```
-_Traducción: Soy [tu nombre], fundador de FlowData Solutions. Ayudo a pequeñas empresas a convertir planillas desordenadas en datos confiables y a automatizar reportes. Trabajo con Python, Excel y Google Sheets, y también escribo y corrijo textos en español._
+_Traducción: Soy [tu nombre], analista de datos y fundador de FlowData Solutions. Armo dashboards en Power BI, limpio planillas desordenadas y automatizo reportes. Trabajo con Power BI (DAX, Power Query), Python, SQL y Excel, y también escribo textos en español._
 
 **Idiomas:** Español (Nativo) · Inglés ([tu nivel real: Básico / Conversacional / Fluido])
 
-**Habilidades:** Python · Pandas · Microsoft Excel · Google Sheets · Data Cleaning · Data Analysis · Report Automation · Spanish Copywriting · Spanish Proofreading
+**Habilidades:** Power BI · DAX · Power Query · SQL · Python · Pandas · Microsoft Excel · Google Sheets · Data Cleaning · Data Analysis · Report Automation · Spanish Copywriting · Spanish Proofreading
 
 ---
 
@@ -112,6 +112,91 @@ A: No. You receive the final file. The script is optional, for re-running it you
 ```
 
 **Imagen del gig (1280 × 769 px):** captura de antes y después de la planilla del portafolio, con el texto "Messy data → Clean data" (se arma en Canva).
+
+---
+
+## 3b. Gig Power BI — Dashboards (⭐ prioridad junto con el Gig 1)
+
+Power BI es tu fuerte y de lo más buscado en Fiverr: conviene tenerlo como **gig propio** en vez de mezclarlo con la limpieza de datos.
+
+**Título** (máx. 80 caracteres)
+```
+I will create an interactive power bi dashboard for your business data
+```
+
+**Categoría:** Data → Data Visualization (o Data Analytics → Dashboards)
+
+**Tags** (máx. 5):
+```
+power bi, power bi dashboard, dax, data visualization, business intelligence
+```
+
+**Paquetes**
+
+| | Basic — USD 60 | Standard — USD 150 | Premium — USD 300 |
+|---|---|---|---|
+| Nombre | Quick Dashboard | Business Dashboard | Full BI Report |
+| Qué incluye | 1 page, up to 5 visuals, from 1 clean data source | Up to 3 pages, data cleaning in Power Query, data model + DAX measures | Up to 5 pages, star schema, advanced DAX (time intelligence, targets, rankings), custom theme, user guide |
+| Fuentes de datos | 1 | Up to 3 | Up to 5 |
+| Entrega | 3 days | 6 days | 10 days |
+| Revisiones | 1 | 2 | 3 |
+| Archivo .pbix | ✔ | ✔ | ✔ |
+
+_Basic: 1 página con hasta 5 visuales. Standard: hasta 3 páginas, limpieza en Power Query, modelo y medidas DAX. Premium: hasta 5 páginas, modelo estrella, DAX avanzado (comparación de períodos, objetivos, rankings), tema propio y guía de uso._
+
+**Descripción** (máx. 1.200 caracteres)
+```
+Stop building reports by hand. I'll turn your Excel, CSV or database data into a clear, interactive Power BI dashboard your team can use every day.
+
+WHAT YOU GET
+✔ Data cleaning and shaping in Power Query
+✔ A proper data model (star schema) and relationships
+✔ DAX measures: KPIs, month-over-month, year-to-date, targets, rankings
+✔ Interactive filters (slicers), drill-down and conditional formatting
+✔ Clean, professional design with your brand colors
+✔ The .pbix file, ready to use and update
+
+I work with Power BI every day as a data analyst.
+
+EXAMPLE
+See an interactive sales dashboard I built (fictional data):
+https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/portafolio/04-dashboard-interactivo/
+
+HOW IT WORKS
+1. Send me your data (or a sample) and what decisions you need to make
+2. I confirm the KPIs and the right package
+3. You get your dashboard, the .pbix file and a short guide
+
+Your data stays 100% confidential.
+Message me before ordering so I can review your data!
+```
+
+**Requisitos al comprador**
+```
+1. Upload your data files (Excel, CSV) or describe your data source (SQL, SharePoint...).
+2. Which KPIs or questions should the dashboard answer?
+3. Do you have brand colors or an example dashboard you like?
+4. Which Power BI version do you use (Desktop / Service / Pro)?
+```
+
+**FAQ**
+```
+Q: Can you connect to my database or SharePoint?
+A: Yes. Tell me the source and I'll confirm before you order.
+
+Q: Will the dashboard update with new data?
+A: Yes. It's built so you can refresh it when your data changes.
+
+Q: Do I need a Power BI Pro license?
+A: Not to open the .pbix in Power BI Desktop (free). Sharing online in Power BI Service usually requires Pro.
+
+Q: Can you publish it for my team?
+A: Yes, if you give me access to your workspace. Otherwise I'll guide you step by step.
+```
+
+**Imagen del gig (1280 × 769 px):** una captura de tu dashboard de Power BI (cuando lo termines, del ejemplo 5 del portafolio) con el texto "Power BI Dashboards". Mientras tanto, podés usar una captura del dashboard interactivo del ejemplo 4.
+
+> Cuando tengas listo el ejemplo de Power BI (`portafolio/05-dashboard-power-bi/`), reemplazá el link del EXAMPLE por las capturas o el video de ese reporte: es más convincente mostrar Power BI real.
 
 ---
 
@@ -230,7 +315,7 @@ Escribime antes de comprar y reviso tu archivo sin cargo.
 ---
 
 ## 7. Consejos para arrancar en Fiverr
-- **Empezá con 1 o 2 gigs bien hechos** (el de datos primero) en vez de muchos a medias.
+- **Empezá con 2 gigs bien hechos:** el de **Power BI** y el de **limpieza de datos**. Sumá los otros cuando tengas reseñas.
 - **Respondé los mensajes en menos de 1 hora** cuando puedas: Fiverr muestra tu tiempo de respuesta y lo usa para ordenar resultados.
 - **Conectate seguido** desde la app del celular: los vendedores activos aparecen más.
 - **Revisá la sección "Buyer Requests" / "Briefs"** si te la habilitan, y mandá ofertas personalizadas.
