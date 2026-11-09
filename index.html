@@ -253,6 +253,22 @@
   .case__link span { transition: transform .2s; }
   .case:hover .case__link span { transform: translateX(3px); }
 
+  .flow { margin-top: 16px; display: grid; gap: 20px; }
+  .flow__head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; align-items: flex-start; }
+  .flow__head h3 { font-size: 1.25rem; margin: 6px 0 8px; }
+  .flow__head p { max-width: 680px; font-size: .95rem; }
+  .flow__steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .flow__steps li { border: 1px solid var(--fds-border); border-radius: 12px; padding: 14px; display: grid; gap: 4px;
+    background: linear-gradient(180deg, rgba(0, 229, 255, .04), transparent); }
+  .flow__steps b { font-family: var(--font-head); color: var(--fds-accent-text); font-size: .95rem; }
+  .flow__steps span { color: var(--fds-muted); font-size: .9rem; }
+  .flow__foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px; }
+  .flow__foot .case__stats { margin-top: 0; }
+  .case__stats b { white-space: nowrap; }
+  @media (max-width: 420px) { .flow__foot .case__stats { gap: 14px; } }
+  .flow__ctas { display: flex; flex-wrap: wrap; gap: 8px; }
+  .flow .btn--sm { display: inline-flex; }
+
   /* ---------- Process ---------- */
   .steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; counter-reset: step; }
   .step { counter-increment: step; }
@@ -294,6 +310,7 @@
     .grid-3 { grid-template-columns: repeat(3, 1fr); }
     .grid-2 { grid-template-columns: repeat(2, 1fr); }
     .steps { grid-template-columns: repeat(4, 1fr); }
+    .flow__steps { grid-template-columns: repeat(4, 1fr); }
     .cta { padding: 64px 40px; }
   }
   @media (min-width: 1024px) {
@@ -541,6 +558,34 @@
           </div>
         </article>
       </div>
+
+      <article class="card flow" aria-labelledby="flow-title">
+        <div class="flow__head">
+          <div>
+            <span class="case__tag">Caso completo · de punta a punta</span>
+            <h3 id="flow-title">De la planilla desordenada al reporte listo para entregar</h3>
+            <p class="muted">Una ferretería mayorista (ficticia) exporta sus ventas del sistema con fechas mezcladas, nombres escritos de mil formas, duplicados y faltantes. Así lo resolvemos, paso a paso.</p>
+          </div>
+          <span class="status status--success"><span class="status__dot" aria-hidden="true"></span>Sin bloqueantes</span>
+        </div>
+        <ol class="flow__steps">
+          <li><b>1 · Diagnóstico</b><span>Detectamos 4 formatos de fecha, 18 variantes de 5 clientes, 8 duplicados y 20 faltantes.</span></li>
+          <li><b>2 · Limpieza</b><span>Script reproducible y modelo listo para Power BI, con cada fila rastreable al original.</span></li>
+          <li><b>3 · Reporte</b><span>Reporte web y Excel de 10 hojas con indicadores, rankings, devoluciones y notas.</span></li>
+          <li><b>4 · Control de calidad</b><span>Totales recalculados, interfaz probada en celular y escritorio, privacidad revisada.</span></li>
+        </ol>
+        <div class="flow__foot">
+          <div class="case__stats">
+            <div><b class="num">218→210</b><small>renglones → facturas</small></div>
+            <div><b class="num">$ 79,7 M</b><small>total conciliado</small></div>
+            <div><b class="num">0</b><small>bloqueantes</small></div>
+          </div>
+          <div class="flow__ctas">
+            <a class="btn btn--primary btn--sm" href="referencias/prueba-ferreteria/reporte/reporte_ventas_2026-10.html">Ver el reporte</a>
+            <a class="btn btn--ghost btn--sm" href="https://github.com/FL0WDATAS0LUTI0NSDEV/freelance-servicios-digitales/tree/main/referencias/prueba-ferreteria">Ver el proceso completo</a>
+          </div>
+        </div>
+      </article>
     </div>
   </section>
 
