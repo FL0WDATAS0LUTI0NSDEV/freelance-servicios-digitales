@@ -22,16 +22,16 @@
 - [x] Título del perfil en español (confirmado con el conector de Fiverr el 9/11, tarde)
 - [ ] Experiencia laboral en español (texto en 2.2)
 - [ ] Habilidades: sumar Power Query, Dashboards, Data Visualization y Data Cleaning; Python en nivel Intermedio
-- [ ] Portfolio: 3 proyectos de demostración (textos en 2.6)
+- [x] Portfolio: 3 proyectos de demostración (textos en 2.6)
 - [ ] Video de presentación en español, 30–60 s
 
 ### Gig de Power BI
-- [ ] Tags: cambiar `dax` por `power bi report`
-- [ ] Paquetes: Básico a USD 45, descripciones con KPIs, "Data source connectivity" tildado en los 3, dashboards 1 / 3 / 5 (texto en 2.3)
-- [ ] Descripción: primer párrafo nuevo (texto en 2.4)
-- [ ] Preguntas frecuentes sin prefijos "1. Pregunta:" / "Respuesta:" (texto en 2.5)
-- [ ] Primera imagen de la galería: `portafolio/capturas/fiverr/1-portada-power-bi-es.png`
-- [ ] **Quitar el video de la galería** (por ahora). Fiverr usa el primer cuadro del video como miniatura del gig, así que con video la miniatura no muestra el título. El video nuevo con portada (`video-dashboard-con-portada.mp4`) **fue rechazado sin motivo**, probablemente por los 3 s de imagen fija. Sin video, la miniatura pasa a ser `1-portada-power-bi-es.png`. Volver a sumar un video cuando esté el ejemplo real en Power BI (grabación del reporte en uso, sin imágenes fijas).
+- [x] Tags: cambiar `dax` por `power bi report`
+- [x] Paquetes: Básico a USD 45, descripciones con KPIs, "Data source connectivity" tildado en los 3, dashboards 1 / 3 / 5 (texto en 2.3)
+- [x] Descripción: primer párrafo nuevo (texto en 2.4)
+- [x] Preguntas frecuentes sin prefijos "1. Pregunta:" / "Respuesta:" (texto en 2.5)
+- [x] Primera imagen de la galería: `portafolio/capturas/fiverr/1-portada-power-bi-es.png`
+- [x] **Quitar el video de la galería** (por ahora). Fiverr usa el primer cuadro del video como miniatura del gig, así que con video la miniatura no muestra el título. El video nuevo con portada (`video-dashboard-con-portada.mp4`) **fue rechazado sin motivo**, probablemente por los 3 s de imagen fija. Sin video, la miniatura pasa a ser `1-portada-power-bi-es.png`. Volver a sumar un video cuando esté el ejemplo real en Power BI (grabación del reporte en uso, sin imágenes fijas).
 
 > Hacé los cambios del gig **todos juntos** y después dejalo quieto 2–3 semanas para poder medir.
 
@@ -108,7 +108,7 @@ El servicio es en español.
 ```
 
 ### 2.6 Portfolio (3 proyectos de demostración)
-Para los tres: cliente, precio y fechas **en blanco**; **sin links** en la descripción. Las imágenes están en `portafolio/capturas/` y `portafolio/capturas/fiverr/`.
+Cargados el 09/11/2026. Fiverr exige precio: se usó el costo simulado (200 / 150 / 45). Textos finales e imágenes 4:3 en `gestion/perfil-fiverr.md` y `portafolio/capturas/fiverr/portafolio-4x3/`; sin links en la descripción.
 
 **Proyecto 1 — Archivos:** `fiverr/video-dashboard.mp4`, `1-dashboard-interactivo.png` · **Gig relacionado:** Power BI
 ```
