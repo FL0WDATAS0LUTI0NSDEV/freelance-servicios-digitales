@@ -35,7 +35,7 @@ Veredicto: **se puede entregar, sin bloqueantes.** Regeneró el reporte desde ce
 - Pendiente de CUIT faltante en las notas.
 - Excel sin valores calculados para vistas previas.
 
-> Este reporte es la versión **anterior** a esas mejoras: sirve justamente para comparar con los próximos.
+> Este reporte es la versión **anterior** a esas mejoras, con una excepción ya aplicada: **en celular, las tablas largas (productos y devoluciones) arrancan plegadas** con las primeras 3 filas y un botón "Ver las N filas". La página en celular bajó de ~9.700 px a ~7.400 px de alto. En escritorio e impresión se ven completas.
 
 ## Cómo reproducirlo
 ```bash

@@ -349,8 +349,13 @@ def hbars(filas, total_ref=None):
     return f'<ul class="hbars" role="list">{"".join(items)}</ul>'
 
 
-def tabla(columnas, filas, clase="", pie=None, caption=None):
-    """columnas: lista de (titulo, alineacion). Las celdas llevan data-label para la vista apilada en celular."""
+FILAS_VISIBLES_CELULAR = 3   # en celular, las tablas largas muestran estas filas y un botón "Ver todas"
+MIN_FILAS_PLEGAR = 6         # se pliegan las tablas con al menos esta cantidad de filas
+
+
+def tabla(columnas, filas, clase="", pie=None, caption=None, plegable=True):
+    """columnas: lista de (titulo, alineacion). Las celdas llevan data-label para la vista apilada en celular.
+    Si la tabla es larga (y plegable), en celular se muestran solo las primeras filas con un botón para ver todas."""
     th = "".join(f'<th scope="col"{" class=r" if a == "r" else ""}>{escape(t)}</th>' for t, a in columnas)
     cuerpo = []
     for fila in filas:
@@ -367,8 +372,15 @@ def tabla(columnas, filas, clase="", pie=None, caption=None):
             celdas.append(f'<td{cls} data-label="{escape(t)}">{valor}</td>')
         tfoot = f"<tfoot><tr>{''.join(celdas)}</tr></tfoot>"
     cap = f'<caption class="sr-only">{escape(caption)}</caption>' if caption else ""
-    return (f'<div class="table-wrap"><table class="stack {clase}">{cap}<thead><tr>{th}</tr></thead>'
+    html = (f'<div class="table-wrap"><table class="stack {clase}">{cap}<thead><tr>{th}</tr></thead>'
             f'<tbody>{"".join(cuerpo)}</tbody>{tfoot}</table></div>')
+    if plegable and len(filas) >= MIN_FILAS_PLEGAR:
+        ocultas = len(filas) - FILAS_VISIBLES_CELULAR
+        html = (f'<div class="fold" data-fold>{html}'
+                f'<button type="button" class="fold__btn" aria-expanded="false" '
+                f'data-more="Ver las {len(filas)} filas" data-less="Mostrar menos">Ver las {len(filas)} filas</button>'
+                f'<p class="fold__hint">{ocultas} filas más</p></div>')
+    return html
 
 
 def grafico_dias(por_dia: pd.DataFrame, neto: int) -> str:
@@ -515,7 +527,7 @@ def generar_html(d: dict, salida: Path, entrada: Path):
         [[f"{DIAS_CORTOS[r.Dia_Semana_Nro]} {fecha_corta(r.Fecha)}", entero(r.Facturas), pesos(r.Neto)]
          for r in pdia.itertuples()],
         pie=["Total", entero(pdia["Facturas"].sum()), pesos(neto)], clase="compact",
-        caption="Ventas netas por día")
+        caption="Ventas netas por día", plegable=False)
 
     generado = date.today()
     titulo = f"Ventas de {mes} {anio}"
@@ -684,7 +696,16 @@ def generar_html(d: dict, salida: Path, entrada: Path):
     table.stack.compact tr {{ display:flex; justify-content:space-between; gap:8px; padding:6px 12px; }}
     table.stack.compact td {{ display:block; padding:0; }}
     table.stack.compact td::before {{ content:none; }}
+    .fold:not(.is-open) tbody tr:nth-child(n+{FILAS_VISIBLES_CELULAR + 1}) {{ display:none; }}
+    .fold:not(.is-open) tfoot {{ display:none; }}
+    .fold .fold__btn {{ display:flex; }}
+    .fold:not(.is-open) .fold__hint {{ display:block; }}
   }}
+  .fold__btn {{ display:none; width:100%; justify-content:center; margin-top:10px; min-height:44px; padding:10px 14px;
+    border-radius:10px; border:1px solid var(--fds-border); background:var(--fds-card); color:var(--fds-accent-text);
+    font:inherit; font-size:.875rem; font-weight:600; cursor:pointer; }}
+  .fold__btn:hover {{ border-color:var(--fds-blue); }}
+  .fold__hint {{ display:none; margin:6px 0 0; text-align:center; font-size:.75rem; color:var(--fds-muted); }}
 
   .note {{ display:flex; gap:10px; align-items:flex-start; margin-top:14px; padding:12px 14px; border-radius:10px;
     border:1px solid color-mix(in srgb,var(--fds-amber-text) 45%,var(--fds-border));
@@ -725,6 +746,9 @@ def generar_html(d: dict, salida: Path, entrada: Path):
     body {{ background:#fff; color:#0F172A; }}
     .card {{ break-inside:avoid; }}
     details > *:not(summary) {{ display:block; }}
+    .fold tbody tr, .fold tfoot {{ display:table-row-group !important; }}
+    .fold tbody tr {{ display:table-row !important; }}
+    .fold__btn, .fold__hint {{ display:none !important; }}
   }}
 </style>
 </head>
@@ -875,6 +899,15 @@ def generar_html(d: dict, salida: Path, entrada: Path):
   }});
   sync();
 }})();
+  document.querySelectorAll('[data-fold]').forEach(function (f) {{
+    var b = f.querySelector('.fold__btn');
+    b.addEventListener('click', function () {{
+      var open = f.classList.toggle('is-open');
+      b.setAttribute('aria-expanded', String(open));
+      b.textContent = open ? b.dataset.less : b.dataset.more;
+      if (!open) f.scrollIntoView({{ block: 'nearest' }});
+    }});
+  }});
 </script>
 </body>
 </html>
