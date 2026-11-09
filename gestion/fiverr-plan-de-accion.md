@@ -21,7 +21,7 @@
 - [x] Certificación cargada — retocar: nombre `Técnico Superior en Ciencia de Datos`, otorgada por `Teclab`, 2025 (que coincida con Educación y con el diploma)
 - [x] Título del perfil en español (confirmado con el conector de Fiverr el 9/11, tarde)
 - [ ] Experiencia laboral en español (texto en 2.2)
-- [ ] Habilidades: sumar Power Query, Dashboards, Data Visualization y Data Cleaning; Python en nivel Intermedio
+- [ ] Habilidades: sumar Power Query, Dashboards, Data Visualization y Data Cleaning. Python queda en **Pro** (decisión del dueño, 09/11: maneja el ecosistema completo, no solo pandas)
 - [x] Portfolio: 3 proyectos de demostración (textos en 2.6)
 - [ ] Video de presentación en español, 30–60 s
 
