@@ -19,25 +19,14 @@ description: Diseño UI/UX de calidad de producción (Tier 1), con estética Saa
 | `--fds-blue` | `#0066FF` | Acción principal: botones, links, foco |
 | `--fds-neutral` | `#F4F6F8` | Texto principal sobre oscuro / fondo en modo claro |
 
-Derivados sugeridos (mantener coherencia):
-```css
-:root {
-  --fds-navy: #0B1325;
-  --fds-navy-2: #111C33;            /* superficies / tarjetas */
-  --fds-border: rgba(244,246,248,.08);
-  --fds-text: #F4F6F8;
-  --fds-muted: rgba(244,246,248,.64);
-  --fds-cyan: #00E5FF;
-  --fds-blue: #0066FF;
-  --fds-glass: rgba(17,28,51,.6);
-}
-```
+Los tokens completos (fondos, tarjetas, bordes, texto, modo claro y acentos como Success Green `#10B981`) están definidos en **theme-factory** (`.claude/skills/theme-factory/SKILL.md`), que es la fuente única de colores. Usar esas variables (`--fds-bg`, `--fds-card`, `--fds-border`, `--fds-text`, `--fds-cyan`, `--fds-blue`...) y no inventar colores nuevos.
+
 - Verificar siempre contraste WCAG: el cyan y el azul eléctrico sobre `#0B1325` sirven para acentos y texto grande; para texto chico sobre azul usar blanco.
 
 ### Estilo
-- **Dark mode elegante** por defecto; si se ofrece modo claro, usar `#F4F6F8` de fondo y `#0B1325` de texto.
-- **Bordes sutiles** de 1 px (`--fds-border`) con **micro-degradados** (ej. `linear-gradient(180deg, rgba(255,255,255,.06), transparent)`).
-- **Glassmorphism limpio:** `background: var(--fds-glass); backdrop-filter: blur(12px);` solo en superficies flotantes (navbar, modales), nunca en todo.
+- **Dark mode elegante** por defecto; el modo claro (FDS Light) y el switcher se implementan con **theme-factory**.
+- **Bordes sutiles** de 1 px (`--fds-border`, `#1E2D4A` en dark) con **micro-degradados** (ej. `linear-gradient(180deg, rgba(255,255,255,.06), transparent)`).
+- **Glassmorphism limpio:** `background: rgba(19,31,55,.6); backdrop-filter: blur(12px);` (tarjeta `#131F37` translúcida) solo en superficies flotantes (navbar, modales), nunca en todo.
 - **Tipografía:** Inter o Plus Jakarta Sans (Google Fonts, `display=swap`). Pesos 400/500/600/700. Números de datos con `font-variant-numeric: tabular-nums`.
 - Radios de 10–14 px, sombras suaves y difusas, glow cyan muy sutil solo para destacar.
 
@@ -56,4 +45,4 @@ Derivados sugeridos (mantener coherencia):
 - [ ] Nada genérico: jerarquía clara, espaciado consistente, detalles cuidados.
 
 ## Combinación obligatoria
-Aplicar siempre junto con **frontend-design** (estructura sólida, accesible y rápida). Ver `.claude/skills/frontend-design/SKILL.md`.
+Aplicar siempre junto con **frontend-design** (estructura sólida, accesible y rápida), **theme-factory** (tokens y temas) y **brand-guidelines** (marca, voz e indicadores de estado).

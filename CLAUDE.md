@@ -1,11 +1,13 @@
 # FlowData Solutions — instrucciones para Claude Code
 
 ## Capa 1: Skills de frontend y diseño (FDS)
-Este repo define dos skills en `.claude/skills/`:
-- **frontend-design**: estructura sólida, responsiva (Mobile-First), accesible (WCAG 2.1) y rápida (Core Web Vitals).
-- **top-design**: estética profesional Tier 1 estilo SaaS/B2B con la identidad visual de FlowData Solutions (dark mode, `#0B1325`, `#00E5FF`, `#0066FF`, `#F4F6F8`, Inter / Plus Jakarta Sans).
+Este repo define cuatro skills en `.claude/skills/`:
+1. **frontend-design**: estructura sólida, responsiva (Mobile-First), accesible (WCAG 2.1) y rápida (Core Web Vitals).
+2. **top-design**: estética profesional Tier 1 estilo SaaS/B2B (Vercel, Linear, Stripe), dark mode, Inter / Plus Jakarta Sans.
+3. **theme-factory**: tokens de diseño (fuente única de colores), temas FDS Dark (default) y FDS Light, acentos, y switcher claro/oscuro con persistencia.
+4. **brand-guidelines**: nombre, logo, voz y tono, slogan "Automatización de Procesos & Soluciones de Datos", bordes de foco cian/azul e indicadores de estado de pipelines.
 
-**Directiva de ejecución:** al crear o modificar cualquier código de interfaz (por ejemplo `index.html`, los reportes HTML del portafolio o componentes nuevos), aplicar **siempre** los criterios combinados de `frontend-design` y `top-design`.
+**Directiva de ejecución:** al crear o modificar cualquier código de interfaz (por ejemplo `index.html`, los reportes HTML del portafolio o componentes nuevos), aplicar **siempre** los criterios combinados de `frontend-design` y `top-design`, con los tokens de `theme-factory` y las reglas de `brand-guidelines`.
 
 ## Contexto del repo
 - Web pública servida con GitHub Pages desde `main` (raíz): https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/
