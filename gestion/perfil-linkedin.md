@@ -5,17 +5,18 @@
 > **Para bajar el riesgo:**
 > - No pedir la insignia de verificación de identidad (no coincidiría el nombre).
 > - Pocas solicitudes de conexión: máximo 10 por día, siempre personalizadas; nunca mensajes masivos ni copiados.
-> - Nombre escrito normal (`FlowData` / `Solutions`), no en mayúsculas.
+> - Nombre de pila + inicial (`Dante I`): baja mucho el riesgo. Nunca poner la marca dentro del nombre.
 > - No vincular el perfil al empleador ni a cuentas personales.
 > - Si LinkedIn pide verificar la identidad o restringe la cuenta, **no** mandar documentos de otra persona: avisar y pasar a la opción B (página administrada por alguien de confianza) o C (sin LinkedIn).
 
 ## Configuración del perfil (opción A)
 | Sección | Qué va |
 |---|---|
-| Nombre | `FlowData` · Apellido `Solutions` |
+| Nombre | `Dante` · Apellido `I` (ajustado el 09/11: nombre de pila + inicial, como en Fiverr; la marca va en portada, titular y experiencia — LinkedIn no permite nombres de empresa en el campo del nombre) |
 | Foto | `marca/isotipo-400.png` |
 | Portada | `marca/linkedin-portada-perfil-1584x396.png` (4:1; la de 4200 × 700 es para páginas de empresa) |
-| Titular | `Dashboards en Power BI · Facturas PDF a Excel · Reportes automáticos para PYMEs` |
+| Titular | `Dashboards en Power BI · Facturas PDF a Excel · Reportes automáticos.` |
+| Destacado | Enlace a la web ("Portafolio de FlowData Solutions") con la imagen de facturas PDF a Excel |
 | Acerca de | la descripción larga de la sección 2 (entra: máx. 2.600) |
 | Servicios | ya cargados (Desarrollo web, Consultoría de TI, Elaboración de informes de datos, Introducción de datos, Tramitación de facturas); "Acerca de" de servicios: versión corta de 397 caracteres |
 | Destacado | link a la web + imágenes del portafolio (dashboard, facturas PDF a Excel) |
