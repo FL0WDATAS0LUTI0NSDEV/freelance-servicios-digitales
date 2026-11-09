@@ -31,7 +31,7 @@
 - [ ] Descripción: primer párrafo nuevo (texto en 2.4)
 - [ ] Preguntas frecuentes sin prefijos "1. Pregunta:" / "Respuesta:" (texto en 2.5)
 - [ ] Primera imagen de la galería: `portafolio/capturas/fiverr/1-portada-power-bi-es.png`
-- [ ] **Reemplazar el video de la galería por `portafolio/capturas/fiverr/video-dashboard-con-portada.mp4`.** Según el conector, la miniatura del gig en los resultados es el **primer cuadro del video** (no la portada): hoy se ve el dashboard sin el título "Dashboards en Power BI". El video nuevo arranca con 3 s de portada, así la miniatura muestra el título.
+- [ ] **Quitar el video de la galería** (por ahora). Fiverr usa el primer cuadro del video como miniatura del gig, así que con video la miniatura no muestra el título. El video nuevo con portada (`video-dashboard-con-portada.mp4`) **fue rechazado sin motivo**, probablemente por los 3 s de imagen fija. Sin video, la miniatura pasa a ser `1-portada-power-bi-es.png`. Volver a sumar un video cuando esté el ejemplo real en Power BI (grabación del reporte en uso, sin imágenes fijas).
 
 > Hacé los cambios del gig **todos juntos** y después dejalo quieto 2–3 semanas para poder medir.
 
