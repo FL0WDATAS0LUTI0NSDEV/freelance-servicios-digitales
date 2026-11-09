@@ -4,6 +4,8 @@ En Fiverr **no vendés horas sino "gigs"**: servicios cerrados con 3 paquetes (B
 
 Las partes entre corchetes `[ ]` se completan con datos reales. **No inventes experiencia, clientes ni títulos.**
 
+> ⚠️ **Sin links ni datos de contacto:** Fiverr prohíbe compartir mails, teléfonos, redes o links externos en el perfil, los gigs y los mensajes antes de una orden, y puede suspender la cuenta. Los ejemplos van como **imágenes, PDF o video en la galería de cada gig**. Los links de Canva de esta guía son solo para que descargues las imágenes.
+
 > Fiverr se queda con una comisión de cada venta (hoy, alrededor del 20 %). Revisá el porcentaje vigente antes de fijar precios.
 
 ---
@@ -25,7 +27,7 @@ Hi! I'm [your name], a data analyst and founder of FlowData Solutions. I build P
 
 I work with Power BI (DAX, Power Query), Python (pandas), SQL and Excel. I also write Spanish content for websites.
 
-Clear communication, on-time delivery and revisions included. Check my portfolio: https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/
+Clear communication, on-time delivery and revisions included. See examples of my work in the gig galleries.
 ```
 _Traducción: Soy [tu nombre], analista de datos y fundador de FlowData Solutions. Armo dashboards en Power BI, limpio planillas desordenadas y automatizo reportes. Trabajo con Power BI (DAX, Power Query), Python, SQL y Excel, y también escribo textos en español._
 
@@ -77,8 +79,7 @@ TOOLS
 Python (pandas), Excel, Google Sheets, CSV.
 
 EXAMPLE
-See a real example with fictional data: a sales sheet with 77 messy rows and 58 different spellings, cleaned into 70 reliable rows.
-https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/
+See a real example with fictional data in the gig gallery: a sales sheet with 77 messy rows and 58 different spellings, cleaned into 70 reliable rows.
 
 HOW IT WORKS
 1. Send me a sample of your file before ordering
@@ -159,8 +160,7 @@ WHAT YOU GET
 I work with Power BI every day as a data analyst.
 
 EXAMPLE
-See an interactive sales dashboard I built (fictional data):
-https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/portafolio/04-dashboard-interactivo/
+See the interactive sales dashboard I built (fictional data) in the gig gallery.
 
 HOW IT WORKS
 1. Send me your data (or a sample) and what decisions you need to make
@@ -196,7 +196,7 @@ A: Yes, if you give me access to your workspace. Otherwise I'll guide you step b
 
 **Imagen del gig (1280 × 769 px):** diseño en Canva listo para revisar y descargar: https://canva.link/b13jgckuz5svk4w — más adelante, reemplazala o complementala con una captura de tu dashboard de Power BI (cuando lo termines, del ejemplo 5 del portafolio) con el texto "Power BI Dashboards". Mientras tanto, podés usar una captura del dashboard interactivo del ejemplo 4.
 
-> Cuando tengas listo el ejemplo de Power BI (`portafolio/05-dashboard-power-bi/`), reemplazá el link del EXAMPLE por las capturas o el video de ese reporte: es más convincente mostrar Power BI real.
+> Cuando tengas listo el ejemplo de Power BI (`portafolio/05-dashboard-power-bi/`), sumá sus capturas o el video a la galería del gig: es más convincente mostrar Power BI real.
 
 ---
 
@@ -240,8 +240,7 @@ WHAT YOU GET
 • Delivery in Google Docs or Word
 
 EXAMPLE
-See a before & after for a ceramics workshop website (fictional business):
-https://github.com/FL0WDATAS0LUTI0NSDEV/freelance-servicios-digitales/tree/main/portafolio/03-redaccion-web
+See a before & after for a ceramics workshop website (fictional business) in the gig gallery.
 
 Message me with your project and I'll be happy to help!
 ```
@@ -307,7 +306,7 @@ Voy a limpiar, ordenar y automatizar tus planillas de excel con python
 ✔ Completo datos faltantes cuando se pueden calcular
 ✔ Armo reportes automáticos en Excel o HTML
 
-Mirá un ejemplo con datos ficticios: https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/
+Mirá un ejemplo con datos ficticios en la galería de este gig.
 
 Escribime antes de comprar y reviso tu archivo sin cargo.
 ```

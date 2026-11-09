@@ -3,6 +3,8 @@
 Texto listo para copiar y pegar en cada campo del perfil.
 Las partes entre corchetes `[ ]` se completan con datos reales. **No pongas experiencia, clientes ni títulos que no tengas**: Workana y los clientes lo verifican.
 
+> **⚠️ Regla de links y contacto:** Workana bloquea a quien comparte datos de contacto. En **ningún campo** (Sobre mí, proyectos, propuestas, mensajes) pongas links (web, GitHub, Canva, Drive), mail, teléfono, WhatsApp ni redes. La web de FlowData muestra el mail, así que linkearla también cuenta como contacto. Los ejemplos se muestran con **capturas** en "Proyectos destacados"; si un cliente pide más, mandale capturas o archivos **por el chat de Workana**.
+
 > **Privacidad:** Workana pide verificar tu identidad y muestra tu nombre (en general, nombre e inicial del apellido) y tu foto a los clientes; no se puede usar un perfil anónimo. Lo que sí controlás: **no menciones a tu empleador** en ningún campo, usá el mail de FlowData Solutions y, en "Experiencia laboral", poné tu empleo actual solo como "Desarrollador analista de datos · Empresa privada (confidencial)" o dejalo afuera.
 
 ---
@@ -58,10 +60,9 @@ POR QUÉ ELEGIRME
 • Tus datos se tratan con total confidencialidad.
 • Revisiones incluidas en cada proyecto.
 
-Mirá ejemplos de mi trabajo (con datos ficticios) en mi portafolio:
-https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/
+Mirá ejemplos de mi trabajo (con datos ficticios) en la sección Portafolio de este perfil.
 
-Escribime contándome qué necesitás y te respondo con una propuesta.
+Contame qué necesitás por mensaje y te respondo con una propuesta.
 ```
 
 ---
@@ -97,7 +98,7 @@ Es la tarifa de lanzamiento de los servicios de datos. Para tareas de asistente 
 ## Portafolio (sección "Portafolio" de Workana)
 Cargá un proyecto por ejemplo, con una captura de pantalla:
 
-| Título | Descripción corta | Link |
+| Título | Descripción corta | Link (solo para tu referencia: **no lo pegues en Workana**) |
 |---|---|---|
 | Limpieza de una planilla de ventas con Python | Unifiqué 58 formas distintas de escribir clientes, productos y provincias, completé datos faltantes y eliminé duplicados. De 77 filas desordenadas a una base confiable. | https://github.com/FL0WDATAS0LUTI0NSDEV/freelance-servicios-digitales/tree/main/portafolio/01-limpieza-de-datos |
 | Reporte de ventas automático | Reporte con indicadores, conclusiones y rankings generado con un solo comando, en HTML y Excel. | https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/portafolio/02-reporte-automatico/reporte_ventas.html |
