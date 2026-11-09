@@ -4,7 +4,104 @@ En Fiverr **no vendés horas sino "gigs"**: servicios cerrados con 3 paquetes (B
 
 Las partes entre corchetes `[ ]` se completan con datos reales. **No inventes experiencia, clientes ni títulos.**
 
+> ⚠️ **Sin links ni datos de contacto:** Fiverr prohíbe compartir mails, teléfonos, redes o links externos en el perfil, los gigs y los mensajes antes de una orden, y puede suspender la cuenta. Los ejemplos van como **imágenes, PDF o video en la galería de cada gig**. Los links de Canva de esta guía son solo para que descargues las imágenes.
+
 > Fiverr se queda con una comisión de cada venta (hoy, alrededor del 20 %). Revisá el porcentaje vigente antes de fijar precios.
+
+---
+
+## ⭐ Decisión: Fiverr en español
+
+El dueño **no habla inglés**, así que el perfil y los gigs van **en español**, apuntando a compradores hispanohablantes (Latinoamérica, España y empresas hispanas de EE. UU.). Son menos que los de habla inglesa, pero se los puede atender bien, sin malentendidos ni malas reseñas. Las secciones en inglés de más abajo quedan como referencia para el futuro.
+
+- **Idiomas del perfil:** solo **Español (nativo)**. No agregar inglés.
+- **Tags:** se pueden mezclar términos en inglés que también buscan los hispanohablantes ("power bi", "dashboard").
+- Si un comprador escribe en inglés, se le responde con amabilidad que el servicio es en español.
+
+### Perfil (español)
+**Título:** `Desarrollador Power BI y Analista de Datos`
+
+**Acerca de:**
+```
+¡Hola! Soy Dante, analista de datos y fundador de FlowData Solutions. Armo dashboards en Power BI, ordeno planillas desordenadas y automatizo los reportes que las pequeñas empresas hacen a mano todos los meses.
+
+Trabajo con Power BI (DAX, Power Query), Python, SQL y Excel. Comunicación clara, entregas en fecha y revisiones incluidas. Atiendo en español. Mirá ejemplos de mi trabajo en la galería de mis gigs.
+```
+
+**Experiencia laboral — FlowData Solutions (Fundador):**
+```
+Soluciones de datos para pequeñas empresas y profesionales independientes.
+• Dashboards en Power BI con modelo de datos y medidas DAX.
+• Limpieza y organización de planillas y bases de datos con Python y SQL.
+• Reportes automáticos en Excel y formato web.
+• Documentación de procesos y guías de uso para el cliente.
+```
+
+### Gig Power BI (español)
+**Título:** `Voy a crear un dashboard interactivo en Power BI para tu negocio`
+
+**Categoría:** Datos → Visualización de datos (o Análisis de datos → Dashboards)
+
+**Tags (5):** `power bi`, `dashboard power bi`, `dax`, `visualizacion de datos`, `analisis de datos`
+
+**Paquetes**
+
+| | Básico — USD 60 | Estándar — USD 150 | Premium — USD 300 |
+|---|---|---|---|
+| Nombre | Dashboard rápido | Dashboard de negocio | Reporte BI completo |
+| Qué incluye | 1 página, hasta 5 visuales, 1 fuente de datos ya ordenada | Hasta 3 páginas, limpieza en Power Query, modelo de datos y medidas DAX | Hasta 5 páginas, modelo estrella, DAX avanzado (comparación de períodos, objetivos, rankings), tema con tus colores y guía de uso |
+| Fuentes de datos | 1 | Hasta 3 | Hasta 5 |
+| Entrega | 3 días | 6 días | 10 días |
+| Revisiones | 1 | 2 | 3 |
+| Archivo .pbix | ✔ | ✔ | ✔ |
+
+**Descripción:**
+```
+Dejá de armar reportes a mano. Convierto tus datos de Excel, CSV o base de datos en un dashboard de Power BI claro e interactivo, para que tu equipo lo use todos los días.
+
+QUÉ RECIBÍS
+✔ Limpieza y preparación de datos en Power Query
+✔ Modelo de datos ordenado (esquema estrella) y relaciones
+✔ Medidas DAX: indicadores, comparación con el mes anterior, acumulado del año, objetivos y rankings
+✔ Filtros interactivos, desglose y formato condicional
+✔ Diseño profesional con los colores de tu marca
+✔ El archivo .pbix, listo para usar y actualizar
+
+Trabajo con Power BI todos los días como analista de datos.
+
+CÓMO TRABAJAMOS
+1. Me mandás tus datos (o una muestra) y qué decisiones querés tomar
+2. Confirmamos los indicadores y el paquete adecuado
+3. Recibís el dashboard, el archivo .pbix y una guía corta
+
+Tus datos son 100 % confidenciales. Atiendo en español.
+¡Escribime antes de comprar para revisar tus datos!
+```
+
+**Requisitos al comprador:**
+```
+1. Subí tus archivos de datos (Excel, CSV) o contame de dónde salen (SQL, SharePoint, sistema).
+2. ¿Qué indicadores o preguntas tiene que responder el dashboard?
+3. ¿Tenés colores de marca o algún dashboard de ejemplo que te guste?
+4. ¿Qué versión de Power BI usan (Desktop gratuito / Pro)?
+```
+
+**Preguntas frecuentes:**
+```
+P: ¿Podés conectarte a mi base de datos o SharePoint?
+R: Sí. Contame cuál es la fuente y te lo confirmo antes de que compres.
+
+P: ¿El dashboard se actualiza con datos nuevos?
+R: Sí. Queda armado para que lo actualices cuando cambien tus datos.
+
+P: ¿Necesito licencia Power BI Pro?
+R: No para abrir el archivo .pbix en Power BI Desktop, que es gratuito. Para compartirlo en línea con Power BI Service, normalmente sí.
+
+P: ¿Atendés en inglés?
+R: El servicio es en español.
+```
+
+**Galería:** `portafolio/capturas/fiverr/1-portada-power-bi-es.png` (portada), `2-dashboard-interactivo.png`, `3-reporte-kpis.png`.
 
 ---
 
@@ -25,7 +122,7 @@ Hi! I'm [your name], a data analyst and founder of FlowData Solutions. I build P
 
 I work with Power BI (DAX, Power Query), Python (pandas), SQL and Excel. I also write Spanish content for websites.
 
-Clear communication, on-time delivery and revisions included. Check my portfolio: https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/
+Clear communication, on-time delivery and revisions included. See examples of my work in the gig galleries.
 ```
 _Traducción: Soy [tu nombre], analista de datos y fundador de FlowData Solutions. Armo dashboards en Power BI, limpio planillas desordenadas y automatizo reportes. Trabajo con Power BI (DAX, Power Query), Python, SQL y Excel, y también escribo textos en español._
 
@@ -77,8 +174,7 @@ TOOLS
 Python (pandas), Excel, Google Sheets, CSV.
 
 EXAMPLE
-See a real example with fictional data: a sales sheet with 77 messy rows and 58 different spellings, cleaned into 70 reliable rows.
-https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/
+See a real example with fictional data in the gig gallery: a sales sheet with 77 messy rows and 58 different spellings, cleaned into 70 reliable rows.
 
 HOW IT WORKS
 1. Send me a sample of your file before ordering
@@ -159,8 +255,7 @@ WHAT YOU GET
 I work with Power BI every day as a data analyst.
 
 EXAMPLE
-See an interactive sales dashboard I built (fictional data):
-https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/portafolio/04-dashboard-interactivo/
+See the interactive sales dashboard I built (fictional data) in the gig gallery.
 
 HOW IT WORKS
 1. Send me your data (or a sample) and what decisions you need to make
@@ -196,7 +291,7 @@ A: Yes, if you give me access to your workspace. Otherwise I'll guide you step b
 
 **Imagen del gig (1280 × 769 px):** diseño en Canva listo para revisar y descargar: https://canva.link/b13jgckuz5svk4w — más adelante, reemplazala o complementala con una captura de tu dashboard de Power BI (cuando lo termines, del ejemplo 5 del portafolio) con el texto "Power BI Dashboards". Mientras tanto, podés usar una captura del dashboard interactivo del ejemplo 4.
 
-> Cuando tengas listo el ejemplo de Power BI (`portafolio/05-dashboard-power-bi/`), reemplazá el link del EXAMPLE por las capturas o el video de ese reporte: es más convincente mostrar Power BI real.
+> Cuando tengas listo el ejemplo de Power BI (`portafolio/05-dashboard-power-bi/`), sumá sus capturas o el video a la galería del gig: es más convincente mostrar Power BI real.
 
 ---
 
@@ -240,8 +335,7 @@ WHAT YOU GET
 • Delivery in Google Docs or Word
 
 EXAMPLE
-See a before & after for a ceramics workshop website (fictional business):
-https://github.com/FL0WDATAS0LUTI0NSDEV/freelance-servicios-digitales/tree/main/portafolio/03-redaccion-web
+See a before & after for a ceramics workshop website (fictional business) in the gig gallery.
 
 Message me with your project and I'll be happy to help!
 ```
@@ -307,7 +401,7 @@ Voy a limpiar, ordenar y automatizar tus planillas de excel con python
 ✔ Completo datos faltantes cuando se pueden calcular
 ✔ Armo reportes automáticos en Excel o HTML
 
-Mirá un ejemplo con datos ficticios: https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/
+Mirá un ejemplo con datos ficticios en la galería de este gig.
 
 Escribime antes de comprar y reviso tu archivo sin cargo.
 ```

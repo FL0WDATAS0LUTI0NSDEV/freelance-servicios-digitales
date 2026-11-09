@@ -15,7 +15,8 @@ Copiá la que corresponda, completá lo que está entre `[corchetes]` y **person
 4. **Mostrá un ejemplo concreto** del portafolio que se parezca a su pedido.
 5. **Cerrá con una pregunta**, no con "quedo a disposición". Una pregunta invita a responder.
 6. **Corto.** Entre 80 y 150 palabras. Si escribe un texto largo, el cliente no lo lee.
-7. **No inventes experiencia** ni clientes. Si te preguntan, contá que estás arrancando y mostrá el portafolio: la honestidad cierra más proyectos que una mentira que se descubre.
+7. **Sin links ni datos de contacto en Workana, Fiverr y Upwork.** Nada de URLs (web, GitHub, Canva, Drive), mails, teléfonos ni redes: lo toman como contacto externo y pueden bloquearte. Nombrá el ejemplo y decí que está en la **sección Portafolio de tu perfil**; si piden más, mandá capturas por el chat de la plataforma. Los links de este kit son solo para **clientes directos** (LinkedIn, recomendaciones, mail).
+8. **No inventes experiencia** ni clientes. Si te preguntan, contá que estás arrancando y mostrá el portafolio: la honestidad cierra más proyectos que una mentira que se descubre.
 
 ### Qué proyectos conviene elegir al principio
 - ✅ Presupuestos chicos o medianos (USD 30–300), plazos razonables, descripción clara.
@@ -55,8 +56,7 @@ Así lo resolvería:
 2. La limpio con Python y te entrego el archivo ordenado en Excel o Google Sheets.
 3. Te paso un informe corto con todo lo que se corrigió.
 
-Hice algo muy parecido con una planilla de ventas (datos ficticios): 77 filas desordenadas y 58 formas distintas de escribir los mismos datos, convertidas en una base confiable. Lo podés ver acá:
-https://github.com/FL0WDATAS0LUTI0NSDEV/freelance-servicios-digitales/tree/main/portafolio/01-limpieza-de-datos
+Hice algo muy parecido con una planilla de ventas (datos ficticios): 77 filas desordenadas y 58 formas distintas de escribir los mismos datos, convertidas en una base confiable. Lo podés ver en la sección Portafolio de mi perfil ("Limpieza de una planilla de ventas").
 
 Plazo: [2–3] días · Presupuesto: USD [40]
 
@@ -83,8 +83,7 @@ Mi propuesta:
 2. Armo un script en Python (o automatización en Google Sheets, si preferís no instalar nada) que genera el reporte con un clic: totales, comparación con el período anterior y rankings.
 3. Te entrego el reporte en Excel o en formato web, más una guía corta para usarlo.
 
-Ejemplo de un reporte automático que armé (datos ficticios), con indicadores y conclusiones que se escriben solas:
-https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/portafolio/02-reporte-automatico/reporte_ventas.html
+Podés ver un reporte automático que armé (datos ficticios), con indicadores y conclusiones que se escriben solas, en la sección Portafolio de mi perfil ("Reporte de ventas automático").
 
 Plazo: [5–7] días · Presupuesto: USD [120]
 
@@ -112,8 +111,7 @@ Te propongo:
 3. Armo el dashboard en [Power BI / Google Looker Studio / Excel] (trabajo con Power BI en mi día a día como analista), con filtros por [fecha / vendedor / producto], que se actualiza cuando cargás datos nuevos.
 4. Te muestro cómo usarlo en una llamada corta.
 
-Podés ver un dashboard interactivo de ejemplo que armé (datos ficticios), con filtros, indicadores y comparación de períodos:
-https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/portafolio/04-dashboard-interactivo/
+Podés ver un dashboard interactivo que armé (datos ficticios), con filtros, indicadores y comparación de períodos, en la sección Portafolio de mi perfil ("Dashboard de ventas interactivo").
 
 Plazo: [5–10] días · Presupuesto: USD [150]
 
@@ -162,8 +160,7 @@ Mi enfoque:
 2. Escribo textos cortos, fáciles de leer en el celular, enfocados en lo que gana quien lee, con un llamado a la acción claro.
 3. Incluye [2] rondas de revisión.
 
-Ejemplo: así reescribí la página de inicio de un taller de cerámica (negocio ficticio), con el antes y el después:
-https://github.com/FL0WDATAS0LUTI0NSDEV/freelance-servicios-digitales/tree/main/portafolio/03-redaccion-web
+Ejemplo: en la sección Portafolio de mi perfil está cómo reescribí la página de inicio de un taller de cerámica (negocio ficticio), con el antes y el después.
 
 Plazo: [3–4] días · Presupuesto: USD [60]
 

@@ -3,6 +3,10 @@
 Texto listo para copiar y pegar en cada campo del perfil.
 Las partes entre corchetes `[ ]` se completan con datos reales. **No pongas experiencia, clientes ni títulos que no tengas**: Workana y los clientes lo verifican.
 
+> **⚠️ Regla de links y contacto:** Workana bloquea a quien comparte datos de contacto. En **ningún campo** (Sobre mí, proyectos, propuestas, mensajes) pongas links (web, GitHub, Canva, Drive), mail, teléfono, WhatsApp ni redes. La web de FlowData muestra el mail, así que linkearla también cuenta como contacto. Los ejemplos se muestran con **capturas** en "Proyectos destacados"; si un cliente pide más, mandale capturas o archivos **por el chat de Workana**.
+
+> **Privacidad:** Workana pide verificar tu identidad y muestra tu nombre (en general, nombre e inicial del apellido) y tu foto a los clientes; no se puede usar un perfil anónimo. Lo que sí controlás: **no menciones a tu empleador** en ningún campo, usá el mail de FlowData Solutions y, en "Experiencia laboral", poné tu empleo actual solo como "Desarrollador analista de datos · Empresa privada (confidencial)" o dejalo afuera.
+
 ---
 
 ## Título profesional
@@ -56,10 +60,9 @@ POR QUÉ ELEGIRME
 • Tus datos se tratan con total confidencialidad.
 • Revisiones incluidas en cada proyecto.
 
-Mirá ejemplos de mi trabajo (con datos ficticios) en mi portafolio:
-https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/
+Mirá ejemplos de mi trabajo (con datos ficticios) en la sección Portafolio de este perfil.
 
-Escribime contándome qué necesitás y te respondo con una propuesta.
+Contame qué necesitás por mensaje y te respondo con una propuesta.
 ```
 
 ---
@@ -95,11 +98,20 @@ Es la tarifa de lanzamiento de los servicios de datos. Para tareas de asistente 
 ## Portafolio (sección "Portafolio" de Workana)
 Cargá un proyecto por ejemplo, con una captura de pantalla:
 
-| Título | Descripción corta | Link |
+| Título | Descripción corta | Link (solo para tu referencia: **no lo pegues en Workana**) |
 |---|---|---|
 | Limpieza de una planilla de ventas con Python | Unifiqué 58 formas distintas de escribir clientes, productos y provincias, completé datos faltantes y eliminé duplicados. De 77 filas desordenadas a una base confiable. | https://github.com/FL0WDATAS0LUTI0NSDEV/freelance-servicios-digitales/tree/main/portafolio/01-limpieza-de-datos |
 | Reporte de ventas automático | Reporte con indicadores, conclusiones y rankings generado con un solo comando, en HTML y Excel. | https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/portafolio/02-reporte-automatico/reporte_ventas.html |
 | Textos para la web de un taller de cerámica | Reescritura de la página de inicio: más clara, sin errores y con un llamado a la acción. | https://github.com/FL0WDATAS0LUTI0NSDEV/freelance-servicios-digitales/tree/main/portafolio/03-redaccion-web |
+| Dashboard de ventas interactivo | Tablero con filtros por período, provincia, vendedor y producto; indicadores con comparación contra el período anterior; gráficos clicables y exportación a CSV. | https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/portafolio/04-dashboard-interactivo/ |
+| Caso completo: de la planilla desordenada al reporte | Exportación de ventas con fechas mezcladas, duplicados y faltantes → limpieza reproducible → reporte web y Excel → control de calidad. Total conciliado y sin bloqueantes. | https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/referencias/prueba-ferreteria/reporte/reporte_ventas_2026-10.html |
+
+**Orden recomendado:** 1) Dashboard interactivo, 2) Caso completo, 3) Limpieza, 4) Reporte automático, 5) Redacción. Cuando tengas el dashboard de Power BI (ejemplo 5), ponelo primero.
+
+**Capturas para cada proyecto:** en tu computadora están en el repo:
+- Dashboard: abrí `portafolio/04-dashboard-interactivo/index.html` en el navegador y sacá una captura (`Win + Shift + S`).
+- Caso completo: `referencias/prueba-ferreteria/reporte/capturas/reporte_ventas_2026-10_1280_dark.png`.
+- Limpieza y reporte: captura del README en GitHub o del reporte abierto en el navegador.
 
 Aclarales en cada uno que **son ejemplos con datos ficticios**.
 
@@ -110,4 +122,5 @@ Aclarales en cada uno que **son ejemplos con datos ficticios**.
 - Hacé los tests de habilidades que ofrece la plataforma (Excel, Python, ortografía).
 - Postulate a proyectos chicos al principio para juntar las primeras reseñas.
 - Respondé rápido: las primeras propuestas suelen ser las más leídas.
-- Usá la plantilla `plantillas/presupuesto-rapido.md` para las propuestas, personalizando siempre el primer párrafo.
+- Usá el agente `redactor-propuestas` o el kit (`plantillas/kit-propuestas.md`) para las propuestas, personalizando siempre la primera línea.
+- Antes de aceptar cada proyecto, completá tu lista de control privada (conflicto de interés, recursos propios, plazos).

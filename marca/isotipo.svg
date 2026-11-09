@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="FlowData Solutions">
+  <defs>
+    <linearGradient id="fds-flow" x1="96" y1="96" x2="416" y2="416" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00E5FF"/>
+      <stop offset="1" stop-color="#0066FF"/>
+    </linearGradient>
+    <linearGradient id="fds-edge" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00E5FF" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#0066FF" stop-opacity=".25"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="496" height="496" rx="116" fill="#0B1325"/>
+  <rect x="8" y="8" width="496" height="496" rx="116" fill="none" stroke="url(#fds-edge)" stroke-width="6"/>
+  <!-- "F" de flujo: tronco + dos ramas que terminan en nodos de datos -->
+  <g fill="none" stroke="url(#fds-flow)" stroke-width="40" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M152 392 V128 H332"/>
+    <path d="M152 252 H268"/>
+  </g>
+  <circle cx="352" cy="128" r="30" fill="#00E5FF"/>
+  <circle cx="288" cy="252" r="26" fill="#22B8FF"/>
+  <!-- Barras ascendentes: los datos convertidos en resultados -->
+  <g fill="url(#fds-flow)">
+    <rect x="232" y="336" width="36" height="56" rx="12"/>
+    <rect x="292" y="300" width="36" height="92" rx="12"/>
+    <rect x="352" y="252" width="36" height="140" rx="12"/>
+  </g>
+</svg>

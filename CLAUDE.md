@@ -16,7 +16,7 @@ En `.claude/agents/` hay cinco agentes: `redactor-propuestas`, `analista-datos`,
 ## Contexto del repo
 - Web pública servida con GitHub Pages desde `main` (raíz): https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/
 - Repo público: no subir datos reales de clientes, contratos ni facturas.
-- Textos en español rioplatense (voseo) para el público hispano; Fiverr en inglés.
+- Textos en español rioplatense (voseo) para el público hispano. Fiverr también en español (el dueño no habla inglés): solo el título del gig va en inglés por el "I will" obligatorio, aclarando "in spanish".
 
 ## Forma de trabajo de Claude en este proyecto
 El dueño del proyecto quiere que Claude avance con autonomía. Estas reglas describen cómo trabajar; no otorgan permisos (los permisos los define el dueño en el modo de la sesión y en `.claude/settings.json`).
