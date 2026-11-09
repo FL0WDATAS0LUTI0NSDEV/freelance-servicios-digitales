@@ -10,6 +10,101 @@ Las partes entre corchetes `[ ]` se completan con datos reales. **No inventes ex
 
 ---
 
+## ⭐ Decisión: Fiverr en español
+
+El dueño **no habla inglés**, así que el perfil y los gigs van **en español**, apuntando a compradores hispanohablantes (Latinoamérica, España y empresas hispanas de EE. UU.). Son menos que los de habla inglesa, pero se los puede atender bien, sin malentendidos ni malas reseñas. Las secciones en inglés de más abajo quedan como referencia para el futuro.
+
+- **Idiomas del perfil:** solo **Español (nativo)**. No agregar inglés.
+- **Tags:** se pueden mezclar términos en inglés que también buscan los hispanohablantes ("power bi", "dashboard").
+- Si un comprador escribe en inglés, se le responde con amabilidad que el servicio es en español.
+
+### Perfil (español)
+**Título:** `Desarrollador Power BI y Analista de Datos`
+
+**Acerca de:**
+```
+¡Hola! Soy Dante, analista de datos y fundador de FlowData Solutions. Armo dashboards en Power BI, ordeno planillas desordenadas y automatizo los reportes que las pequeñas empresas hacen a mano todos los meses.
+
+Trabajo con Power BI (DAX, Power Query), Python, SQL y Excel. Comunicación clara, entregas en fecha y revisiones incluidas. Atiendo en español. Mirá ejemplos de mi trabajo en la galería de mis gigs.
+```
+
+**Experiencia laboral — FlowData Solutions (Fundador):**
+```
+Soluciones de datos para pequeñas empresas y profesionales independientes.
+• Dashboards en Power BI con modelo de datos y medidas DAX.
+• Limpieza y organización de planillas y bases de datos con Python y SQL.
+• Reportes automáticos en Excel y formato web.
+• Documentación de procesos y guías de uso para el cliente.
+```
+
+### Gig Power BI (español)
+**Título:** `Voy a crear un dashboard interactivo en Power BI para tu negocio`
+
+**Categoría:** Datos → Visualización de datos (o Análisis de datos → Dashboards)
+
+**Tags (5):** `power bi`, `dashboard power bi`, `dax`, `visualizacion de datos`, `analisis de datos`
+
+**Paquetes**
+
+| | Básico — USD 60 | Estándar — USD 150 | Premium — USD 300 |
+|---|---|---|---|
+| Nombre | Dashboard rápido | Dashboard de negocio | Reporte BI completo |
+| Qué incluye | 1 página, hasta 5 visuales, 1 fuente de datos ya ordenada | Hasta 3 páginas, limpieza en Power Query, modelo de datos y medidas DAX | Hasta 5 páginas, modelo estrella, DAX avanzado (comparación de períodos, objetivos, rankings), tema con tus colores y guía de uso |
+| Fuentes de datos | 1 | Hasta 3 | Hasta 5 |
+| Entrega | 3 días | 6 días | 10 días |
+| Revisiones | 1 | 2 | 3 |
+| Archivo .pbix | ✔ | ✔ | ✔ |
+
+**Descripción:**
+```
+Dejá de armar reportes a mano. Convierto tus datos de Excel, CSV o base de datos en un dashboard de Power BI claro e interactivo, para que tu equipo lo use todos los días.
+
+QUÉ RECIBÍS
+✔ Limpieza y preparación de datos en Power Query
+✔ Modelo de datos ordenado (esquema estrella) y relaciones
+✔ Medidas DAX: indicadores, comparación con el mes anterior, acumulado del año, objetivos y rankings
+✔ Filtros interactivos, desglose y formato condicional
+✔ Diseño profesional con los colores de tu marca
+✔ El archivo .pbix, listo para usar y actualizar
+
+Trabajo con Power BI todos los días como analista de datos.
+
+CÓMO TRABAJAMOS
+1. Me mandás tus datos (o una muestra) y qué decisiones querés tomar
+2. Confirmamos los indicadores y el paquete adecuado
+3. Recibís el dashboard, el archivo .pbix y una guía corta
+
+Tus datos son 100 % confidenciales. Atiendo en español.
+¡Escribime antes de comprar para revisar tus datos!
+```
+
+**Requisitos al comprador:**
+```
+1. Subí tus archivos de datos (Excel, CSV) o contame de dónde salen (SQL, SharePoint, sistema).
+2. ¿Qué indicadores o preguntas tiene que responder el dashboard?
+3. ¿Tenés colores de marca o algún dashboard de ejemplo que te guste?
+4. ¿Qué versión de Power BI usan (Desktop gratuito / Pro)?
+```
+
+**Preguntas frecuentes:**
+```
+P: ¿Podés conectarte a mi base de datos o SharePoint?
+R: Sí. Contame cuál es la fuente y te lo confirmo antes de que compres.
+
+P: ¿El dashboard se actualiza con datos nuevos?
+R: Sí. Queda armado para que lo actualices cuando cambien tus datos.
+
+P: ¿Necesito licencia Power BI Pro?
+R: No para abrir el archivo .pbix en Power BI Desktop, que es gratuito. Para compartirlo en línea con Power BI Service, normalmente sí.
+
+P: ¿Atendés en inglés?
+R: El servicio es en español.
+```
+
+**Galería:** `portafolio/capturas/fiverr/1-portada-power-bi-es.png` (portada), `2-dashboard-interactivo.png`, `3-reporte-kpis.png`.
+
+---
+
 ## 1. Usuario
 El nombre de usuario **no se puede cambiar después**. Opciones:
 ```
