@@ -43,6 +43,7 @@ Soy [tu nombre], analista de datos con formación en Data Science y desarrollo f
 
 QUÉ PUEDO HACER POR VOS
 ✔ Limpieza y orden de planillas y bases de datos: duplicados, formatos de fechas y montos, nombres escritos de distintas formas, datos faltantes.
+✔ Facturas y comprobantes en PDF a Excel: extraigo fecha, CUIT, número, neto, IVA por alícuota, percepciones y total, con controles de duplicados y CUIT inválidos. Listo para el Libro IVA o tu contador.
 ✔ Reportes automáticos: el resumen semanal o mensual que hoy hacés a mano, generado con un solo clic (Excel, HTML o Google Sheets).
 ✔ Dashboards en Power BI (modelo de datos, DAX, Power Query) o en Google Looker Studio con los indicadores clave de tu negocio.
 ✔ Documentación de procesos: manuales paso a paso para que tu equipo no dependa de una sola persona.
@@ -80,10 +81,12 @@ Cargá las que realmente manejes, en este orden de prioridad:
 8. Análisis de datos
 9. Limpieza de datos
 10. Automatización
-11. Visualización de datos
-12. Looker Studio / Google Data Studio
-13. Redacción de contenidos
-14. Asistente virtual
+11. Extracción de datos / PDF a Excel
+12. Entrada de datos (Data entry)
+13. Visualización de datos
+14. Looker Studio / Google Data Studio
+15. Redacción de contenidos
+16. Asistente virtual
 
 ---
 
@@ -105,11 +108,13 @@ Cargá un proyecto por ejemplo, con una captura de pantalla:
 | Textos para la web de un taller de cerámica | Reescritura de la página de inicio: más clara, sin errores y con un llamado a la acción. | https://github.com/FL0WDATAS0LUTI0NSDEV/freelance-servicios-digitales/tree/main/portafolio/03-redaccion-web |
 | Dashboard de ventas interactivo | Tablero con filtros por período, provincia, vendedor y producto; indicadores con comparación contra el período anterior; gráficos clicables y exportación a CSV. | https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/portafolio/04-dashboard-interactivo/ |
 | Caso completo: de la planilla desordenada al reporte | Exportación de ventas con fechas mezcladas, duplicados y faltantes → limpieza reproducible → reporte web y Excel → control de calidad. Total conciliado y sin bloqueantes. | https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/referencias/prueba-ferreteria/reporte/reporte_ventas_2026-10.html |
+| Facturas PDF a Libro IVA en Excel | Script que lee facturas en PDF de distintos proveedores y arma el Libro IVA Compras: CUIT, neto e IVA por alícuota, percepciones y total, con control de duplicados, CUIT inválidos y totales. 14 PDF procesados, 0 diferencias. | https://github.com/FL0WDATAS0LUTI0NSDEV/freelance-servicios-digitales/tree/main/portafolio/06-facturas-pdf-a-excel |
 
-**Orden recomendado:** 1) Dashboard interactivo, 2) Caso completo, 3) Limpieza, 4) Reporte automático, 5) Redacción. Cuando tengas el dashboard de Power BI (ejemplo 5), ponelo primero.
+**Orden recomendado:** 1) Dashboard interactivo, 2) Facturas PDF a Excel, 3) Caso completo, 4) Limpieza, 5) Reporte automático, 6) Redacción. Cuando tengas el dashboard de Power BI (ejemplo 5), ponelo primero.
 
 **Capturas para cada proyecto:** en tu computadora están en el repo:
 - Dashboard: abrí `portafolio/04-dashboard-interactivo/index.html` en el navegador y sacá una captura (`Win + Shift + S`).
+- Facturas PDF a Excel: `portafolio/capturas/fiverr/portafolio-4x3/4-facturas-pdf-excel-4x3.png`.
 - Caso completo: `referencias/prueba-ferreteria/reporte/capturas/reporte_ventas_2026-10_1280_dark.png`.
 - Limpieza y reporte: captura del README en GitHub o del reporte abierto en el navegador.
 

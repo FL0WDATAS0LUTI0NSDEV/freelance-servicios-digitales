@@ -33,6 +33,8 @@ Copiá la que corresponda, completá lo que está entre `[corchetes]` y **person
 | Limpieza + 1 reporte automático | USD 120 | 5–7 días |
 | Automatización completa + documentación | USD 350 | 2–3 semanas |
 | Dashboard en Power BI / Looker Studio / Excel | USD 150–300 | 5–10 días |
+| Facturas PDF a Excel / Libro IVA (hasta 50 / 200 / 500) | USD 40 / 90 / 180 | 2 / 4 / 7 días |
+| Proceso mensual de facturas (recurrente) | desde USD 60 por mes | todos los meses |
 | Carga o transcripción de datos | USD 6–12 por hora | según volumen |
 | Perfil profesional | USD 25 | 2 días |
 | Textos para web (hasta 4 secciones) | USD 60 | 4 días |
@@ -122,6 +124,35 @@ Plazo: [5–10] días · Presupuesto: USD [150]
 - ¿Dónde están los datos y cada cuánto se actualizan?
 - ¿Cuántas personas lo van a ver? ¿Necesitan acceso con su cuenta?
 - ¿Tenés preferencia de herramienta?
+
+---
+
+## 3 bis. Facturas o comprobantes en PDF a Excel
+
+**Cuándo usarla:** "pasar facturas a Excel", "extraer datos de PDF", "libro IVA", "cargar comprobantes", "carga de facturas", "data entry de facturas", "PDF a Excel".
+
+```
+Hola [nombre]: entiendo que tenés [cantidad] facturas en PDF de [compras / ventas] y necesitás pasarlas a Excel [para el Libro IVA / para tu contador / para controlar gastos].
+
+En vez de cargarlas a mano, lo resuelvo con un proceso automático:
+1. Extraigo de cada PDF la fecha, tipo, punto de venta, número, CUIT, razón social, neto e IVA por alícuota, percepciones y total.
+2. Controlo que no haya facturas duplicadas, CUIT con dígito verificador inválido ni sumas que no coincidan con el total.
+3. Te entrego el Excel con el libro, un resumen por proveedor y una hoja con las observaciones.
+
+Tengo un ejemplo (datos ficticios) en la sección Portafolio de mi perfil ("Facturas PDF a Libro IVA en Excel"): 14 facturas de distintos proveedores procesadas en segundos, con 1 duplicado y 1 CUIT erróneo detectados.
+
+Plazo: [2–4] días · Presupuesto: USD [40–90]
+
+¿Me mandás 2 o 3 facturas de muestra de tus proveedores más frecuentes? Así te confirmo el alcance. ¿Son PDF descargados del sistema o escaneados?
+```
+
+**Preguntas para afinar el presupuesto:**
+- ¿Cuántas facturas son y de cuántos proveedores (formatos) distintos?
+- ¿PDF descargados o escaneados/fotos? (escaneados = OCR, se cotiza aparte)
+- ¿Qué columnas necesita el contador? ¿Tiene un modelo de planilla?
+- ¿Es algo de una vez o todos los meses? (si es mensual, ofrecer el proceso recurrente)
+
+> Nunca usar código, plantillas ni facturas del trabajo en relación de dependencia. Las facturas del cliente van solo en `clientes-privado/<cliente>/`.
 
 ---
 
