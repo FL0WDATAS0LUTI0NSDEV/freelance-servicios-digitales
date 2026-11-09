@@ -31,6 +31,12 @@ RECALC_PY_CANDIDATOS = [  # script recalc.py de la skill xlsx; si no está, se u
     "/mnt/skills/public/xlsx/scripts/recalc.py",
     "~/.claude/skills/xlsx/scripts/recalc.py",
 ]
+SOFFICE_CANDIDATOS = [  # dónde buscar LibreOffice si "soffice" no está en el PATH (o definí la variable SOFFICE)
+    r"C:\Program Files\LibreOffice\program\soffice.exe",
+    r"C:\Program Files (x86)\LibreOffice\program\soffice.exe",
+    "/Applications/LibreOffice.app/Contents/MacOS/soffice",
+    "/usr/bin/soffice", "/usr/bin/libreoffice", "/snap/bin/libreoffice",
+]
 # ================================================================
 
 import argparse
@@ -435,6 +441,14 @@ def generar_excel(d: dict, salida: Path):
 ERRORES_EXCEL = ("#VALUE!", "#DIV/0!", "#REF!", "#NAME?", "#NULL!", "#NUM!", "#N/A")
 
 
+def buscar_soffice():
+    """Ruta a LibreOffice: variable SOFFICE, PATH o ubicaciones habituales de Windows, macOS y Linux."""
+    for c in [os.environ.get("SOFFICE", ""), shutil.which("soffice") or "", shutil.which("libreoffice") or ""] + SOFFICE_CANDIDATOS:
+        if c and Path(c).expanduser().is_file():
+            return str(Path(c).expanduser())
+    return None
+
+
 def recalcular_excel(xlsx: Path) -> str:
     """Recalcula las fórmulas con LibreOffice para que el archivo guarde los valores calculados
     (sin esto, las vistas previas y openpyxl data_only=True ven celdas vacías)."""
@@ -451,13 +465,17 @@ def recalcular_excel(xlsx: Path) -> str:
         if res.get("total_errors"):
             sys.exit(f"{xlsx.name} tiene {res['total_errors']} errores al recalcular: {res['error_summary']}")
         return f"recalc.py ({res.get('total_formulas')} fórmulas, 0 errores)"
-    if shutil.which("soffice"):
+    soffice = buscar_soffice()
+    if soffice:
         with tempfile.TemporaryDirectory() as tmp:
-            subprocess.run(["soffice", "--headless", "--calc", "--convert-to", "xlsx", "--outdir", tmp, str(xlsx)],
+            # Perfil temporal: funciona aunque tengas LibreOffice abierto.
+            perfil = "-env:UserInstallation=" + Path(tmp, "perfil").resolve().as_uri()
+            subprocess.run([soffice, perfil, "--headless", "--calc", "--convert-to", "xlsx", "--outdir", tmp, str(xlsx)],
                            capture_output=True, timeout=180, check=True)
             shutil.move(str(Path(tmp) / xlsx.name), xlsx)
-        return "soffice --convert-to xlsx"
-    print("Aviso: sin LibreOffice; el Excel se recalcula recién al abrirlo en Excel.")
+        return f"LibreOffice ({soffice})"
+    print("Aviso: no encontré LibreOffice; el Excel se recalcula recién al abrirlo en Excel. "
+          "Instalalo desde https://www.libreoffice.org/download/ o definí la variable SOFFICE con la ruta a soffice.")
     return ""
 
 

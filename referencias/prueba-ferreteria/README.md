@@ -43,6 +43,11 @@ Se mantiene la mejora anterior: **en celular, las tablas largas (productos y dev
 
 `verificar_reporte.js` ahora también controla: ningún pedido externo, tablas plegadas en 375 px (3 filas + botón, y que el botón las abra) y completas en 1280 px, color del foco en cada tema y que no haya negativos con guion.
 
+## Requisitos para correrlo en tu computadora
+- **Python 3** con `pandas` y `openpyxl`: `pip install pandas openpyxl`.
+- **LibreOffice** (gratis, https://www.libreoffice.org/download/): el script lo usa para guardar el Excel con los valores ya calculados. Lo encuentra solo en las ubicaciones habituales de Windows, macOS y Linux; si lo instalaste en otro lugar, definí la variable `SOFFICE` con la ruta a `soffice`. Sin LibreOffice el reporte se genera igual y el Excel se calcula al abrirlo.
+- **Node.js + Playwright** solo para `verificar_reporte.js` (opcional): `npm install playwright` y `npx playwright install chromium`.
+
 ## Cómo reproducirlo
 ```bash
 cd referencias/prueba-ferreteria
