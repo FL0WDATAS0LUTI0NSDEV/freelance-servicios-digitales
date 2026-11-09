@@ -1,4 +1,32 @@
-# LinkedIn — Página de empresa de FlowData Solutions
+# LinkedIn — FlowData Solutions
+
+> **Decisión del dueño (09/11/2026): opción A.** Se usa un **perfil personal con el nombre de la marca** ("FlowData Solutions"), sin el nombre real del dueño. Riesgo conocido y aceptado: LinkedIn exige nombre real en perfiles personales y puede **restringir o cerrar** la cuenta sin aviso. Todos los textos e imágenes están en este repo para poder recrearla.
+>
+> **Para bajar el riesgo:**
+> - No pedir la insignia de verificación de identidad (no coincidiría el nombre).
+> - Pocas solicitudes de conexión: máximo 10 por día, siempre personalizadas; nunca mensajes masivos ni copiados.
+> - Nombre escrito normal (`FlowData` / `Solutions`), no en mayúsculas.
+> - No vincular el perfil al empleador ni a cuentas personales.
+> - Si LinkedIn pide verificar la identidad o restringe la cuenta, **no** mandar documentos de otra persona: avisar y pasar a la opción B (página administrada por alguien de confianza) o C (sin LinkedIn).
+
+## Configuración del perfil (opción A)
+| Sección | Qué va |
+|---|---|
+| Nombre | `FlowData` · Apellido `Solutions` |
+| Foto | `marca/isotipo-400.png` |
+| Portada | `marca/linkedin-portada-perfil-1584x396.png` (4:1; la de 4200 × 700 es para páginas de empresa) |
+| Titular | `Dashboards en Power BI · Facturas PDF a Excel · Reportes automáticos para PYMEs` |
+| Acerca de | la descripción larga de la sección 2 (entra: máx. 2.600) |
+| Servicios | ya cargados (Desarrollo web, Consultoría de TI, Elaboración de informes de datos, Introducción de datos, Tramitación de facturas); "Acerca de" de servicios: versión corta de 397 caracteres |
+| Destacado | link a la web + imágenes del portafolio (dashboard, facturas PDF a Excel) |
+| Experiencia | `Fundador` · FlowData Solutions · Autónomo · nov. 2026 – actualidad. Sin el empleo actual. |
+| Educación | vacía (o solo la formación, sin datos que identifiquen) |
+| Aptitudes | Power BI, DAX, Power Query, Python, SQL, Excel, Análisis de datos, Visualización de datos, Limpieza de datos, Extracción de datos, Automatización, Business Intelligence |
+| Información de contacto | web de FlowData y `flowdata.solutions.dev@gmail.com` |
+
+---
+
+## Referencia: página de empresa (opciones B y C)
 
 **Decisión:** la presencia en LinkedIn es una **página de empresa** de FlowData Solutions, no un perfil personal con el nombre del dueño.
 
