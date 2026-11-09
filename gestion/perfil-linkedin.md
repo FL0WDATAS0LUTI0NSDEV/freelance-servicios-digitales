@@ -25,7 +25,7 @@
 | Eslogan (máx. 120 caracteres) | ver abajo |
 
 3. **Logo:** `marca/isotipo-400.png` (400 × 400 px, listo).
-4. **Portada:** `marca/linkedin-portada-1128x191.png` (1128 × 191 px, lista).
+4. **Portada:** `marca/linkedin-portada-empresa-4200x700.png` (4200 × 700 px, proporción 6:1 que usan las páginas de empresa; contenido centrado y la esquina inferior izquierda libre para el logo). La de 1128 × 191 es para perfiles personales y en la página queda agrandada y recortada.
 
 ### Eslogan (elegí uno)
 ```
