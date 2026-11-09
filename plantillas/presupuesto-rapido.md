@@ -1,5 +1,7 @@
 # Presupuesto rápido (para Workana / Upwork / Fiverr)
 
+> Para propuestas listas por tipo de pedido, usá el [kit de propuestas](kit-propuestas.md).
+
 Hola [nombre], gracias por la publicación.
 
 Entiendo que necesitás **[resumen del problema]**. Tengo experiencia en **[habilidad relevante]** y puedo ayudarte así:
