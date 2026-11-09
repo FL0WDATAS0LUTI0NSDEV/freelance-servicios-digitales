@@ -22,7 +22,7 @@
 - [x] Título del perfil en español (confirmado con el conector de Fiverr el 9/11, tarde)
 - [ ] Experiencia laboral en español (texto en 2.2)
 - [ ] Habilidades: sumar Power Query, Dashboards, Data Visualization y Data Cleaning. Python queda en **Pro** (decisión del dueño, 09/11: maneja el ecosistema completo, no solo pandas)
-- [x] Portfolio: 3 proyectos de demostración (textos en 2.6)
+- [x] Portfolio: 4 proyectos de demostración (el 4.º, facturas PDF a Excel, cargado el 09/11)
 - [ ] Video de presentación en español, 30–60 s
 
 ### Gig de Power BI
