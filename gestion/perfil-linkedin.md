@@ -1,253 +1,162 @@
-# Perfil de LinkedIn — FlowData Solutions
+# LinkedIn — Página de empresa de FlowData Solutions
 
-## Posicionamiento
-**Analista de datos con formación en Data Science y desarrollo full-stack**, especializado en **Power BI**, que fundó FlowData Solutions para resolver problemas de datos de PYMEs: desde ordenar planillas y automatizar reportes hasta dashboards y aplicaciones web a medida.
+**Decisión:** la presencia en LinkedIn es una **página de empresa** de FlowData Solutions, no un perfil personal con el nombre del dueño.
 
-### Regla de honestidad (importante)
-**Trabajás actualmente como analista** (experiencia real) y te formaste en Data Science y desarrollo full-stack, aunque **todavía no trabajaste con esos dos títulos**. El perfil está escrito para eso:
-- ✅ Tu **trabajo actual de analista** es tu experiencia profesional principal: contá qué hacés y qué lograste, con números reales si los tenés.
-- ✅ Data Science y full-stack aparecen como **formación + proyectos demostrables** (portafolio y FlowData Solutions), no como puestos anteriores.
-- ⚠️ **Revisá tu contrato actual** antes de ofrecer servicios: cláusulas de exclusividad, no competencia o confidencialidad. Nunca uses datos, código ni clientes de tu empleador en FlowData Solutions.
-- ❌ No ponemos empresas, clientes, años de experiencia ni resultados que no existan. Un cliente que descubre una mentira no vuelve; uno que ve un portafolio honesto y sólido, sí contrata.
-- 💡 Lo que no tenés en experiencia lo compensás con **prueba visible**: portafolio, publicaciones explicando cómo resolvés problemas y las primeras reseñas.
-
-Las partes entre `[corchetes]` se completan con tus datos reales. En las listas de tecnologías, **dejá solo las que realmente manejás**.
+## Cómo funciona (leer antes de crearla)
+- LinkedIn exige que los **perfiles personales usen nombre real**. Por eso **no** se crea un perfil personal con nombre de marca ni con nombre inventado: LinkedIn suele restringir esas cuentas.
+- La página de empresa se crea **desde una cuenta personal que la administra** (puede ser una que ya tengas y no uses). Los visitantes ven la página; **no se muestra quién la administra**, salvo que esa persona se agregue como empleado.
+- **Limitación:** la página **no puede enviar solicitudes de conexión ni escribirle primero a nadie**. Puede publicar, recibir seguidores y responder mensajes. Por eso la estrategia es **contenido + vidriera de confianza**, y los clientes llegan sobre todo por Workana, Fiverr, la web y recomendaciones.
+- **No agregues tu trabajo en FlowData Solutions a una cuenta personal** si no querés que se vincule tu nombre con la página.
 
 ---
 
-## 1. Foto y portada
-- **Foto:** de frente, fondo liso, buena luz. La misma en Workana y Fiverr.
-- **Portada (1584 × 396 px):** fondo `#0B1325` con:
-  ```
-  FlowData Solutions
-  Data Science · Desarrollo Full-Stack · Automatización
-  ```
+## 1. Crear la página
+1. Desde la cuenta administradora: **Para negocios (ícono de cuadrícula) → Crear una página de empresa → Empresa**.
+2. Completá los campos así:
 
----
+| Campo | Valor |
+|---|---|
+| Nombre | `FlowData Solutions` |
+| URL pública | `linkedin.com/company/flowdata-solutions` (si está tomada: `flowdata-solutions-ar` o `flowdatasolutions`) |
+| Sitio web | `https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/` |
+| Sector | `Servicios y consultoría de TI` (o `Servicios de análisis de datos` si aparece) |
+| Tamaño | `0–1 empleados` |
+| Tipo | `Autónomo` / `Empresa privada` |
+| Eslogan (máx. 120 caracteres) | ver abajo |
 
-## 2. Titular (máx. 220 caracteres)
-**Opción A (recomendada — combina tu experiencia real con tu formación):**
-```
-Analista de Datos | Power BI · Python · SQL | Data Science & Full-Stack | Convierto datos en dashboards, automatizaciones y apps web para PYMEs | Fundador de FlowData Solutions
-```
+3. **Logo:** el isotipo de la web (cuadrado con el flujo de datos en cian/azul) sobre fondo `#0B1325`, 400 × 400 px. Se puede armar en Canva.
+4. **Portada (1128 × 191 px):** fondo `#0B1325` con el texto `Automatización de Procesos & Soluciones de Datos` y, más chico, `Power BI · Python · SQL · Dashboards`.
 
-**Opción A2 (si preferís destacar los dos títulos de formación):**
+### Eslogan (elegí uno)
 ```
-Data Scientist & Full-Stack Developer | Analista de datos | Power BI · Python · SQL | Dashboards, automatizaciones y apps web para PYMEs | FlowData Solutions
+Automatización de Procesos & Soluciones de Datos para PYMEs
 ```
-
-**Opción B (más orientada a negocio):**
 ```
-Ayudo a PYMEs a decidir con datos: análisis, dashboards y aplicaciones web a medida | Data Science + Full-Stack | FlowData Solutions
-```
-
-**Opción C (más técnica, para reclutadores):**
-```
-Data Scientist & Full-Stack Developer | Python, pandas, scikit-learn, SQL | [JavaScript/TypeScript, React, Node.js] | Abierto a proyectos freelance
+Dashboards en Power BI, reportes automáticos y apps web para PYMEs
 ```
 
 ---
 
-## 3. Acerca de (máx. 2.600 caracteres)
+## 2. Descripción ("Acerca de", máx. 2.000 caracteres)
 ```
-Soy [tu nombre], analista de datos con formación en Data Science y desarrollo full-stack. En mi trabajo actual como analista [qué hacés: armo reportes / analizo ventas / construyo tableros en Power BI…]. Fundé FlowData Solutions para ayudar a pequeñas y medianas empresas a usar mejor sus datos: que dejen de perder horas en planillas y empiecen a tomar decisiones con información clara.
+FlowData Solutions ayuda a pequeñas y medianas empresas a usar mejor sus datos: que dejen de perder horas armando planillas y reportes a mano, y empiecen a decidir con información clara.
 
-La ventaja de combinar los dos perfiles es que puedo resolver el problema completo: desde limpiar y analizar los datos hasta construir la herramienta que el equipo usa todos los días.
+🔹 Qué hacemos
+• Dashboards en Power BI: modelo de datos, medidas DAX y diseño a medida.
+• Limpieza y organización de planillas y bases de datos (Python, SQL, Excel).
+• Reportes automáticos que se generan con un clic, en Excel o en formato web.
+• Análisis de datos y modelos simples de pronóstico y segmentación.
+• Aplicaciones web a medida para conectar datos y procesos.
 
-🔹 Qué hago
-• Limpieza, organización y análisis de datos (Python, pandas, SQL).
-• Automatización de reportes y procesos repetitivos.
-• Dashboards en Power BI (modelado de datos, DAX, Power Query) y tableros web interactivos.
-• Modelos de Machine Learning aplicados: pronóstico de ventas, segmentación de clientes, detección de anomalías.
-• Aplicaciones web a medida y APIs para conectar datos y sistemas.
+🔹 Planes mensuales
+Mantenemos tus reportes y dashboards actualizados y funcionando, con horas incluidas para ajustes. Desde USD 100 por mes, sin permanencia.
 
-🔹 Tecnologías
-[Power BI (DAX, Power Query) · Excel avanzado · Python · pandas · NumPy · scikit-learn · Jupyter · SQL (PostgreSQL/MySQL) · JavaScript/TypeScript · React · Node.js · FastAPI · Git] ← dejá solo las que manejás
+🔹 Cómo trabajamos
+Entendemos el problema, proponemos una solución con alcance, plazo y precio cerrados, y entregamos por etapas. Al final queda la herramienta funcionando y documentada.
 
-🔹 Cómo trabajo
-Primero entiendo el problema del negocio, después propongo una solución con alcance, plazo y precio cerrados, y entrego por etapas. Al final queda la herramienta funcionando, documentada y, si el cliente quiere, con mantenimiento mensual.
-
-🔹 Proyectos que podés ver
-• Dashboard de ventas interactivo con filtros, indicadores y exportación.
-• Pipeline de limpieza de datos: 58 variantes de nombres unificadas en 17 valores.
-• Reporte automático en HTML y Excel generado con un solo comando.
+🔹 Portafolio
+Ejemplos con datos ficticios: dashboard interactivo, limpieza de datos y reportes automáticos.
 👉 https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/
 
-📩 ¿Tu equipo pierde tiempo con planillas o necesita una herramienta a medida? Escribime y lo vemos: flowdata.solutions.dev@gmail.com
+📩 flowdata.solutions.dev@gmail.com
 ```
+
+> Para la marca usamos la primera persona del plural ("hacemos", "trabajamos"): suena a empresa y no expone a una persona. Es honesto mientras no se afirmen cosas falsas (no decir "nuestro equipo de 10 analistas", ni clientes o años que no existen).
+
+### Especialidades (hasta 20)
+```
+Power BI, Análisis de datos, Business Intelligence, Dashboards, DAX, Power Query, Python, SQL, Limpieza de datos, Automatización de reportes, Excel, Visualización de datos, Ciencia de datos, Desarrollo web, PYMEs
+```
+
+### Botón personalizado
+**Contactar** (o **Visitar sitio web**) → la web de FlowData Solutions.
 
 ---
 
-## 4. Experiencia
+## 3. Configuración recomendada
+- **Mensajes de la página: activados**, así los interesados pueden escribirle a la marca. Revisalos todos los días.
+- **Página de servicios** (si LinkedIn la ofrece para tu página): cargá Power BI, Análisis de datos, Desarrollo web.
+- **Hashtags de la página:** #PowerBI #AnalisisDeDatos #PYMEs.
+- **Notificaciones:** al celular de la cuenta administradora.
 
-### Tu trabajo actual de analista (experiencia profesional)
-| Campo | Qué poner |
+---
+
+## 4. Estrategia sin contacto directo
+
+Como la página no puede escribirle primero a nadie, la estrategia cambia:
+
+| Antes (perfil personal) | Ahora (página de empresa) |
 |---|---|
-| Cargo | `[Analista de datos / Analista de … ]` (el nombre real del puesto) |
-| Tipo de empleo | `Jornada completa` (o el que corresponda) |
-| Empresa | `[nombre de la empresa]` |
-| Fecha de inicio | `[mes y año]` · "Trabajo actualmente aquí" |
+| 10 solicitudes de conexión por día | **Seguidores** a través del contenido |
+| Mensajes directos en frío | La gente **le escribe a la página** después de ver una publicación o la web |
+| Vos sos la cara visible | **La marca** es la cara visible |
 
-**Descripción (completala con lo que hacés de verdad):**
-```
-• [Tarea principal: ej. Desarrollo y mantenimiento de dashboards en Power BI para el área de …]
-• [Tarea: ej. Extracción y transformación de datos con SQL / Power Query desde …]
-• [Logro con número, si lo tenés: ej. Reduje de X a Y horas la preparación del reporte mensual]
-```
-No publiques datos confidenciales de la empresa (clientes, montos, sistemas internos).
+### Cómo conseguir seguidores
+1. **Primeros seguidores:** compartí la página con conocidos que sí uses (WhatsApp, grupos) y pedí que la sigan y compartan la primera publicación.
+2. **Contenido útil 2–3 veces por semana** (ver ideas abajo). En las páginas, el alcance depende casi todo de que el contenido se comparta.
+3. **Link a la página** en la web, en Workana, en Fiverr y en la firma del mail.
+4. **Comentar como página** en publicaciones de dueños de PYMEs, contadores y comunidades de datos (en una publicación, elegí "comentar como FlowData Solutions"). Comentarios útiles, nunca spam.
+5. **Grupos de LinkedIn:** la página no puede unirse a grupos; eso solo funciona desde una cuenta personal. Si no querés usar una, salteá este punto.
 
-### FlowData Solutions (emprendimiento, real y actual)
-| Campo | Qué poner |
-|---|---|
-| Cargo | `Fundador · Data Scientist & Full-Stack Developer` |
-| Tipo de empleo | `Autónomo` |
-| Empresa | `FlowData Solutions` |
-| Fecha de inicio | `Noviembre 2026` · "Trabajo actualmente aquí" |
-| Modalidad | `En remoto` |
-
-**Descripción:**
+### Respuestas a mensajes que lleguen a la página
+**Cuando alguien consulta:**
 ```
-Emprendimiento de soluciones de datos y desarrollo web para PYMEs y profesionales independientes.
-• Pipelines de limpieza y validación de datos con Python y pandas.
-• Reportes automáticos (Excel/HTML) y dashboards interactivos en JavaScript.
-• Desarrollo de aplicaciones web a medida y automatización de procesos.
-Portafolio: https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/
+¡Hola [nombre]! Gracias por escribirnos. Contanos un poco más: ¿qué datos manejan hoy (Excel, sistema de facturación, otra cosa) y qué les gustaría ver o automatizar? Si nos compartís un ejemplo del archivo (con datos cambiados si preferís), te respondemos con una propuesta concreta, con plazo y precio cerrado.
 ```
 
-### Proyectos (sección "Proyectos" de LinkedIn)
-Cargá cada ejemplo del portafolio como proyecto, asociado a FlowData Solutions, aclarando **"proyecto de portafolio con datos ficticios"**:
+**Cuando pide precio de entrada:**
+```
+Depende del alcance, pero como referencia: limpieza de una planilla desde USD 40, un reporte automático desde USD 120 y un dashboard en Power BI desde USD 150. Con un ejemplo de tus datos te paso el precio exacto, sin compromiso.
+```
 
-1. **Dashboard de ventas interactivo** — HTML, CSS, JavaScript. Filtros, KPIs con comparación de períodos, gráficos clicables, exportación CSV.
-   https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/portafolio/04-dashboard-interactivo/
-2. **Pipeline de limpieza de datos** — Python, pandas. Normalización de fechas, montos y entidades; deduplicación; imputación de faltantes; informe de cambios.
-3. **Reporte de ventas automático** — Python, pandas, openpyxl. KPIs, conclusiones automáticas y rankings en HTML y Excel.
-
-Si tenés proyectos propios o de tu formación (trabajos finales, Kaggle, apps), sumalos también: cuentan como experiencia demostrable.
-
-### Educación y certificaciones
-Cargá tu formación real: `[carrera / bootcamp / cursos de Data Science]`, `[cursos de desarrollo full-stack]`, con fechas e institución. Si tenés certificados, agregalos en **Licencias y certificaciones**.
+**Para que el contacto siga por la plataforma que prefiera:** si el cliente viene de LinkedIn, el trabajo se puede contratar directo (sin comisión): acordá alcance, plazo y forma de pago por escrito (podés usar `plantillas/propuesta-comercial.md`).
 
 ---
 
-## 5. Destacados
-1. **Mi web y servicios** → https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/
-2. **Dashboard interactivo** → https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/portafolio/04-dashboard-interactivo/
-3. **Código en GitHub** → https://github.com/FL0WDATAS0LUTI0NSDEV/freelance-servicios-digitales
+## 5. Publicaciones (2–3 por semana)
+Ideas que funcionan para una página de datos:
 
----
-
-## 6. Aptitudes (fijá las 3 primeras)
-1. Microsoft Power BI
-2. Análisis de datos
-3. Python
-4. Ciencia de datos
-5. Desarrollo full-stack
-6. DAX · Power Query · SQL · pandas
-5. Machine Learning · scikit-learn
-6. Visualización de datos · Dashboards
-7. JavaScript · [TypeScript · React · Node.js]
-8. APIs REST · [FastAPI / Express]
-9. Automatización de procesos
-10. Git / GitHub
-
-(Dejá solo las que manejás. Pedile a compañeros de estudio o docentes que **validen** tus aptitudes.)
-
----
-
-## 7. Configuración
-- **URL personalizada:** `linkedin.com/in/[tunombre]-data`.
-- **"Abierto a" → "Ofrecer servicios":** Análisis de datos, Business Intelligence (Power BI), Ciencia de datos, Desarrollo web. Modalidad remota.
-- **"Abierto a" → "Buscar empleo"** (opcional, solo visible para reclutadores): Data Analyst / BI Analyst (semi-senior según tu experiencia), Data Scientist Jr., Full-Stack Developer Jr. Un empleo y el emprendimiento pueden convivir.
-- **Información de contacto:** email y web.
-
----
-
-## 8. Mensajes de contacto directo (clientes sin comisión)
-
-### A quién contactar
-- **Dueños y gerentes de PYMEs** (comercios, distribuidoras, estudios, clínicas, inmobiliarias).
-- **Contadores y estudios contables:** manejan datos de muchos clientes y pueden recomendarte.
-- **Agencias de marketing o desarrollo** que necesitan apoyo en datos o en proyectos web.
-
-**Ritmo:** 10 solicitudes de conexión por día, siempre con nota personalizada. LinkedIn limita las invitaciones semanales: priorizá calidad.
-
-### Solicitud de conexión (máx. 300 caracteres)
-**Para dueños de PYMEs:**
-```
-Hola [nombre], vi que [empresa] [dato concreto: abrió una sucursal / trabaja con muchos proveedores]. Trabajo ayudando a PYMEs a ordenar sus datos y automatizar reportes. Me gustaría sumarte a mi red.
-```
-
-**Para contadores:**
-```
-Hola [nombre], ayudo a estudios contables y a sus clientes a automatizar planillas y reportes con Python. Me encantaría conectar y conocer cómo trabajan.
-```
-
-**Para agencias:**
-```
-Hola [nombre], soy Data Scientist y desarrollador full-stack. Colaboro con agencias en proyectos de datos, dashboards y desarrollo web. ¿Conectamos?
-```
-
-### Primer mensaje (después de que acepta) — NO vender todavía
-```
-¡Gracias por conectar, [nombre]! Una pregunta rápida, por curiosidad: en [empresa], ¿cómo arman hoy los reportes de [ventas / stock / gastos]? ¿Es algo manual con Excel o ya tienen algo automatizado?
-```
-
-### Si cuenta un problema
-```
-Te entiendo, es muy común. Justamente armé algo parecido: [un dashboard de ventas con filtros / un reporte que se genera solo]. Lo podés ver acá: [link del ejemplo].
-
-Si querés, me mandás un ejemplo de la planilla (con datos cambiados si preferís) y te digo en una llamada de 20 minutos cómo lo automatizaría. Sin compromiso.
-```
-
-### Si no responde (5–7 días después, una sola vez)
-```
-[Nombre], te comparto un ejemplo que puede servirte: [link al dashboard]. Si en algún momento querés ahorrar tiempo con los reportes, avisame. ¡Éxitos!
-```
-
-### Para pedir recomendaciones a conocidos
-```
-¡Hola [nombre]! Arranqué mi emprendimiento, FlowData Solutions: ayudo a empresas a ordenar sus datos, automatizar reportes y armar herramientas web a medida. Si conocés a alguien que pierda tiempo con planillas, ¿me lo pasarías? Te dejo mi web: [link]. ¡Gracias!
-```
-
----
-
-## 9. Publicaciones (1–2 por semana)
-Como todavía no tenés experiencia laboral para mostrar, **las publicaciones son tu prueba de que sabés**. Ideas:
-
-1. **Lanzamiento:** "Hoy lanzo FlowData Solutions" + qué hacés + link al portafolio.
-2. **Antes y después:** captura de la planilla desordenada vs. limpia, explicando en 5 líneas qué hiciste.
-3. **Cómo lo hice:** el dashboard interactivo — qué problema resuelve y qué decisiones de diseño tomaste.
-4. **Tip de Excel o Python** que le ahorra tiempo a una PYME.
-5. **Mini caso de ML:** "Cómo pronosticar las ventas del mes que viene con 30 líneas de Python" (con datos ficticios).
-6. **Aprendizajes:** "3 errores comunes en las planillas de ventas y cómo evitarlos".
+1. **Lanzamiento** de la página (texto abajo).
+2. **Antes y después:** captura de una planilla desordenada vs. limpia (datos ficticios).
+3. **Tip de Power BI** para PYMEs: una medida DAX útil explicada en 5 líneas.
+4. **Tip de Excel:** cómo evitar los errores más comunes en planillas de ventas.
+5. **Caso del portafolio:** el dashboard interactivo, qué problema resuelve.
+6. **Pregunta a la comunidad:** "¿Cuántas horas por mes le dedica tu equipo a armar reportes?" (encuesta).
+7. **Mini guía:** "3 indicadores que toda PYME debería mirar cada mes".
 
 ### Primera publicación
 ```
-🚀 Hoy lanzo FlowData Solutions.
+🚀 Nace FlowData Solutions.
 
-Trabajo como analista de datos y me formé en Data Science y desarrollo full-stack. Decidí usar todo eso para algo concreto: ayudar a PYMEs que pierden horas con planillas y reportes armados a mano.
+Muchas PYMEs pierden horas cada mes armando reportes a mano, corrigiendo planillas o buscando números que deberían estar a un clic.
 
-Lo que hago:
-📊 Ordeno y analizo datos con Python y SQL.
-⚙️ Automatizo reportes y procesos repetitivos.
-📈 Armo dashboards en Power BI y tableros web interactivos.
-💻 Desarrollo aplicaciones web a medida.
+Para eso estamos:
+📊 Dashboards en Power BI con los indicadores que importan.
+🧹 Planillas y bases de datos ordenadas y confiables.
+⚙️ Reportes que se generan solos.
+💻 Herramientas web a medida.
 
-Armé un portafolio con ejemplos (datos ficticios), como un dashboard de ventas con filtros y una planilla con 58 formas distintas de escribir los mismos datos, convertida en una base confiable:
+Armamos un portafolio con ejemplos (datos ficticios), como un dashboard de ventas con filtros y una planilla con 58 formas distintas de escribir los mismos datos, convertida en una base confiable:
 👉 https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/
 
-Estoy buscando mis primeros proyectos. Si conocés a alguien a quien le sirva, ¡te agradezco que lo compartas! 🙌
+Si conocés una empresa a la que le sirva, compartí esta publicación. ¡Gracias! 🙌
 
-#PowerBI #DataScience #Python #FullStack #Automatización #PYMEs
+#PowerBI #AnálisisDeDatos #Automatización #PYMEs
 ```
 
 ---
 
-## 10. Rutina semanal en LinkedIn
+## 6. Rutina semanal
 | Día | Acción |
 |---|---|
-| Lunes a viernes | 10 solicitudes de conexión con nota + responder mensajes |
-| Martes | Publicación (caso, tip o antes/después) |
-| Jueves | Publicación o comentario largo en un post de tu público |
-| Todos los días | 10 minutos comentando posts de dueños de PYMEs con aportes útiles |
-| Viernes | Registrar en la planilla: conexiones, conversaciones, llamadas, propuestas |
+| Lunes | Revisar el resumen semanal y programar las publicaciones de la semana |
+| Martes | Publicación (tip de Power BI o Excel) |
+| Jueves | Publicación (caso del portafolio o antes/después) |
+| Sábado (opcional) | Encuesta o pregunta a la comunidad |
+| Todos los días | Responder mensajes de la página y comentar como página en 3–5 publicaciones de tu público |
+| Viernes | Anotar en la planilla: seguidores, mensajes recibidos, consultas y propuestas |
+
+---
+
+## Más adelante (opcional)
+Si en algún momento querés usar tu perfil personal (por ejemplo, cuando dejes tu empleo actual o tengas permiso), las páginas con una persona visible detrás suelen generar más confianza y permiten el contacto directo. Ahí se puede sumar tu perfil como "Fundador" de la página.

@@ -8,7 +8,7 @@ Cinco agentes especializados, guardados en `.claude/agents/`. Claude Code los us
 | **analista-datos** | Diagnostica y limpia la planilla de un cliente con un script reproducible e informe de cambios | "Analizá el archivo de [cliente] que dejé en `clientes-privado/[cliente]/`" |
 | **generador-reportes** | Arma reportes automáticos (HTML/Excel), dashboards web o guías de Power BI con tu diseño | "Generá el reporte mensual de [cliente] con los datos limpios" |
 | **control-calidad** | Revisa una entrega antes de mandarla: que funcione, que los números cierren, diseño y privacidad | "Revisá la entrega de [cliente] antes de mandarla" |
-| **contenido-linkedin** | Escribe publicaciones y mensajes de LinkedIn con tu voz de marca | "Escribí un post sobre el dashboard interactivo" |
+| **contenido-linkedin** | Escribe publicaciones y respuestas para la página de empresa de LinkedIn con tu voz de marca | "Escribí un post sobre el dashboard interactivo" |
 
 ## Flujo típico de un proyecto
 1. **redactor-propuestas** → mandás la propuesta.
