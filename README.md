@@ -22,7 +22,7 @@ Ejemplos con datos ficticios: [limpieza de una planilla](portafolio/01-limpieza-
 ├── servicios/            # Descripción de cada servicio
 ├── portafolio/           # Ejemplos de trabajo (datos ficticios)
 ├── plantillas/           # Propuesta comercial, presupuesto, reporte de entrega
-└── gestion/              # Plan de lanzamiento, perfil de Workana y seguimiento de clientes
+└── gestion/              # Plan de lanzamiento, perfiles de Workana y LinkedIn, seguimiento de clientes
 ```
 
 ## Dónde ofrezco mis servicios
