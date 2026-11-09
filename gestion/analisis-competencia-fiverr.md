@@ -2,12 +2,60 @@
 
 **Fecha del relevamiento:** 9 de noviembre de 2026 (el perfil y el gig se crearon la noche anterior, el 8 de noviembre)
 **Gig analizado:** [@fl0wdata — "I will create an interactive power bi dashboard for your business in spanish"](https://www.fiverr.com/fl0wdata/create-an-interactive-power-bi-dashboard-for-your-business-in-spanish)
-**Cómo se hizo:** búsquedas públicas en Fiverr ("power bi dashboard" y "dashboard en power bi") con el filtro **"El vendedor habla: español"**, más la lectura de la página de cada gig (paquetes, descripción, reseñas). No hay un conector de Fiverr con API: los datos salen de las páginas tal como las ve un comprador.
+**Cómo se hizo:** búsquedas públicas en Fiverr ("power bi dashboard" y "dashboard en power bi") con el filtro **"El vendedor habla: español"**, más la lectura de la página de cada gig (paquetes, descripción, reseñas). Los datos de las secciones 1 a 8 salen de las páginas tal como las ve un comprador. La **sección 0** se agregó la misma tarde con el **conector de Fiverr** (perfil, gigs publicados y reseñas completas de cada vendedor, más búsquedas de vendedores que hablan español).
 
 > **Límites del relevamiento**
 > - Fiverr muestra solo las **5 reseñas más recientes/destacadas** de cada gig en la carga inicial y un resumen automático ("AI summary"). Las conclusiones sobre reseñas salen de esa muestra, no de todas.
 > - Los precios cambian seguido y Fiverr muestra "precio estimado" en la búsqueda. Acá van los precios reales de los paquetes al día del relevamiento.
 > - En Fiverr hay pocas reseñas negativas visibles; las "quejas" son más bien reseñas tibias (3–4,5 ★).
+
+---
+
+## 0. Actualización con el conector de Fiverr (9 nov 2026, tarde)
+
+> **Resumen:** el gig sigue igual que a la mañana (USD 60 / 150 / 300) y el "Acerca de" del perfil sigue en inglés, así que las prioridades de la sección 7 siguen pendientes. El conector sumó dos competidores nuevos que salen **primeros** en las búsquedas de vendedores que hablan español, y confirmó con las reseñas completas que **lo que más se premia es que el cliente vuelva y que le expliquen el tablero**.
+
+### 0.1 Tu perfil hoy, según Fiverr
+| Dato | Valor | Lectura |
+|---|---|---|
+| Nivel / reseñas | Nuevo · sin reseñas | Esperable (gig de un día). |
+| Idiomas | Español nativo · Inglés **básico** | Ya no dice que hablás inglés fluido: bien. |
+| Título del perfil | `Power BI Developer Data Analyst` (en inglés) | Pasalo a **"Desarrollador Power BI y Analista de Datos"**. |
+| "Acerca de" | En inglés ("Hi! I'm Dante…") | **Pendiente:** reemplazar por la versión en español de `perfil-fiverr.md`. |
+| Tiempo de respuesta | Sin dato todavía | Los que salen primeros muestran **0–1 h**. Respondé rápido desde el día 1. |
+| Gig | 1 solo gig, USD 60 / 150 / 300, descripción en español | Los cambios de paquetes de la sección 8 **no están aplicados**. |
+
+**No apareciste en ninguna de las 3 búsquedas** que hice con el conector (dashboard Power BI para pyme, con filtro de idioma español y de países de Latinoamérica). Los que salen arriba tienen el perfil completo: título del perfil claro, lista de habilidades larga y, varios, **video de presentación** (Pablo, Juampa, Rodrigo).
+
+### 0.2 Competidores nuevos que salen primeros
+| Vendedor | Reseñas · pedidos | Respuesta | Paquetes Power BI | Qué hace distinto |
+|---|---|---|---|---|
+| **Gustavo Pérez** — gustavo_apm (🇨🇴 Colombia) | 5,0 (5) · 5 pedidos | 4 h | **USD 20 / 45 / 100** — "hasta 2 / 5 / 10 KPIs" | **Salió 1.º en las 3 búsquedas** con solo 5 reseñas. Gig **en español** con título bilingüe ("…en excel y power bi"), dice "reduje hasta un 60 % el tiempo de reportes" y nombra empresas donde trabajó (Ecopetrol, Prosegur). Incluye "Soporte y guía para que domines tu tablero". |
+| **Ivan C** — ivan_jcs (🇦🇷 Argentina) | 5,0 (2) · 2 pedidos | **0 h** | **USD 30 / 60 / 125** | Tu competidor más directo: argentino, nuevo, mismo stack. Tiene **2 gigs de nicho**: rentabilidad B2B/SaaS y marketing (ROAS, CAC vs LTV). Gigs en inglés con "¡Hablo español!". Paquetes con nombre de resultado ("The Money View", "Full Marketing GPS"). |
+
+Los dos muestran lo mismo: **con muy pocas reseñas igual se puede salir arriba** si el perfil está completo, la respuesta es rápida y el gig habla de un problema concreto del negocio.
+
+### 0.3 Cambios en los competidores que ya estaban relevados
+- **Pablo G:** sus 15 reseñas más recientes son **todas 5 ★** y **8 de 15 son de clientes que repiten** ("no es la primera vez", "third time", "always working with Pablo"). También vende **sesiones 1 a 1** de Power BI: un cliente de Reino Unido lo contrató todas las semanas. Su descripción promete "publicación en Power BI Service y un **video corto de recorrida**".
+- **Juampa F:** bajó a **4,6** por una reseña de **1 ★ — "i expected more"** (septiembre de 2026). Su Premium es de USD 120. Muestra el riesgo de los paquetes baratos con alcance vago: el cliente espera más de lo que se describe.
+- **Edinson:** su última reseña es **3 ★ — "It was ok"**; las de 5 ★ destacan **"sesión 1 a 1, explica muy bien"** y "explica de una manera sencilla".
+- **Rodrigo Chin:** ahora cobra **USD 375 / 1.000 / 2.500** en todos sus gigs y abrió uno de **auditoría de reportes** ("te muestro dónde se rompen tus números"). Confirma que el techo del mercado es alto.
+
+### 0.4 Patrones en las reseñas completas
+1. **Clientes que vuelven** = la mayoría de las reseñas de Pablo, Juampa (hkapoor95 y makailahk compraron 3–4 veces) y Edinson. El primer cliente vale por varios pedidos.
+2. **"Me explicó"**: las sesiones 1 a 1 y la explicación del tablero aparecen en Pablo, Edinson y Gustavo. Es tu ventaja natural: atendés en español y por videollamada.
+3. **Las notas bajas** (1 ★, 3 ★, 4,3 ★) vienen con comentarios cortos ("i expected more", "it was ok"): el problema es la **expectativa**, no la técnica. Se evita confirmando el alcance antes de la compra.
+
+### 0.5 Recomendaciones nuevas (además de las de la sección 6)
+1. **Completá el perfil antes que nada**: "Acerca de" y título del perfil en español, **habilidades** (Power BI, DAX, Power Query, SQL, Python, Excel, Dashboards, Data visualization, Data cleaning) y video de presentación. Es lo que tienen en común los que salen primeros.
+2. **No bajes el Básico a USD 20–30** para pelearle a Gustavo e Ivan: con Básico de USD 45–50 (sección 4) quedás por debajo de Pablo y Based Analytics y por encima de la gama baja, que es donde aparecen las reseñas de 1–3 ★.
+3. **Expresá los paquetes en KPIs** como Gustavo ("hasta 5 / 10 / 15 KPIs", texto listo en la sección 8). Es el formato que usa el competidor que sale primero en español.
+4. **Sumá una línea de resultado medible solo cuando la tengas**: Gustavo usa "reduje hasta un 60 % el tiempo de reportes". Vos podés decir lo que ya es cierto (*"trabajo todos los días con Power BI como analista de datos"*); cuando tengas un caso real, sumalo con el número.
+5. **Pensá un segundo gig de nicho** como hace Ivan: por ejemplo "dashboard de ventas y stock para comercios" o "dashboard de cobranzas". Más gigs = más búsquedas donde aparecer.
+6. **Ofrecé una sesión 1 a 1 en español** (como extra del gig o como gig aparte: "te explico tu dashboard / te enseño Power BI"). Las reseñas de Pablo y Edinson muestran que se vende y genera clientes que vuelven.
+7. **Antes de cada compra, confirmá el alcance por escrito** en el chat (páginas, KPIs, fuente de datos): es lo que evita el "i expected more".
+
+**Próxima revisión:** la rutina semanal de los lunes vuelve a correr este relevamiento con el conector; el 30 de noviembre de 2026 se miden impresiones y clics (sección 7).
 
 ---
 
