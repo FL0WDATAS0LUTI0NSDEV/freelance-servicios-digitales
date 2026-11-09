@@ -237,6 +237,9 @@
     border: 1px solid var(--fds-border); background: var(--fds-bg);
   }
 
+  .plan h3 { margin-top: 0; }
+  .plans__note { margin-top: 16px; font-size: .9rem; }
+
   /* ---------- Portfolio ---------- */
   .case { display: flex; flex-direction: column; gap: 14px; }
   .case__tag { font-size: .78rem; font-weight: 600; color: var(--fds-muted); }
@@ -326,6 +329,7 @@
     <nav aria-label="Principal">
       <ul class="nav__links">
         <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#planes">Planes</a></li>
         <li><a href="#portafolio">Portafolio</a></li>
         <li><a href="#proceso">Cómo trabajo</a></li>
       </ul>
@@ -435,6 +439,51 @@
           </ul>
         </article>
       </div>
+    </div>
+  </section>
+
+  <!-- Planes mensuales -->
+  <section id="planes">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Planes mensuales</span>
+        <h2>Tus reportes, siempre al día</h2>
+        <p>Después de cada proyecto, me ocupo de que tus planillas, reportes y dashboards sigan actualizados y funcionando. Sin permanencia: lo cancelás cuando quieras.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card card--interactive service plan">
+          <h3>Esencial</h3>
+          <p class="service__price"><strong class="num">USD 100</strong>/mes</p>
+          <ul>
+            <li>1 reporte o dashboard</li>
+            <li>Actualización mensual de datos</li>
+            <li>Control de errores</li>
+            <li>1 hora de ajustes</li>
+          </ul>
+        </article>
+        <article class="card card--interactive card--featured service plan">
+          <span class="badge">Recomendado</span>
+          <h3>Crecimiento</h3>
+          <p class="service__price"><strong class="num">USD 150</strong>/mes</p>
+          <ul>
+            <li>Hasta 3 reportes o dashboards</li>
+            <li>Actualización semanal</li>
+            <li>3 horas de ajustes y 1 indicador nuevo por mes</li>
+            <li>Resumen mensual con conclusiones</li>
+          </ul>
+        </article>
+        <article class="card card--interactive service plan">
+          <h3>Socio de datos</h3>
+          <p class="service__price"><strong class="num">USD 250</strong>/mes</p>
+          <ul>
+            <li>Hasta 5 reportes o dashboards</li>
+            <li>Actualización semanal</li>
+            <li>6 horas de mejoras e indicadores nuevos</li>
+            <li>Reunión mensual de 30 minutos</li>
+          </ul>
+        </article>
+      </div>
+      <p class="muted plans__note">Primer mes con 20 % de descuento al contratarlo junto con un proyecto. Pago mensual adelantado; cancelás con 15 días de aviso.</p>
     </div>
   </section>
 

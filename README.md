@@ -9,6 +9,7 @@ Repositorio central de mi emprendimiento freelance: servicios técnicos y digita
 | 📊 Análisis de datos y automatización (Python) | Orden y limpieza de planillas y bases de datos, reportes automáticos, documentación de procesos | USD 40 | [Ver](servicios/analisis-datos-automatizacion.md) |
 | ✍️ Redacción y contenido | Textos para webs, corrección de estilo, propuestas comerciales, perfiles profesionales | USD 25 | [Ver](servicios/redaccion-contenido.md) |
 | 🗂️ Asistente virtual / soporte administrativo | Correos, agendas, atención a clientes, seguimiento de facturación | USD 6/h | [Ver](servicios/asistente-virtual.md) |
+| 🔁 Mantenimiento mensual | Reportes y dashboards siempre actualizados, control de errores y horas de ajustes | USD 100/mes | [Ver](servicios/mantenimiento-mensual.md) |
 
 ## Portafolio
 

@@ -37,6 +37,7 @@ Copiá la que corresponda, completá lo que está entre `[corchetes]` y **person
 | Textos para web (hasta 4 secciones) | USD 60 | 4 días |
 | Corrección de estilo | USD 10 cada 1.000 palabras | 1–3 días |
 | Propuesta comercial | USD 40 | 3 días |
+| Mantenimiento mensual | USD 100 / 150 / 250 por mes | continuo |
 
 > Recordá que la plataforma se queda con una comisión: calculá cuánto te queda antes de ofertar.
 
@@ -195,6 +196,28 @@ No bajes el precio sin bajar el alcance.
 
 Si quedaste conforme, me ayudaría muchísimo que dejes una reseña en [Workana]: estoy arrancando y cada opinión suma. ¡Gracias!
 ```
+
+### Ofrecer el mantenimiento mensual
+**Al entregar** (junto con el mensaje de entrega, o al día siguiente):
+```
+[Nombre], un detalle más: para que [el reporte / el dashboard] siga actualizado sin que tengas que ocuparte, ofrezco un mantenimiento mensual.
+
+Por USD [150] por mes actualizo los datos cada semana, controlo que no haya errores y te dejo 3 horas para ajustes o indicadores nuevos. Sin permanencia: lo cancelás cuando quieras con 15 días de aviso.
+
+Como recién terminamos el proyecto, el primer mes tiene 20 % de descuento. ¿Te interesa que lo arranquemos?
+```
+
+**Si duda:**
+```
+Te propongo probar un mes con el plan Esencial (USD 100): actualizo [el reporte] una vez por mes y te dejo 1 hora para ajustes. Si no le ves valor, lo cancelás y listo.
+```
+
+**Si el cliente avisa que algo dejó de funcionar** (y no tiene plan):
+```
+Lo reviso y te paso presupuesto para arreglarlo. Para que no vuelva a pasar, con el mantenimiento mensual (desde USD 100) quedaría cubierto: controlo los datos todos los meses y los cambios chicos van incluidos.
+```
+
+Detalle de los planes: [servicios/mantenimiento-mensual.md](../servicios/mantenimiento-mensual.md).
 
 ### Para recuperar un cliente (1 mes después)
 ```
