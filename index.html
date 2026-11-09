@@ -305,6 +305,8 @@
     html { scroll-behavior: auto; }
     *, *::before, *::after { transition: none !important; animation: none !important; }
   }
+  /* Foco visible en modo claro (WCAG 1.4.11: el cian no llega a 3:1 sobre blanco) */
+  :root[data-theme="light"] :focus-visible { outline-color: #0066FF; }
 </style>
 </head>
 <body>

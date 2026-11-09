@@ -42,6 +42,8 @@ Colores tomados de `theme-factory`.
   outline: 2px solid var(--fds-cyan);
   outline-offset: 2px;
 }
+/* En modo claro el cian no alcanza contraste 3:1 sobre blanco: usar azul */
+:root[data-theme="light"] :focus-visible { outline-color: var(--fds-blue); }
 .is-active,
 .card:focus-within {
   border-color: var(--fds-blue);
