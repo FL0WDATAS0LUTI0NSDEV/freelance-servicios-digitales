@@ -18,10 +18,12 @@
 ### Perfil
 - [x] Idioma: solo español
 - [x] "Acerca de" en español
-- [x] Certificación cargada — retocar: nombre `Técnico Superior en Ciencia de Datos`, otorgada por `Teclab`, 2025 (que coincida con Educación y con el diploma)
-- [x] Título del perfil en español (confirmado con el conector de Fiverr el 9/11, tarde)
-- [ ] Experiencia laboral en español (texto en 2.2)
-- [ ] Habilidades: sumar Power Query, Dashboards, Data Visualization y Data Cleaning. Python queda en **Pro** (decisión del dueño, 09/11: maneja el ecosistema completo, no solo pandas)
+- [x] Certificación corregida (09/11): nombre `Técnico Superior en Ciencia de Datos`, otorgada por `Teclab`, 2025 (que coincida con Educación y con el diploma)
+- [x] Título del perfil en español: "Desarrollador Power BI y Analista de Datos" (confirmado con el conector el 9/11)
+- [x] "Acerca de" actualizado con el servicio de facturas PDF a Excel (confirmado con el conector el 9/11)
+- [ ] Verificación en dos pasos (2FA) y verificación de identidad
+- [x] Experiencia laboral en español (texto en 2.2)
+- [x] Habilidades (12 en Pro, incluidas Data extraction, PDF to Excel y Excel automation). Antes: sumar Power Query, Dashboards, Data Visualization y Data Cleaning. Python queda en **Pro** (decisión del dueño, 09/11: maneja el ecosistema completo, no solo pandas)
 - [x] Portfolio: 4 proyectos de demostración (el 4.º, facturas PDF a Excel, cargado el 09/11)
 - [ ] Video de presentación en español, 30–60 s
 
