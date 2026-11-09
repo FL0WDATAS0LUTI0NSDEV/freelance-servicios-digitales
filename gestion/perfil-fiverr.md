@@ -118,7 +118,7 @@ R: El servicio es en español.
 ---
 
 ## Portafolio del perfil (3 proyectos)
-Formulario de Fiverr: nombre (máx. 50), industria (máx. 6), duración, costo (vacío: son ejemplos), fecha de inicio, descripción (máx. 1400) y adjuntos (1024×768, 4:3).
+Formulario de Fiverr: nombre (máx. 50), industria (máx. 6), duración, costo (obligatorio: precio simulado del trabajo, ver fiverr-plan-de-accion.md), fecha de inicio, descripción (máx. 1400) y adjuntos (1024×768, 4:3).
 Imágenes listas en `portafolio/capturas/fiverr/portafolio-4x3/`. Todos son **ejemplos con datos ficticios**; sin links ni contacto.
 
 ### 1. Dashboard de ventas interactivo
