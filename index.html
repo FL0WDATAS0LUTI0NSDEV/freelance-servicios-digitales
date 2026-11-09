@@ -289,6 +289,7 @@
     .nav__links { display: flex; }
     .nav .btn--sm { display: inline-flex; }
     .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
     .steps { grid-template-columns: repeat(4, 1fr); }
     .cta { padding: 64px 40px; }
   }
@@ -445,7 +446,19 @@
         <h2>Ejemplos de trabajo</h2>
         <p>Casos con datos y negocios ficticios que muestran cómo resuelvo problemas reales.</p>
       </div>
-      <div class="grid-3">
+      <div class="grid-3 grid-2">
+        <article class="card card--interactive card--featured case">
+          <span class="badge">Nuevo</span>
+          <span class="case__tag">Dashboards · Visualización</span>
+          <h3>Dashboard de ventas interactivo</h3>
+          <p>Un año de ventas en un tablero con filtros, indicadores contra el período anterior, gráficos clicables y tabla exportable.</p>
+          <a class="case__link" href="portafolio/04-dashboard-interactivo/">Abrir dashboard <span aria-hidden="true">→</span></a>
+          <div class="case__stats">
+            <div><b class="num">6</b><small>filtros</small></div>
+            <div><b class="num">4</b><small>indicadores</small></div>
+            <div><b class="num">0</b><small>instalación</small></div>
+          </div>
+        </article>
         <article class="card card--interactive case">
           <span class="case__tag">Datos · Python</span>
           <h3>Limpieza de una planilla de ventas</h3>

@@ -1,0 +1,294 @@
+fecha,cliente,producto,cantidad,monto,vendedor,provincia
+2025-01-02,Almacén Don Pepe,Aceite 900ml,8,24800,Martín Ruiz,Buenos Aires
+2025-01-07,Bar El Faro,Harina 1kg,8,8800,Sofía Paz,Córdoba
+2025-01-09,Kiosco La Esquina,Galletitas 300g,7,13300,Sofía Paz,Buenos Aires
+2025-01-10,Kiosco La Esquina,Café 500g,17,115600,Sofía Paz,Buenos Aires
+2025-01-13,Supermercado Sol,Harina 1kg,13,14300,Sofía Paz,Córdoba
+2025-01-13,Autoservicio Mitre,Harina 1kg,17,18700,Martín Ruiz,Buenos Aires
+2025-01-15,Autoservicio Mitre,Aceite 900ml,10,31000,Martín Ruiz,Buenos Aires
+2025-01-16,Dietética Natura,Harina 1kg,3,3300,Martín Ruiz,Santa Fe
+2025-01-18,Supermercado Sol,Harina 1kg,34,37400,Sofía Paz,Córdoba
+2025-01-24,Dietética Natura,Aceite 900ml,13,40300,Martín Ruiz,Santa Fe
+2025-01-25,Almacén Don Pepe,Harina 1kg,8,8800,Laura Gómez,Buenos Aires
+2025-01-29,Autoservicio Mitre,Azúcar 1kg,17,25500,Sofía Paz,Buenos Aires
+2025-01-31,Kiosco La Esquina,Café 500g,15,102000,Martín Ruiz,Buenos Aires
+2025-02-06,Autoservicio Mitre,Café 500g,11,76296,Laura Gómez,Buenos Aires
+2025-02-06,Rotisería Doña Rosa,Azúcar 1kg,8,12240,Sofía Paz,Santa Fe
+2025-02-07,Almacén Don Pepe,Azúcar 1kg,1,1530,Sofía Paz,Buenos Aires
+2025-02-08,Dietética Natura,Azúcar 1kg,19,29070,Laura Gómez,Santa Fe
+2025-02-10,Bar El Faro,Harina 1kg,5,5610,Sofía Paz,Córdoba
+2025-02-11,Autoservicio Mitre,Café 500g,32,221952,Laura Gómez,Buenos Aires
+2025-02-12,Kiosco La Esquina,Café 500g,9,62424,Martín Ruiz,Buenos Aires
+2025-02-21,Supermercado Sol,Azúcar 1kg,23,35190,Martín Ruiz,Córdoba
+2025-02-21,Supermercado Sol,Azúcar 1kg,25,38250,Sofía Paz,Córdoba
+2025-02-22,Mercadito Central,Aceite 900ml,5,15810,Sofía Paz,Mendoza
+2025-02-27,Kiosco La Esquina,Galletitas 300g,6,11628,Sofía Paz,Buenos Aires
+2025-02-27,Rotisería Doña Rosa,Aceite 900ml,4,12648,Laura Gómez,Santa Fe
+2025-02-28,Almacén Don Pepe,Harina 1kg,12,13464,Martín Ruiz,Buenos Aires
+2025-03-01,Almacén Don Pepe,Yerba 1kg,7,30588,Sofía Paz,Buenos Aires
+2025-03-04,Supermercado Sol,Azúcar 1kg,30,46818,Laura Gómez,Córdoba
+2025-03-04,Supermercado Sol,Galletitas 300g,4,7907,Martín Ruiz,Córdoba
+2025-03-05,Almacén Don Pepe,Yerba 1kg,10,43697,Sofía Paz,Buenos Aires
+2025-03-06,Almacén Don Pepe,Galletitas 300g,1,1977,Martín Ruiz,Buenos Aires
+2025-03-07,Autoservicio Mitre,Café 500g,33,233466,Sofía Paz,Buenos Aires
+2025-03-08,Rotisería Doña Rosa,Aceite 900ml,4,12901,Laura Gómez,Santa Fe
+2025-03-08,Mercadito Central,Aceite 900ml,12,38703,Sofía Paz,Mendoza
+2025-03-10,Rotisería Doña Rosa,Azúcar 1kg,7,10924,Sofía Paz,Santa Fe
+2025-03-10,Supermercado Sol,Galletitas 300g,33,65233,Sofía Paz,Córdoba
+2025-03-10,Almacén Don Pepe,Yerba 1kg,7,30588,Martín Ruiz,Buenos Aires
+2025-03-12,Kiosco La Esquina,Café 500g,19,134420,Martín Ruiz,Buenos Aires
+2025-03-12,Autoservicio Mitre,Yerba 1kg,18,78654,Laura Gómez,Buenos Aires
+2025-03-13,Kiosco La Esquina,Harina 1kg,14,16022,Sofía Paz,Buenos Aires
+2025-03-17,Kiosco La Esquina,Azúcar 1kg,14,21848,Martín Ruiz,Buenos Aires
+2025-03-18,Supermercado Sol,Azúcar 1kg,32,49939,Sofía Paz,Córdoba
+2025-03-21,Mercadito Central,Galletitas 300g,15,29651,Martín Ruiz,Mendoza
+2025-03-22,Rotisería Doña Rosa,Yerba 1kg,10,43697,Sofía Paz,Santa Fe
+2025-03-25,Rotisería Doña Rosa,Harina 1kg,6,6867,Sofía Paz,Santa Fe
+2025-03-27,Autoservicio Mitre,Aceite 900ml,10,32252,Laura Gómez,Buenos Aires
+2025-03-28,Mercadito Central,Yerba 1kg,6,26218,Laura Gómez,Mendoza
+2025-03-28,Rotisería Doña Rosa,Azúcar 1kg,3,4682,Laura Gómez,Santa Fe
+2025-03-29,Mercadito Central,Galletitas 300g,14,27675,Laura Gómez,Mendoza
+2025-04-01,Kiosco La Esquina,Yerba 1kg,7,31200,Martín Ruiz,Buenos Aires
+2025-04-01,Dietética Natura,Harina 1kg,4,4669,Sofía Paz,Santa Fe
+2025-04-02,Bar El Faro,Yerba 1kg,14,62399,Laura Gómez,Córdoba
+2025-04-02,Bar El Faro,Yerba 1kg,8,35657,Sofía Paz,Córdoba
+2025-04-03,Mercadito Central,Azúcar 1kg,6,9551,Laura Gómez,Mendoza
+2025-04-03,Supermercado Sol,Café 500g,17,122676,Laura Gómez,Córdoba
+2025-04-04,Mercadito Central,Galletitas 300g,13,26212,Laura Gómez,Mendoza
+2025-04-04,Mercadito Central,Café 500g,9,64946,Laura Gómez,Mendoza
+2025-04-04,Dietética Natura,Aceite 900ml,6,19738,Martín Ruiz,Santa Fe
+2025-04-08,Dietética Natura,Yerba 1kg,5,22285,Martín Ruiz,Santa Fe
+2025-04-09,Kiosco La Esquina,Café 500g,17,122676,Martín Ruiz,Buenos Aires
+2025-04-10,Kiosco La Esquina,Café 500g,14,101027,Martín Ruiz,Buenos Aires
+2025-04-12,Mercadito Central,Yerba 1kg,11,49028,Martín Ruiz,Mendoza
+2025-04-16,Rotisería Doña Rosa,Aceite 900ml,4,13159,Martín Ruiz,Santa Fe
+2025-04-17,Rotisería Doña Rosa,Harina 1kg,6,7004,Sofía Paz,Santa Fe
+2025-04-18,Supermercado Sol,Aceite 900ml,12,39477,Martín Ruiz,Córdoba
+2025-04-19,Supermercado Sol,Yerba 1kg,18,80227,Sofía Paz,Córdoba
+2025-04-19,Mercadito Central,Harina 1kg,13,15175,Sofía Paz,Mendoza
+2025-04-22,Mercadito Central,Harina 1kg,13,15175,Sofía Paz,Mendoza
+2025-04-22,Mercadito Central,Café 500g,17,122676,Laura Gómez,Mendoza
+2025-04-24,Bar El Faro,Yerba 1kg,4,17828,Laura Gómez,Córdoba
+2025-04-28,Supermercado Sol,Aceite 900ml,20,65795,Laura Gómez,Córdoba
+2025-04-30,Mercadito Central,Aceite 900ml,8,26318,Laura Gómez,Mendoza
+2025-05-01,Kiosco La Esquina,Harina 1kg,7,8335,Sofía Paz,Buenos Aires
+2025-05-02,Dietética Natura,Aceite 900ml,8,26844,Martín Ruiz,Santa Fe
+2025-05-02,Supermercado Sol,Galletitas 300g,36,74038,Martín Ruiz,Córdoba
+2025-05-02,Almacén Don Pepe,Aceite 900ml,7,23489,Laura Gómez,Buenos Aires
+2025-05-03,Kiosco La Esquina,Yerba 1kg,9,40916,Martín Ruiz,Buenos Aires
+2025-05-05,Bar El Faro,Galletitas 300g,8,16453,Sofía Paz,Córdoba
+2025-05-06,Supermercado Sol,Azúcar 1kg,11,17860,Laura Gómez,Córdoba
+2025-05-06,Supermercado Sol,Galletitas 300g,14,28793,Sofía Paz,Córdoba
+2025-05-07,Kiosco La Esquina,Aceite 900ml,15,50333,Martín Ruiz,Buenos Aires
+2025-05-07,Rotisería Doña Rosa,Aceite 900ml,9,30200,Sofía Paz,Santa Fe
+2025-05-07,Supermercado Sol,Aceite 900ml,24,80533,Laura Gómez,Córdoba
+2025-05-08,Almacén Don Pepe,Café 500g,7,51524,Sofía Paz,Buenos Aires
+2025-05-09,Autoservicio Mitre,Galletitas 300g,18,37019,Laura Gómez,Buenos Aires
+2025-05-10,Almacén Don Pepe,Café 500g,11,80966,Laura Gómez,Buenos Aires
+2025-05-12,Supermercado Sol,Aceite 900ml,24,80533,Sofía Paz,Córdoba
+2025-05-13,Almacén Don Pepe,Azúcar 1kg,15,24355,Martín Ruiz,Buenos Aires
+2025-05-14,Supermercado Sol,Yerba 1kg,26,118202,Sofía Paz,Córdoba
+2025-05-14,Supermercado Sol,Aceite 900ml,12,40266,Sofía Paz,Córdoba
+2025-05-15,Supermercado Sol,Café 500g,12,88326,Martín Ruiz,Córdoba
+2025-05-15,Dietética Natura,Yerba 1kg,5,22731,Laura Gómez,Santa Fe
+2025-05-15,Supermercado Sol,Galletitas 300g,18,37019,Sofía Paz,Córdoba
+2025-05-16,Autoservicio Mitre,Aceite 900ml,9,30200,Laura Gómez,Buenos Aires
+2025-05-17,Dietética Natura,Harina 1kg,9,10716,Laura Gómez,Santa Fe
+2025-05-17,Supermercado Sol,Galletitas 300g,21,43189,Martín Ruiz,Córdoba
+2025-05-20,Supermercado Sol,Azúcar 1kg,6,9742,Martín Ruiz,Córdoba
+2025-05-20,Supermercado Sol,Galletitas 300g,23,47302,Laura Gómez,Córdoba
+2025-05-20,Almacén Don Pepe,Harina 1kg,6,7144,Laura Gómez,Buenos Aires
+2025-05-21,Supermercado Sol,Galletitas 300g,4,8226,Martín Ruiz,Córdoba
+2025-05-23,Almacén Don Pepe,Yerba 1kg,12,54555,Sofía Paz,Buenos Aires
+2025-05-23,Almacén Don Pepe,Aceite 900ml,9,30200,Sofía Paz,Buenos Aires
+2025-05-23,Dietética Natura,Café 500g,6,44163,Laura Gómez,Santa Fe
+2025-05-24,Kiosco La Esquina,Aceite 900ml,13,43622,Sofía Paz,Buenos Aires
+2025-05-29,Kiosco La Esquina,Yerba 1kg,2,9092,Martín Ruiz,Buenos Aires
+2025-05-30,Kiosco La Esquina,Café 500g,21,154571,Sofía Paz,Buenos Aires
+2025-05-30,Supermercado Sol,Azúcar 1kg,30,48709,Sofía Paz,Córdoba
+2025-05-31,Mercadito Central,Yerba 1kg,19,86378,Sofía Paz,Mendoza
+2025-06-05,Supermercado Sol,Azúcar 1kg,39,64589,Sofía Paz,Córdoba
+2025-06-06,Supermercado Sol,Yerba 1kg,44,204034,Martín Ruiz,Córdoba
+2025-06-07,Kiosco La Esquina,Café 500g,26,195201,Sofía Paz,Buenos Aires
+2025-06-07,Supermercado Sol,Harina 1kg,1,1214,Laura Gómez,Córdoba
+2025-06-09,Supermercado Sol,Café 500g,12,90093,Sofía Paz,Córdoba
+2025-06-09,Kiosco La Esquina,Aceite 900ml,13,44494,Sofía Paz,Buenos Aires
+2025-06-10,Mercadito Central,Café 500g,16,120124,Sofía Paz,Mendoza
+2025-06-11,Autoservicio Mitre,Yerba 1kg,16,74194,Laura Gómez,Buenos Aires
+2025-06-12,Autoservicio Mitre,Harina 1kg,10,12145,Martín Ruiz,Buenos Aires
+2025-06-13,Almacén Don Pepe,Café 500g,10,75077,Laura Gómez,Buenos Aires
+2025-06-16,Mercadito Central,Café 500g,12,90093,Laura Gómez,Mendoza
+2025-06-17,Mercadito Central,Aceite 900ml,17,58185,Sofía Paz,Mendoza
+2025-06-17,Almacén Don Pepe,Azúcar 1kg,14,23186,Sofía Paz,Buenos Aires
+2025-06-18,Mercadito Central,Harina 1kg,11,13359,Sofía Paz,Mendoza
+2025-06-19,Supermercado Sol,Harina 1kg,11,13359,Martín Ruiz,Córdoba
+2025-06-21,Supermercado Sol,Azúcar 1kg,43,71213,Laura Gómez,Córdoba
+2025-06-21,Supermercado Sol,Café 500g,30,225232,Martín Ruiz,Córdoba
+2025-06-21,Supermercado Sol,Galletitas 300g,28,58737,Laura Gómez,Córdoba
+2025-06-23,Rotisería Doña Rosa,Café 500g,2,15015,Laura Gómez,Santa Fe
+2025-06-24,Kiosco La Esquina,Galletitas 300g,13,27271,Laura Gómez,Buenos Aires
+2025-06-25,Almacén Don Pepe,Café 500g,11,82585,Martín Ruiz,Buenos Aires
+2025-06-25,Kiosco La Esquina,Aceite 900ml,18,61608,Laura Gómez,Buenos Aires
+2025-06-26,Bar El Faro,Yerba 1kg,14,64920,Martín Ruiz,Córdoba
+2025-06-26,Almacén Don Pepe,Galletitas 300g,1,2098,Laura Gómez,Buenos Aires
+2025-06-26,Autoservicio Mitre,Aceite 900ml,14,47917,Laura Gómez,Buenos Aires
+2025-06-27,Supermercado Sol,Aceite 900ml,14,47917,Sofía Paz,Córdoba
+2025-07-03,Autoservicio Mitre,Yerba 1kg,16,75678,Sofía Paz,Buenos Aires
+2025-07-03,Dietética Natura,Aceite 900ml,7,24438,Sofía Paz,Santa Fe
+2025-07-03,Supermercado Sol,Aceite 900ml,8,27929,Sofía Paz,Córdoba
+2025-07-05,Mercadito Central,Galletitas 300g,8,17118,Sofía Paz,Mendoza
+2025-07-05,Supermercado Sol,Galletitas 300g,1,2140,Laura Gómez,Córdoba
+2025-07-05,Bar El Faro,Yerba 1kg,22,104057,Martín Ruiz,Córdoba
+2025-07-07,Autoservicio Mitre,Azúcar 1kg,5,8446,Martín Ruiz,Buenos Aires
+2025-07-07,Mercadito Central,Galletitas 300g,6,12838,Martín Ruiz,Mendoza
+2025-07-08,Supermercado Sol,Café 500g,23,176132,Sofía Paz,Córdoba
+2025-07-10,Bar El Faro,Harina 1kg,6,7433,Sofía Paz,Córdoba
+2025-07-10,Bar El Faro,Galletitas 300g,10,21397,Sofía Paz,Córdoba
+2025-07-11,Bar El Faro,Galletitas 300g,5,10699,Laura Gómez,Córdoba
+2025-07-12,Mercadito Central,Galletitas 300g,15,32096,Martín Ruiz,Mendoza
+2025-07-12,Kiosco La Esquina,Aceite 900ml,25,87278,Martín Ruiz,Buenos Aires
+2025-07-12,Almacén Don Pepe,Aceite 900ml,8,27929,Sofía Paz,Buenos Aires
+2025-07-14,Supermercado Sol,Azúcar 1kg,16,27028,Sofía Paz,Córdoba
+2025-07-14,Dietética Natura,Harina 1kg,4,4955,Martín Ruiz,Santa Fe
+2025-07-16,Bar El Faro,Harina 1kg,9,11149,Laura Gómez,Córdoba
+2025-07-17,Supermercado Sol,Yerba 1kg,9,42569,Laura Gómez,Córdoba
+2025-07-19,Autoservicio Mitre,Café 500g,14,107211,Laura Gómez,Buenos Aires
+2025-07-21,Bar El Faro,Azúcar 1kg,5,8446,Sofía Paz,Córdoba
+2025-07-23,Almacén Don Pepe,Harina 1kg,18,22298,Martín Ruiz,Buenos Aires
+2025-07-25,Supermercado Sol,Galletitas 300g,6,12838,Laura Gómez,Córdoba
+2025-07-25,Autoservicio Mitre,Aceite 900ml,6,20947,Sofía Paz,Buenos Aires
+2025-07-26,Almacén Don Pepe,Azúcar 1kg,4,6757,Laura Gómez,Buenos Aires
+2025-07-26,Autoservicio Mitre,Aceite 900ml,10,34911,Sofía Paz,Buenos Aires
+2025-07-26,Almacén Don Pepe,Yerba 1kg,7,33109,Martín Ruiz,Buenos Aires
+2025-07-28,Kiosco La Esquina,Galletitas 300g,18,38515,Sofía Paz,Buenos Aires
+2025-07-29,Bar El Faro,Azúcar 1kg,10,16892,Laura Gómez,Córdoba
+2025-07-30,Bar El Faro,Yerba 1kg,9,42569,Laura Gómez,Córdoba
+2025-07-31,Almacén Don Pepe,Yerba 1kg,10,47299,Martín Ruiz,Buenos Aires
+2025-07-31,Mercadito Central,Azúcar 1kg,15,25339,Martín Ruiz,Mendoza
+2025-08-01,Autoservicio Mitre,Aceite 900ml,12,42731,Sofía Paz,Buenos Aires
+2025-08-02,Mercadito Central,Azúcar 1kg,1,1723,Sofía Paz,Mendoza
+2025-08-04,Autoservicio Mitre,Harina 1kg,19,24008,Sofía Paz,Buenos Aires
+2025-08-04,Dietética Natura,Aceite 900ml,13,46292,Sofía Paz,Santa Fe
+2025-08-05,Rotisería Doña Rosa,Azúcar 1kg,5,8615,Sofía Paz,Santa Fe
+2025-08-05,Supermercado Sol,Aceite 900ml,6,21366,Martín Ruiz,Córdoba
+2025-08-07,Kiosco La Esquina,Yerba 1kg,7,33771,Laura Gómez,Buenos Aires
+2025-08-08,Almacén Don Pepe,Café 500g,8,62489,Sofía Paz,Buenos Aires
+2025-08-09,Bar El Faro,Café 500g,15,117166,Laura Gómez,Córdoba
+2025-08-09,Dietética Natura,Aceite 900ml,9,32048,Sofía Paz,Santa Fe
+2025-08-11,Supermercado Sol,Aceite 900ml,43,153120,Sofía Paz,Córdoba
+2025-08-13,Mercadito Central,Galletitas 300g,13,28373,Laura Gómez,Mendoza
+2025-08-15,Kiosco La Esquina,Harina 1kg,14,17690,Sofía Paz,Buenos Aires
+2025-08-18,Mercadito Central,Galletitas 300g,18,39285,Sofía Paz,Mendoza
+2025-08-19,Supermercado Sol,Azúcar 1kg,2,3446,Sofía Paz,Córdoba
+2025-08-20,Autoservicio Mitre,Café 500g,11,85922,Martín Ruiz,Buenos Aires
+2025-08-21,Autoservicio Mitre,Yerba 1kg,15,72367,Sofía Paz,Buenos Aires
+2025-08-23,Supermercado Sol,Aceite 900ml,25,89023,Laura Gómez,Córdoba
+2025-08-25,Bar El Faro,Azúcar 1kg,4,6892,Laura Gómez,Córdoba
+2025-08-26,Kiosco La Esquina,Galletitas 300g,16,34920,Laura Gómez,Buenos Aires
+2025-08-26,Supermercado Sol,Azúcar 1kg,30,51691,Laura Gómez,Córdoba
+2025-08-27,Almacén Don Pepe,Galletitas 300g,6,13095,Martín Ruiz,Buenos Aires
+2025-08-27,Almacén Don Pepe,Harina 1kg,1,1264,Laura Gómez,Buenos Aires
+2025-08-28,Supermercado Sol,Galletitas 300g,37,80753,Laura Gómez,Córdoba
+2025-08-29,Supermercado Sol,Aceite 900ml,27,96145,Sofía Paz,Córdoba
+2025-08-30,Supermercado Sol,Azúcar 1kg,35,60306,Laura Gómez,Córdoba
+2025-09-01,Dietética Natura,Yerba 1kg,4,19684,Laura Gómez,Santa Fe
+2025-09-02,Kiosco La Esquina,Galletitas 300g,7,15583,Sofía Paz,Buenos Aires
+2025-09-02,Kiosco La Esquina,Harina 1kg,18,23199,Sofía Paz,Buenos Aires
+2025-09-03,Kiosco La Esquina,Yerba 1kg,12,59052,Martín Ruiz,Buenos Aires
+2025-09-04,Supermercado Sol,Yerba 1kg,9,44289,Laura Gómez,Córdoba
+2025-09-08,Supermercado Sol,Yerba 1kg,16,78736,Sofía Paz,Córdoba
+2025-09-08,Bar El Faro,Azúcar 1kg,12,21090,Martín Ruiz,Córdoba
+2025-09-15,Kiosco La Esquina,Café 500g,15,119509,Martín Ruiz,Buenos Aires
+2025-09-16,Autoservicio Mitre,Café 500g,18,143411,Martín Ruiz,Buenos Aires
+2025-09-19,Supermercado Sol,Aceite 900ml,23,83539,Martín Ruiz,Córdoba
+2025-09-19,Mercadito Central,Azúcar 1kg,11,19332,Sofía Paz,Mendoza
+2025-09-20,Mercadito Central,Aceite 900ml,27,98068,Sofía Paz,Mendoza
+2025-09-20,Kiosco La Esquina,Aceite 900ml,9,32689,Sofía Paz,Buenos Aires
+2025-09-22,Mercadito Central,Café 500g,9,71706,Laura Gómez,Mendoza
+2025-09-22,Supermercado Sol,Café 500g,16,127477,Sofía Paz,Córdoba
+2025-09-23,Bar El Faro,Yerba 1kg,8,39368,Sofía Paz,Córdoba
+2025-09-25,Kiosco La Esquina,Aceite 900ml,8,29057,Martín Ruiz,Buenos Aires
+2025-09-29,Supermercado Sol,Galletitas 300g,25,55654,Martín Ruiz,Córdoba
+2025-09-30,Bar El Faro,Yerba 1kg,14,68894,Martín Ruiz,Córdoba
+2025-10-01,Autoservicio Mitre,Galletitas 300g,13,29519,Laura Gómez,Buenos Aires
+2025-10-02,Almacén Don Pepe,Azúcar 1kg,14,25097,Laura Gómez,Buenos Aires
+2025-10-03,Bar El Faro,Azúcar 1kg,13,23304,Martín Ruiz,Córdoba
+2025-10-07,Autoservicio Mitre,Café 500g,8,65013,Sofía Paz,Buenos Aires
+2025-10-09,Supermercado Sol,Galletitas 300g,22,49955,Martín Ruiz,Córdoba
+2025-10-11,Bar El Faro,Aceite 900ml,7,25934,Martín Ruiz,Córdoba
+2025-10-11,Dietética Natura,Yerba 1kg,7,35136,Sofía Paz,Santa Fe
+2025-10-13,Autoservicio Mitre,Galletitas 300g,1,2271,Martín Ruiz,Buenos Aires
+2025-10-13,Dietética Natura,Yerba 1kg,8,40155,Martín Ruiz,Santa Fe
+2025-10-13,Supermercado Sol,Café 500g,36,292559,Laura Gómez,Córdoba
+2025-10-14,Kiosco La Esquina,Harina 1kg,26,34180,Sofía Paz,Buenos Aires
+2025-10-15,Bar El Faro,Aceite 900ml,2,7410,Laura Gómez,Córdoba
+2025-10-15,Almacén Don Pepe,Harina 1kg,17,22348,Laura Gómez,Buenos Aires
+2025-10-15,Almacén Don Pepe,Harina 1kg,12,15775,Martín Ruiz,Buenos Aires
+2025-10-18,Supermercado Sol,Aceite 900ml,37,137077,Martín Ruiz,Córdoba
+2025-10-20,Rotisería Doña Rosa,Café 500g,5,40633,Martín Ruiz,Santa Fe
+2025-10-20,Supermercado Sol,Galletitas 300g,27,61308,Martín Ruiz,Córdoba
+2025-10-21,Bar El Faro,Café 500g,9,73140,Sofía Paz,Córdoba
+2025-10-23,Dietética Natura,Galletitas 300g,8,18165,Martín Ruiz,Santa Fe
+2025-10-23,Supermercado Sol,Yerba 1kg,38,190737,Laura Gómez,Córdoba
+2025-10-23,Autoservicio Mitre,Yerba 1kg,13,65252,Martín Ruiz,Buenos Aires
+2025-10-24,Kiosco La Esquina,Yerba 1kg,11,55213,Sofía Paz,Buenos Aires
+2025-10-27,Autoservicio Mitre,Harina 1kg,20,26292,Martín Ruiz,Buenos Aires
+2025-10-28,Kiosco La Esquina,Café 500g,17,138153,Martín Ruiz,Buenos Aires
+2025-10-28,Kiosco La Esquina,Café 500g,8,65013,Laura Gómez,Buenos Aires
+2025-10-28,Supermercado Sol,Yerba 1kg,11,55213,Martín Ruiz,Córdoba
+2025-10-29,Bar El Faro,Yerba 1kg,1,5019,Laura Gómez,Córdoba
+2025-10-30,Supermercado Sol,Galletitas 300g,26,59038,Martín Ruiz,Córdoba
+2025-11-01,Supermercado Sol,Yerba 1kg,13,66557,Sofía Paz,Córdoba
+2025-11-03,Dietética Natura,Yerba 1kg,5,25599,Martín Ruiz,Santa Fe
+2025-11-04,Bar El Faro,Yerba 1kg,4,20479,Martín Ruiz,Córdoba
+2025-11-06,Mercadito Central,Café 500g,16,132627,Sofía Paz,Mendoza
+2025-11-07,Supermercado Sol,Galletitas 300g,31,71799,Martín Ruiz,Córdoba
+2025-11-07,Supermercado Sol,Café 500g,22,182362,Martín Ruiz,Córdoba
+2025-11-07,Supermercado Sol,Galletitas 300g,16,37057,Sofía Paz,Córdoba
+2025-11-08,Supermercado Sol,Aceite 900ml,1,3779,Laura Gómez,Córdoba
+2025-11-14,Almacén Don Pepe,Galletitas 300g,10,23161,Martín Ruiz,Buenos Aires
+2025-11-14,Autoservicio Mitre,Yerba 1kg,23,117755,Laura Gómez,Buenos Aires
+2025-11-14,Almacén Don Pepe,Azúcar 1kg,8,14628,Martín Ruiz,Buenos Aires
+2025-11-15,Supermercado Sol,Harina 1kg,12,16091,Sofía Paz,Córdoba
+2025-11-17,Supermercado Sol,Aceite 900ml,32,120924,Laura Gómez,Córdoba
+2025-11-17,Dietética Natura,Harina 1kg,5,6704,Sofía Paz,Santa Fe
+2025-11-17,Rotisería Doña Rosa,Azúcar 1kg,6,10971,Laura Gómez,Santa Fe
+2025-11-20,Supermercado Sol,Azúcar 1kg,30,54855,Laura Gómez,Córdoba
+2025-11-21,Bar El Faro,Harina 1kg,5,6704,Laura Gómez,Córdoba
+2025-11-22,Supermercado Sol,Yerba 1kg,18,92156,Martín Ruiz,Córdoba
+2025-11-25,Supermercado Sol,Aceite 900ml,39,147376,Laura Gómez,Córdoba
+2025-11-25,Dietética Natura,Café 500g,9,74602,Laura Gómez,Santa Fe
+2025-11-25,Almacén Don Pepe,Aceite 900ml,2,7558,Sofía Paz,Buenos Aires
+2025-11-26,Bar El Faro,Aceite 900ml,12,45347,Martín Ruiz,Córdoba
+2025-11-26,Supermercado Sol,Aceite 900ml,27,102030,Sofía Paz,Córdoba
+2025-11-26,Rotisería Doña Rosa,Aceite 900ml,5,18894,Martín Ruiz,Santa Fe
+2025-11-27,Supermercado Sol,Yerba 1kg,29,148474,Martín Ruiz,Córdoba
+2025-11-27,Autoservicio Mitre,Yerba 1kg,3,15359,Laura Gómez,Buenos Aires
+2025-11-29,Autoservicio Mitre,Galletitas 300g,16,37057,Martín Ruiz,Buenos Aires
+2025-12-01,Kiosco La Esquina,Yerba 1kg,10,52222,Martín Ruiz,Buenos Aires
+2025-12-02,Bar El Faro,Yerba 1kg,5,26111,Martín Ruiz,Córdoba
+2025-12-02,Bar El Faro,Yerba 1kg,12,62666,Laura Gómez,Córdoba
+2025-12-03,Supermercado Sol,Café 500g,22,186009,Martín Ruiz,Córdoba
+2025-12-05,Kiosco La Esquina,Galletitas 300g,3,7087,Laura Gómez,Buenos Aires
+2025-12-08,Supermercado Sol,Galletitas 300g,29,68510,Sofía Paz,Córdoba
+2025-12-08,Mercadito Central,Yerba 1kg,7,36555,Laura Gómez,Mendoza
+2025-12-09,Dietética Natura,Aceite 900ml,15,57817,Sofía Paz,Santa Fe
+2025-12-09,Mercadito Central,Café 500g,14,118369,Sofía Paz,Mendoza
+2025-12-09,Supermercado Sol,Café 500g,13,109914,Sofía Paz,Córdoba
+2025-12-10,Bar El Faro,Harina 1kg,9,12309,Laura Gómez,Córdoba
+2025-12-11,Almacén Don Pepe,Azúcar 1kg,4,7460,Sofía Paz,Buenos Aires
+2025-12-13,Autoservicio Mitre,Café 500g,9,76095,Laura Gómez,Buenos Aires
+2025-12-16,Bar El Faro,Aceite 900ml,2,7709,Laura Gómez,Córdoba
+2025-12-16,Almacén Don Pepe,Café 500g,13,109914,Sofía Paz,Buenos Aires
+2025-12-17,Autoservicio Mitre,Harina 1kg,10,13677,Martín Ruiz,Buenos Aires
+2025-12-18,Dietética Natura,Aceite 900ml,5,19272,Sofía Paz,Santa Fe
+2025-12-19,Autoservicio Mitre,Aceite 900ml,19,73235,Sofía Paz,Buenos Aires
+2025-12-20,Autoservicio Mitre,Harina 1kg,3,4103,Sofía Paz,Buenos Aires
+2025-12-22,Dietética Natura,Café 500g,7,59185,Martín Ruiz,Santa Fe
+2025-12-23,Supermercado Sol,Azúcar 1kg,35,65277,Martín Ruiz,Córdoba
+2025-12-24,Autoservicio Mitre,Harina 1kg,22,30090,Sofía Paz,Buenos Aires
+2025-12-27,Mercadito Central,Yerba 1kg,12,62666,Sofía Paz,Mendoza
+2025-12-27,Supermercado Sol,Galletitas 300g,25,59060,Laura Gómez,Córdoba
+2025-12-29,Rotisería Doña Rosa,Aceite 900ml,6,23127,Martín Ruiz,Santa Fe
+2025-12-30,Autoservicio Mitre,Aceite 900ml,13,50108,Sofía Paz,Buenos Aires
+2025-12-31,Almacén Don Pepe,Aceite 900ml,4,15418,Martín Ruiz,Buenos Aires

@@ -12,7 +12,7 @@ Repositorio central de mi emprendimiento freelance: servicios técnicos y digita
 
 ## Portafolio
 
-Ejemplos con datos ficticios: [limpieza de una planilla](portafolio/01-limpieza-de-datos/), [reporte automático](portafolio/02-reporte-automatico/) y [textos para una web](portafolio/03-redaccion-web/). Ver [todos los ejemplos](portafolio/).
+Ejemplos con datos ficticios: [limpieza de una planilla](portafolio/01-limpieza-de-datos/), [reporte automático](portafolio/02-reporte-automatico/), [textos para una web](portafolio/03-redaccion-web/) y [dashboard interactivo](portafolio/04-dashboard-interactivo/). Ver [todos los ejemplos](portafolio/).
 
 ## Estructura del repositorio
 
