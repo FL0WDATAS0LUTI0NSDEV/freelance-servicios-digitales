@@ -10,18 +10,21 @@ Ejemplo de respaldo: `portafolio/06-facturas-pdf-a-excel/`. Análisis de compete
 ```
 I will extract data from PDF invoices to excel in spanish
 ```
-**Categoría:** Datos → Data Entry / Entrada de datos (si existe *Data Processing* o *Data Conversion*, elegir esa). Tipo de servicio: *Data Entry* o *Data Conversion*.
 **Tags** (5, máx. 20 caracteres): `pdf to excel` · `data extraction` · `invoice processing` · `excel data entry` · `pdf data entry`
 
 ## 2. Paquetes
 | | Básico — USD 40 | Estándar — USD 90 | Premium — USD 180 |
 |---|---|---|---|
 | Nombre | Hasta 50 facturas | Hasta 200 facturas | Hasta 500 + automatización |
+| Formatting & clean up | ✔ | ✔ | ✔ |
+| Include source code | — | — | ✔ |
 | Descripción | Hasta 50 facturas PDF de hasta 2 formatos de proveedor, pasadas a Excel. | Hasta 200 facturas, hasta 6 formatos, con controles de CUIT, duplicados y totales. | Hasta 500 facturas, controles, y el script para repetirlo cada mes con guía de uso. |
 | Entrega | 2 días | 4 días | 7 días |
 | Revisiones | 1 | 2 | 3 |
 
-**Extras:** entrega en 1 día menos (+USD 15 / 25 / 40) · facturas escaneadas con OCR (cotizar) · 100 facturas adicionales (+USD 25).
+**Categoría final:** Data → Data Processing · Service type: Automations · Technology: Python, Excel, Google Sheets (+VBA si aplica) · Expertise: Data extraction, Data validation, Transformation, Normalization, Data manipulation, ETL.
+
+**Extras:** entrega rápida (1/2/4 días, +USD 15/25/40) · código fuente +USD 60 · revisión adicional +USD 10 · "100 facturas adicionales" +USD 25, 1 día ("Sumá 100 facturas más a tu paquete, con los mismos datos y controles. Podés agregarlo varias veces."). OCR: cotizar con oferta personalizada.
 
 ## 3. Descripción (858/1200)
 ```
@@ -66,6 +69,9 @@ Sí. El Premium incluye el script para que lo repitas vos, o me lo encargás cad
 
 ¿Mis facturas quedan seguras?
 Sí. Solo las uso para tu pedido y las borro al terminar.
+
+¿Después puedo ver estos datos en un dashboard?
+Sí. También armo dashboards en Power BI con tus compras o ventas. Consultame.
 
 ¿Atendés en inglés?
 El servicio es en español.
