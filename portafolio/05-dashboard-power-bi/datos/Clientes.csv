@@ -1,0 +1,9 @@
+ClienteID,Cliente,TipoCliente,Provincia
+C01,Almacén Don Pepe,Almacén,Buenos Aires
+C02,Autoservicio Mitre,Supermercado,Buenos Aires
+C03,Bar El Faro,Gastronomía,Córdoba
+C04,Dietética Natura,Dietética,Santa Fe
+C05,Kiosco La Esquina,Kiosco,Buenos Aires
+C06,Mercadito Central,Almacén,Mendoza
+C07,Rotisería Doña Rosa,Gastronomía,Santa Fe
+C08,Supermercado Sol,Supermercado,Córdoba
