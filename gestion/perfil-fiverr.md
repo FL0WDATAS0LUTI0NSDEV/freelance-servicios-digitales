@@ -122,7 +122,7 @@ Formulario de Fiverr: nombre (máx. 50), industria (máx. 6), duración, costo (
 Imágenes listas en `portafolio/capturas/fiverr/portafolio-4x3/`. Todos son **ejemplos con datos ficticios**; sin links ni contacto.
 
 ### 1. Dashboard de ventas interactivo
-Imagen: `1-dashboard-ventas-4x3.png` · Duración: menos de 1 semana · Inicio: 11/2026 · Industria: comercio mayorista / minorista.
+Imagen: `1-dashboard-ventas-4x3.png` · Costo: 200 · Duración: menos de 1 semana · Inicio: 11/2026 · Industria: comercio mayorista / minorista.
 ```
 Ejemplo de portafolio con datos ficticios de una distribuidora.
 
@@ -138,7 +138,7 @@ Resultado: una vista clara del negocio que se actualiza con los datos nuevos, li
 ```
 
 ### 2. De la planilla desordenada al reporte
-Imagen: `2-caso-completo-4x3.png` · Duración: menos de 1 semana · Inicio: 11/2026 · Industria: comercio minorista.
+Imagen: `2-caso-completo-4x3.png` · Costo: 150 · Duración: menos de 1 semana · Inicio: 11/2026 · Industria: comercio minorista.
 ```
 Caso completo con datos ficticios de una ferretería.
 
@@ -153,7 +153,7 @@ Resultado: de un archivo en el que no se podía confiar a un reporte listo para 
 ```
 
 ### 3. Limpieza de una planilla de ventas
-Imagen: `3-limpieza-4x3.png` · Duración: menos de 1 semana · Inicio: 11/2026 · Industria: comercio minorista.
+Imagen: `3-limpieza-4x3.png` · Costo: 45 · Duración: menos de 1 semana · Inicio: 11/2026 · Industria: comercio minorista.
 ```
 Ejemplo de portafolio con datos ficticios.
 

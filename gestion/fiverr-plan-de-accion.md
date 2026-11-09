@@ -156,3 +156,12 @@ Con un script en Python unifiqué fechas, nombres, productos, vendedores y provi
 
 Herramientas: Python (pandas), Excel.
 ```
+
+## Simulación de costos (portafolio, 09/11/2026)
+| Proyecto | Horas est. | Precio | Neto (−20 %) | Neto/hora |
+|---|---|---|---|---|
+| Dashboard interactivo | 15 | 200 | 160 | ~10,7 |
+| Caso completo (limpieza + reporte) | 10,5 | 150 | 120 | ~11,4 |
+| Limpieza de planilla | 4 | 45 | 36 | 9 |
+
+Con precios de lanzamiento el neto ronda 9-11 USD/h: la meta de USD 1.500 netos/mes exigiría ~12 pedidos Estándar (~140 h). **Revisar el 30/11:** tras 5 reseñas, subir a ~65/200/400 y sumar extras (entrega rápida, página adicional, actualización mensual).
