@@ -7,13 +7,40 @@ dCalendario y fObjetivos) y genera en esta carpeta:
 - reporte_ventas_AAAA-MM.xlsx  -> Excel con las tablas de resumen (con fórmulas)
 
 Uso:
-    python generar_reporte.py                       # usa ../ventas_octubre_2026_limpio.xlsx
-    python generar_reporte.py ruta/al/limpio.xlsx   # otro mes
+    python generar_reporte.py                                   # usa ENTRADA_POR_DEFECTO (CONFIG)
+    python generar_reporte.py ruta/al/limpio.xlsx               # otro mes
+    python generar_reporte.py ruta/al/limpio.xlsx --salida DIR  # guarda el reporte en otra carpeta
+
+Los datos de la limpieza (duplicados quitados, total de la planilla original) se leen de
+informe_limpieza.md si está al lado del archivo de entrada y corresponde a esos datos
+(mismo total neto y misma cantidad de renglones). Si no, esas frases se omiten.
 
 Basado en portafolio/02-reporte-automatico/generar_reporte.py y en el diseño de
 portafolio/04-dashboard-interactivo/index.html (FlowData Solutions).
 """
+# ================================================================ CONFIG
+# Lo único que hay que editar para otro cliente u otro mes.
+CLIENTE = "Ferretería mayorista"
+ENTRADA_POR_DEFECTO = "../ventas_octubre_2026_limpio.xlsx"  # relativa a la carpeta de este script
+INFORME_LIMPIEZA = "informe_limpieza.md"                     # se busca al lado del archivo de entrada
+# Mientras el cliente no confirme la unidad de fObjetivos, no se calcula % de cumplimiento.
+OBJETIVOS_CONFIRMADOS = False
+# Recalcular el Excel con LibreOffice para que quede con valores (vistas previas, openpyxl, celular).
+RECALCULAR_EXCEL = True
+RECALC_PY_CANDIDATOS = [  # script recalc.py de la skill xlsx; si no está, se usa soffice directo
+    "/mnt/skills/public/xlsx/scripts/recalc.py",
+    "~/.claude/skills/xlsx/scripts/recalc.py",
+]
+# ================================================================
+
+import argparse
+import json
+import os
+import re
+import shutil
+import subprocess
 import sys
+import tempfile
 from datetime import date
 from html import escape
 from pathlib import Path
@@ -25,11 +52,6 @@ from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.table import Table, TableStyleInfo
 
 AQUI = Path(__file__).resolve().parent
-ENTRADA_POR_DEFECTO = AQUI.parent / "ventas_octubre_2026_limpio.xlsx"
-CLIENTE = "Ferretería mayorista"
-
-# Mientras el cliente no confirme la unidad de fObjetivos, no se calcula % de cumplimiento.
-OBJETIVOS_CONFIRMADOS = False
 
 MESES = {1: "enero", 2: "febrero", 3: "marzo", 4: "abril", 5: "mayo", 6: "junio", 7: "julio",
          8: "agosto", 9: "septiembre", 10: "octubre", 11: "noviembre", 12: "diciembre"}
@@ -51,16 +73,66 @@ def millones(x: float) -> str:
     return f"{signo}$\u00a0" + f"{x / 1e3:,.0f}".replace(",", ".") + "\u00a0k"
 
 
+MENOS = "\u2212"  # signo menos tipográfico, en todos los negativos del reporte
+
+
 def entero(x: float) -> str:
-    return f"{x:,.0f}".replace(",", ".")
+    return f"{x:,.0f}".replace(",", ".").replace("-", MENOS)
 
 
 def pct(x: float, dec: int = 1) -> str:
-    return f"{x:.{dec}f}".replace(".", ",") + "\u00a0%"
+    return f"{x:.{dec}f}".replace(".", ",").replace("-", MENOS) + "\u00a0%"
+
+
+def veces(x: float) -> str:
+    """Un solo redondeo (1 decimal) para 'veces el objetivo', igual en HTML, Excel y notas."""
+    return f"{x:.1f}".replace(".", ",")
+
+
+def rango_veces(ratio: pd.Series) -> str:
+    lo, hi = veces(ratio.min()), veces(ratio.max())
+    return f"unas {lo} veces" if lo == hi else f"entre {lo} y {hi} veces"
 
 
 def fecha_corta(d) -> str:
     return f"{d:%d/%m}"
+
+
+# ---------------------------------------------------------------- informe de limpieza
+def _monto_md(texto: str):
+    m = re.fullmatch(r"\s*([+\-\u2212]?)\s*\$?\s*([\d.]+)\s*", texto)
+    if not m:
+        return None
+    return (-1 if m.group(1) in ("-", MENOS) else 1) * int(m.group(2).replace(".", ""))
+
+
+def leer_informe(entrada: Path, d: dict) -> dict:
+    """Lee los datos de la limpieza de informe_limpieza.md (al lado del archivo de entrada).
+    Solo los usa si el informe corresponde a estos datos; si no, devuelve {} y las frases se omiten."""
+    ruta = entrada.parent / INFORME_LIMPIEZA
+    if not ruta.is_file():
+        print(f"Aviso: no está {ruta.name} al lado de {entrada.name}; se omiten los datos de la limpieza.")
+        return {}
+    texto = ruta.read_text(encoding="utf-8")
+
+    def valor(patron):  # primer **valor** en negrita despu\u00e9s del patr\u00f3n, en la misma l\u00ednea
+        m = re.search(patron + r"[^\n]*?\*\*([^*\n]+)\*\*", texto, re.IGNORECASE)
+        return _monto_md(m.group(1)) if m else None
+
+    info = {
+        "duplicados": valor(r"Filas duplicadas eliminadas"),
+        "renglones": valor(r"Renglones finales"),
+        "neto": valor(r"Total limpio \(neto\)"),
+        "suma_original": valor(r"Suma de la columna Total en el original"),
+        "pie_total_general": bool(re.search(r"Fila de pie\s*'TOTAL GENERAL'", texto, re.IGNORECASE)),
+    }
+    m = re.search(r"Informe de limpieza\s*[\u2014-]+\s*Ventas\s+(\w+)\s+(\d{4})", texto, re.IGNORECASE)
+    mes_ok = m is None or (m.group(1).lower() == MESES[d["periodo"].month] and int(m.group(2)) == d["periodo"].year)
+    if info["neto"] != d["neto"] or info["renglones"] != len(d["v"]) or not mes_ok:
+        print(f"Aviso: {ruta.name} no corresponde a estos datos (neto {info['neto']} vs {d['neto']}, "
+              f"renglones {info['renglones']} vs {len(d['v'])}); se omiten los datos de la limpieza.")
+        return {}
+    return info
 
 
 # ---------------------------------------------------------------- lectura
@@ -100,7 +172,11 @@ def preparar(t: dict) -> dict:
     if len(meses) != 1:
         sys.exit(f"Se esperaba un solo mes en fVentas y hay {len(meses)}")
     periodo = meses[0]
-    cal = cal[cal["Fecha"].dt.to_period("M") == periodo]
+    cal_mes = cal[cal["Fecha"].dt.to_period("M") == periodo]
+    # El período del reporte es el que cubren los datos (si el archivo trae medio mes, no se informa el mes entero).
+    desde, hasta = v["Fecha"].min(), v["Fecha"].max()
+    mes_completo = desde <= cal_mes["Fecha"].min() and hasta >= cal_mes["Fecha"].max()
+    cal = cal_mes[cal_mes["Fecha"].between(desde, hasta)]
 
     es_dev = v["Tipo_Movimiento"].eq("Devolución")
     ventas, devs = v[~es_dev], v[es_dev]
@@ -131,8 +207,16 @@ def preparar(t: dict) -> dict:
     obj = t["fObjetivos"].copy()
     por_vendedor = agrupar("Vendedor").merge(obj[["Vendedor", "Objetivo"]], on="Vendedor", how="left")
 
+    # Venta neta / objetivo cargado: un solo cálculo para HTML, Excel y notas.
+    por_vendedor["Veces_Objetivo"] = por_vendedor["Neto"] / por_vendedor["Objetivo"].where(por_vendedor["Objetivo"] > 0)
+
+    cli_periodo = t["dClientes"][t["dClientes"]["CUIT"].isin(v["CUIT"])]
+    cuit_invalidos = cli_periodo[cli_periodo["CUIT_Valido"].astype(str).str.strip().str.lower() == "no"]
+
     d = {
         "v": v, "ventas": ventas, "devs": devs.sort_values("Fecha"), "periodo": periodo, "cal": cal,
+        "desde": desde, "hasta": hasta, "mes_completo": mes_completo,
+        "cuit_invalidos": cuit_invalidos.sort_values("Cliente"), "clientes_dim": len(cli_periodo),
         "neto": neto, "bruto": int(ventas["Total"].sum()), "dev": int(devs["Total"].sum()),
         "facturas": v["Nro_Factura"].nunique(), "facturas_venta": ventas["Nro_Factura"].nunique(),
         "unidades": int(v["Cantidad"].sum()), "clientes": v["Cliente"].nunique(),
@@ -152,7 +236,11 @@ def preparar(t: dict) -> dict:
 
 # ---------------------------------------------------------------- Excel
 NAVY, BLANCO = "0B1325", "FFFFFF"
-F_MONEDA, F_ENTERO, F_PCT, F_FECHA = '"$" #,##0;-"$" #,##0', "#,##0", "0.0%", "dd/mm/yyyy"
+# Negativos con el signo menos tipográfico (U+2212), igual que en el HTML.
+F_MONEDA = '"$" #,##0;"−$" #,##0'
+F_ENTERO = '#,##0;"−"#,##0'
+F_PCT = '0.0%;"−"0.0%'
+F_FECHA = "dd/mm/yyyy"
 BORDE = Border(bottom=Side(style="thin", color="E2E8F0"))
 
 
@@ -213,15 +301,22 @@ def generar_excel(d: dict, salida: Path):
         ("Ticket promedio", "=B3/B7", F_MONEDA, "Ventas brutas / facturas de venta"),
         ("Unidades netas", f"=SUM({R(CAN)})", F_ENTERO, ""),
         ("Clientes con compras", f"=SUMPRODUCT(1/COUNTIF({R(CLI)},{R(CLI)}))", F_ENTERO, ""),
-        ("Cumplimiento de objetivos", "Pendiente de confirmación", None,
-         "Los objetivos cargados parecen estar en otra unidad; se calcula cuando el cliente la confirme"),
     ]
+    tot_ven = len(d["por_vendedor"]) + 2  # fila del total en la hoja "Por vendedor"
+    if OBJETIVOS_CONFIRMADOS:
+        filas.append(("Cumplimiento de objetivos", f"='Por vendedor'!E{tot_ven}/SUM('Por vendedor'!H2:H{tot_ven - 1})",
+                      F_PCT, "Ventas netas / suma de objetivos"))
+    else:
+        filas.append(("Cumplimiento de objetivos", "Pendiente de confirmación", None,
+                      "Falta confirmar la unidad de los objetivos cargados; se calcula cuando el cliente la confirme"))
     for etiqueta, valor, fmt, nota in filas:
         res.append([etiqueta, valor, nota])
         if fmt:
             res.cell(row=res.max_row, column=2).number_format = fmt
     formatear(res, {})
-    res["A13"] = f"Período: {MESES[d['periodo'].month]} {d['periodo'].year} · Generado el {date.today():%d/%m/%Y} por FlowData Solutions"
+    parcial = "" if d["mes_completo"] else " (mes parcial)"
+    res["A13"] = (f"Período: {d['desde']:%d/%m/%Y} al {d['hasta']:%d/%m/%Y}{parcial} · "
+                  f"Generado el {date.today():%d/%m/%Y} por FlowData Solutions")
     res["A13"].font = Font(italic=True, color="64748B")
 
     # --- Datos (fuente de todas las fórmulas)
@@ -269,7 +364,7 @@ def generar_excel(d: dict, salida: Path):
                                    "% del mes", "Ticket promedio", "Objetivo cargado", "Cumplimiento"],
               [16, 10, 16, 15, 16, 10, 15, 16, 26])
     for i, r in enumerate(d["por_vendedor"].itertuples(), start=2):
-        cumplimiento = f"=E{i}/H{i}" if OBJETIVOS_CONFIRMADOS else "Pendiente de confirmación"
+        cumplimiento = f'=IFERROR(E{i}/H{i},"")' if OBJETIVOS_CONFIRMADOS else "Pendiente de confirmación"
         ws.append([r.Vendedor, f"=COUNTIFS({R(VEN)},A{i})",
                    f'=SUMIFS({R(TOT)},{R(VEN)},A{i},{R(TIP)},"Venta")',
                    f'=SUMIFS({R(TOT)},{R(VEN)},A{i},{R(TIP)},"Devolución")',
@@ -277,12 +372,15 @@ def generar_excel(d: dict, salida: Path):
                    f'=IFERROR(C{i}/COUNTIFS({R(VEN)},A{i},{R(TIP)},"Venta"),0)',
                    None if pd.isna(r.Objetivo) else int(r.Objetivo), cumplimiento])
     tot = fila_total(ws, "Total", [2, 3, 4, 5, 6])
+    assert tot == tot_ven
     formatear(ws, {"B": F_ENTERO, "C": F_MONEDA, "D": F_MONEDA, "E": F_MONEDA, "F": F_PCT, "G": F_MONEDA,
                    "H": F_MONEDA, "I": F_PCT})
-    ws.cell(row=tot + 2, column=1, value=(
-        "Nota: el objetivo cargado (fObjetivos) es entre 5 y 7 veces menor que la venta neta. "
-        "Falta que el cliente confirme la unidad (¿miles?, ¿semanal?, ¿sin IVA?) antes de calcular el cumplimiento.")
-    ).font = Font(italic=True, color="B45309")
+    ratio = d["por_vendedor"]["Veces_Objetivo"].dropna()
+    if not OBJETIVOS_CONFIRMADOS and len(ratio):
+        ws.cell(row=tot + 2, column=1, value=(
+            f"Nota: la venta neta es {rango_veces(ratio)} el objetivo cargado (fObjetivos). "
+            "Falta que el cliente confirme la unidad (¿miles?, ¿semanal?, ¿sin IVA?) antes de calcular el cumplimiento.")
+        ).font = Font(italic=True, color="B45309")
 
     # --- Por cliente
     ws = hoja(wb, "Por cliente", ["Cliente", "Facturas", "Ventas brutas", "Devoluciones", "Ventas netas", "% del mes",
@@ -332,6 +430,53 @@ def generar_excel(d: dict, salida: Path):
 
     wb.calculation.fullCalcOnLoad = True  # Excel recalcula todo al abrir
     wb.save(salida)
+
+
+ERRORES_EXCEL = ("#VALUE!", "#DIV/0!", "#REF!", "#NAME?", "#NULL!", "#NUM!", "#N/A")
+
+
+def recalcular_excel(xlsx: Path) -> str:
+    """Recalcula las fórmulas con LibreOffice para que el archivo guarde los valores calculados
+    (sin esto, las vistas previas y openpyxl data_only=True ven celdas vacías)."""
+    candidatos = [os.environ.get("RECALC_PY", "")] + RECALC_PY_CANDIDATOS
+    script = next((Path(c).expanduser() for c in candidatos if c and Path(c).expanduser().is_file()), None)
+    if script:
+        r = subprocess.run([sys.executable, str(script), str(xlsx), "120"], capture_output=True, text=True)
+        try:
+            res = json.loads(r.stdout)
+        except json.JSONDecodeError:
+            res = {"error": (r.stderr or r.stdout).strip()[-300:]}
+        if "error" in res:
+            sys.exit(f"No se pudo recalcular {xlsx.name} con {script}: {res['error']}")
+        if res.get("total_errors"):
+            sys.exit(f"{xlsx.name} tiene {res['total_errors']} errores al recalcular: {res['error_summary']}")
+        return f"recalc.py ({res.get('total_formulas')} fórmulas, 0 errores)"
+    if shutil.which("soffice"):
+        with tempfile.TemporaryDirectory() as tmp:
+            subprocess.run(["soffice", "--headless", "--calc", "--convert-to", "xlsx", "--outdir", tmp, str(xlsx)],
+                           capture_output=True, timeout=180, check=True)
+            shutil.move(str(Path(tmp) / xlsx.name), xlsx)
+        return "soffice --convert-to xlsx"
+    print("Aviso: sin LibreOffice; el Excel se recalcula recién al abrirlo en Excel.")
+    return ""
+
+
+def controlar_excel(xlsx: Path, d: dict):
+    """Con los valores ya calculados: cero errores y Resumen igual a los totales de pandas."""
+    wb = load_workbook(xlsx, data_only=True)
+    errores = [f"{ws.title}!{c.coordinate}" for ws in wb.worksheets for fila in ws.iter_rows() for c in fila
+               if isinstance(c.value, str) and c.value.strip() in ERRORES_EXCEL]
+    assert not errores, f"Errores en el Excel: {errores[:10]}"
+    res = wb["Resumen"]
+    vacias = [f"B{r}" for r in range(2, 11) if res[f"B{r}"].value is None]
+    assert not vacias, f"Celdas del Resumen sin valor calculado: {vacias}"
+    esperado = {"B2": d["neto"], "B3": d["bruto"], "B4": d["dev"], "B6": d["facturas"],
+                "B7": d["facturas_venta"], "B9": d["unidades"], "B10": d["clientes"]}
+    distintas = {k: (res[k].value, e) for k, e in esperado.items() if abs(float(res[k].value) - e) > 0.5}
+    assert not distintas, f"El Resumen del Excel no coincide con los datos: {distintas}"
+    control = [c.value for c in wb["Control"]["E"][1:] if c.value is not None]
+    assert control and all(x == "OK" for x in control), f"Hoja Control: {control}"
+    return len(control)
 
 
 # ---------------------------------------------------------------- HTML
@@ -411,7 +556,7 @@ def grafico_dias(por_dia: pd.DataFrame, neto: int) -> str:
             f'<ol class="dchart__cols" aria-label="Ventas netas por día">{"".join(cols)}</ol></div></div>')
 
 
-def generar_html(d: dict, salida: Path, entrada: Path):
+def generar_html(d: dict, salida: Path, entrada: Path, info: dict):
     p = d["periodo"]
     mes, anio = MESES[p.month], p.year
     neto, bruto, dev = d["neto"], d["bruto"], d["dev"]
@@ -454,8 +599,9 @@ def generar_html(d: dict, salida: Path, entrada: Path):
         f"{fecha_corta(sem_top['Hasta'])} concentró {millones(sem_top['Neto'])} ({pct(sem_top['Participacion'], 0)}).",
         f"<b>{escape(top_ven['Vendedor'])}</b> lideró las ventas con {millones(top_ven['Neto'])} "
         f"({pct(top_ven['Participacion'], 0)} del total).",
-        f"Hubo {len(devs)} devoluciones por {pesos(dev)}, el {pct(dev_pct)} de lo vendido.",
     ]
+    if len(devs):
+        insights.append(f"Hubo {len(devs)} devoluciones por {pesos(dev)}, el {pct(dev_pct)} de lo vendido.")
     insights_html = "".join(f"<li>{t}</li>" for t in insights)
 
     # ---- Semanas
@@ -476,17 +622,34 @@ def generar_html(d: dict, salida: Path, entrada: Path):
     # ---- Vendedores
     pendiente = ('<span class="status status--pending"><span class="status__dot" aria-hidden="true"></span>'
                  'Pendiente de confirmación</span>')
+
+    def cumplimiento(r):
+        if not OBJETIVOS_CONFIRMADOS:
+            return pendiente
+        return "—" if pd.isna(r.Veces_Objetivo) else pct(100 * r.Veces_Objetivo, 0)
     ven_tabla = tabla(
         [("Vendedor", "l"), ("Facturas", "r"), ("Ventas netas", "r"), ("% del mes", "r"), ("Ticket promedio", "r"),
          ("Devoluciones", "r"), ("Cumplimiento de objetivo", "l")],
         [[escape(r.Vendedor), entero(r.Facturas), pesos(r.Neto), pct(r.Participacion), pesos(r.Ticket),
-          pesos(r.Devoluciones) if r.Devoluciones else "—", pendiente] for r in ven.itertuples()],
+          pesos(r.Devoluciones) if r.Devoluciones else "—", cumplimiento(r)] for r in ven.itertuples()],
         pie=["Total", entero(ven["Facturas"].sum()), pesos(ven["Neto"].sum()), pct(100), pesos(d["ticket"]),
              pesos(ven["Devoluciones"].sum()), ""],
         caption="Ventas por vendedor")
     objetivos_txt = ", ".join(f"{escape(r.Vendedor)} {millones(r.Objetivo)}" for r in ven.itertuples()
                               if not pd.isna(r.Objetivo))
-    ratio = (ven["Neto"] / ven["Objetivo"]).dropna()
+    ratio = ven["Veces_Objetivo"].dropna()  # mismo cálculo y redondeo que la nota del Excel
+    if OBJETIVOS_CONFIRMADOS:
+        nota_obj = ""
+    else:
+        nota_obj = ("<p><strong>Cumplimiento de objetivos: pendiente de confirmación.</strong> "
+                    + (f"Los objetivos cargados ({objetivos_txt}) son mucho menores que la venta neta: la venta es "
+                       f"{rango_veces(ratio)} el objetivo, así que probablemente estén en otra unidad "
+                       "(¿miles de pesos?, ¿semanales?, ¿sin IVA?). " if len(ratio) else
+                       "No hay objetivos cargados para este período. ")
+                    + "Lo calculamos cuando lo confirmes.</p>")
+        nota_obj = ('<div class="note" role="note"><svg class="note__icon" viewBox="0 0 24 24" fill="none" '
+                    'stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">'
+                    '<circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.5"/></svg>' + nota_obj + "</div>")
     ven_barras = hbars([{"nombre": escape(r.Vendedor), "valor": r.Neto,
                          "texto": f"{millones(r.Neto)} <span class='muted'>· {pct(r.Participacion, 0)}</span>"}
                         for r in ven.itertuples()])
@@ -517,9 +680,45 @@ def generar_html(d: dict, salida: Path, entrada: Path):
           escape(r.Producto), escape(r.Vendedor), entero(r.Cantidad), pesos(r.Total)] for r in devs.itertuples()],
         pie=["Total", "", "", "", "", entero(devs["Cantidad"].sum()), pesos(dev)],
         caption="Detalle de devoluciones")
-    dev_por_cli = devs.groupby("Cliente")["Total"].agg(["sum", "size"]).sort_values("sum")
-    dev_top = dev_por_cli.iloc[0]
-    dev_prod = devs.groupby("Producto")["Total"].sum().sort_values()
+    if len(devs):
+        dev_por_cli = devs.groupby("Cliente")["Total"].agg(["sum", "size"]).sort_values("sum")
+        dev_top = dev_por_cli.iloc[0]
+        dev_prod = devs.groupby("Producto")["Total"].sum().sort_values()
+        dev_texto = (f'<b style="color:var(--fds-text)">{escape(dev_por_cli.index[0])}</b> concentró '
+                     f"{int(dev_top['size'])} de las {len(devs)} devoluciones ({pesos(dev_top['sum'])}). "
+                     f"Por monto, lo más devuelto fue {escape(dev_prod.index[0])} ({pesos(dev_prod.iloc[0])}).")
+    else:
+        dev_texto, dev_tabla = "No hubo devoluciones en el período.", ""
+
+    # ---- Notas sobre los datos (todo sale de los datos o del informe de limpieza; si falta el dato, se omite)
+    notas = []
+    if len(devs):
+        notas.append(f"Las ventas netas ya descuentan las {len(devs)} devoluciones. Están cargadas como facturas con "
+                     "cantidad negativa (no como notas de crédito): confirmá si son devoluciones reales.")
+    if calculados:
+        notas.append(f"{calculados} renglones tenían el total o la cantidad vacíos y se completaron con cantidad × precio. "
+                     "Si hubo descuentos, avisanos y lo corregimos.")
+    if info.get("duplicados"):
+        n_dup = info["duplicados"]
+        txt = (f"En la limpieza se quitó {n_dup} renglón duplicado" if n_dup == 1 else
+               f"En la limpieza se quitaron {n_dup} renglones duplicados") + " de la exportación."
+        if info.get("pie_total_general") and info.get("suma_original") is not None:
+            txt += (f" Por eso, y por los totales que se completaron, el total no coincide con la fórmula de "
+                    f"\"TOTAL GENERAL\" de la planilla original ({pesos(info['suma_original'])}).")
+        notas.append(txt)
+    inv = d["cuit_invalidos"]
+    if len(inv):
+        nombres = ", ".join(escape(c) for c in inv["Cliente"])
+        notas.append((f"{len(inv)} de los {d['clientes_dim']} CUIT de clientes no pasan" if len(inv) > 1 else
+                      f"1 de los {d['clientes_dim']} CUIT de clientes no pasa")
+                     + f" el dígito verificador ({nombres}). No los modificamos: conviene revisarlos en el "
+                     "sistema de facturación.")
+    if not OBJETIVOS_CONFIRMADOS:
+        notas.append("El cumplimiento de objetivos queda pendiente hasta confirmar la unidad de los objetivos.")
+    if not d["mes_completo"]:
+        notas.append(f"El archivo trae ventas del {d['desde']:%d/%m} al {d['hasta']:%d/%m}: el reporte cubre solo "
+                     "esos días, no el mes completo.")
+    notas_html = "".join(f"<li>{n}</li>" for n in notas)
 
     # ---- Tabla diaria (para lectores de pantalla y para quien prefiera números)
     dia_tabla = tabla(
@@ -546,9 +745,6 @@ def generar_html(d: dict, salida: Path, entrada: Path):
     document.documentElement.dataset.theme = t;
   }})();
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
   :root, :root[data-theme="dark"] {{
     --fds-bg:#0B1325; --fds-card:#131F37; --fds-border:#1E2D4A; --fds-text:#F4F6F8;
@@ -563,8 +759,9 @@ def generar_html(d: dict, salida: Path, entrada: Path):
     --bar-from:#38BDF8; --bar-to:#0066FF; --weekend:rgba(15,23,42,.045); color-scheme:light;
   }}
   :root {{ --fds-cyan:#00E5FF; --fds-blue:#0066FF; --fds-green:#10B981; --radius:14px;
-    --font-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
-    --font-head:"Plus Jakarta Sans","Inter",system-ui,sans-serif; }}
+    /* Sin fuentes externas (reporte confidencial): Inter / Plus Jakarta Sans si están instaladas, si no las del sistema */
+    --font-body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    --font-head:"Plus Jakarta Sans","Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; }}
 
   *,*::before,*::after {{ box-sizing:border-box; }}
   body {{ margin:0; font-family:var(--font-body); color:var(--fds-text); background:var(--fds-bg);
@@ -574,6 +771,7 @@ def generar_html(d: dict, salida: Path, entrada: Path):
   .num {{ font-variant-numeric:tabular-nums; }}
   .muted {{ color:var(--fds-muted); }}
   :focus-visible {{ outline:2px solid var(--fds-cyan); outline-offset:2px; border-radius:6px; }}
+  :root[data-theme="light"] :focus-visible {{ outline-color:#0066FF; }}
   .wrap {{ max-width:1200px; margin:0 auto; padding:0 16px; }}
   .sr-only {{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }}
   .skip {{ position:absolute; left:16px; top:-48px; z-index:30; padding:8px 12px; border-radius:8px;
@@ -767,7 +965,7 @@ def generar_html(d: dict, salida: Path, entrada: Path):
     </div>
     <div class="top__actions">
       <span class="status status--success" title="Totales controlados contra los datos limpios">
-        <span class="status__dot" aria-hidden="true"></span><span>✓ Datos verificados</span></span>
+        <span class="status__dot" aria-hidden="true"></span><span>Totales controlados</span></span>
       <button class="btn icon-btn" id="theme-toggle" type="button" aria-label="Cambiar a modo claro" aria-pressed="false">
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
@@ -780,7 +978,7 @@ def generar_html(d: dict, salida: Path, entrada: Path):
   <div class="head">
     <span class="tag">{CLIENTE} · Reporte mensual</span>
     <h1>{titulo}</h1>
-    <p class="muted">Período: {pdia['Fecha'].min():%d/%m/%Y} al {pdia['Fecha'].max():%d/%m/%Y} · {d['facturas']} facturas · Generado el {generado:%d/%m/%Y}</p>
+    <p class="muted">Período: {d['desde']:%d/%m/%Y} al {d['hasta']:%d/%m/%Y}{"" if d['mes_completo'] else " (mes parcial)"} · {d['facturas']} facturas · Generado el {generado:%d/%m/%Y}</p>
   </div>
 
   <nav aria-label="Secciones del reporte">
@@ -796,7 +994,7 @@ def generar_html(d: dict, salida: Path, entrada: Path):
     <h2 id="t-ind" class="sr-only">Indicadores clave</h2>
     <div class="kpis">{kpis_html}</div>
     <div class="card insights">
-      <h2 style="font-size:1.05rem">Lo más importante del mes</h2>
+      <h2 style="font-size:1.05rem">Lo más importante {"del mes" if d["mes_completo"] else "del período"}</h2>
       <ul>{insights_html}</ul>
     </div>
   </section>
@@ -826,12 +1024,7 @@ def generar_html(d: dict, salida: Path, entrada: Path):
     <section class="card" id="vendedores" aria-labelledby="t-ven">
       <div class="card__head"><h2 id="t-ven">Por vendedor</h2><p class="muted">Ventas netas · % del mes</p></div>
       {ven_barras}
-      <div class="note" role="note">
-        <svg class="note__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.5"/></svg>
-        <p><strong>Cumplimiento de objetivos: pendiente de confirmación.</strong> Los objetivos cargados ({objetivos_txt})
-        son entre {f'{ratio.min():.1f}'.replace('.', ',')} y {f'{ratio.max():.1f}'.replace('.', ',')} veces menores que la venta neta, así que probablemente estén en otra unidad
-        (¿miles de pesos?, ¿semanales?, ¿sin IVA?). Lo calculamos cuando lo confirmes.</p>
-      </div>
+      {nota_obj}
     </section>
   </div>
   <section class="card" style="margin-top:12px" aria-labelledby="t-ven2">
@@ -860,22 +1053,14 @@ def generar_html(d: dict, salida: Path, entrada: Path):
       <div><span>Renglones</span><b class="num">{len(devs)}</b></div>
       <div><span>Unidades devueltas</span><b class="num">{entero(-devs['Cantidad'].sum())}</b></div>
     </div>
-    <p class="muted" style="font-size:.85rem;margin-bottom:12px"><b style="color:var(--fds-text)">{escape(dev_por_cli.index[0])}</b> concentró
-      {int(dev_top['size'])} de las {len(devs)} devoluciones ({pesos(dev_top['sum'])}). Por monto, lo más devuelto fue
-      {escape(dev_prod.index[0])} ({pesos(dev_prod.iloc[0])}).</p>
+    <p class="muted" style="font-size:.85rem;margin-bottom:12px">{dev_texto}</p>
     {dev_tabla}
   </section>
 
   <section class="card" id="notas" style="margin-top:12px" aria-labelledby="t-notas">
     <div class="card__head"><h2 id="t-notas">Notas sobre los datos</h2>
       <span class="status status--pending"><span class="status__dot" aria-hidden="true"></span>Puntos a confirmar</span></div>
-    <ul class="data-notes">
-      <li>Las ventas netas ya descuentan las {len(devs)} devoluciones. Están cargadas como facturas con cantidad negativa
-        (no como notas de crédito): confirmá si son devoluciones reales.</li>
-      <li>{calculados} renglones tenían el total o la cantidad vacíos y se completaron con cantidad × precio. Si hubo descuentos, avisanos y lo corregimos.</li>
-      <li>En la limpieza se quitaron 8 renglones duplicados de la exportación. Por eso el total no coincide con la fórmula de "TOTAL GENERAL" de la planilla original.</li>
-      <li>El cumplimiento de objetivos queda pendiente hasta confirmar la unidad de los objetivos.</li>
-    </ul>
+    <ul class="data-notes">{notas_html}</ul>
   </section>
 </main>
 
@@ -917,15 +1102,28 @@ def generar_html(d: dict, salida: Path, entrada: Path):
 
 # ---------------------------------------------------------------- main
 def main():
-    entrada = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else ENTRADA_POR_DEFECTO
+    ap = argparse.ArgumentParser(description="Genera el reporte mensual de ventas (HTML + Excel).")
+    ap.add_argument("entrada", nargs="?", default=ENTRADA_POR_DEFECTO, help="planilla limpia (.xlsx)")
+    ap.add_argument("--salida", default=".", help="carpeta donde guardar el reporte (relativa a este script)")
+    ap.add_argument("--sin-recalcular", action="store_true", help="no recalcular el Excel con LibreOffice")
+    a = ap.parse_args()
+    entrada = (AQUI / Path(a.entrada).expanduser()).resolve()
+    carpeta = (AQUI / Path(a.salida).expanduser()).resolve()
+    carpeta.mkdir(parents=True, exist_ok=True)
+
     d = preparar(leer_tablas(entrada))
+    info = leer_informe(entrada, d)
     sufijo = f"{d['periodo'].year}-{d['periodo'].month:02d}"
-    html, xlsx = AQUI / f"reporte_ventas_{sufijo}.html", AQUI / f"reporte_ventas_{sufijo}.xlsx"
+    html, xlsx = carpeta / f"reporte_ventas_{sufijo}.html", carpeta / f"reporte_ventas_{sufijo}.xlsx"
     generar_excel(d, xlsx)
-    generar_html(d, html, entrada)
-    print(f"Listo: {html.name} y {xlsx.name}")
+    metodo = recalcular_excel(xlsx) if RECALCULAR_EXCEL and not a.sin_recalcular else ""
+    if metodo:
+        n = controlar_excel(xlsx, d)
+        print(f"Excel recalculado con {metodo}; Resumen con valores y {n} controles OK")
+    generar_html(d, html, entrada, info)
+    print(f"Listo: {html} y {xlsx.name}")
     print(f"Ventas netas {pesos(d['neto'])} · brutas {pesos(d['bruto'])} · devoluciones {pesos(d['dev'])} · "
-          f"{d['facturas']} facturas · {d['unidades']} unidades")
+          f"{d['facturas']} facturas · {entero(d['unidades'])} unidades")
 
 
 if __name__ == "__main__":
