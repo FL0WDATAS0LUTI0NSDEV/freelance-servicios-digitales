@@ -1,11 +1,14 @@
 # Plan de repaso — Data Science y Full-Stack
 
-Tenés base en las cuatro áreas (Python para datos y ML, SQL, frontend y backend), pero hay que **refrescarlas**. Este plan las repasa **haciendo proyectos que sirven para vender**: cada semana termina con algo concreto para el portafolio o para un cliente.
+**Tu punto fuerte hoy:** trabajás como analista y manejás **Power BI**. Eso se vende desde el día 1 (dashboards, modelado, DAX, Power Query) y no necesita repaso.
+
+Tenés base en las cuatro áreas restantes (Python para datos y ML, SQL, frontend y backend), pero hay que **refrescarlas**. Este plan las repasa **haciendo proyectos que sirven para vender**: cada semana termina con algo concreto para el portafolio o para un cliente.
 
 **Dedicación sugerida:** 1,5 a 2 horas por día, en paralelo con las propuestas. No hace falta terminar el plan para empezar a vender: los servicios de la columna "Ya podés vender" se ofrecen desde el día 1.
 
 | Semana | Repaso | Proyecto que sale de la semana | Ya podés vender |
 |---|---|---|---|
+| 0 | **Power BI** (ya lo usás): armar 1 dashboard propio con datos públicos o con `ventas_2025.csv` y publicarlo como imagen/PDF + video corto | Ejemplo de Power BI para el portafolio | **Dashboards en Power BI** desde ya |
 | 1 | **Python + pandas**: lectura de Excel/CSV, limpieza, `groupby`, fechas, `merge` | Repetir sin mirar el [ejemplo de limpieza](../portafolio/01-limpieza-de-datos/) con otra planilla (ej. un dataset de Kaggle) | Limpieza de planillas, reportes simples |
 | 2 | **SQL**: `SELECT`, `JOIN`, `GROUP BY`, subconsultas, funciones de ventana. Practicar con PostgreSQL o SQLite | Cargar `ventas_2025.csv` en una base y responder 10 preguntas de negocio con SQL | + Consultas y reportes desde bases de datos |
 | 3 | **Visualización + JavaScript**: DOM, `fetch`, eventos; gráficos con SVG o Chart.js | Modificar el [dashboard](../portafolio/04-dashboard-interactivo/) para que lea un CSV que sube el usuario | + Dashboards |

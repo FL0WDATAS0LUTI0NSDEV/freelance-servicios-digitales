@@ -10,6 +10,11 @@ Las partes entre corchetes `[ ]` se completan con datos reales. **No pongas expe
 
 **Opción A (recomendada):**
 ```
+Analista de datos | Power BI, Python y automatización de reportes
+```
+
+**Opción A2:**
+```
 Limpieza de datos y automatización de reportes con Python
 ```
 
@@ -30,12 +35,12 @@ Datos, automatización y redacción para PYMEs
 ```
 ¿Tu empresa pierde horas ordenando planillas o armando reportes a mano? Te ayudo a que tus datos trabajen solos.
 
-Soy [tu nombre], freelancer especializado en datos y automatización para PYMEs y profesionales independientes. Trabajo con Python, Excel y Google Sheets para convertir información desordenada en datos confiables y reportes que se generan automáticamente.
+Soy [tu nombre], analista de datos con formación en Data Science y desarrollo full-stack. Trabajo con Power BI, Python, SQL, Excel y Google Sheets para convertir información desordenada en datos confiables y reportes que se generan automáticamente.
 
 QUÉ PUEDO HACER POR VOS
 ✔ Limpieza y orden de planillas y bases de datos: duplicados, formatos de fechas y montos, nombres escritos de distintas formas, datos faltantes.
 ✔ Reportes automáticos: el resumen semanal o mensual que hoy hacés a mano, generado con un solo clic (Excel, HTML o Google Sheets).
-✔ Dashboards simples con los indicadores clave de tu negocio.
+✔ Dashboards en Power BI (modelo de datos, DAX, Power Query) o en Google Looker Studio con los indicadores clave de tu negocio.
 ✔ Documentación de procesos: manuales paso a paso para que tu equipo no dependa de una sola persona.
 ✔ Redacción: textos para páginas web, propuestas comerciales, perfiles profesionales y corrección de estilo.
 
@@ -62,20 +67,20 @@ Escribime contándome qué necesitás y te respondo con una propuesta.
 ## Habilidades (skills)
 Cargá las que realmente manejes, en este orden de prioridad:
 
-1. Python
-2. Pandas
-3. Microsoft Excel
-4. Google Sheets
-5. Análisis de datos
-6. Limpieza de datos
-7. Automatización
-8. Visualización de datos
-9. Looker Studio / Google Data Studio
-10. Google Apps Script
-11. Redacción de contenidos
-12. Corrección de textos
-13. Asistente virtual
-14. Entrada de datos
+1. Power BI
+2. Python
+3. Pandas
+4. Microsoft Excel
+5. DAX / Power Query
+6. SQL
+7. Google Sheets
+8. Análisis de datos
+9. Limpieza de datos
+10. Automatización
+11. Visualización de datos
+12. Looker Studio / Google Data Studio
+13. Redacción de contenidos
+14. Asistente virtual
 
 ---
 

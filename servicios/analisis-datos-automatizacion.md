@@ -6,11 +6,11 @@ PYMEs y profesionales que pierden horas con planillas desordenadas o reportes ma
 ## Qué hago
 - **Limpieza y orden de datos**: duplicados, formatos, fechas, columnas inconsistentes (Excel, Google Sheets, CSV).
 - **Automatización de reportes**: reportes semanales/mensuales generados solos (Python + pandas, Google Apps Script).
-- **Dashboards simples**: indicadores clave en Google Sheets, Looker Studio o Excel.
+- **Dashboards en Power BI**: modelo de datos, medidas DAX y transformaciones con Power Query. También en Looker Studio, Google Sheets o Excel.
 - **Documentación de procesos**: manuales paso a paso para que el equipo repita el proceso sin depender de nadie.
 
 ## Herramientas
-Python (pandas, openpyxl), Excel / Google Sheets, Looker Studio, Google Apps Script.
+Power BI (DAX, Power Query), Python (pandas, openpyxl, scikit-learn), SQL, Excel / Google Sheets, Looker Studio.
 
 ## Paquetes sugeridos
 | Paquete | Alcance | Plazo estimado | Precio |

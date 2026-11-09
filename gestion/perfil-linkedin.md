@@ -1,12 +1,13 @@
 # Perfil de LinkedIn — FlowData Solutions
 
 ## Posicionamiento
-**Data Scientist & Full-Stack Developer** que fundó FlowData Solutions para resolver problemas de datos de PYMEs: desde ordenar planillas y automatizar reportes hasta dashboards y aplicaciones web a medida.
+**Analista de datos con formación en Data Science y desarrollo full-stack**, especializado en **Power BI**, que fundó FlowData Solutions para resolver problemas de datos de PYMEs: desde ordenar planillas y automatizar reportes hasta dashboards y aplicaciones web a medida.
 
 ### Regla de honestidad (importante)
-Te formaste en Data Science y desarrollo full-stack, pero **todavía no trabajaste en relación de dependencia en esos roles**. El perfil está escrito para eso:
-- ✅ Decimos lo que **sabés hacer** y lo **demostramos** con el portafolio y los proyectos.
-- ✅ La experiencia es **FlowData Solutions** (tu emprendimiento, real y actual) y tus **proyectos propios / de formación**.
+**Trabajás actualmente como analista** (experiencia real) y te formaste en Data Science y desarrollo full-stack, aunque **todavía no trabajaste con esos dos títulos**. El perfil está escrito para eso:
+- ✅ Tu **trabajo actual de analista** es tu experiencia profesional principal: contá qué hacés y qué lograste, con números reales si los tenés.
+- ✅ Data Science y full-stack aparecen como **formación + proyectos demostrables** (portafolio y FlowData Solutions), no como puestos anteriores.
+- ⚠️ **Revisá tu contrato actual** antes de ofrecer servicios: cláusulas de exclusividad, no competencia o confidencialidad. Nunca uses datos, código ni clientes de tu empleador en FlowData Solutions.
 - ❌ No ponemos empresas, clientes, años de experiencia ni resultados que no existan. Un cliente que descubre una mentira no vuelve; uno que ve un portafolio honesto y sólido, sí contrata.
 - 💡 Lo que no tenés en experiencia lo compensás con **prueba visible**: portafolio, publicaciones explicando cómo resolvés problemas y las primeras reseñas.
 
@@ -25,9 +26,14 @@ Las partes entre `[corchetes]` se completan con tus datos reales. En las listas 
 ---
 
 ## 2. Titular (máx. 220 caracteres)
-**Opción A (recomendada — une tus dos perfiles):**
+**Opción A (recomendada — combina tu experiencia real con tu formación):**
 ```
-Data Scientist & Full-Stack Developer | Convierto datos en dashboards, automatizaciones y apps web para PYMEs | Python · SQL · [React] | Fundador de FlowData Solutions
+Analista de Datos | Power BI · Python · SQL | Data Science & Full-Stack | Convierto datos en dashboards, automatizaciones y apps web para PYMEs | Fundador de FlowData Solutions
+```
+
+**Opción A2 (si preferís destacar los dos títulos de formación):**
+```
+Data Scientist & Full-Stack Developer | Analista de datos | Power BI · Python · SQL | Dashboards, automatizaciones y apps web para PYMEs | FlowData Solutions
 ```
 
 **Opción B (más orientada a negocio):**
@@ -44,19 +50,19 @@ Data Scientist & Full-Stack Developer | Python, pandas, scikit-learn, SQL | [Jav
 
 ## 3. Acerca de (máx. 2.600 caracteres)
 ```
-Soy [tu nombre], Data Scientist y desarrollador full-stack. Fundé FlowData Solutions para ayudar a pequeñas y medianas empresas a usar mejor sus datos: que dejen de perder horas en planillas y empiecen a tomar decisiones con información clara.
+Soy [tu nombre], analista de datos con formación en Data Science y desarrollo full-stack. En mi trabajo actual como analista [qué hacés: armo reportes / analizo ventas / construyo tableros en Power BI…]. Fundé FlowData Solutions para ayudar a pequeñas y medianas empresas a usar mejor sus datos: que dejen de perder horas en planillas y empiecen a tomar decisiones con información clara.
 
 La ventaja de combinar los dos perfiles es que puedo resolver el problema completo: desde limpiar y analizar los datos hasta construir la herramienta que el equipo usa todos los días.
 
 🔹 Qué hago
 • Limpieza, organización y análisis de datos (Python, pandas, SQL).
 • Automatización de reportes y procesos repetitivos.
-• Dashboards interactivos con filtros e indicadores clave.
+• Dashboards en Power BI (modelado de datos, DAX, Power Query) y tableros web interactivos.
 • Modelos de Machine Learning aplicados: pronóstico de ventas, segmentación de clientes, detección de anomalías.
 • Aplicaciones web a medida y APIs para conectar datos y sistemas.
 
 🔹 Tecnologías
-[Python · pandas · NumPy · scikit-learn · Jupyter · SQL (PostgreSQL/MySQL) · JavaScript/TypeScript · React · Node.js · FastAPI · Git] ← dejá solo las que manejás
+[Power BI (DAX, Power Query) · Excel avanzado · Python · pandas · NumPy · scikit-learn · Jupyter · SQL (PostgreSQL/MySQL) · JavaScript/TypeScript · React · Node.js · FastAPI · Git] ← dejá solo las que manejás
 
 🔹 Cómo trabajo
 Primero entiendo el problema del negocio, después propongo una solución con alcance, plazo y precio cerrados, y entrego por etapas. Al final queda la herramienta funcionando, documentada y, si el cliente quiere, con mantenimiento mensual.
@@ -74,7 +80,23 @@ Primero entiendo el problema del negocio, después propongo una solución con al
 
 ## 4. Experiencia
 
-### Puesto principal (real y actual)
+### Tu trabajo actual de analista (experiencia profesional)
+| Campo | Qué poner |
+|---|---|
+| Cargo | `[Analista de datos / Analista de … ]` (el nombre real del puesto) |
+| Tipo de empleo | `Jornada completa` (o el que corresponda) |
+| Empresa | `[nombre de la empresa]` |
+| Fecha de inicio | `[mes y año]` · "Trabajo actualmente aquí" |
+
+**Descripción (completala con lo que hacés de verdad):**
+```
+• [Tarea principal: ej. Desarrollo y mantenimiento de dashboards en Power BI para el área de …]
+• [Tarea: ej. Extracción y transformación de datos con SQL / Power Query desde …]
+• [Logro con número, si lo tenés: ej. Reduje de X a Y horas la preparación del reporte mensual]
+```
+No publiques datos confidenciales de la empresa (clientes, montos, sistemas internos).
+
+### FlowData Solutions (emprendimiento, real y actual)
 | Campo | Qué poner |
 |---|---|
 | Cargo | `Fundador · Data Scientist & Full-Stack Developer` |
@@ -115,10 +137,12 @@ Cargá tu formación real: `[carrera / bootcamp / cursos de Data Science]`, `[cu
 ---
 
 ## 6. Aptitudes (fijá las 3 primeras)
-1. Ciencia de datos
-2. Python
-3. Desarrollo full-stack
-4. Análisis de datos · pandas · SQL
+1. Microsoft Power BI
+2. Análisis de datos
+3. Python
+4. Ciencia de datos
+5. Desarrollo full-stack
+6. DAX · Power Query · SQL · pandas
 5. Machine Learning · scikit-learn
 6. Visualización de datos · Dashboards
 7. JavaScript · [TypeScript · React · Node.js]
@@ -132,8 +156,8 @@ Cargá tu formación real: `[carrera / bootcamp / cursos de Data Science]`, `[cu
 
 ## 7. Configuración
 - **URL personalizada:** `linkedin.com/in/[tunombre]-data`.
-- **"Abierto a" → "Ofrecer servicios":** Ciencia de datos, Análisis de datos, Desarrollo web, Desarrollo de aplicaciones. Modalidad remota.
-- **"Abierto a" → "Buscar empleo"** (opcional, solo visible para reclutadores): Data Scientist Jr., Data Analyst, Full-Stack Developer Jr. Un empleo y el emprendimiento pueden convivir.
+- **"Abierto a" → "Ofrecer servicios":** Análisis de datos, Business Intelligence (Power BI), Ciencia de datos, Desarrollo web. Modalidad remota.
+- **"Abierto a" → "Buscar empleo"** (opcional, solo visible para reclutadores): Data Analyst / BI Analyst (semi-senior según tu experiencia), Data Scientist Jr., Full-Stack Developer Jr. Un empleo y el emprendimiento pueden convivir.
 - **Información de contacto:** email y web.
 
 ---
@@ -201,12 +225,12 @@ Como todavía no tenés experiencia laboral para mostrar, **las publicaciones so
 ```
 🚀 Hoy lanzo FlowData Solutions.
 
-Me formé como Data Scientist y desarrollador full-stack, y decidí usar esas dos herramientas para algo concreto: ayudar a PYMEs que pierden horas con planillas y reportes armados a mano.
+Trabajo como analista de datos y me formé en Data Science y desarrollo full-stack. Decidí usar todo eso para algo concreto: ayudar a PYMEs que pierden horas con planillas y reportes armados a mano.
 
 Lo que hago:
 📊 Ordeno y analizo datos con Python y SQL.
 ⚙️ Automatizo reportes y procesos repetitivos.
-📈 Armo dashboards interactivos.
+📈 Armo dashboards en Power BI y tableros web interactivos.
 💻 Desarrollo aplicaciones web a medida.
 
 Armé un portafolio con ejemplos (datos ficticios), como un dashboard de ventas con filtros y una planilla con 58 formas distintas de escribir los mismos datos, convertida en una base confiable:
@@ -214,7 +238,7 @@ Armé un portafolio con ejemplos (datos ficticios), como un dashboard de ventas 
 
 Estoy buscando mis primeros proyectos. Si conocés a alguien a quien le sirva, ¡te agradezco que lo compartas! 🙌
 
-#DataScience #Python #FullStack #Automatización #PYMEs
+#PowerBI #DataScience #Python #FullStack #Automatización #PYMEs
 ```
 
 ---

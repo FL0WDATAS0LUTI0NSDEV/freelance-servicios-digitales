@@ -31,7 +31,7 @@ Copiá la que corresponda, completá lo que está entre `[corchetes]` y **person
 | Limpiar 1 planilla (hasta ~1.000 filas) | USD 40 | 2–3 días |
 | Limpieza + 1 reporte automático | USD 120 | 5–7 días |
 | Automatización completa + documentación | USD 350 | 2–3 semanas |
-| Dashboard simple (Sheets / Looker Studio / Excel) | USD 120–200 | 5–10 días |
+| Dashboard en Power BI / Looker Studio / Excel | USD 150–300 | 5–10 días |
 | Carga o transcripción de datos | USD 6–12 por hora | según volumen |
 | Perfil profesional | USD 25 | 2 días |
 | Textos para web (hasta 4 secciones) | USD 60 | 4 días |
@@ -101,7 +101,7 @@ Plazo: [5–7] días · Presupuesto: USD [120]
 
 ## 3. Dashboard / tablero de indicadores
 
-**Cuándo usarla:** "dashboard", "tablero", "Looker Studio", "Power BI básico", "visualizar datos", "KPIs".
+**Cuándo usarla:** "dashboard", "tablero", "Power BI", "Looker Studio", "visualizar datos", "KPIs". Power BI es tu fuerte: estos proyectos son prioridad.
 
 ```
 Hola [nombre]: entiendo que necesitás ver de un vistazo [qué indicadores: ventas, gastos, clientes, stock] sin tener que armar tablas cada vez.
@@ -109,11 +109,11 @@ Hola [nombre]: entiendo que necesitás ver de un vistazo [qué indicadores: vent
 Te propongo:
 1. Definimos juntos los 4–6 indicadores que más te importan.
 2. Ordeno los datos de origen para que el tablero sea confiable.
-3. Armo el dashboard en [Google Looker Studio / Google Sheets / Excel], con filtros por [fecha / vendedor / producto], que se actualiza cuando cargás datos nuevos.
+3. Armo el dashboard en [Power BI / Google Looker Studio / Excel] (trabajo con Power BI en mi día a día como analista), con filtros por [fecha / vendedor / producto], que se actualiza cuando cargás datos nuevos.
 4. Te muestro cómo usarlo en una llamada corta.
 
-Podés ver cómo presento indicadores y rankings en este reporte de ejemplo (datos ficticios):
-https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/portafolio/02-reporte-automatico/reporte_ventas.html
+Podés ver un dashboard interactivo de ejemplo que armé (datos ficticios), con filtros, indicadores y comparación de períodos:
+https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/portafolio/04-dashboard-interactivo/
 
 Plazo: [5–10] días · Presupuesto: USD [150]
 
