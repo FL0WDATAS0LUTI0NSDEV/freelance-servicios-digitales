@@ -24,8 +24,8 @@
 - [ ] Activar **verificación en dos pasos** en Fiverr y en Gmail.
 
 ### Próximos pasos
-- [ ] **Página de empresa de LinkedIn** (guía en `gestion/perfil-linkedin.md`; logo `marca/isotipo-400.png`, portada `marca/linkedin-portada-1128x191.png`).
-- [ ] **Publicaciones automáticas de LinkedIn:** tanda 1 (6 posts, 12 al 26/11) lista en `gestion/linkedin-publicaciones.md`. Falta conectar la página de LinkedIn en Metricool (hoy solo está la marca de Instagram `planillasparaemprender`) y programarlas.
+- [x] **Página de empresa de LinkedIn** creada, con la publicación de lanzamiento (10/11/2026).
+- [ ] **Publicaciones automáticas de LinkedIn:** posts 2 a 6 (17 al 26/11) listos en `gestion/linkedin-publicaciones.md`. Falta conectar la página de LinkedIn en Metricool (hoy solo está la marca de Instagram `planillasparaemprender`) y programarlas.
 - [ ] **Ejemplo de Power BI** (`portafolio/05-dashboard-power-bi/`), con cuenta personal de Microsoft.
 - [ ] Cuando Workana apruebe: **5 propuestas por día** con el agente `redactor-propuestas` (sin links).
 - [ ] Certificado gratuito de **Pandas en Kaggle**.

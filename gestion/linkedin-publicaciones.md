@@ -10,7 +10,7 @@
 4. Cada lunes se puede repetir: redactar la semana siguiente con el agente `contenido-linkedin`, agregarla acá y programarla.
 
 ### Requisito pendiente
-- [ ] Crear la página de empresa en LinkedIn (guía en `perfil-linkedin.md`).
+- [x] Crear la página de empresa en LinkedIn (guía en `perfil-linkedin.md`). Creada y con la primera publicación (lanzamiento) hecha a mano, 10/11/2026.
 - [ ] En Metricool, **conectar LinkedIn** y elegir la **página de FlowData Solutions** (no el perfil personal). Hoy la única marca de Metricool es la de Instagram `planillasparaemprender`; conviene crear una **marca nueva "FlowData Solutions"** para no mezclar cuentas.
 
 ## Horarios
@@ -151,8 +151,8 @@ Eso es lo que automatizamos: un reporte que se genera solo, con estos números a
 ## Registro
 | # | Fecha | Estado en Metricool | Notas |
 |---|---|---|---|
-| 1 | 12/11 | Pendiente (falta conectar LinkedIn) | |
-| 2 | 17/11 | Pendiente | |
+| 1 | 10/11 | Publicada a mano | Lanzamiento, adelantada |
+| 2 | 17/11 | Pendiente (falta conectar LinkedIn en Metricool) | |
 | 3 | 19/11 | Pendiente | |
 | 4 | 21/11 | Pendiente | |
 | 5 | 24/11 | Pendiente | |
