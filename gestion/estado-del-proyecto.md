@@ -29,6 +29,7 @@
 - [x] **Metricool, post 6 (sale el 23/11):** adaptado a salud con la imagen del centro médico (10/11/2026).
 
 ### Workana
+- [ ] 11/11/2026: capacitación de ~3 h; ofrecieron una membresía de USD 353. **No pagar por ahora**: crear perfil y proponer es gratis y la membresía no es requisito para la aprobación (centro de ayuda de Workana). Decidir después de las primeras reseñas.
 - [ ] Cuando aprueben: cargar lo del servicio de facturas y **5 propuestas por día** (agente `redactor-propuestas`, sin links).
 
 ### Freelancer.com
