@@ -33,7 +33,7 @@
 - [x] **Página de empresa de LinkedIn** creada, con la publicación de lanzamiento (10/11/2026).
 - [x] **Publicaciones automáticas de LinkedIn:** posts 2 a 6 programados en Metricool (12 al 23/11, antes de que termine la prueba ~25/11), detalle en `gestion/linkedin-publicaciones.md`. Desde diciembre, la tarea `linkedin-tanda-semanal` deja los textos en el repo y se programan a mano en LinkedIn.
 - [ ] **Ejemplo de Power BI** (`portafolio/05-dashboard-power-bi/`) en la compu personal con Power BI Desktop: .pbix, 3 capturas, PDF y video de 60–90 s sin imágenes fijas → nueva galería y video del gig.
-- [ ] **Captación:** seguir `gestion/oportunidades-captacion.md` (relevamiento del 10/11/2026): estudios contables como socios (servicio de facturas), red cercana, y consultar con el contador por el programa KIT 4.0.
+- [ ] **Captación:** seguir `gestion/oportunidades-captacion.md` (relevamiento del 10/11/2026): estudios contables como socios (servicio de facturas), red cercana, y consultar con el contador por el programa KIT 4.0. Oferta cerrada lista en `servicios/oferta-estudios-contables.md` (pendientes previos al primer contacto en el relevamiento).
 - [ ] Upwork: después del 30/11 y con reseñas, perfil orientado a clientes hispanohablantes (requiere decidir la compra de Connects).
 - [ ] Activar 2FA también en Gmail.
 - [ ] Certificado gratuito de **Pandas en Kaggle**.
