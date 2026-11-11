@@ -38,7 +38,9 @@
 - [x] Experiencia: Fundador · FlowData Solutions y Desarrollador analista de datos · Empresa privada (confidencial). Teléfono y mail verificados (11/11/2026).
 - [ ] Corregir "Soy [tu nombre]" en el resumen (si no se hizo).
 - [ ] Identidad enviada el 11/11/2026 (revisión de 2 a 3 días): confirmar alrededor del 14/11. Falta verificación de pago y 2FA. Educación opcional (sin datos identificatorios).
-- [ ] Empezar a ofertar en proyectos en español con el agente `redactor-propuestas` (sin links, pocas propuestas del plan gratuito).
+- [x] Primera oferta enviada (11/11/2026): control de asistencia con QR + Power BI, USD 220, 14 días. **Esperar respuesta del cliente.** Quedan 5 ofertas; criterios en `gestion/perfil-freelancer.md`.
+- [ ] No comprar "Verified by Freelancer" (insignia paga) ni membresías hasta el primer trabajo. Solo proyectos en español.
+- [ ] Revisar proyectos nuevos mañana y tarde.
 - [ ] Revisar si se deja "Excel VBA" en habilidades (solo si se manejan macros).
 
 ### LinkedIn
