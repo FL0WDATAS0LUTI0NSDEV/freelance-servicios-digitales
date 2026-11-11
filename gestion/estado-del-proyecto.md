@@ -33,7 +33,10 @@
 
 ### Freelancer.com
 - [x] Cuenta creada (10/11/2026): foto, tarifa USD 12/h, 20 habilidades, encabezado y resumen. Textos en `gestion/perfil-freelancer.md`.
-- [ ] Portafolio (6 ejemplos con capturas, sin links), verificaciones (mail, teléfono, identidad, pago) y 2FA.
+- [x] Portafolio: 5 ejemplos con capturas, sin links (11/11/2026).
+- [ ] Corregir "Soy [tu nombre]" en el resumen (si no se hizo).
+- [ ] Verificaciones (mail, teléfono, identidad, pago) y 2FA.
+- [ ] Empezar a ofertar en proyectos en español con el agente `redactor-propuestas` (sin links, pocas propuestas del plan gratuito).
 - [ ] Revisar si se deja "Excel VBA" en habilidades (solo si se manejan macros).
 
 ### LinkedIn
