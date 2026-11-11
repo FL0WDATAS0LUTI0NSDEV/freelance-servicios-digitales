@@ -45,7 +45,23 @@ La oferta está en `servicios/oferta-estudios-contables.md` (planes de USD 60, 1
 - [ ] Sumar el ejemplo 6 a la sección `#portafolio` de la web (hoy el mail apunta a la carpeta en GitHub).
 - [ ] Armar la lista de 20 estudios para contactar (LinkedIn, "estudio contable" + ciudad).
 
+## Chatbots: nueva línea de servicio
+Ficha en `servicios/chatbots.md` (USD 60 / 180 / 400 y mantenimiento de USD 40/mes). Todavía no se publica.
+
+**Hay demanda:** en Workana aparecen pedidos de chatbots de WhatsApp con IA y derivación a una persona, y de automatización de WhatsApp Business con CRM. En Fiverr, los gigs de chatbots por reglas van de USD 100 a 400 y los de IA de USD 400 a 600 (perfiles individuales, solo orientativo). Blogs de agencias españolas hablan de cientos a miles de euros por implementación.
+
+**Ángulo propio:** la mayoría vende "bots" sueltos. FlowData puede venderlos **conectados a los datos** (stock, precios, pedidos desde una planilla) y con **reporte mensual de consultas**, que lleva al plan mensual.
+
+**Ojo con los costos de Meta:** desde el 1/10/2026 la API de WhatsApp cobra también las respuestas dentro de la ventana de 24 h, según varios proveedores. Las tarifas para Argentina que publican terceros no coinciden (marketing entre USD 0,03 y 0,07 por mensaje): confirmar en la tabla oficial de Meta antes de cada presupuesto.
+
+**Antes de ofrecerlo:**
+- [ ] **Ejemplo 7 de portafolio** (con datos ficticios): bot de la ferretería que responde horarios y medios de pago, consulta stock y precio desde una planilla y guarda los pedidos. Con video corto de la conversación.
+- [ ] Elegir la herramienta (plataforma sin código tipo ManyChat o Botpress, o Python + API de WhatsApp) según costo para el cliente y facilidad de mantenimiento.
+- [ ] Probar el flujo completo con un número de prueba propio, nunca con el de un cliente.
+- [ ] Recién después: sumarlo a la web (`index.html` y `README.md`, en sintonía con la ficha), crear un gig en Fiverr y mencionarlo en Workana.
+
 ## Fuentes
 - Workana: [analista de datos con Excel, Power BI y Python](https://www.workana.com/job/analista-de-datos-con-expertise-en-excel-power-bi-y-python), [plantillas de Power BI para tienda online](https://www.workana.com/job/desarrollo-de-plantillas-de-power-bi-reutilizables-para-tienda-online-de-business-intelligence), [dashboards de ventas (Brasil)](https://www.workana.com/job/desenvolvimento-de-dashboards-em-power-bi-para-analise-de-vendas-clientes-e-fornecedores). Sin fecha visible: confirmar que sigan abiertos.
 - Plataformas: [Xolo — plataformas en español 2026](https://blog.xolo.io/es/7-mejores-plataformas-para-trabajos-freelance-espanol-2026), [Upwork vs Toptal](https://www.upwork.com/en-gb/resources/upwork-vs-toptal), [Freelancer.com — Power BI](https://www.freelancer.com.co/jobs/power-bi/), [comparativa de plataformas para empresas](https://hackceleration.com/es/labs/mejor/plataformas-freelancers-empresas).
 - KIT 4.0: [proveedores de la Economía del Conocimiento](https://www.argentina.gob.ar/economia/industria-y-economia-del-conocimiento/kit-40/proveedores-de-la-economia-del-conocimiento), [formulario de inscripción de proveedores](https://www.argentina.gob.ar/formularios/solicitud-de-inscripcion-al-listado-de-proveedores-kit-40), [acceder al Kit 4.0](https://www.argentina.gob.ar/servicio/acceder-al-kit-40), [acceso para todas las MiPyMEs](https://siap.blogdelcontador.com.ar/?p=88880).
+- Chatbots: [Workana — chatbot de WhatsApp con IA y CRM](https://www.workana.com/es/job/ai-powered-whatsapp-chatbot-development-with-crm-integration), [Workana — automatización de WhatsApp Business con IA](https://www.workana.com/es/job/automatizacion-de-whatsapp-business-y-crm-con-asistente-ia-para-multiples-negocios), [Workana — asistente para pymes](https://www.workana.com/es/job/autopyme-asistente-inteligente-para-pymes), [costos de chatbots en 2026 (SAPI)](https://sapi.es/blog/cuanto-cuesta-un-chatbot-para-whatsapp-en-2026-precios-y-opciones), [costos de chatbots (Grupo Oro)](https://grupooro.es/cuanto-cuesta-un-chatbot-de-whatsapp/), [cambio de precios de la API desde octubre de 2026 (Mercately)](https://blog.mercately.com/es/nuevos-precios-whatsapp-api-octubre-2026), [tarifas por país (Sleekflow)](https://help.sleekflow.io/es_/pricing), [ejemplo de gig de chatbots en español (Fiverr)](https://es.fiverr.com/ghlspecialisth/setup-live-chatbot-manychat-botpress-chatfuel-zapier-integration-stack-ai).
