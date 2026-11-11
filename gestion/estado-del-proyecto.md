@@ -29,4 +29,5 @@
 - [ ] **Ejemplo de Power BI** (`portafolio/05-dashboard-power-bi/`), con cuenta personal de Microsoft.
 - [ ] Cuando Workana apruebe: **5 propuestas por día** con el agente `redactor-propuestas` (sin links).
 - [ ] Certificado gratuito de **Pandas en Kaggle**.
+- [ ] **Captación:** seguir `gestion/oportunidades-captacion.md` (relevamiento del 10/11/2026): estudios contables como socios, red cercana, segundo gig de Fiverr, y consultar con el contador por el programa KIT 4.0.
 - [ ] Lista de control privada (guardada fuera del repo): revisar contrato/código de conducta del empleo actual, cuenta personal de Microsoft, consulta al contador por monotributo.
