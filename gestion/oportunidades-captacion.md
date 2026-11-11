@@ -7,12 +7,12 @@
 | Canal | Qué hacer | Por qué |
 |---|---|---|
 | **Workana** | Apenas aprueben el perfil: 5 propuestas por día con `redactor-propuestas`. Buscar con filtros "Power BI", "Excel", "Python", "automatización", "dashboard". Postularse primero a proyectos chicos (USD 50–250) para juntar reseñas. | Es la plataforma principal para freelancers en español en Latinoamérica. Hay demanda real de dashboards de ventas y analistas con Excel + Power BI + Python, incluso clientes de Brasil. |
-| **Fiverr** | Cerrar los pendientes del gig (activo, galería, verificación de identidad, portafolio del perfil). Sumar un **segundo gig** de "limpieza de planillas Excel" (entrada barata, USD 20–40) que lleve al gig de Power BI. | Con el gig activo y verificado se aparece en búsquedas; un gig de entrada consigue la primera reseña más rápido. |
+| **Fiverr** | Con los 2 gigs activos (Power BI y facturas PDF a Excel): verificación de identidad, responder en menos de 1 h y revisar **Briefs** todos los días. Medir el 30/11. | Responder rápido y estar verificado mejora la posición en búsquedas; los Briefs son pedidos abiertos de compradores. |
 | **LinkedIn (página de empresa)** | Seguir con los posts programados y además usar el perfil personal: comentar en publicaciones de dueños de PyMEs y contadores, y mandar 5 pedidos de conexión por día a ese público. | La página sola crece despacio; el alcance viene del perfil personal. |
 
 ## Prioridad 2 — Clientes directos (próximas 2–4 semanas)
 
-1. **Estudios contables como socios.** Cada estudio atiende decenas de PyMEs con planillas desordenadas. Ofrecerles: limpieza de datos para cierres, reportes mensuales automáticos para sus clientes, o comisión por referido. Empezar por el contador propio (de paso, la consulta por monotributo).
+1. **Estudios contables como socios.** Cada estudio atiende decenas de PyMEs con planillas desordenadas. Es el público ideal del servicio de **facturas PDF a Libro IVA en Excel** (ejemplo 6 del portafolio). Ofrecerles: carga de facturas para cierres, reportes mensuales automáticos para sus clientes, o comisión por referido. Empezar por el contador propio (de paso, la consulta por monotributo).
 2. **Red cercana:** la lista de "10 conocidos / PyMEs cercanas" del plan de lanzamiento sigue pendiente. Llevar el caso de la ferretería como ejemplo (es justo el tipo de comercio al que apunta).
 3. **Comercios con stock y ventas en Excel:** ferreterías, distribuidoras, corralones, ópticas, farmacias. Propuesta concreta: "te dejo un reporte mensual de ventas y stock que se arma solo".
 4. **Comunidades:** grupos de Power BI y Excel en español (LinkedIn, Facebook, Telegram), respondiendo dudas con ayuda real, sin vender de entrada.
@@ -30,7 +30,7 @@
 ## Qué ajustar en la oferta
 - Los clientes de Workana piden **Excel + Power BI + Python juntos**: ya está en el perfil; reforzarlo en el título y en las propuestas.
 - Terminar el **ejemplo de Power BI** (`portafolio/05-dashboard-power-bi/`): es lo que más aparece en los pedidos.
-- Armar una **oferta cerrada para contadores** (por ejemplo, "reporte mensual automático para tus clientes PyME") con precio fijo.
+- Armar una **oferta cerrada para contadores** (por ejemplo, "facturas del mes a Libro IVA + reporte mensual para tus clientes PyME") con precio fijo por cliente.
 
 ## Fuentes
 - Workana: [analista de datos con Excel, Power BI y Python](https://www.workana.com/job/analista-de-datos-con-expertise-en-excel-power-bi-y-python), [plantillas de Power BI para tienda online](https://www.workana.com/job/desarrollo-de-plantillas-de-power-bi-reutilizables-para-tienda-online-de-business-intelligence), [dashboards de ventas (Brasil)](https://www.workana.com/job/desenvolvimento-de-dashboards-em-power-bi-para-analise-de-vendas-clientes-e-fornecedores). Sin fecha visible: confirmar que sigan abiertos.
