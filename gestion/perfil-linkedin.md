@@ -14,7 +14,7 @@
 |---|---|
 | Nombre | `Dante` · Apellido `I` (ajustado el 09/11: nombre de pila + inicial, como en Fiverr; la marca va en portada, titular y experiencia — LinkedIn no permite nombres de empresa en el campo del nombre) |
 | Foto | `marca/isotipo-400.png` |
-| Portada | `marca/linkedin-portada-perfil-1584x396.png` (4:1; la de 4200 × 700 es para páginas de empresa) |
+| Portada | `marca/linkedin-portada-perfil-1584x396.png` (4:1, con el dashboard del portafolio y tarjetas de métricas; sin la cara, porque ya está en la foto de perfil). La foto de perfil con la foto del dueño **no** se guarda en el repo público. |
 | Titular | `Dashboards en Power BI · Facturas PDF a Excel · Reportes automáticos.` |
 | Destacado | Enlace a la web ("Portafolio de FlowData Solutions") con la imagen de facturas PDF a Excel |
 | Acerca de | la descripción larga de la sección 2 (entra: máx. 2.600) |
