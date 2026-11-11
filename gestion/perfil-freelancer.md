@@ -123,3 +123,19 @@ Imágenes recomendadas por Freelancer: 4:3 (1600×1200). Las de `portafolio/capt
 | 5 | `fiverr/3-reporte-kpis.png` | Reporte de ventas automático (HTML y Excel) | Python, Microsoft Excel | Report Writing, Data Analysis, Excel |
 
 Descripciones: las de la sección Portafolio de `perfil-workana.md`, terminando con "Ejemplo con datos ficticios." Sin links.
+
+---
+
+## Cómo usar las 6 ofertas gratuitas
+Una oferta solo si el proyecto cumple **las 5**:
+1. Es de lo que ya sabés hacer: facturas PDF a Excel, limpieza de planillas, reportes o dashboards con datos que manda el cliente.
+2. Presupuesto: USD 30 o más (trabajos chicos) o USD 100 o más (dashboards).
+3. Menos de 20 ofertas (publicado hace pocas horas).
+4. Cliente con pago verificado; mejor si tiene reseñas.
+5. En español de origen y sin señales de estafa (pago adelantado, archivos raros, WhatsApp/Telegram).
+
+Reparto sugerido: 3 para trabajos chicos de Excel/PDF (primeras reseñas), 2 para dashboards de Power BI, 1 de reserva. Si en 2 semanas no hay respuestas, revisar el texto de las propuestas antes de seguir.
+
+Registro de ofertas (11/11/2026):
+- Diseño de panel de Power BI (Egipto, USD 10–15, 56 ofertas): descartado.
+- Control de asistencia con QR georreferenciado (Bogotá, USD 30–250, 49 ofertas): propuesta lista (USD 220, 2 hitos); se manda solo si se maneja JavaScript/Apps Script.
