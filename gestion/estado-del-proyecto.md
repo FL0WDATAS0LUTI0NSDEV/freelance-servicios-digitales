@@ -26,7 +26,7 @@
 - [ ] **Fiverr, gig de facturas:** reemplazar la galería por `portafolio/capturas/fiverr/gig-facturas/` (portada, ejemplo y PDF nuevos, ya sin la ferretería).
 - [ ] **Fiverr, gig de Power BI:** reemplazar `3-reporte-kpis.png` y, si está subido, el PDF por `fiverr/reporte-facturacion-ejemplo.pdf`.
 - [ ] **Fiverr, Workana y LinkedIn:** pegar los textos nuevos de `gestion/perfil-*.md` (caso del centro médico, 26 PDF) y las imágenes `portafolio-4x3/2-caso-completo-4x3.png` y `4-facturas-pdf-excel-4x3.png`. El link viejo del reporte redirige solo al nuevo.
-- [ ] **Metricool, post 6 (26/11):** usa `2-caso-completo-reporte.png`. Si se programó con la imagen vieja (ferretería), cambiarla por la nueva.
+- [x] **Metricool, post 6 (sale el 23/11):** adaptado a salud con la imagen del centro médico (10/11/2026).
 
 ### Workana
 - [ ] Cuando aprueben: cargar lo del servicio de facturas y **5 propuestas por día** (agente `redactor-propuestas`, sin links).

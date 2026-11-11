@@ -127,25 +127,27 @@ Con eso, cualquier gráfico muestra cuánto creciste (o no) sin tocar una fórmu
 #PowerBI #DAX #BusinessIntelligence
 ```
 
-### 6 · Jueves 26/11 · Mini guía
-Imagen: `2-caso-completo-reporte.png`
+### 6 · Jueves 26/11 · Mini guía (salud)
+> En Metricool sale el **lunes 23/11 a las 9:00**. Adaptado al rubro salud el 10/11/2026 (texto e imagen del centro médico).
+
+Imagen: `2-caso-completo-reporte.png` (reporte de facturación del centro médico, datos ficticios)
 
 ```
-3 indicadores que toda PYME debería mirar cada mes (y casi nadie mira):
+3 números que todo centro médico debería mirar cada mes (y casi nadie mira):
 
-1️⃣ Ticket promedio. Si las ventas suben pero el ticket baja, estás vendiendo más barato o a clientes más chicos.
+1️⃣ Débitos de las obras sociales. Cada prestación rechazada es trabajo hecho que no se cobra. Si no lo medís, no sabés qué corregir en la carga.
 
-2️⃣ Concentración de clientes. Si 3 clientes son la mitad de la facturación, un solo atraso te complica el mes.
+2️⃣ Concentración por cobertura. Si dos obras sociales o prepagas son más de la mitad de la facturación, un atraso en el pago te complica el mes.
 
-3️⃣ Avance contra el objetivo. No alcanza con saber cuánto vendiste: importa si vas en camino a la meta a mitad de mes, cuando todavía podés hacer algo.
+3️⃣ Facturación por profesional y especialidad. Muestra qué agendas rinden, dónde hay lugar para crecer y si los objetivos están bien puestos.
 
-Los tres salen de la misma planilla de ventas que ya tenés. El problema suele ser que está desordenada o que armarlos lleva horas.
+Los tres salen de la exportación del sistema de facturación que ya tenés. El problema suele ser que está desordenada o que armarlos lleva horas.
 
-Eso es lo que automatizamos: un reporte que se genera solo, con estos números a la vista.
+Eso es lo que automatizamos: un reporte mensual que se arma solo, con estos números a la vista. Mirá un ejemplo con datos ficticios 👉 https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/referencias/caso-centro-medico/reporte/reporte_facturacion_2026-10.html
 
 ¿Cuál de los tres mirás hoy?
 
-#AnálisisDeDatos #PYMEs #GestiónEmpresarial #Reportes
+#Salud #GestiónSanitaria #AnálisisDeDatos #Reportes
 ```
 
 ---
