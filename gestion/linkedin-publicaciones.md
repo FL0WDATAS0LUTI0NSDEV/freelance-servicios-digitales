@@ -11,7 +11,7 @@
 
 ### Requisito pendiente
 - [x] Crear la página de empresa en LinkedIn (guía en `perfil-linkedin.md`). Creada y con la primera publicación (lanzamiento) hecha a mano, 10/11/2026.
-- [ ] En Metricool, **conectar LinkedIn** y elegir la **página de FlowData Solutions** (no el perfil personal). Hoy la única marca de Metricool es la de Instagram `planillasparaemprender`; conviene crear una **marca nueva "FlowData Solutions"** para no mezclar cuentas.
+- [x] Metricool: cuenta propia de FlowData (`flowdata.solutions.dev`), marca `8020974`, LinkedIn conectado a la página (10/11/2026). Ojo: la API muestra `urn:li:person` aunque publica en la página.
 
 ## Horarios
 Martes y jueves 9:00 (hora de Argentina), encuesta opcional el sábado 10:00. Cuando la página tenga historial, ajustar con "mejor momento para publicar" de Metricool.
@@ -152,8 +152,8 @@ Eso es lo que automatizamos: un reporte que se genera solo, con estos números a
 | # | Fecha | Estado en Metricool | Notas |
 |---|---|---|---|
 | 1 | 10/11 | Publicada a mano | Lanzamiento, adelantada |
-| 2 | 17/11 | Pendiente (falta conectar LinkedIn en Metricool) | |
-| 3 | 19/11 | Pendiente | |
-| 4 | 21/11 | Pendiente | |
-| 5 | 24/11 | Pendiente | |
-| 6 | 26/11 | Pendiente | |
+| 2 | 17/11 9:00 | Programada | |
+| 3 | 19/11 9:00 | Programada |  |
+| 4 | 21/11 10:00 | Programada | Encuesta 7 días |
+| 5 | 24/11 9:00 | Programada |  |
+| 6 | 26/11 9:00 | Programada |  |
