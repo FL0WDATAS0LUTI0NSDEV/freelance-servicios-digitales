@@ -25,7 +25,7 @@
 
 ### Próximos pasos
 - [x] **Página de empresa de LinkedIn** creada, con la publicación de lanzamiento (10/11/2026).
-- [x] **Publicaciones automáticas de LinkedIn:** posts 2 a 6 programados en Metricool (17 al 26/11), detalle en `gestion/linkedin-publicaciones.md`. Próximo: tanda 2 desde el 1/12.
+- [x] **Publicaciones automáticas de LinkedIn:** posts 2 a 6 programados en Metricool (12 al 23/11, antes de que termine la prueba ~25/11), detalle en `gestion/linkedin-publicaciones.md`. Desde diciembre, la tarea `linkedin-tanda-semanal` deja los textos en el repo y se programan a mano en LinkedIn.
 - [ ] **Ejemplo de Power BI** (`portafolio/05-dashboard-power-bi/`), con cuenta personal de Microsoft.
 - [ ] Cuando Workana apruebe: **5 propuestas por día** con el agente `redactor-propuestas` (sin links).
 - [ ] Certificado gratuito de **Pandas en Kaggle**.

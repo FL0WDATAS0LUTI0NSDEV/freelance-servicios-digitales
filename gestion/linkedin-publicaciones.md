@@ -7,7 +7,7 @@
 1. **Metricool** publica en la página a la hora programada (`autoPublish: true`).
 2. Los textos y las imágenes salen de este archivo; las imágenes se toman de la web publicada en GitHub Pages (URL pública), así Metricool las puede descargar.
 3. Claude programa la tanda con el conector de Metricool; antes de programar, el dueño aprueba los textos.
-4. **Tarea programada `linkedin-tanda-semanal`** (app de Claude, jueves 10:00): redacta los posts de la semana siguiente, los deja como **borrador** en Metricool, los agrega a este archivo y hace commit. El dueño los revisa en Metricool → Planificación y los pasa a programados (o se lo pide a Claude). Si la semana ya tiene 2 posts o más, no agrega nada. Corre solo con la app abierta; si estaba cerrada, corre al abrirla.
+4. **Tarea programada `linkedin-tanda-semanal`** (app de Claude, jueves 10:00): redacta los posts de la semana siguiente, los agrega a este archivo y hace commit. **No usa Metricool**: la prueba gratis termina alrededor del 25/11/2026, así que desde diciembre se programan a mano en LinkedIn (página → Crear publicación → ícono de reloj). Si la semana ya tiene 2 posts o más, no agrega nada. Corre solo con la app abierta.
 
 ### Requisito pendiente
 - [x] Crear la página de empresa en LinkedIn (guía en `perfil-linkedin.md`). Creada y con la primera publicación (lanzamiento) hecha a mano, 10/11/2026.
@@ -20,7 +20,9 @@ URL base de imágenes: `https://fl0wdatas0luti0nsdev.github.io/freelance-servici
 
 ---
 
-## Tanda 1 (12 al 26 de noviembre de 2026)
+## Tanda 1 (10 al 23 de noviembre de 2026)
+
+> Fechas adelantadas para que todo salga antes de que termine la prueba de Metricool (~25/11). Fechas finales en el registro.
 
 ### 1 · Jueves 12/11 · Lanzamiento
 Imagen: `marca/linkedin-portada-1128x191.png` (o sin imagen, se muestra la vista previa de la web).
@@ -152,8 +154,8 @@ Eso es lo que automatizamos: un reporte que se genera solo, con estos números a
 | # | Fecha | Estado en Metricool | Notas |
 |---|---|---|---|
 | 1 | 10/11 | Publicada a mano | Lanzamiento, adelantada |
-| 2 | 17/11 9:00 | Programada | |
-| 3 | 19/11 9:00 | Programada |  |
+| 2 | 12/11 9:00 | Programada | Adelantada |
+| 3 | 17/11 9:00 | Programada | Adelantada |
 | 4 | 21/11 10:00 | Programada | Encuesta 7 días |
-| 5 | 24/11 9:00 | Programada |  |
-| 6 | 26/11 9:00 | Programada |  |
+| 5 | 19/11 9:00 | Programada | Adelantada |
+| 6 | 23/11 9:00 | Programada | Adelantada |
