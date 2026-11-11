@@ -32,7 +32,9 @@
 - [ ] Cuando aprueben: cargar lo del servicio de facturas y **5 propuestas por día** (agente `redactor-propuestas`, sin links).
 
 ### Freelancer.com
-- [ ] Cuenta en creación (10/11/2026). Textos, habilidades y cuidados en `gestion/perfil-freelancer.md` (usuario permanente, sin membresía paga, sin links).
+- [x] Cuenta creada (10/11/2026): foto, tarifa USD 12/h, 20 habilidades, encabezado y resumen. Textos en `gestion/perfil-freelancer.md`.
+- [ ] Portafolio (6 ejemplos con capturas, sin links), verificaciones (mail, teléfono, identidad, pago) y 2FA.
+- [ ] Revisar si se deja "Excel VBA" en habilidades (solo si se manejan macros).
 
 ### LinkedIn
 - [ ] 5–10 solicitudes de conexión por día con nota (PYMEs, contadores, estudios contables) y 2–3 comentarios útiles.
