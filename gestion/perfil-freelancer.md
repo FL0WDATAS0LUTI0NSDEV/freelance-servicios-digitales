@@ -108,3 +108,18 @@ Capturas listas en el repo:
 - Los exámenes de habilidades de Freelancer.com son pagos: no hacerlos sin decidirlo antes.
 - Desconfiá de "clientes" que piden pagar algo por adelantado, mandan archivos raros o quieren seguir por WhatsApp/Telegram (mismo patrón que la estafa de Fiverr).
 - Anotá cada propuesta en `seguimiento-flowdata.xlsx`.
+
+---
+
+## Textos del portafolio (formulario "Crear un elemento de portafolio")
+Imágenes recomendadas por Freelancer: 4:3 (1600×1200). Las de `portafolio/capturas/fiverr/portafolio-4x3/` ya tienen esa proporción. Industria: "Comercio minorista" o "Servicios contables" según el caso.
+
+| # | Imagen | Título | Herramientas | Habilidades |
+|---|---|---|---|---|
+| 1 | `portafolio-4x3/1-dashboard-ventas-4x3.png` | Dashboard de ventas interactivo | JavaScript, HTML, Python | Data Visualization, Business Intelligence, Data Analysis |
+| 2 | `portafolio-4x3/4-facturas-pdf-excel-4x3.png` | Facturas PDF a Libro IVA en Excel | Python, Microsoft Excel | PDF, Data Extraction, Data Processing |
+| 3 | `portafolio-4x3/2-caso-completo-4x3.png` | De la planilla desordenada al reporte de ventas | Python, Microsoft Excel | Data Cleansing, Report Writing, Data Analysis |
+| 4 | `portafolio-4x3/3-limpieza-4x3.png` | Limpieza de una planilla de ventas con Python | Python, Pandas | Data Cleansing, Data Processing, Excel |
+| 5 | `fiverr/3-reporte-kpis.png` | Reporte de ventas automático (HTML y Excel) | Python, Microsoft Excel | Report Writing, Data Analysis, Excel |
+
+Descripciones: las de la sección Portafolio de `perfil-workana.md`, terminando con "Ejemplo con datos ficticios." Sin links.
