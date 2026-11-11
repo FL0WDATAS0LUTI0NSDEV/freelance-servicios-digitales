@@ -1,13 +1,18 @@
-"""Extrae los datos de facturas de compra en PDF y arma el Libro IVA Compras en Excel.
+"""Extrae los datos de facturas en PDF y arma el Libro IVA Compras o Ventas en Excel.
 
-- Lee todos los PDF de una carpeta, aunque cada proveedor use un diseño distinto.
-- Saca fecha, tipo, punto de venta, número, CUIT, razón social, netos por alícuota,
-  IVA, percepciones y total.
-- Si el proveedor no discrimina el neto por alícuota, lo calcula a partir del IVA.
-- Controla: dígito verificador del CUIT, comprobantes duplicados, que la suma cuadre
-  con el total y que la fecha esté dentro del período.
+- Lee todos los PDF de una carpeta, aunque cada emisor use un diseño distinto.
+- Saca fecha, código y tipo de comprobante, punto de venta, número, CUIT y razón social
+  de la contraparte, neto e IVA por alícuota (27 %, 21 %, 10,5 %, 5 % y 2,5 %), no gravado,
+  exento, percepciones de IVA y de IIBB, y total.
+- Notas de crédito: se cargan en negativo, así los totales del libro ya quedan netos.
+- Si el emisor no discrimina el neto por alícuota, lo calcula a partir del IVA.
+- Facturas B con "IVA contenido" (Ley 27.743): separa neto e IVA desde ese dato.
+- Controla: dígito verificador del CUIT, comprobantes duplicados, que la suma cuadre con
+  el total, que el IVA corresponda a la alícuota, que la fecha esté dentro del período y,
+  en ventas, que la numeración sea correlativa (saltos de número).
 
-Uso:  python extraer_facturas.py [carpeta_pdf] [salida.xlsx] [MM/AAAA]
+Uso:  python extraer_facturas.py [carpeta_pdf] [salida.xlsx] [MM/AAAA] [compras|ventas]
+      python extraer_facturas.py ventas        (ejemplo de ventas con los valores por defecto)
 """
 from __future__ import annotations
 
@@ -22,7 +27,20 @@ from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
 
 AQUI = Path(__file__).parent
-TOL = 0.05  # tolerancia de redondeo en pesos
+TOL = 0.05       # tolerancia de redondeo en pesos para que la suma cuadre con el total
+TOL_IVA = 1.00   # tolerancia para comparar el IVA con neto x alícuota (redondeos por renglón)
+PERIODO = "10/2026"
+
+# Alícuotas de IVA vigentes: (tasa, como aparece en la factura, sufijo de columna interna)
+ALICUOTAS = [(27, "27", "27"), (21, "21", "21"), (10.5, "10,5", "105"), (5, "5", "5"), (2.5, "2,5", "25")]
+SIEMPRE = {"21", "105"}  # alícuotas que siempre tienen columna en el libro, aunque estén vacías
+
+# Códigos de comprobante de ARCA (ex AFIP)
+CODIGOS = {
+    ("factura", "A"): "01", ("nc", "A"): "03", ("factura", "B"): "06", ("nc", "B"): "08",
+    ("factura", "C"): "11", ("nc", "C"): "13", ("factura", "M"): "51", ("nc", "M"): "53",
+}
+CONSUMIDOR_FINAL = "—"  # CUIT que se muestra cuando la factura B no identifica al comprador
 
 
 # ---------------------------------------------------------------- utilidades
@@ -64,14 +82,23 @@ def texto_pdf(ruta: Path) -> str:
 
 
 IMPORTE = r"\$\s?([\d.]+,\d{2})"
+CUIT = r"(\d{2}-\d{8}-\d)"
 PATRONES = {
     "fecha": [r"Fecha(?: de Emisión)?:\s*(\d{2}/\d{2}/\d{4})"],
-    "tipo": [r"FACTURA\s+([ABCM])\b", r"^([ABCM])$"],
+    "tipo": [r"(?:FACTURA|NOTA DE CR[ÉE]DITO)\s+([ABCM])\b", r"^([ABCM])$"],
     "pv_nro": [r"Punto de Venta:\s*(\d+)\s+Comp\. Nro:\s*(\d+)", r"N°\s*(\d{4,5})-(\d{8})"],
-    "cuit": [r"C\.?U\.?I\.?T\.?:?\s*(\d{2}-\d{8}-\d)"],
+    "cuit": [r"C\.?U\.?I\.?T\.?:?\s*" + CUIT],
+    "cuit_cliente": [r"CUIT cliente:\s*" + CUIT],
+    "cliente": [r"^Cliente:\s*(.+?)\s*$"],
     "total": [r"Importe Total:\s*" + IMPORTE, r"^TOTAL\s+" + IMPORTE],
-    "percepcion": [r"Percepci[oó]n IIBB:\s*" + IMPORTE, r"Perc\. Ingresos Brutos\s+" + IMPORTE],
+    "perc_iibb": [r"Percepci[oó]n IIBB:\s*" + IMPORTE, r"Perc\. Ingresos Brutos\s+" + IMPORTE],
+    "perc_iva": [r"Percepci[oó]n IVA:\s*" + IMPORTE, r"Perc\. IVA\s+" + IMPORTE],
+    "no_gravado": [r"No [Gg]ravado:?\s*" + IMPORTE],
+    "exento": [r"Exento:?\s*" + IMPORTE],
+    "subtotal": [r"Subtotal neto\s+" + IMPORTE],
+    "iva_contenido": [r"IVA Contenido:?\s*" + IMPORTE],
 }
+MONTOS = ["no_gravado", "exento", "perc_iva", "perc_iibb", "total"]
 
 
 def buscar(clave: str, texto: str):
@@ -82,63 +109,128 @@ def buscar(clave: str, texto: str):
     return None
 
 
-def extraer(ruta: Path) -> dict:
+def monto(clave: str, texto: str) -> float:
+    g = buscar(clave, texto)
+    return a_numero(g[0]) if g else 0.0
+
+
+def extraer(ruta: Path, modo: str = "compras") -> dict:
     t = texto_pdf(ruta)
-    primera = t.splitlines()[0]
-    razon = re.sub(r"\s+FACTURA.*$", "", primera).strip()
+    clase = "nc" if re.search(r"NOTA DE CR[ÉE]DITO", t) else "factura"
+    tipo = buscar("tipo", t)[0]
     pv, nro = buscar("pv_nro", t)
+    if modo == "ventas":  # la contraparte es el cliente
+        g = buscar("cuit_cliente", t)
+        cuit = g[0] if g else CONSUMIDOR_FINAL
+        g = buscar("cliente", t)
+        contraparte = g[0] if g else "Consumidor final"
+    else:  # la contraparte es el proveedor, que encabeza la factura
+        cuit = buscar("cuit", t)[0]
+        primera = t.splitlines()[0]
+        contraparte = nombre_prolijo(re.sub(r"\s+(FACTURA|NOTA DE CR[ÉE]DITO).*$", "", primera).strip())
     fila = {
-        "archivo": ruta.name,
+        "archivo": ruta.name, "clase": clase, "tipo": tipo,
+        "codigo": CODIGOS.get((clase, tipo), ""),
         "fecha": datetime.strptime(buscar("fecha", t)[0], "%d/%m/%Y").date(),
-        "tipo": buscar("tipo", t)[0],
-        "pv": int(pv),
-        "numero": int(nro),
-        "cuit": buscar("cuit", t)[0],
-        "proveedor": nombre_prolijo(razon),
-        "percepcion": a_numero(buscar("percepcion", t)[0]) if buscar("percepcion", t) else 0.0,
-        "total": a_numero(buscar("total", t)[0]),
+        "pv": int(pv), "numero": int(nro), "cuit": cuit, "contraparte": contraparte,
+        "derivado": set(), "notas": [],
     }
-    # IVA y neto por alícuota ("IVA 21%: $ x" o "IVA 21% $ x")
-    for alic, col in (("21", "21"), ("10,5", "105")):
-        m = re.search(rf"IVA {alic}%:?\s*" + IMPORTE, t)
+    for clave in MONTOS:
+        fila[clave] = monto(clave, t)
+
+    # IVA y neto por alícuota ("IVA 21%: $ x", "IVA 21% $ x", "Neto Gravado 10,5%: $ x")
+    presentes = []
+    for tasa, txt, col in ALICUOTAS:
+        m = re.search(rf"\bIVA {re.escape(txt)}%:?\s*" + IMPORTE, t)
         fila[f"iva_{col}"] = a_numero(m.group(1)) if m else 0.0
-        m = re.search(rf"Neto(?: Gravado)? {alic}%:?\s*" + IMPORTE, t)
+        m = re.search(rf"\bNeto(?: Gravado)? {re.escape(txt)}%:?\s*" + IMPORTE, t)
         fila[f"neto_{col}"] = a_numero(m.group(1)) if m else None
-    # Si el proveedor solo informa un subtotal neto, se reparte por alícuota:
-    # el 10,5 % se calcula desde su IVA y el resto queda en 21 %.
-    m = re.search(r"Subtotal neto\s+" + IMPORTE, t)
-    if fila["neto_21"] is None or fila["neto_105"] is None:
-        subtotal = a_numero(m.group(1)) if m else None
-        n105 = fila["neto_105"] if fila["neto_105"] is not None else round(fila["iva_105"] / 0.105, 2)
-        n21 = fila["neto_21"] if fila["neto_21"] is not None else (
-            round(subtotal - n105, 2) if subtotal is not None else round(fila["iva_21"] / 0.21, 2))
-        fila["neto_21"], fila["neto_105"] = n21, n105
+        if fila[f"iva_{col}"] or fila[f"neto_{col}"] is not None:
+            presentes.append((tasa, col))
+    # Si el emisor solo informa un subtotal neto, se reparte por alícuota: cada neto
+    # faltante se calcula desde su IVA, y el de mayor IVA se lleva la diferencia del subtotal.
+    faltan = [(tasa, col) for tasa, col in presentes if fila[f"neto_{col}"] is None]
+    if faltan:
+        subtotal = monto("subtotal", t) or None
+        for tasa, col in faltan:
+            fila[f"neto_{col}"] = round(fila[f"iva_{col}"] / (tasa / 100), 2)
+            fila["derivado"].add(col)
+        if subtotal is not None:
+            tasa, col = max(faltan, key=lambda a: fila[f"iva_{a[1]}"])
+            otros = sum(fila[f"neto_{c}"] for _, c in presentes if c != col)
+            fila[f"neto_{col}"] = round(subtotal - otros, 2)
+    for _, _, col in ALICUOTAS:
+        if fila[f"neto_{col}"] is None:
+            fila[f"neto_{col}"] = 0.0
+
+    # Factura B sin IVA discriminado
+    if not presentes and tipo in ("B", "C"):
+        contenido = monto("iva_contenido", t)
+        resto = fila["total"] - fila["no_gravado"] - fila["exento"] - fila["perc_iva"] - fila["perc_iibb"]
+        if contenido and tipo == "B":
+            neto = round(resto - contenido, 2)
+            ratio = contenido / neto if neto else 0
+            tasa, _, col = min(ALICUOTAS, key=lambda a: abs(a[0] / 100 - ratio))
+            if abs(tasa / 100 - ratio) > 0.002:
+                col = "21"
+                fila["notas"].append("Revisar alícuota (B)")
+            fila[f"neto_{col}"], fila[f"iva_{col}"] = neto, contenido
+            fila["derivado"].add(col)
+        else:  # B o C recibida sin IVA informado: no genera crédito fiscal
+            fila["no_gravado"] = round(fila["no_gravado"] + resto, 2)
+            fila["notas"].append(f"{tipo} sin IVA discriminado")
     return fila
 
 
 # ---------------------------------------------------------------- controles
-def controlar(filas: list[dict], periodo: str):
+def controlar(filas: list[dict], periodo: str, modo: str = "compras"):
     vistos, libro, obs = {}, [], []
     mes, anio = map(int, periodo.split("/"))
     for f in filas:
-        clave = (f["cuit"], f["tipo"], f["pv"], f["numero"])
+        clave = (f["cuit"], f["codigo"], f["pv"], f["numero"])
         if clave in vistos:
             obs.append(("Duplicado", f["archivo"], f"Mismo comprobante que {vistos[clave]}: no se carga dos veces."))
             continue
         vistos[clave] = f["archivo"]
-        notas = []
-        if not cuit_ok(f["cuit"]):
+        notas = list(f["notas"])
+        for n in f["notas"]:
+            obs.append((n, f["archivo"], "Revisar el comprobante a mano antes de presentar."))
+        if f["cuit"] != CONSUMIDOR_FINAL and not cuit_ok(f["cuit"]):
             notas.append("CUIT inválido")
-            obs.append(("CUIT inválido", f["archivo"], f"{f['cuit']}: el dígito verificador no corresponde. Pedir al proveedor que lo corrija."))
-        suma = f["neto_21"] + f["iva_21"] + f["neto_105"] + f["iva_105"] + f["percepcion"]
+            quien = "al proveedor" if modo == "compras" else "al cliente sus datos y corregir la ficha"
+            obs.append(("CUIT inválido", f["archivo"], f"{f['cuit']}: el dígito verificador no corresponde. Pedir {quien}."))
+        suma = sum(f[f"neto_{c}"] + f[f"iva_{c}"] for _, _, c in ALICUOTAS) + sum(
+            f[k] for k in MONTOS if k != "total")
         if abs(suma - f["total"]) > TOL:
             notas.append("No cuadra")
-            obs.append(("Total no cuadra", f["archivo"], f"Netos + IVA + percepciones = {suma:,.2f} vs total {f['total']:,.2f}."))
+            obs.append(("Total no cuadra", f["archivo"], f"Netos + IVA + otros conceptos = {suma:,.2f} vs total {f['total']:,.2f}."))
+        for tasa, txt, c in ALICUOTAS:
+            if c in f["derivado"] or not f[f"neto_{c}"]:
+                continue
+            esperado = f[f"neto_{c}"] * tasa / 100
+            if abs(esperado - f[f"iva_{c}"]) > TOL_IVA:
+                notas.append(f"IVA {txt}% no coincide")
+                obs.append(("IVA no coincide", f["archivo"], f"IVA {txt}% informado {f[f'iva_{c}']:,.2f}; neto x alícuota = {esperado:,.2f}."))
         if (f["fecha"].month, f["fecha"].year) != (mes, anio):
             notas.append("Fuera de período")
             obs.append(("Fuera de período", f["archivo"], f"Fecha {f['fecha']:%d/%m/%Y} fuera de {periodo}."))
+        if f["clase"] == "nc":  # las notas de crédito restan
+            for k in [f"neto_{c}" for _, _, c in ALICUOTAS] + [f"iva_{c}" for _, _, c in ALICUOTAS] + MONTOS:
+                f[k] = -f[k]
         f["control"] = ", ".join(notas) or "OK"
         libro.append(f)
+    if modo == "ventas":  # correlatividad de la numeración propia
+        series = {}
+        for f in libro:
+            series.setdefault((f["codigo"], f["tipo"], f["clase"], f["pv"]), []).append(f["numero"])
+        for (cod, tipo, clase, pv), nums in sorted(series.items()):
+            nums.sort()
+            faltan = [n for n in range(nums[0], nums[-1] + 1) if n not in nums]
+            if faltan:
+                nombre = ("NC " if clase == "nc" else "Factura ") + tipo
+                lista = ", ".join(f"{pv:05d}-{n:08d}" for n in faltan)
+                obs.append(("Salto de numeración", f"{nombre} (cód. {cod})",
+                            f"Faltan {lista} entre el {nums[0]} y el {nums[-1]}. ¿Anulado o sin cargar?"))
     libro.sort(key=lambda f: (f["fecha"], f["cuit"], f["numero"]))
     return libro, obs
 
@@ -167,72 +259,86 @@ def titulo(ws, texto, sub):
     ws["A2"].font = Font(italic=True, size=9, color="6B7280")
 
 
-def escribir_excel(libro, obs, salida: Path, periodo: str):
+def escribir_excel(libro, obs, salida: Path, periodo: str, modo: str = "compras"):
+    hoja = "Libro IVA Compras" if modo == "compras" else "Libro IVA Ventas"
+    quien = "Proveedor" if modo == "compras" else "Cliente"
+    alics = [(txt, c) for _, txt, c in ALICUOTAS
+             if c in SIEMPRE or any(f[f"neto_{c}"] or f[f"iva_{c}"] for f in libro)]
+    # columnas: (título, clave o función, formato, ancho)
+    cols = [("Fecha", "fecha", "DD/MM/YYYY", 11), ("Cód.", "codigo", "@", 6),
+            ("Tipo", lambda f: ("NC " if f["clase"] == "nc" else "Factura ") + f["tipo"], None, 10),
+            ("Pto. Vta.", "pv", "00000", 9), ("Número", "numero", "00000000", 11),
+            ("CUIT", "cuit", None, 15), (quien, "contraparte", None, 30)]
+    for txt, c in alics:
+        cols += [(f"Neto {txt}%", f"neto_{c}", MONEDA, 14), (f"IVA {txt}%", f"iva_{c}", MONEDA, 13)]
+    cols += [("No gravado", "no_gravado", MONEDA, 12), ("Exento", "exento", MONEDA, 12),
+             ("Perc. IVA", "perc_iva", MONEDA, 12), ("Perc. IIBB", "perc_iibb", MONEDA, 12),
+             ("Total", "total", MONEDA, 15), ("Control", "control", None, 22), ("Archivo", "archivo", None, 38)]
+    letra = {clave if isinstance(clave, str) else t: get_column_letter(j)
+             for j, (t, clave, _, _) in enumerate(cols, 1)}
+
     wb = Workbook()
     ws = wb.active
-    ws.title = "Libro IVA Compras"
-    titulo(ws, f"Libro IVA Compras — {periodo}",
-           "Ejemplo con datos ficticios · generado automáticamente desde los PDF de las facturas")
-    cols = ["Fecha", "Tipo", "Pto. Vta.", "Número", "CUIT", "Proveedor", "Neto 21%", "IVA 21%",
-            "Neto 10,5%", "IVA 10,5%", "Perc. IIBB", "Total", "Control", "Archivo"]
-    encabezado(ws, 4, cols)
+    ws.title = hoja
+    titulo(ws, f"{hoja} — {periodo}",
+           "Ejemplo con datos ficticios · generado automáticamente desde los PDF · las notas de crédito restan")
+    encabezado(ws, 4, [c[0] for c in cols])
     r0 = 5
+    j_control = next(j for j, c in enumerate(cols, 1) if c[1] == "control")
     for i, f in enumerate(libro):
         r = r0 + i
-        vals = [f["fecha"], f["tipo"], f["pv"], f["numero"], f["cuit"], f["proveedor"], f["neto_21"],
-                f["iva_21"], f["neto_105"], f["iva_105"], f["percepcion"], f["total"], f["control"], f["archivo"]]
-        for j, v in enumerate(vals, 1):
+        for j, (_, clave, formato, _) in enumerate(cols, 1):
+            v = clave(f) if callable(clave) else f[clave]
             c = ws.cell(row=r, column=j, value=v)
             c.border = Border(bottom=FINO)
-            if j == 1:
-                c.number_format = "DD/MM/YYYY"
-            elif j == 3:
-                c.number_format = "00000"
-            elif j == 4:
-                c.number_format = "00000000"
-            elif 7 <= j <= 12:
-                c.number_format = MONEDA
+            if formato:
+                c.number_format = formato
+        cc = ws.cell(row=r, column=j_control)
         if f["control"] != "OK":
-            ws.cell(row=r, column=13).font = Font(bold=True, color="B91C1C")
-            ws.cell(row=r, column=13).fill = PatternFill("solid", fgColor="FDECEC")
+            cc.font = Font(bold=True, color="B91C1C")
+            cc.fill = PatternFill("solid", fgColor="FDECEC")
         else:
-            ws.cell(row=r, column=13).font = Font(color="047857")
+            cc.font = Font(color="047857")
     rt = r0 + len(libro)
-    ws.cell(row=rt, column=6, value="TOTALES").font = Font(bold=True)
-    for j in range(7, 13):
-        L = get_column_letter(j)
-        c = ws.cell(row=rt, column=j, value=f"=SUM({L}{r0}:{L}{rt - 1})")
-        c.font = Font(bold=True)
-        c.number_format = MONEDA
-        c.border = Border(top=Side(style="medium", color=AZUL))
-    anchos = [11, 6, 9, 11, 15, 28, 14, 13, 13, 12, 12, 15, 18, 36]
-    for j, w in enumerate(anchos, 1):
-        ws.column_dimensions[get_column_letter(j)].width = w
+    ws.cell(row=rt, column=7, value="TOTALES").font = Font(bold=True)
+    for j, (_, _, formato, _) in enumerate(cols, 1):
+        if formato == MONEDA:
+            L = get_column_letter(j)
+            c = ws.cell(row=rt, column=j, value=f"=SUM({L}{r0}:{L}{rt - 1})")
+            c.font = Font(bold=True)
+            c.number_format = MONEDA
+            c.border = Border(top=Side(style="medium", color=AZUL))
+    for j, (_, _, _, ancho) in enumerate(cols, 1):
+        ws.column_dimensions[get_column_letter(j)].width = ancho
     ws.freeze_panes = "A5"
-    ws.auto_filter.ref = f"A4:N{rt - 1}"
+    ws.auto_filter.ref = f"A4:{get_column_letter(len(cols))}{rt - 1}"
 
-    # --- Resumen por proveedor (con fórmulas, se recalcula si se edita el libro)
-    rp = wb.create_sheet("Por proveedor")
-    titulo(rp, "Resumen por proveedor", "Fórmulas SUMAR.SI sobre la hoja Libro IVA Compras")
-    encabezado(rp, 4, ["Proveedor", "CUIT", "Comprobantes", "Neto gravado", "IVA crédito fiscal", "Perc. IIBB", "Total"])
-    provs = sorted({(f["proveedor"], f["cuit"]) for f in libro})
-    rango = f"'Libro IVA Compras'!$E${r0}:$E${rt - 1}"
-    def col(L):
-        return f"'Libro IVA Compras'!${L}${r0}:${L}${rt - 1}"
-    for i, (p, c) in enumerate(provs):
+    # --- Resumen por contraparte (con fórmulas, se recalcula si se edita el libro)
+    rp = wb.create_sheet(f"Por {quien.lower()}")
+    titulo(rp, f"Resumen por {quien.lower()}", f"Fórmulas SUMAR.SI sobre la hoja {hoja}")
+    iva_txt = "IVA crédito fiscal" if modo == "compras" else "IVA débito fiscal"
+    encabezado(rp, 4, [quien, "CUIT", "Comprobantes", "Neto gravado", iva_txt,
+                       "No gravado y exento", "Percepciones", "Total"])
+    def rango(L):
+        return f"'{hoja}'!${L}${r0}:${L}${rt - 1}"
+    crit = rango(letra["cuit"])
+    def sumas(claves, r):
+        return "=" + "+".join(f"SUMIF({crit},B{r},{rango(letra[k])})" for k in claves)
+    grupos = {
+        4: [f"neto_{c}" for _, c in alics], 5: [f"iva_{c}" for _, c in alics],
+        6: ["no_gravado", "exento"], 7: ["perc_iva", "perc_iibb"], 8: ["total"],
+    }
+    contras = sorted({(f["contraparte"], f["cuit"]) for f in libro})
+    for i, (p, c) in enumerate(contras):
         r = 5 + i
         rp.cell(row=r, column=1, value=p)
         rp.cell(row=r, column=2, value=c)
-        rp.cell(row=r, column=3, value=f"=COUNTIF({rango},B{r})")
-        rp.cell(row=r, column=4, value=f"=SUMIF({rango},B{r},{col('G')})+SUMIF({rango},B{r},{col('I')})")
-        rp.cell(row=r, column=5, value=f"=SUMIF({rango},B{r},{col('H')})+SUMIF({rango},B{r},{col('J')})")
-        rp.cell(row=r, column=6, value=f"=SUMIF({rango},B{r},{col('K')})")
-        rp.cell(row=r, column=7, value=f"=SUMIF({rango},B{r},{col('L')})")
-        for j in range(4, 8):
-            rp.cell(row=r, column=j).number_format = MONEDA
-    rf = 5 + len(provs)
+        rp.cell(row=r, column=3, value=f"=COUNTIF({crit},B{r})")
+        for j, claves in grupos.items():
+            rp.cell(row=r, column=j, value=sumas(claves, r)).number_format = MONEDA
+    rf = 5 + len(contras)
     rp.cell(row=rf, column=1, value="TOTAL").font = Font(bold=True)
-    for j in range(3, 8):
+    for j in range(3, 9):
         L = get_column_letter(j)
         c = rp.cell(row=rf, column=j, value=f"=SUM({L}5:{L}{rf - 1})")
         c.font = Font(bold=True)
@@ -240,8 +346,9 @@ def escribir_excel(libro, obs, salida: Path, periodo: str):
         if j > 3:
             c.number_format = MONEDA
     rp.cell(row=rf + 2, column=1, value="Control: total del resumen = total del libro").font = Font(italic=True)
-    rp.cell(row=rf + 2, column=7, value=f"=IF(ABS(G{rf}-'Libro IVA Compras'!L{rt})<0.01,\"OK\",\"REVISAR\")").font = Font(bold=True, color="047857")
-    for j, w in enumerate([28, 15, 13, 16, 17, 13, 16], 1):
+    rp.cell(row=rf + 2, column=8,
+            value=f"=IF(ABS(H{rf}-'{hoja}'!{letra['total']}{rt})<0.01,\"OK\",\"REVISAR\")").font = Font(bold=True, color="047857")
+    for j, w in enumerate([32, 15, 13, 16, 17, 16, 14, 16], 1):
         rp.column_dimensions[get_column_letter(j)].width = w
 
     # --- Controles
@@ -254,33 +361,43 @@ def escribir_excel(libro, obs, salida: Path, periodo: str):
         rc.cell(row=5 + i, column=1, value=tipo).font = Font(bold=True, color="B91C1C")
         rc.cell(row=5 + i, column=2, value=arch)
         rc.cell(row=5 + i, column=3, value=det)
-    for j, w in enumerate([18, 36, 80], 1):
+    for j, w in enumerate([20, 38, 90], 1):
         rc.column_dimensions[get_column_letter(j)].width = w
 
-    for hoja in wb.worksheets:
-        hoja.sheet_view.showGridLines = False
-        hoja.page_setup.orientation = "landscape"
-        hoja.page_setup.fitToWidth = 1
-        hoja.page_setup.fitToHeight = 0
-        hoja.sheet_properties.pageSetUpPr.fitToPage = True
+    for h in wb.worksheets:
+        h.sheet_view.showGridLines = False
+        h.page_setup.orientation = "landscape"
+        h.page_setup.fitToWidth = 1
+        h.page_setup.fitToHeight = 0
+        h.sheet_properties.pageSetUpPr.fitToPage = True
     wb.save(salida)
 
 
-def main():
-    carpeta = Path(sys.argv[1]) if len(sys.argv) > 1 else AQUI / "facturas"
-    salida = Path(sys.argv[2]) if len(sys.argv) > 2 else AQUI / "libro_iva_compras.xlsx"
-    periodo = sys.argv[3] if len(sys.argv) > 3 else "10/2026"
+def procesar(carpeta: Path, salida: Path, periodo: str, modo: str):
     pdfs = sorted(carpeta.glob("*.pdf"))
     filas, errores = [], []
     for p in pdfs:
         try:
-            filas.append(extraer(p))
+            filas.append(extraer(p, modo))
         except Exception as e:  # un PDF ilegible no frena el resto
             errores.append(("No se pudo leer", p.name, f"{type(e).__name__}: {e}. Revisar a mano (¿PDF escaneado?)."))
-    libro, obs = controlar(filas, periodo)
-    escribir_excel(libro, errores + obs, salida, periodo)
-    print(f"PDF leídos: {len(pdfs)} · cargados en el libro: {len(libro)} · observaciones: {len(errores) + len(obs)}")
-    for o in errores + obs:
+    libro, obs = controlar(filas, periodo, modo)
+    escribir_excel(libro, errores + obs, salida, periodo, modo)
+    return pdfs, libro, errores + obs
+
+
+def main():
+    args = sys.argv[1:]
+    modo = "compras"
+    if args and args[-1] in ("compras", "ventas"):
+        modo = args.pop()
+    defecto = "facturas" if modo == "compras" else "facturas_ventas"
+    carpeta = Path(args[0]) if len(args) > 0 else AQUI / defecto
+    salida = Path(args[1]) if len(args) > 1 else AQUI / f"libro_iva_{modo}.xlsx"
+    periodo = args[2] if len(args) > 2 else PERIODO
+    pdfs, libro, obs = procesar(carpeta, salida, periodo, modo)
+    print(f"[{modo}] PDF leídos: {len(pdfs)} · cargados en el libro: {len(libro)} · observaciones: {len(obs)}")
+    for o in obs:
         print("  -", o[0], "|", o[1])
     print(f"Excel: {salida}")
 

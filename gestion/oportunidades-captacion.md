@@ -40,7 +40,8 @@ La oferta está en `servicios/oferta-estudios-contables.md` (planes de USD 60, 1
 **Antes del primer contacto:**
 - [ ] Confirmar con el contador cómo facturar (monotributo) y si cobrar en USD o en pesos.
 - [ ] Tener a mano un acuerdo de confidencialidad simple.
-- [ ] Ampliar `extraer_facturas.py`: Libro IVA Ventas, notas de crédito, alícuotas del 27 % y 2,5 %, percepciones de IVA y conceptos exentos o no gravados (hoy solo Compras, 21 % y 10,5 %, percepciones de IIBB).
+- [x] Ampliar `extraer_facturas.py`: Libro IVA Ventas, notas de crédito, todas las alícuotas, percepciones de IVA, no gravado y exento, facturas B con IVA contenido y saltos de numeración (10/11/2026, 0 diferencias en 24 comprobantes).
+- [ ] Actualizar las cifras del ejemplo 6 en los perfiles de Workana, Fiverr y LinkedIn si se edita esa parte (hoy dicen "14 PDF"; ahora son 18 de compras + 7 de ventas).
 - [ ] Sumar el ejemplo 6 a la sección `#portafolio` de la web (hoy el mail apunta a la carpeta en GitHub).
 - [ ] Armar la lista de 20 estudios para contactar (LinkedIn, "estudio contable" + ciudad).
 

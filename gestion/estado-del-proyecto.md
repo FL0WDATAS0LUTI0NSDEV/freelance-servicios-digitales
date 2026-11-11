@@ -5,7 +5,7 @@
 ## Hecho
 - **Web** con identidad FDS (modo oscuro/claro), servicios (incluye facturas PDF a Excel), planes mensuales, portafolio y caso completo: https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/
 - **Logo** y piezas de marca en `marca/` (portadas de LinkedIn: perfil 1584×396 y página 4200×700).
-- **Portafolio:** limpieza de datos, reporte automático, redacción web, dashboard interactivo, caso completo de la ferretería y **ejemplo 6: facturas PDF a Libro IVA en Excel** (datos ficticios, 0 diferencias en 14 PDF).
+- **Portafolio:** limpieza de datos, reporte automático, redacción web, dashboard interactivo, caso completo de la ferretería y **ejemplo 6: facturas PDF a Libro IVA Compras y Ventas en Excel** (datos ficticios; notas de crédito, todas las alícuotas, percepciones, exento, facturas B y saltos de numeración; 0 diferencias en 24 comprobantes).
 - **Fiverr (en español), 2 gigs activos** (verificados con el conector el 9/11):
   - Power BI: 45 / 150 / 300, FAQ limpias, tags, dashboards 1/3/5, sin video (rechazado).
   - Facturas PDF a Excel: 40 / 90 / 180, Data Processing → Automations, galería propia. Textos en `gestion/gig-facturas-fiverr.md`.

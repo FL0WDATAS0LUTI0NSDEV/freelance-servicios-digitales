@@ -14,7 +14,7 @@ Estudios contables chicos y medianos que todos los meses reciben facturas en PDF
 - El equipo del estudio revisa y presenta, en lugar de tipear.
 
 ## Qué recibe el estudio, por cada cliente
-1. **Libro IVA Compras** en Excel: fecha, tipo, punto de venta, número, CUIT, razón social, neto e IVA por alícuota, percepciones de IIBB y total. Ventas, otras alícuotas, notas de crédito y conceptos exentos se confirman con una muestra.
+1. **Libro IVA Compras y Ventas** en Excel: fecha, código y tipo de comprobante, punto de venta, número, CUIT, razón social, neto e IVA por alícuota (27 %, 21 %, 10,5 %, 5 % y 2,5 %), no gravado, exento, percepciones de IVA y de IIBB, y total. Las notas de crédito restan; las facturas B a consumidor final se separan en neto e IVA. En ventas, además, se controlan los saltos de numeración.
 2. **Resumen por proveedor** con fórmulas, para cruzar con el total.
 3. **Hoja de controles** con cada observación para revisar.
 4. Las columnas se adaptan al modelo de planilla del estudio. Si necesita un formato de importación específico, se evalúa con un archivo de muestra antes de empezar.
