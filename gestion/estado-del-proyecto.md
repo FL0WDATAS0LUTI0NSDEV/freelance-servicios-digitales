@@ -25,6 +25,9 @@
 ### Workana
 - [ ] Cuando aprueben: cargar lo del servicio de facturas y **5 propuestas por día** (agente `redactor-propuestas`, sin links).
 
+### Freelancer.com
+- [ ] Cuenta en creación (10/11/2026). Textos, habilidades y cuidados en `gestion/perfil-freelancer.md` (usuario permanente, sin membresía paga, sin links).
+
 ### LinkedIn
 - [ ] 5–10 solicitudes de conexión por día con nota (PYMEs, contadores, estudios contables) y 2–3 comentarios útiles.
 - [ ] Nunca pedir la insignia de verificación.
