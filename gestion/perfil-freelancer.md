@@ -138,4 +138,6 @@ Reparto sugerido: 3 para trabajos chicos de Excel/PDF (primeras reseñas), 2 par
 
 Registro de ofertas (11/11/2026):
 - Diseño de panel de Power BI (Egipto, USD 10–15, 56 ofertas): descartado.
-- Control de asistencia con QR georreferenciado (Bogotá, USD 30–250, 49 ofertas): propuesta lista (USD 220, 2 hitos); se manda solo si se maneja JavaScript/Apps Script.
+- Control de asistencia con QR georreferenciado (Bogotá, USD 30–250, 49 ofertas): **oferta enviada** (USD 220, 14 días, 2 hitos). Quedan 5 ofertas.
+- Diseño de sitio con Odoo (USD 250–750, 188 ofertas, pide experiencia en Odoo): descartado.
+- 100 proyectos recientes en inglés revisados: ninguno cumple; por ahora solo español.
