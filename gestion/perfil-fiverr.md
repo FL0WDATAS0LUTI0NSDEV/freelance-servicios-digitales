@@ -19,13 +19,17 @@ El dueño **no habla inglés**, así que el perfil y los gigs van **en español*
 - Si un comprador escribe en inglés, se le responde con amabilidad que el servicio es en español.
 
 ### Perfil (español)
-**Título:** `Desarrollador Power BI y Analista de Datos`
+**Título:** `Dashboards en Power BI · Facturas PDF a Excel · Reportes automáticos` (cambiado por el dueño el 11/11; antes: `Desarrollador Power BI y Analista de Datos`)
 
 **Acerca de:**
 ```
-¡Hola! Soy Dante, analista de datos y fundador de FlowData Solutions. Armo dashboards en Power BI, ordeno planillas desordenadas y automatizo los reportes que las pequeñas empresas hacen a mano todos los meses.
+¡Hola! Soy Dante, analista de datos y fundador de FlowData Solutions. Ayudo a pymes, centros de salud y estudios contables a dejar de hacer a mano lo que se puede automatizar:
 
-Trabajo con Power BI (DAX, Power Query), Python, SQL y Excel. Comunicación clara, entregas en fecha y revisiones incluidas. Atiendo en español. Mirá ejemplos de mi trabajo en la galería de mis gigs.
+• Dashboards en Power BI con modelo de datos y medidas DAX.
+• Facturas en PDF a Excel, listas para el Libro IVA Compras y Ventas, con controles de CUIT, duplicados y totales.
+• Planillas ordenadas y reportes automáticos con Python.
+
+Atiendo en español. Entregas en fecha y revisiones incluidas. Mirá los ejemplos (datos ficticios) en mi portafolio.
 ```
 
 **Experiencia laboral — FlowData Solutions (Fundador):**
