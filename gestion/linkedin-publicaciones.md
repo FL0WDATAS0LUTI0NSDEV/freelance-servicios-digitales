@@ -7,7 +7,7 @@
 1. **Metricool** publica en la página a la hora programada (`autoPublish: true`).
 2. Los textos y las imágenes salen de este archivo; las imágenes se toman de la web publicada en GitHub Pages (URL pública), así Metricool las puede descargar.
 3. Claude programa la tanda con el conector de Metricool; antes de programar, el dueño aprueba los textos.
-4. Cada lunes se puede repetir: redactar la semana siguiente con el agente `contenido-linkedin`, agregarla acá y programarla.
+4. **Tarea programada `linkedin-tanda-semanal`** (app de Claude, jueves 10:00): redacta los posts de la semana siguiente, los deja como **borrador** en Metricool, los agrega a este archivo y hace commit. El dueño los revisa en Metricool → Planificación y los pasa a programados (o se lo pide a Claude). Si la semana ya tiene 2 posts o más, no agrega nada. Corre solo con la app abierta; si estaba cerrada, corre al abrirla.
 
 ### Requisito pendiente
 - [x] Crear la página de empresa en LinkedIn (guía en `perfil-linkedin.md`). Creada y con la primera publicación (lanzamiento) hecha a mano, 10/11/2026.
