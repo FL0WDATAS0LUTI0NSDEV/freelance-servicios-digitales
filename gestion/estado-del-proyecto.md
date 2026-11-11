@@ -1,33 +1,40 @@
 # Estado del proyecto — FlowData Solutions
 
-> Resumen para retomar en la próxima sesión. Última actualización: 9 de noviembre de 2026.
+> Resumen para retomar en la próxima sesión. Última actualización: 10 de noviembre de 2026.
 
 ## Hecho
-- **Web** con identidad FDS (modo oscuro/claro), servicios, planes mensuales, portafolio y caso completo: https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/
-- **Logo** y piezas de marca en `marca/`.
-- **Portafolio:** limpieza de datos, reporte automático, redacción web, dashboard interactivo y caso completo de la ferretería (datos ficticios). Imágenes para plataformas en `portafolio/capturas/`.
-- **Workana:** perfil completo (título Data Analyst, "Sobre mí" sin links, 3 proyectos, empleo actual como confidencial). **En revisión de Workana.**
-- **Fiverr (en español):** perfil y gig de Power BI creados (título en inglés con "in spanish", paquetes USD 60/150/300, descripción, FAQ, requisitos, galería con video y PDF).
-- **Herramientas:** kit de propuestas, planilla de seguimiento (meta USD 1.500 netos/mes), 5 agentes de Claude Code, 5 skills de diseño, tarea semanal de los lunes, plan de repaso.
-- **Equipo local:** repo clonado con GitHub Desktop, Python + pandas/openpyxl y LibreOffice funcionando.
+- **Web** con identidad FDS (modo oscuro/claro), servicios (incluye facturas PDF a Excel), planes mensuales, portafolio y caso completo: https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/
+- **Logo** y piezas de marca en `marca/` (portadas de LinkedIn: perfil 1584×396 y página 4200×700).
+- **Portafolio:** limpieza de datos, reporte automático, redacción web, dashboard interactivo, caso completo de la ferretería y **ejemplo 6: facturas PDF a Libro IVA en Excel** (datos ficticios, 0 diferencias en 14 PDF).
+- **Fiverr (en español), 2 gigs activos** (verificados con el conector el 9/11):
+  - Power BI: 45 / 150 / 300, FAQ limpias, tags, dashboards 1/3/5, sin video (rechazado).
+  - Facturas PDF a Excel: 40 / 90 / 180, Data Processing → Automations, galería propia. Textos en `gestion/gig-facturas-fiverr.md`.
+  - Perfil: título "Desarrollador Power BI y Analista de Datos", "Acerca de" con facturas, 12 habilidades, certificación corregida, portafolio de 4 proyectos, **2FA activada**.
+- **Workana:** perfil completo; **en revisión**. Textos con el servicio de facturas listos en `gestion/perfil-workana.md`; plantilla de propuesta de facturas en el kit.
+- **LinkedIn (opción A, decisión del dueño):** perfil personal "Dante I" con la marca en portada, titular y experiencia (Fundador · FlowData Solutions). Destacado con la web. **Primera publicación hecha** (9/11). Riesgos y reglas en `gestion/perfil-linkedin.md`.
+- **Herramientas:** kit de propuestas, planilla de seguimiento (meta USD 1.500 netos/mes), 5 agentes, 5 skills de diseño, tarea semanal de los lunes, plan de repaso.
 
 ## Pendiente
 ### Fiverr
-- [ ] Reportar a **eva8090** y **bearlion3378** (estafa con archivo .html; no se abrió) y después archivar los chats.
-- [ ] Verificar que la **primera imagen de la galería** sea `1-portada-power-bi-es.png`.
-- [ ] Perfil: sacar **inglés** de idiomas, título en español, nivel de **Python en Intermedio**.
-- [ ] Cargar el **portafolio de muestra** del perfil (3 imágenes de `portafolio/capturas/`).
-- [ ] **Verificación de identidad**. W-9: **no corresponde** (no es persona de EE. UU.); si piden, W-8BEN.
-- [ ] Confirmar que el gig quede **Activo**.
+- [ ] Corregir "HHasta" en el paquete Premium del gig de Power BI.
+- [ ] Reportar a **eva8090** y **bearlion3378** (estafa con archivo .html; no se abrió) y archivar los chats.
+- [ ] **Verificación de identidad** (DNI + selfie). W-9: no corresponde; si piden, W-8BEN.
+- [ ] Rutina diaria: app de Fiverr, responder en menos de 1 h, revisar Briefs.
+- [ ] **30/11: primera medición** de los dos gigs (impresiones, clics, mensajes) y revisión de precios (ver simulación en `gestion/fiverr-plan-de-accion.md`).
 
-### Seguridad
-- [ ] Activar **verificación en dos pasos** en Fiverr y en Gmail.
+### Workana
+- [ ] Cuando aprueben: cargar lo del servicio de facturas y **5 propuestas por día** (agente `redactor-propuestas`, sin links).
+
+### LinkedIn
+- [ ] 5–10 solicitudes de conexión por día con nota (PYMEs, contadores, estudios contables) y 2–3 comentarios útiles.
+- [ ] Nunca pedir la insignia de verificación.
 
 ### Próximos pasos
 - [x] **Página de empresa de LinkedIn** creada, con la publicación de lanzamiento (10/11/2026).
 - [x] **Publicaciones automáticas de LinkedIn:** posts 2 a 6 programados en Metricool (12 al 23/11, antes de que termine la prueba ~25/11), detalle en `gestion/linkedin-publicaciones.md`. Desde diciembre, la tarea `linkedin-tanda-semanal` deja los textos en el repo y se programan a mano en LinkedIn.
-- [ ] **Ejemplo de Power BI** (`portafolio/05-dashboard-power-bi/`), con cuenta personal de Microsoft.
-- [ ] Cuando Workana apruebe: **5 propuestas por día** con el agente `redactor-propuestas` (sin links).
+- [ ] **Ejemplo de Power BI** (`portafolio/05-dashboard-power-bi/`) en la compu personal con Power BI Desktop: .pbix, 3 capturas, PDF y video de 60–90 s sin imágenes fijas → nueva galería y video del gig.
+- [ ] **Captación:** seguir `gestion/oportunidades-captacion.md` (relevamiento del 10/11/2026): estudios contables como socios (servicio de facturas), red cercana, y consultar con el contador por el programa KIT 4.0.
+- [ ] Upwork: después del 30/11 y con reseñas, perfil orientado a clientes hispanohablantes (requiere decidir la compra de Connects).
+- [ ] Activar 2FA también en Gmail.
 - [ ] Certificado gratuito de **Pandas en Kaggle**.
-- [ ] **Captación:** seguir `gestion/oportunidades-captacion.md` (relevamiento del 10/11/2026): estudios contables como socios, red cercana, segundo gig de Fiverr, y consultar con el contador por el programa KIT 4.0.
-- [ ] Lista de control privada (guardada fuera del repo): revisar contrato/código de conducta del empleo actual, cuenta personal de Microsoft, consulta al contador por monotributo.
+- [ ] Lista de control privada (fuera del repo): contrato/código de conducta del empleo actual, cuenta personal de Microsoft, consulta al contador por monotributo.
