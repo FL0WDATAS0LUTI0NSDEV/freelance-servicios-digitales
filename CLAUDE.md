@@ -28,7 +28,7 @@ No hay build, framework ni `package.json`: es un sitio estático + scripts de Py
 | `servicios/` | Ficha de cada servicio (precios "desde"). Mantener en sintonía con `index.html` y `README.md`. |
 | `portafolio/01..05/` | Ejemplos con datos ficticios, cada uno con su `README.md`. Las páginas HTML se publican en GitHub Pages. |
 | `portafolio/capturas/` | Imágenes para Workana/Fiverr (`fiverr/`: galería del gig, video y PDF). |
-| `referencias/prueba-ferreteria/` | Caso completo de punta a punta con los agentes (limpieza → reporte → control de calidad). Es la **implementación de referencia** de un entregable para cliente. |
+| `referencias/caso-centro-medico/` | Caso completo de punta a punta con los agentes (datos → limpieza → reporte → control de calidad), con la facturación ficticia de un centro médico. Es la **implementación de referencia** de un entregable para cliente. `referencias/prueba-ferreteria/` solo guarda una redirección para links viejos. |
 | `plantillas/` | Kit de propuestas, presupuesto, propuesta comercial, reporte de entrega. |
 | `gestion/` | Estado del proyecto, planes, perfiles de plataformas (Workana, Fiverr, LinkedIn), competencia, seguimiento (`seguimiento-flowdata.xlsx`). |
 | `marca/` | Logo e isotipo (SVG/PNG) y reglas de uso en `marca/README.md`. |
@@ -49,12 +49,12 @@ cd portafolio/02-reporte-automatico && python generar_reporte.py ../01-limpieza-
 cd portafolio/04-dashboard-interactivo && python generar_datos.py
 cd portafolio/05-dashboard-power-bi && python preparar_datos.py
 
-# Caso de referencia (ferretería)
-cd referencias/prueba-ferreteria && python limpiar.py
-cd referencias/prueba-ferreteria/reporte && python generar_reporte.py            # --salida DIR, --sin-recalcular
-node verificar_reporte.js reporte_ventas_2026-10.html                            # requiere Playwright
+# Caso de referencia (centro médico)
+cd referencias/caso-centro-medico && python generar_datos.py && python limpiar.py
+cd referencias/caso-centro-medico/reporte && python generar_reporte.py            # --salida DIR, --sin-recalcular
+node verificar_reporte.js reporte_facturacion_2026-10.html                            # requiere Playwright
 ```
-- `generar_reporte.py` de la ferretería recalcula el Excel con **LibreOffice** (busca `soffice` en el PATH, la variable `SOFFICE` o rutas habituales); sin LibreOffice igual genera el reporte.
+- `generar_reporte.py` del caso de referencia recalcula el Excel con **LibreOffice** (busca `soffice` en el PATH, la variable `SOFFICE` o rutas habituales); sin LibreOffice igual genera el reporte.
 - `verificar_reporte.js` (Playwright) prueba 375/1280 px × oscuro/claro: errores de consola, scroll horizontal, pedidos externos, foco y signo menos, y guarda capturas. No hay tests automáticos aparte de este.
 
 ## Convenciones de código y entregables

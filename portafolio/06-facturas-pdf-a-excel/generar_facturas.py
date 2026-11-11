@@ -1,5 +1,7 @@
 """Genera facturas en PDF con DATOS FICTICIOS para el ejemplo 6.
 
+Cliente del ejemplo: un centro médico (ficticio).
+
 Compras (carpeta facturas/): 18 comprobantes de 7 proveedores inventados, con dos
 diseños distintos (como pasa en la realidad: cada proveedor factura con su sistema).
 Incluye a propósito:
@@ -7,15 +9,18 @@ Incluye a propósito:
 - dos notas de crédito, una factura de energía con IVA 27 %, percepción de IVA y
   concepto no gravado, y un flete con seguro exento.
 
-Ventas (carpeta facturas_ventas/): 7 comprobantes que emite la ferretería con su
-propio sistema: facturas A a responsables inscriptos, facturas B a consumidores
-finales (con el IVA contenido de la Ley 27.743), una nota de crédito y un salto
-de numeración, para mostrar el control de correlatividad.
+Ventas (carpeta facturas_ventas/): 8 comprobantes que emite el centro médico con su
+propio sistema: facturas A a empresas (exámenes laborales), facturas B a pacientes
+particulares (con el IVA contenido de la Ley 27.743), una factura B exenta a una obra
+social, una nota de crédito y un salto de numeración, para mostrar el control de
+correlatividad. El tratamiento de IVA de cada prestación es ilustrativo: en un caso
+real lo define el contador.
 
 Uso:  python generar_facturas.py
 """
 from pathlib import Path
 import random
+import unicodedata
 
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
@@ -29,10 +34,10 @@ CARPETA_VENTAS = AQUI / "facturas_ventas"
 PROVEEDORES = [
     # razón social, CUIT (rango ficticio 30-99...), diseño
     ("Distribuidora Andina SA", "30-99000025-3", "clasico"),
-    ("Herramientas del Sur SRL", "30-99000033-4", "moderno"),
-    ("Pinturas Litoral SA", "30-99000041-5", "clasico"),
-    ("Electro Cuyo SRL", "30-99000059-8", "moderno"),
-    ("Bulonera Central SA", "30-99000067-9", "clasico"),
+    ("Equipos Médicos del Sur SRL", "30-99000033-4", "moderno"),
+    ("Insumos Litoral SA", "30-99000041-5", "clasico"),
+    ("Electromedicina Cuyo SRL", "30-99000059-8", "moderno"),
+    ("Lavadero Central SA", "30-99000067-9", "clasico"),
     ("Logística Pampa SRL", "30-99000075-0", "moderno"),
 ]
 
@@ -49,22 +54,23 @@ def cuit_valido(base10: str) -> str:
 
 
 # Recalcula los CUIT para que el dígito verificador sea correcto
-COMPRADOR = ("Ferretería El Tornillo SRL (ficticia)", cuit_valido("3099000017"))
+COMPRADOR = ("Centro Médico del Parque SRL (ficticio)", cuit_valido("3099000017"))
 PROVEEDORES = [(n, cuit_valido(c.replace("-", "")[:10]), d) for n, c, d in PROVEEDORES]
 COOPERATIVA = ("Cooperativa Eléctrica del Centro Ltda", cuit_valido("3099000083"), "clasico")
 
-CLIENTES = [  # clientes de la ferretería (ventas), responsables inscriptos
-    ("Constructora Río Seco SRL", cuit_valido("3099000091")),
-    ("Instalaciones Norte SA", cuit_valido("3099000105")),
+CLIENTES = [  # empresas que contratan exámenes laborales (ventas), responsables inscriptos
+    ("Transportes Río Seco SRL", cuit_valido("3099000091")),
+    ("Metalúrgica Norte SA", cuit_valido("3099000105")),
 ]
+OBRA_SOCIAL = ("Obra Social Andina", cuit_valido("3099000113"))  # exenta en IVA (ilustrativo): recibe factura B
 
 ITEMS = {
-    "Distribuidora Andina SA": [("Tornillos autoperforantes x100", 21), ("Tarugos nylon x50", 21)],
-    "Herramientas del Sur SRL": [("Taladro percutor 650 W", 21), ("Juego de mechas x10", 21)],
-    "Pinturas Litoral SA": [("Látex interior 20 L", 21), ("Rodillo antigota", 21)],
-    "Electro Cuyo SRL": [("Cable unipolar 2,5 mm x100 m", 21), ("Térmica bipolar 20 A", 10.5)],
-    "Bulonera Central SA": [("Bulones 8 x 40 x100", 21), ("Arandelas planas x500", 21)],
-    "Logística Pampa SRL": [("Flete Rosario - Córdoba", 21)],
+    "Distribuidora Andina SA": [("Guantes de nitrilo x100", 21), ("Jeringas descartables 5 ml x100", 21)],
+    "Equipos Médicos del Sur SRL": [("Tensiómetro digital de brazo", 21), ("Oxímetro de pulso", 21)],
+    "Insumos Litoral SA": [("Gasas estériles x100", 21), ("Alcohol en gel 5 L", 21)],
+    "Electromedicina Cuyo SRL": [("Electrodos descartables x50", 21), ("Monitor multiparamétrico", 10.5)],
+    "Lavadero Central SA": [("Lavado de ropa de cama (kg)", 21), ("Lavado de ambos (unidad)", 21)],
+    "Logística Pampa SRL": [("Traslado de muestras de laboratorio", 21)],
 }
 
 
@@ -107,18 +113,18 @@ def armar_comprobantes():
     comps.append(malo)
 
     # Casos que aparecen en cualquier mes real de un estudio
-    andina, herramientas, logistica = PROVEEDORES[0], PROVEEDORES[1], PROVEEDORES[5]
+    andina, equipos, logistica = PROVEEDORES[0], PROVEEDORES[1], PROVEEDORES[5]
     # Energía: IVA 27 %, percepción de IVA y contribución municipal no gravada
     energia = [("Consumo energía comercial (T2) set-oct", 1, 412_380.55, 27)]
     comps.append(comprobante(*COOPERATIVA, 88_412, "21/10/2026", energia,
                              percepcion_iva=round(412_380.55 * 0.03, 2), no_gravado=18_640.00))
     # Nota de crédito por devolución de mercadería
-    comps.append(comprobante(*herramientas, 731, "23/10/2026",
-                             [("Devolución juego de mechas x10 (fallado)", 2, 12_480.00, 21)],
+    comps.append(comprobante(*equipos, 731, "23/10/2026",
+                             [("Devolución tensiómetro digital de brazo (fallado)", 2, 12_480.00, 21)],
                              clase="nc"))
-    # Flete con seguro de mercadería exento y percepción de IVA
+    # Traslado de muestras con seguro exento y percepción de IVA
     comps.append(comprobante(*logistica, numero[logistica[0]] + 18, "27/10/2026",
-                             [("Flete Rosario - Córdoba", 1, 186_500.00, 21)],
+                             [("Traslado de muestras de laboratorio (mensual)", 1, 186_500.00, 21)],
                              exento=9_325.00, percepcion_iva=round(186_500.00 * 0.03, 2)))
     # Nota de crédito por bonificación comercial
     comps.append(comprobante(*andina, 418, "30/10/2026",
@@ -128,29 +134,34 @@ def armar_comprobantes():
 
 
 def armar_ventas():
-    """Comprobantes que emite la ferretería (punto de venta 2, su propio sistema)."""
+    """Comprobantes que emite el centro médico (punto de venta 2, su propio sistema)."""
     v = []
     base = dict(proveedor=COMPRADOR[0], cuit=COMPRADOR[1], diseno="propio", pv=2,
                 percepcion_iibb=0.0, percepcion_iva=0.0, no_gravado=0.0, exento=0.0)
     a = [  # facturas A: el 103 falta a propósito (anulado o no informado)
-        (101, "05/10/2026", CLIENTES[0], [("Cemento portland x50 kg", 40, 9_850.00, 21),
-                                         ("Disyuntor diferencial 40 A", 2, 38_400.00, 10.5)]),
-        (102, "12/10/2026", CLIENTES[1], [("Caño termofusión 20 mm x4 m", 60, 3_920.00, 21)]),
-        (104, "26/10/2026", CLIENTES[0], [("Hierro del 8 x12 m", 30, 11_240.00, 21)]),
+        (101, "05/10/2026", CLIENTES[0], [("Examen preocupacional completo", 12, 45_000.00, 21),
+                                         ("Audiometría", 12, 9_500.00, 21)]),
+        (102, "12/10/2026", CLIENTES[1], [("Examen periódico anual", 40, 38_000.00, 21)]),
+        (104, "26/10/2026", CLIENTES[0], [("Examen preocupacional completo", 6, 45_000.00, 21)]),
     ]
     for nro, fecha, cli, lineas in a:
         v.append(dict(base, clase="factura", tipo="A", numero=nro, fecha=fecha,
                       receptor=cli, lineas=lineas))
-    b = [  # facturas B a consumidor final: precios con IVA incluido
-        (501, "07/10/2026", [("Pintura látex 4 L", 2, 31_460.00, 21)]),
-        (502, "15/10/2026", [("Llave francesa 10\"", 1, 24_200.00, 21), ("Cinta métrica 5 m", 1, 8_470.00, 21)]),
-        (503, "29/10/2026", [("Escalera aluminio 6 escalones", 1, 96_800.00, 21)]),
+    b = [  # facturas B a pacientes particulares (consumidor final): precios con IVA incluido
+        (501, "07/10/2026", [("Consulta clínica particular", 1, 24_200.00, 21)]),
+        (502, "15/10/2026", [("Ecografía abdominal particular", 1, 58_080.00, 21),
+                             ("Electrocardiograma particular", 1, 26_620.00, 21)]),
+        (503, "29/10/2026", [("Ergometría particular", 1, 78_650.00, 21)]),
     ]
     for nro, fecha, lineas in b:
         v.append(dict(base, clase="factura", tipo="B", numero=nro, fecha=fecha,
                       receptor=("Consumidor final", None), lineas=lineas))
+    # Factura B exenta a una obra social (exenta en IVA): liquidación mensual de prestaciones
+    lineas_os = [("Prestaciones ambulatorias octubre (liquidación)", 1, 1_284_000.00, None)]
+    v.append(dict(base, clase="factura", tipo="B", numero=504, fecha="31/10/2026", receptor=OBRA_SOCIAL,
+                  lineas=lineas_os, exento=1_284_000.00))
     v.append(dict(base, clase="nc", tipo="A", numero=11, fecha="28/10/2026", receptor=CLIENTES[1],
-                  lineas=[("Devolución caño termofusión 20 mm x4 m", 5, 3_920.00, 21)]))
+                  lineas=[("Anulación examen periódico (no realizado)", 2, 38_000.00, 21)]))
     return v
 
 
@@ -159,6 +170,8 @@ def montos(comp):
     netos = {}
     if comp.get("tipo") == "B":
         total = round(sum(c * p for _, c, p, _ in comp["lineas"]), 2)
+        if all(a is None for *_, a in comp["lineas"]):  # B exenta: sin IVA
+            return {}, {}, total
         alic = comp["lineas"][0][3]
         iva = round(total - total / (1 + alic / 100), 2)
         return {alic: round(total - iva, 2)}, {alic: iva}, total
@@ -176,7 +189,7 @@ def fmt(x: float) -> str:
 
 
 def alic_txt(a) -> str:
-    return f"{a:g}".replace(".", ",")
+    return "Exento" if a is None else f"{a:g}".replace(".", ",")
 
 
 def titulo_comp(comp) -> str:
@@ -306,7 +319,7 @@ def pdf_moderno(c, comp):
 
 
 def pdf_propio(c, comp):
-    """Diseño del sistema de facturación de la ferretería (ventas)."""
+    """Diseño del sistema de facturación del centro médico (ventas)."""
     netos, ivas, total = montos(comp)
     w, h = A4
     c.setStrokeColor(colors.HexColor("#00B8D4"))
@@ -326,8 +339,9 @@ def pdf_propio(c, comp):
     c.setFont("Helvetica", 9)
     c.drawString(18 * mm, h - 48 * mm, f"Cliente: {comp['receptor'][0]}")
     if comp["receptor"][1]:
+        condicion = "IVA Exento" if comp["tipo"] == "B" else "Responsable Inscripto"
         c.drawString(18 * mm, h - 54 * mm, f"CUIT cliente: {comp['receptor'][1]}")
-        c.drawString(18 * mm, h - 60 * mm, "Condición frente al IVA: Responsable Inscripto")
+        c.drawString(18 * mm, h - 60 * mm, f"Condición frente al IVA: {condicion}")
     else:
         c.drawString(18 * mm, h - 54 * mm, "Condición frente al IVA: Consumidor Final")
     y = h - 72 * mm
@@ -339,11 +353,18 @@ def pdf_propio(c, comp):
         y -= 7 * mm
         c.drawString(18 * mm, y, str(cant))
         c.drawString(32 * mm, y, desc)
-        c.drawString(125 * mm, y, f"{alic_txt(alic)}%")
+        c.drawString(125 * mm, y, alic_txt(alic) + ("" if alic is None else "%"))
         c.drawString(145 * mm, y, fmt(precio))
         c.drawRightString(192 * mm, y, fmt(cant * precio))
     y = 85 * mm
-    if comp["tipo"] == "B":
+    if comp["tipo"] == "B" and not ivas:  # B exenta
+        c.setFont("Helvetica", 10)
+        c.drawString(115 * mm, y, "Importe Exento:")
+        c.drawRightString(192 * mm, y, fmt(total))
+        c.setFont("Helvetica-Bold", 11)
+        c.drawString(115 * mm, y - 6 * mm, "Importe Total:")
+        c.drawRightString(192 * mm, y - 6 * mm, fmt(total))
+    elif comp["tipo"] == "B":
         c.setFont("Helvetica-Bold", 11)
         c.drawString(115 * mm, y, "Importe Total:")
         c.drawRightString(192 * mm, y, fmt(total))
@@ -367,12 +388,18 @@ def pdf_propio(c, comp):
 DISENOS = {"clasico": pdf_clasico, "moderno": pdf_moderno, "propio": pdf_propio}
 
 
+def slug_ascii(nombre: str) -> str:
+    """Primera palabra en minúsculas y sin tildes, para nombres de archivo: "Metalúrgica Norte SA" -> "metalurgica"."""
+    palabra = nombre.split()[0].lower()
+    return unicodedata.normalize("NFKD", palabra).encode("ascii", "ignore").decode()
+
+
 def nombre_archivo(i: int, comp: dict, ventas: bool = False) -> str:
     if ventas:
-        quien = "cf" if not comp["receptor"][1] else comp["receptor"][0].split()[0].lower().replace("í", "i")
+        quien = "cf" if not comp["receptor"][1] else slug_ascii(comp["receptor"][0])
         clase = "nc" if comp["clase"] == "nc" else "fc"
         return f"{i:02d}_{clase}{comp['tipo'].lower()}_{quien}_{comp['pv']:04d}-{comp['numero']:08d}.pdf"
-    slug = comp["proveedor"].split()[0].lower().replace("í", "i")
+    slug = slug_ascii(comp["proveedor"])
     if comp["clase"] == "nc":
         slug += "_nc"
     return f"{i:02d}_{slug}_{comp['pv']:04d}-{comp['numero']:08d}.pdf"

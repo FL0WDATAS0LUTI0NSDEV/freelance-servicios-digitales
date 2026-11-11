@@ -138,15 +138,15 @@ Resultado: una vista clara del negocio que se actualiza con los datos nuevos, li
 ```
 
 ### 2. De la planilla desordenada al reporte
-Imagen: `2-caso-completo-4x3.png` · Costo: 150 · Duración: menos de 1 semana · Inicio: 11/2026 · Industria: comercio minorista.
+Imagen: `2-caso-completo-4x3.png` · Costo: 150 · Duración: menos de 1 semana · Inicio: 11/2026 · Industria: salud.
 ```
-Caso completo con datos ficticios de una ferretería.
+Caso completo con datos ficticios de un centro médico.
 
-Punto de partida: una exportación de ventas con fechas en distintos formatos, filas duplicadas y datos faltantes.
+Punto de partida: una exportación de facturación a obras sociales con fechas en distintos formatos, filas duplicadas, datos faltantes y débitos.
 
 Qué hice:
 - Limpieza reproducible: el mismo proceso sirve para los meses siguientes.
-- Reporte mensual en formato web y en Excel, con indicadores, rankings y conclusiones.
+- Reporte mensual en formato web y en Excel: facturación por especialidad, profesional y obra social, débitos y conclusiones.
 - Control de calidad final: total conciliado contra el archivo original y sin errores bloqueantes.
 
 Resultado: de un archivo en el que no se podía confiar a un reporte listo para tomar decisiones.
@@ -172,13 +172,13 @@ Imagen: `4-facturas-pdf-excel-4x3.png` · Costo: 90 · Duración: menos de 1 sem
 ```
 Ejemplo de portafolio con datos ficticios.
 
-Problema: un comercio recibe todos los meses decenas de facturas de compra en PDF, cada proveedor con su propio diseño, y las copiaba a mano en Excel para el Libro IVA.
+Problema: un centro médico recibe todos los meses decenas de facturas de compra en PDF, cada proveedor con su propio diseño, emite las suyas a empresas, pacientes y obras sociales, y lo copiaba todo a mano en Excel para el Libro IVA.
 
 Qué hice:
 - Script en Python que lee la carpeta de PDF y extrae fecha, tipo, punto de venta, número, CUIT, razón social, neto e IVA por alícuota, percepciones y total.
 - Reconoce distintos diseños de factura.
 - Controles automáticos: CUIT con dígito verificador inválido, facturas duplicadas, sumas que no cierran y fechas fuera del período.
-- Excel con el Libro IVA Compras, resumen por proveedor con fórmulas y hoja de controles.
+- Excel con el Libro IVA Compras y Ventas, resumen por proveedor o cliente con fórmulas y hoja de controles. Notas de crédito, exentos y saltos de numeración incluidos.
 
-Resultado: 14 PDF procesados en segundos, 1 duplicado y 1 CUIT erróneo detectados, 0 diferencias contra los importes originales.
+Resultado: 26 PDF procesados en segundos, 1 duplicado, 1 CUIT erróneo y 1 salto de numeración detectados, 0 diferencias contra los importes originales.
 ```

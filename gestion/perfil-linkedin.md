@@ -154,7 +154,7 @@ Ideas que funcionan para una página de datos:
 3. **Tip de Power BI** para PYMEs: una medida DAX útil explicada en 5 líneas.
 4. **Tip de Excel:** cómo evitar los errores más comunes en planillas de ventas.
 5. **Caso del portafolio:** el dashboard interactivo, qué problema resuelve.
-5 bis. **Facturas PDF a Excel:** "¿Tu equipo copia facturas a mano todos los meses?" con la imagen del ejemplo 6 (14 PDF, 1 duplicado y 1 CUIT erróneo detectados).
+5 bis. **Facturas PDF a Excel:** "¿Tu equipo copia facturas a mano todos los meses?" con la imagen del ejemplo 6 (26 PDF, 1 duplicado, 1 CUIT erróneo y 1 salto de numeración detectados).
 6. **Pregunta a la comunidad:** "¿Cuántas horas por mes le dedica tu equipo a armar reportes?" (encuesta).
 7. **Mini guía:** "3 indicadores que toda PYME debería mirar cada mes".
 

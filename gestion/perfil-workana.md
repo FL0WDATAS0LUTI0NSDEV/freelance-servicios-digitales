@@ -107,15 +107,15 @@ Cargá un proyecto por ejemplo, con una captura de pantalla:
 | Reporte de ventas automático | Reporte con indicadores, conclusiones y rankings generado con un solo comando, en HTML y Excel. | https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/portafolio/02-reporte-automatico/reporte_ventas.html |
 | Textos para la web de un taller de cerámica | Reescritura de la página de inicio: más clara, sin errores y con un llamado a la acción. | https://github.com/FL0WDATAS0LUTI0NSDEV/freelance-servicios-digitales/tree/main/portafolio/03-redaccion-web |
 | Dashboard de ventas interactivo | Tablero con filtros por período, provincia, vendedor y producto; indicadores con comparación contra el período anterior; gráficos clicables y exportación a CSV. | https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/portafolio/04-dashboard-interactivo/ |
-| Caso completo: de la planilla desordenada al reporte | Exportación de ventas con fechas mezcladas, duplicados y faltantes → limpieza reproducible → reporte web y Excel → control de calidad. Total conciliado y sin bloqueantes. | https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/referencias/prueba-ferreteria/reporte/reporte_ventas_2026-10.html |
-| Facturas PDF a Libro IVA en Excel | Script que lee facturas en PDF de distintos proveedores y arma el Libro IVA Compras: CUIT, neto e IVA por alícuota, percepciones y total, con control de duplicados, CUIT inválidos y totales. 14 PDF procesados, 0 diferencias. | https://github.com/FL0WDATAS0LUTI0NSDEV/freelance-servicios-digitales/tree/main/portafolio/06-facturas-pdf-a-excel |
+| Caso completo: de la exportación desordenada al reporte | Facturación de un centro médico a obras sociales con fechas mezcladas, duplicados, faltantes y débitos → limpieza reproducible → reporte web y Excel → control de calidad. Total conciliado y sin bloqueantes. | https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/referencias/caso-centro-medico/reporte/reporte_facturacion_2026-10.html |
+| Facturas PDF a Libro IVA en Excel | Script que lee facturas en PDF de distintos proveedores y arma el Libro IVA Compras y Ventas: CUIT, neto e IVA por alícuota, exento, percepciones y total, notas de crédito, con control de duplicados, CUIT inválidos, totales y saltos de numeración. 26 PDF procesados, 0 diferencias. | https://github.com/FL0WDATAS0LUTI0NSDEV/freelance-servicios-digitales/tree/main/portafolio/06-facturas-pdf-a-excel |
 
 **Orden recomendado:** 1) Dashboard interactivo, 2) Facturas PDF a Excel, 3) Caso completo, 4) Limpieza, 5) Reporte automático, 6) Redacción. Cuando tengas el dashboard de Power BI (ejemplo 5), ponelo primero.
 
 **Capturas para cada proyecto:** en tu computadora están en el repo:
 - Dashboard: abrí `portafolio/04-dashboard-interactivo/index.html` en el navegador y sacá una captura (`Win + Shift + S`).
 - Facturas PDF a Excel: `portafolio/capturas/fiverr/portafolio-4x3/4-facturas-pdf-excel-4x3.png`.
-- Caso completo: `referencias/prueba-ferreteria/reporte/capturas/reporte_ventas_2026-10_1280_dark.png`.
+- Caso completo: `referencias/caso-centro-medico/reporte/capturas/reporte_facturacion_2026-10_1280_dark.png`.
 - Limpieza y reporte: captura del README en GitHub o del reporte abierto en el navegador.
 
 Aclarales en cada uno que **son ejemplos con datos ficticios**.

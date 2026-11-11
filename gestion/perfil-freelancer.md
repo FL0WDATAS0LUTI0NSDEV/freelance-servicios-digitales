@@ -97,7 +97,7 @@ Orden recomendado: 1) Dashboard interactivo, 2) Facturas PDF a Excel, 3) Caso co
 
 Capturas listas en el repo:
 - Facturas: `portafolio/capturas/fiverr/portafolio-4x3/4-facturas-pdf-excel-4x3.png`
-- Caso completo: `referencias/prueba-ferreteria/reporte/capturas/reporte_ventas_2026-10_1280_dark.png`
+- Caso completo: `referencias/caso-centro-medico/reporte/capturas/reporte_facturacion_2026-10_1280_dark.png`
 - El resto: carpeta `portafolio/capturas/fiverr/portafolio-4x3/` o captura del navegador (`Win + Shift + S`).
 
 ---

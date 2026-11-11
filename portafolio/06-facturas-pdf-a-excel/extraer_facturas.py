@@ -60,7 +60,7 @@ def cuit_ok(cuit: str) -> bool:
 
 
 def nombre_prolijo(razon: str) -> str:
-    """'HERRAMIENTAS DEL SUR SRL' -> 'Herramientas del Sur SRL'"""
+    """'EQUIPOS MÉDICOS DEL SUR SRL' -> 'Equipos Médicos del Sur SRL'"""
     if not razon.isupper():
         return razon
     chicas = {"de", "del", "la", "las", "los", "y", "e"}
@@ -93,8 +93,9 @@ PATRONES = {
     "total": [r"Importe Total:\s*" + IMPORTE, r"^TOTAL\s+" + IMPORTE],
     "perc_iibb": [r"Percepci[oó]n IIBB:\s*" + IMPORTE, r"Perc\. Ingresos Brutos\s+" + IMPORTE],
     "perc_iva": [r"Percepci[oó]n IVA:\s*" + IMPORTE, r"Perc\. IVA\s+" + IMPORTE],
-    "no_gravado": [r"No [Gg]ravado:?\s*" + IMPORTE],
-    "exento": [r"Exento:?\s*" + IMPORTE],
+    # Anclados a la línea de totales: un renglón de detalle con alícuota "Exento" no debe confundirse
+    "no_gravado": [r"Importe No Gravado:\s*" + IMPORTE, r"^No gravado\s+" + IMPORTE],
+    "exento": [r"Importe Exento:\s*" + IMPORTE, r"^Exento\s+" + IMPORTE],
     "subtotal": [r"Subtotal neto\s+" + IMPORTE],
     "iva_contenido": [r"IVA Contenido:?\s*" + IMPORTE],
 }
@@ -176,9 +177,10 @@ def extraer(ruta: Path, modo: str = "compras") -> dict:
                 fila["notas"].append("Revisar alícuota (B)")
             fila[f"neto_{col}"], fila[f"iva_{col}"] = neto, contenido
             fila["derivado"].add(col)
-        else:  # B o C recibida sin IVA informado: no genera crédito fiscal
+        elif resto > TOL:  # B o C sin IVA informado: no genera crédito fiscal
             fila["no_gravado"] = round(fila["no_gravado"] + resto, 2)
             fila["notas"].append(f"{tipo} sin IVA discriminado")
+        # si resto ≈ 0, todo el comprobante es exento o no gravado y ya está cargado
     return fila
 
 

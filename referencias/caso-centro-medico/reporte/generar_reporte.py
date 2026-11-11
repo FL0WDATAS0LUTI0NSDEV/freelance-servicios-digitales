@@ -1,0 +1,1151 @@
+"""
+Reporte mensual de facturación — centro médico (datos ficticios, caso de referencia).
+
+Lee la planilla limpia (tablas fFacturacion, dFinanciadores, dPrestaciones, dProfesionales,
+dCalendario y fObjetivos) y genera en esta carpeta:
+- reporte_facturacion_AAAA-MM.html  -> reporte para abrir en el navegador o el celular
+- reporte_facturacion_AAAA-MM.xlsx  -> Excel con las tablas de resumen (con fórmulas)
+
+Uso:
+    python generar_reporte.py                                   # usa ENTRADA_POR_DEFECTO (CONFIG)
+    python generar_reporte.py ruta/al/limpio.xlsx               # otro mes
+    python generar_reporte.py ruta/al/limpio.xlsx --salida DIR  # guarda el reporte en otra carpeta
+
+Los datos de la limpieza (duplicados quitados, total de la planilla original) se leen de
+informe_limpieza.md si está al lado del archivo de entrada y corresponde a esos datos
+(mismo total neto y misma cantidad de renglones). Si no, esas frases se omiten.
+
+Basado en portafolio/02-reporte-automatico/generar_reporte.py y en el diseño de
+portafolio/04-dashboard-interactivo/index.html (FlowData Solutions).
+"""
+# ================================================================ CONFIG
+# Lo único que hay que editar para otro cliente u otro mes.
+CLIENTE = "Centro médico"
+# Leyenda visible debajo del título. Para un cliente real, dejarla vacía ("").
+AVISO_EJEMPLO = "Ejemplo de portafolio de FlowData Solutions: todos los datos son ficticios."
+ENTRADA_POR_DEFECTO = "../facturacion_octubre_2026_limpio.xlsx"  # relativa a la carpeta de este script
+INFORME_LIMPIEZA = "informe_limpieza.md"                     # se busca al lado del archivo de entrada
+# Mientras el cliente no confirme la unidad de fObjetivos, no se calcula % de cumplimiento.
+OBJETIVOS_CONFIRMADOS = False
+# Recalcular el Excel con LibreOffice para que quede con valores (vistas previas, openpyxl, celular).
+RECALCULAR_EXCEL = True
+RECALC_PY_CANDIDATOS = [  # script recalc.py de la skill xlsx; si no está, se usa soffice directo
+    "/mnt/skills/public/xlsx/scripts/recalc.py",
+    "~/.claude/skills/xlsx/scripts/recalc.py",
+]
+SOFFICE_CANDIDATOS = [  # dónde buscar LibreOffice si "soffice" no está en el PATH (o definí la variable SOFFICE)
+    r"C:\Program Files\LibreOffice\program\soffice.exe",
+    r"C:\Program Files (x86)\LibreOffice\program\soffice.exe",
+    "/Applications/LibreOffice.app/Contents/MacOS/soffice",
+    "/usr/bin/soffice", "/usr/bin/libreoffice", "/snap/bin/libreoffice",
+]
+# ================================================================
+
+import argparse
+import json
+import os
+import re
+import shutil
+import subprocess
+import sys
+import tempfile
+from datetime import date
+from html import escape
+from pathlib import Path
+
+import pandas as pd
+from openpyxl import Workbook, load_workbook
+from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
+from openpyxl.utils import get_column_letter
+from openpyxl.worksheet.table import Table, TableStyleInfo
+
+AQUI = Path(__file__).resolve().parent
+
+MESES = {1: "enero", 2: "febrero", 3: "marzo", 4: "abril", 5: "mayo", 6: "junio", 7: "julio",
+         8: "agosto", 9: "septiembre", 10: "octubre", 11: "noviembre", 12: "diciembre"}
+DIAS_CORTOS = {1: "lun", 2: "mar", 3: "mié", 4: "jue", 5: "vie", 6: "sáb", 7: "dom"}
+TABLAS = ["fFacturacion", "dFinanciadores", "dPrestaciones", "dProfesionales", "dCalendario", "fObjetivos"]
+
+
+# ---------------------------------------------------------------- formato
+def pesos(x: float) -> str:
+    signo = "−" if x < 0 else ""
+    return f"{signo}$\u00a0" + f"{abs(x):,.0f}".replace(",", ".")
+
+
+def millones(x: float) -> str:
+    signo = "−" if x < 0 else ""
+    x = abs(x)
+    if x >= 1e6:
+        return f"{signo}$\u00a0" + f"{x / 1e6:.1f}".replace(".", ",") + "\u00a0M"
+    return f"{signo}$\u00a0" + f"{x / 1e3:,.0f}".replace(",", ".") + "\u00a0k"
+
+
+MENOS = "\u2212"  # signo menos tipográfico, en todos los negativos del reporte
+
+
+def entero(x: float) -> str:
+    return f"{x:,.0f}".replace(",", ".").replace("-", MENOS)
+
+
+def pct(x: float, dec: int = 1) -> str:
+    return f"{x:.{dec}f}".replace(".", ",").replace("-", MENOS) + "\u00a0%"
+
+
+def veces(x: float) -> str:
+    """Un solo redondeo (1 decimal) para 'veces el objetivo', igual en HTML, Excel y notas."""
+    return f"{x:.1f}".replace(".", ",")
+
+
+def rango_veces(ratio: pd.Series) -> str:
+    lo, hi = veces(ratio.min()), veces(ratio.max())
+    return f"unas {lo} veces" if lo == hi else f"entre {lo} y {hi} veces"
+
+
+def fecha_corta(d) -> str:
+    return f"{d:%d/%m}"
+
+
+# ---------------------------------------------------------------- informe de limpieza
+def _monto_md(texto: str):
+    m = re.fullmatch(r"\s*([+\-\u2212]?)\s*\$?\s*([\d.]+)\s*", texto)
+    if not m:
+        return None
+    return (-1 if m.group(1) in ("-", MENOS) else 1) * int(m.group(2).replace(".", ""))
+
+
+def leer_informe(entrada: Path, d: dict) -> dict:
+    """Lee los datos de la limpieza de informe_limpieza.md (al lado del archivo de entrada).
+    Solo los usa si el informe corresponde a estos datos; si no, devuelve {} y las frases se omiten."""
+    ruta = entrada.parent / INFORME_LIMPIEZA
+    if not ruta.is_file():
+        print(f"Aviso: no está {ruta.name} al lado de {entrada.name}; se omiten los datos de la limpieza.")
+        return {}
+    texto = ruta.read_text(encoding="utf-8")
+
+    def valor(patron):  # primer **valor** en negrita despu\u00e9s del patr\u00f3n, en la misma l\u00ednea
+        m = re.search(patron + r"[^\n]*?\*\*([^*\n]+)\*\*", texto, re.IGNORECASE)
+        return _monto_md(m.group(1)) if m else None
+
+    info = {
+        "duplicados": valor(r"Filas duplicadas eliminadas"),
+        "renglones": valor(r"Renglones finales"),
+        "neto": valor(r"Total limpio \(neto\)"),
+        "suma_original": valor(r"Suma de la columna Total en el original"),
+        "pie_total_general": bool(re.search(r"Fila de pie\s*'TOTAL GENERAL'", texto, re.IGNORECASE)),
+    }
+    m = re.search(r"Informe de limpieza\s*[\u2014-]+\s*Facturación\s+(\w+)\s+(\d{4})", texto, re.IGNORECASE)
+    mes_ok = m is None or (m.group(1).lower() == MESES[d["periodo"].month] and int(m.group(2)) == d["periodo"].year)
+    if info["neto"] != d["neto"] or info["renglones"] != len(d["v"]) or not mes_ok:
+        print(f"Aviso: {ruta.name} no corresponde a estos datos (neto {info['neto']} vs {d['neto']}, "
+              f"renglones {info['renglones']} vs {len(d['v'])}); se omiten los datos de la limpieza.")
+        return {}
+    return info
+
+
+# ---------------------------------------------------------------- lectura
+def leer_tablas(ruta: Path) -> dict:
+    """Lee las tablas de Excel por su nombre (no depende del nombre de la hoja)."""
+    wb = load_workbook(ruta, data_only=True)
+    tablas = {}
+    for ws in wb.worksheets:
+        for nombre, ref in ws.tables.items():
+            filas = list(ws[ref])
+            valores = [[c.value for c in fila] for fila in filas]
+            tablas[nombre] = pd.DataFrame(valores[1:], columns=valores[0])
+    faltan = [t for t in TABLAS if t not in tablas]
+    if faltan:
+        sys.exit(f"Faltan tablas en {ruta.name}: {', '.join(faltan)}")
+    return tablas
+
+
+def preparar(t: dict) -> dict:
+    v = t["fFacturacion"].copy()
+    v["Fecha"] = pd.to_datetime(v["Fecha"])
+    for c in ["Cantidad", "Precio_Unitario", "Total"]:
+        v[c] = pd.to_numeric(v[c])
+    cal = t["dCalendario"].copy()
+    cal["Fecha"] = pd.to_datetime(cal["Fecha"])
+
+    n0 = len(v)
+    v = (v.merge(t["dFinanciadores"][["CUIT", "Financiador"]], on="CUIT", how="left")
+          .merge(t["dPrestaciones"][["Prestacion", "Especialidad", "Precio_Lista"]], on="Prestacion", how="left")
+          .merge(cal[["Fecha", "Semana_ISO", "Dia_Semana", "Dia_Semana_Nro"]], on="Fecha", how="left"))
+    assert len(v) == n0, "El cruce con las dimensiones duplicó filas"
+    sin_dim = v[v[["Financiador", "Especialidad", "Semana_ISO"]].isna().any(axis=1)]
+    if len(sin_dim):
+        sys.exit(f"{len(sin_dim)} renglones sin obra social, especialidad o fecha en calendario: revisar la limpieza")
+
+    meses = v["Fecha"].dt.to_period("M").unique()
+    if len(meses) != 1:
+        sys.exit(f"Se esperaba un solo mes en fFacturacion y hay {len(meses)}")
+    periodo = meses[0]
+    cal_mes = cal[cal["Fecha"].dt.to_period("M") == periodo]
+    # El período del reporte es el que cubren los datos (si el archivo trae medio mes, no se informa el mes entero).
+    desde, hasta = v["Fecha"].min(), v["Fecha"].max()
+    mes_completo = desde <= cal_mes["Fecha"].min() and hasta >= cal_mes["Fecha"].max()
+    cal = cal_mes[cal_mes["Fecha"].between(desde, hasta)]
+
+    es_dev = v["Tipo_Movimiento"].eq("Débito")
+    facturado, devs = v[~es_dev], v[es_dev]
+    neto = int(v["Total"].sum())
+
+    def agrupar(col):
+        g = v.groupby(col).agg(Neto=("Total", "sum"), Unidades=("Cantidad", "sum"),
+                               Facturas=("Nro_Factura", "nunique"))
+        g["Bruto"] = facturado.groupby(col)["Total"].sum()
+        g["Debitos"] = devs.groupby(col)["Total"].sum()
+        g["Facturas_emitidas"] = facturado.groupby(col)["Nro_Factura"].nunique()
+        g = g.fillna(0)
+        g["Ticket"] = g["Bruto"] / g["Facturas_emitidas"].where(g["Facturas_emitidas"] > 0)
+        g["Participacion"] = 100 * g["Neto"] / neto
+        return g.sort_values("Neto", ascending=False).reset_index()
+
+    por_dia = cal[["Fecha", "Dia_Semana_Nro", "Semana_ISO", "Es_Fin_De_Semana"]].merge(
+        v.groupby("Fecha").agg(Neto=("Total", "sum"), Facturas=("Nro_Factura", "nunique")).reset_index(),
+        on="Fecha", how="left").fillna({"Neto": 0, "Facturas": 0})
+
+    por_semana = por_dia.groupby("Semana_ISO").agg(
+        Desde=("Fecha", "min"), Hasta=("Fecha", "max"), Dias=("Fecha", "size"),
+        Neto=("Neto", "sum"), Facturas=("Facturas", "sum")).reset_index()
+    por_semana["Participacion"] = 100 * por_semana["Neto"] / neto
+
+    por_prestacion = agrupar("Prestacion").merge(t["dPrestaciones"][["Prestacion", "Especialidad", "Precio_Lista"]], on="Prestacion")
+
+    obj = t["fObjetivos"].copy()
+    por_profesional = agrupar("Profesional").merge(obj[["Profesional", "Objetivo"]], on="Profesional", how="left")
+
+    # Facturación neta / objetivo cargado: un solo cálculo para HTML, Excel y notas.
+    por_profesional["Veces_Objetivo"] = por_profesional["Neto"] / por_profesional["Objetivo"].where(por_profesional["Objetivo"] > 0)
+
+    cli_periodo = t["dFinanciadores"][t["dFinanciadores"]["CUIT"].isin(v["CUIT"])]
+    cuit_invalidos = cli_periodo[cli_periodo["CUIT_Valido"].astype(str).str.strip().str.lower() == "no"]
+
+    d = {
+        "v": v, "facturado": facturado, "devs": devs.sort_values("Fecha"), "periodo": periodo, "cal": cal,
+        "desde": desde, "hasta": hasta, "mes_completo": mes_completo,
+        "cuit_invalidos": cuit_invalidos.sort_values("Financiador"), "clientes_dim": len(cli_periodo),
+        "neto": neto, "bruto": int(facturado["Total"].sum()), "dev": int(devs["Total"].sum()),
+        "facturas": v["Nro_Factura"].nunique(), "facturas_emitidas": facturado["Nro_Factura"].nunique(),
+        "unidades": int(v["Cantidad"].sum()), "clientes": v["Financiador"].nunique(),
+        "por_dia": por_dia, "por_semana": por_semana, "por_especialidad": agrupar("Especialidad"),
+        "por_profesional": por_profesional, "por_financiador": agrupar("Financiador"), "por_prestacion": por_prestacion,
+        "origen": v["Origen_Dato"].value_counts(), "dFinanciadores": t["dFinanciadores"],
+    }
+    d["ticket"] = d["bruto"] / d["facturas_emitidas"]
+
+    # Controles: cada corte tiene que sumar lo mismo que el total neto.
+    for k in ["por_dia", "por_semana", "por_especialidad", "por_profesional", "por_financiador", "por_prestacion"]:
+        s = int(d[k]["Neto"].sum())
+        assert s == neto, f"{k} suma {s} y el total neto es {neto}"
+    assert d["bruto"] + d["dev"] == neto
+    return d
+
+
+# ---------------------------------------------------------------- Excel
+NAVY, BLANCO = "0B1325", "FFFFFF"
+# Negativos con el signo menos tipográfico (U+2212), igual que en el HTML.
+F_MONEDA = '"$" #,##0;"−$" #,##0'
+F_ENTERO = '#,##0;"−"#,##0'
+F_PCT = '0.0%;"−"0.0%'
+F_FECHA = "dd/mm/yyyy"
+BORDE = Border(bottom=Side(style="thin", color="E2E8F0"))
+
+
+def hoja(wb, titulo, encabezados, anchos):
+    ws = wb.create_sheet(titulo)
+    ws.append(encabezados)
+    for i, ancho in enumerate(anchos, start=1):
+        ws.column_dimensions[get_column_letter(i)].width = ancho
+        c = ws.cell(row=1, column=i)
+        c.font = Font(bold=True, color=BLANCO)
+        c.fill = PatternFill("solid", fgColor=NAVY)
+        c.alignment = Alignment(vertical="center", wrap_text=True)
+    ws.row_dimensions[1].height = 30
+    ws.freeze_panes = "A2"
+    return ws
+
+
+def formatear(ws, formatos: dict, desde=2):
+    for fila in ws.iter_rows(min_row=desde, max_row=ws.max_row):
+        for c in fila:
+            c.border = BORDE
+            letra = get_column_letter(c.column)
+            if letra in formatos:
+                c.number_format = formatos[letra]
+
+
+def fila_total(ws, etiqueta, columnas_suma):
+    r = ws.max_row + 1
+    ws.cell(row=r, column=1, value=etiqueta).font = Font(bold=True)
+    for col in columnas_suma:
+        letra = get_column_letter(col)
+        c = ws.cell(row=r, column=col, value=f"=SUM({letra}2:{letra}{r - 1})")
+        c.font = Font(bold=True)
+    return r
+
+
+def generar_excel(d: dict, salida: Path):
+    wb = Workbook()
+    wb.remove(wb.active)
+    v = d["v"].sort_values(["Fecha", "Nro_Factura"])
+    n = len(v)
+    last = n + 1
+
+    def R(col):  # rango absoluto de una columna de la hoja Datos
+        return f"Datos!${col}$2:${col}${last}"
+
+    FEC, SEM, FAC, FIN, ESP, PRE, PRF, CAN, TOT, TIP = "A", "B", "D", "E", "G", "H", "I", "J", "L", "M"
+
+    # --- Resumen (primera hoja)
+    res = hoja(wb, "Resumen", ["Indicador", "Valor", "Nota"], [34, 18, 70])
+    filas = [
+        ("Facturación neta", f"=SUM({R(TOT)})", F_MONEDA, "Facturación menos débitos"),
+        ("Facturación bruta", f'=SUMIFS({R(TOT)},{R(TIP)},"Facturado")', F_MONEDA, "Solo renglones facturados"),
+        ("Débitos", f'=SUMIFS({R(TOT)},{R(TIP)},"Débito")', F_MONEDA, "Cantidades negativas (Tipo_Movimiento = Débito): débitos de las obras sociales, a confirmar"),
+        ("Débitos / facturación bruta", "=-B4/B3", F_PCT, ""),
+        ("Facturas (únicas)", f"=SUMPRODUCT(1/COUNTIF({R(FAC)},{R(FAC)}))", F_ENTERO, "Incluye los renglones de débito"),
+        ("Facturas emitidas", f'=COUNTIFS({R(TIP)},"Facturado")', F_ENTERO, "Sin los renglones de débito"),
+        ("Promedio por factura", "=B3/B7", F_MONEDA, "Facturación bruta / facturas emitidas"),
+        ("Prestaciones netas", f"=SUM({R(CAN)})", F_ENTERO, "Cantidad facturada menos débitos"),
+        ("Obras sociales con facturación", f"=SUMPRODUCT(1/COUNTIF({R(FIN)},{R(FIN)}))", F_ENTERO, ""),
+    ]
+    tot_prof = len(d["por_profesional"]) + 2  # fila del total en la hoja "Por profesional"
+    if OBJETIVOS_CONFIRMADOS:
+        filas.append(("Cumplimiento de objetivos", f"='Por profesional'!E{tot_prof}/SUM('Por profesional'!H2:H{tot_prof - 1})",
+                      F_PCT, "Facturación neta / suma de objetivos"))
+    else:
+        filas.append(("Cumplimiento de objetivos", "Pendiente de confirmación", None,
+                      "Falta confirmar la unidad de los objetivos cargados; se calcula cuando el cliente la confirme"))
+    for etiqueta, valor, fmt, nota in filas:
+        res.append([etiqueta, valor, nota])
+        if fmt:
+            res.cell(row=res.max_row, column=2).number_format = fmt
+    formatear(res, {})
+    parcial = "" if d["mes_completo"] else " (mes parcial)"
+    res["A13"] = (f"Período: {d['desde']:%d/%m/%Y} al {d['hasta']:%d/%m/%Y}{parcial} · "
+                  f"Generado el {date.today():%d/%m/%Y} por FlowData Solutions")
+    res["A13"].font = Font(italic=True, color="64748B")
+
+    # --- Datos (fuente de todas las fórmulas)
+    cols = ["Fecha", "Semana_ISO", "Dia_Semana", "Nro_Factura", "Financiador", "CUIT", "Especialidad", "Prestacion",
+            "Profesional", "Cantidad", "Precio_Unitario", "Total", "Tipo_Movimiento", "Origen_Dato"]
+    datos = hoja(wb, "Datos", cols, [12, 8, 11, 18, 22, 15, 22, 22, 14, 10, 14, 14, 15, 32])
+    for fila in v[cols].itertuples(index=False):
+        datos.append([fila[0].to_pydatetime(), *[x.item() if hasattr(x, "item") else x for x in fila[1:]]])
+    formatear(datos, {"A": F_FECHA, "J": F_ENTERO, "K": F_MONEDA, "L": F_MONEDA})
+    tabla = Table(displayName="tFacturacion", ref=f"A1:N{last}")
+    tabla.tableStyleInfo = TableStyleInfo(name="TableStyleLight9", showRowStripes=True)
+    datos.add_table(tabla)
+
+    # --- Por día
+    ws = hoja(wb, "Por día", ["Fecha", "Día", "Facturas", "Facturación bruta", "Débitos", "Facturación neta"],
+              [12, 8, 10, 16, 15, 16])
+    for i, r in enumerate(d["por_dia"].itertuples(), start=2):
+        ws.append([r.Fecha.to_pydatetime(), DIAS_CORTOS[r.Dia_Semana_Nro],
+                   f"=COUNTIFS({R(FEC)},A{i})",
+                   f'=SUMIFS({R(TOT)},{R(FEC)},A{i},{R(TIP)},"Facturado")',
+                   f'=SUMIFS({R(TOT)},{R(FEC)},A{i},{R(TIP)},"Débito")',
+                   f"=SUMIFS({R(TOT)},{R(FEC)},A{i})"])
+    fila_total(ws, "Total", [3, 4, 5, 6])
+    formatear(ws, {"A": F_FECHA, "C": F_ENTERO, "D": F_MONEDA, "E": F_MONEDA, "F": F_MONEDA})
+
+    # --- Por semana
+    ws = hoja(wb, "Por semana", ["Semana ISO", "Desde", "Hasta", "Días del mes", "Facturas", "Facturación neta", "% del mes"],
+              [11, 12, 12, 12, 10, 16, 10])
+    for i, r in enumerate(d["por_semana"].itertuples(), start=2):
+        ws.append([int(r.Semana_ISO), r.Desde.to_pydatetime(), r.Hasta.to_pydatetime(), int(r.Dias),
+                   f"=COUNTIFS({R(SEM)},A{i})", f"=SUMIFS({R(TOT)},{R(SEM)},A{i})", f"=F{i}/Resumen!$B$2"])
+    fila_total(ws, "Total", [4, 5, 6, 7])
+    formatear(ws, {"B": F_FECHA, "C": F_FECHA, "E": F_ENTERO, "F": F_MONEDA, "G": F_PCT})
+
+    # --- Por especialidad
+    ws = hoja(wb, "Por especialidad", ["Especialidad", "Prestaciones netas", "Facturación neta", "% del mes"], [24, 14, 16, 10])
+    for i, r in enumerate(d["por_especialidad"].itertuples(), start=2):
+        ws.append([r.Especialidad, f"=SUMIFS({R(CAN)},{R(ESP)},A{i})", f"=SUMIFS({R(TOT)},{R(ESP)},A{i})",
+                   f"=C{i}/Resumen!$B$2"])
+    fila_total(ws, "Total", [2, 3, 4])
+    formatear(ws, {"B": F_ENTERO, "C": F_MONEDA, "D": F_PCT})
+
+    # --- Por profesional
+    ws = hoja(wb, "Por profesional", ["Profesional", "Facturas", "Facturación bruta", "Débitos", "Facturación neta",
+                                   "% del mes", "Promedio por factura", "Objetivo cargado", "Cumplimiento"],
+              [16, 10, 16, 15, 16, 10, 15, 16, 26])
+    for i, r in enumerate(d["por_profesional"].itertuples(), start=2):
+        cumplimiento = f'=IFERROR(E{i}/H{i},"")' if OBJETIVOS_CONFIRMADOS else "Pendiente de confirmación"
+        ws.append([r.Profesional, f"=COUNTIFS({R(PRF)},A{i})",
+                   f'=SUMIFS({R(TOT)},{R(PRF)},A{i},{R(TIP)},"Facturado")',
+                   f'=SUMIFS({R(TOT)},{R(PRF)},A{i},{R(TIP)},"Débito")',
+                   f"=SUMIFS({R(TOT)},{R(PRF)},A{i})", f"=E{i}/Resumen!$B$2",
+                   f'=IFERROR(C{i}/COUNTIFS({R(PRF)},A{i},{R(TIP)},"Facturado"),0)',
+                   None if pd.isna(r.Objetivo) else int(r.Objetivo), cumplimiento])
+    tot = fila_total(ws, "Total", [2, 3, 4, 5, 6])
+    assert tot == tot_prof
+    formatear(ws, {"B": F_ENTERO, "C": F_MONEDA, "D": F_MONEDA, "E": F_MONEDA, "F": F_PCT, "G": F_MONEDA,
+                   "H": F_MONEDA, "I": F_PCT})
+    ratio = d["por_profesional"]["Veces_Objetivo"].dropna()
+    if not OBJETIVOS_CONFIRMADOS and len(ratio):
+        ws.cell(row=tot + 2, column=1, value=(
+            f"Nota: la facturación neta es {rango_veces(ratio)} el objetivo cargado (fObjetivos). "
+            "Falta que el cliente confirme la unidad (¿miles?, ¿semanal?, ¿solo particulares?) antes de calcular el cumplimiento.")
+        ).font = Font(italic=True, color="B45309")
+
+    # --- Por obra social
+    ws = hoja(wb, "Por obra social", ["Obra social / prepaga", "Facturas", "Facturación bruta", "Débitos", "Facturación neta",
+                                      "% del mes", "Promedio por factura"], [26, 10, 16, 15, 16, 10, 15])
+    for i, r in enumerate(d["por_financiador"].itertuples(), start=2):
+        ws.append([r.Financiador, f"=COUNTIFS({R(FIN)},A{i})",
+                   f'=SUMIFS({R(TOT)},{R(FIN)},A{i},{R(TIP)},"Facturado")',
+                   f'=SUMIFS({R(TOT)},{R(FIN)},A{i},{R(TIP)},"Débito")',
+                   f"=SUMIFS({R(TOT)},{R(FIN)},A{i})", f"=E{i}/Resumen!$B$2",
+                   f'=IFERROR(C{i}/COUNTIFS({R(FIN)},A{i},{R(TIP)},"Facturado"),0)'])
+    fila_total(ws, "Total", [2, 3, 4, 5, 6])
+    formatear(ws, {"B": F_ENTERO, "C": F_MONEDA, "D": F_MONEDA, "E": F_MONEDA, "F": F_PCT, "G": F_MONEDA})
+
+    # --- Por prestación
+    ws = hoja(wb, "Por prestación", ["Prestación", "Especialidad", "Arancel", "Prestaciones netas", "Facturación neta",
+                                     "% del mes"], [24, 24, 13, 14, 16, 10])
+    for i, r in enumerate(d["por_prestacion"].itertuples(), start=2):
+        ws.append([r.Prestacion, r.Especialidad, int(r.Precio_Lista), f"=SUMIFS({R(CAN)},{R(PRE)},A{i})",
+                   f"=SUMIFS({R(TOT)},{R(PRE)},A{i})", f"=E{i}/Resumen!$B$2"])
+    fila_total(ws, "Total", [4, 5, 6])
+    formatear(ws, {"C": F_MONEDA, "D": F_ENTERO, "E": F_MONEDA, "F": F_PCT})
+
+    # --- Débitos (detalle)
+    ws = hoja(wb, "Débitos", ["Fecha", "Factura", "Obra social / prepaga", "Prestación", "Profesional", "Cantidad", "Monto"],
+              [12, 18, 24, 22, 14, 10, 14])
+    for r in d["devs"].itertuples():
+        ws.append([r.Fecha.to_pydatetime(), r.Nro_Factura, r.Financiador, r.Prestacion, r.Profesional,
+                   int(r.Cantidad), int(r.Total)])
+    fila_total(ws, "Total", [6, 7])
+    formatear(ws, {"A": F_FECHA, "F": F_ENTERO, "G": F_MONEDA})
+
+    # --- Control: cada corte tiene que dar el mismo total neto
+    ws = hoja(wb, "Control", ["Corte", "Total del corte", "Facturación neta (Resumen)", "Diferencia", "Estado"],
+              [24, 18, 22, 12, 12])
+    cortes = [("Por día", "F"), ("Por semana", "F"), ("Por especialidad", "C"), ("Por profesional", "E"),
+              ("Por obra social", "E"), ("Por prestación", "E")]
+    for i, (nombre, col) in enumerate(cortes, start=2):
+        n_filas = wb[nombre].max_row  # la última fila con datos es la del total
+        if nombre == "Por profesional":
+            n_filas = tot
+        ws.append([nombre, f"='{nombre}'!{col}{n_filas}", "=Resumen!$B$2", f"=B{i}-C{i}",
+                   f'=IF(ABS(D{i})<0.5,"OK","Revisar")'])
+    i = ws.max_row + 1
+    ws.append(["Débitos (detalle)", f"='Débitos'!G{wb['Débitos'].max_row}", "=Resumen!$B$4",
+               f"=B{i}-C{i}", f'=IF(ABS(D{i})<0.5,"OK","Revisar")'])
+    formatear(ws, {"B": F_MONEDA, "C": F_MONEDA, "D": F_MONEDA})
+
+    wb.calculation.fullCalcOnLoad = True  # Excel recalcula todo al abrir
+    wb.save(salida)
+
+
+ERRORES_EXCEL = ("#VALUE!", "#DIV/0!", "#REF!", "#NAME?", "#NULL!", "#NUM!", "#N/A")
+
+
+def buscar_soffice():
+    """Ruta a LibreOffice: variable SOFFICE, PATH o ubicaciones habituales de Windows, macOS y Linux."""
+    for c in [os.environ.get("SOFFICE", ""), shutil.which("soffice") or "", shutil.which("libreoffice") or ""] + SOFFICE_CANDIDATOS:
+        if c and Path(c).expanduser().is_file():
+            return str(Path(c).expanduser())
+    return None
+
+
+def recalcular_excel(xlsx: Path) -> str:
+    """Recalcula las fórmulas con LibreOffice para que el archivo guarde los valores calculados
+    (sin esto, las vistas previas y openpyxl data_only=True ven celdas vacías)."""
+    candidatos = [os.environ.get("RECALC_PY", "")] + RECALC_PY_CANDIDATOS
+    script = next((Path(c).expanduser() for c in candidatos if c and Path(c).expanduser().is_file()), None)
+    if script:
+        r = subprocess.run([sys.executable, str(script), str(xlsx), "120"], capture_output=True, text=True)
+        try:
+            res = json.loads(r.stdout)
+        except json.JSONDecodeError:
+            res = {"error": (r.stderr or r.stdout).strip()[-300:]}
+        if "error" in res:
+            sys.exit(f"No se pudo recalcular {xlsx.name} con {script}: {res['error']}")
+        if res.get("total_errors"):
+            sys.exit(f"{xlsx.name} tiene {res['total_errors']} errores al recalcular: {res['error_summary']}")
+        return f"recalc.py ({res.get('total_formulas')} fórmulas, 0 errores)"
+    soffice = buscar_soffice()
+    if soffice:
+        with tempfile.TemporaryDirectory() as tmp:
+            # Perfil temporal: funciona aunque tengas LibreOffice abierto.
+            perfil = "-env:UserInstallation=" + Path(tmp, "perfil").resolve().as_uri()
+            subprocess.run([soffice, perfil, "--headless", "--calc", "--convert-to", "xlsx", "--outdir", tmp, str(xlsx)],
+                           capture_output=True, timeout=180, check=True)
+            shutil.move(str(Path(tmp) / xlsx.name), xlsx)
+        return f"LibreOffice ({soffice})"
+    print("Aviso: no encontré LibreOffice; el Excel se recalcula recién al abrirlo en Excel. "
+          "Instalalo desde https://www.libreoffice.org/download/ o definí la variable SOFFICE con la ruta a soffice.")
+    return ""
+
+
+def controlar_excel(xlsx: Path, d: dict):
+    """Con los valores ya calculados: cero errores y Resumen igual a los totales de pandas."""
+    wb = load_workbook(xlsx, data_only=True)
+    errores = [f"{ws.title}!{c.coordinate}" for ws in wb.worksheets for fila in ws.iter_rows() for c in fila
+               if isinstance(c.value, str) and c.value.strip() in ERRORES_EXCEL]
+    assert not errores, f"Errores en el Excel: {errores[:10]}"
+    res = wb["Resumen"]
+    vacias = [f"B{r}" for r in range(2, 11) if res[f"B{r}"].value is None]
+    assert not vacias, f"Celdas del Resumen sin valor calculado: {vacias}"
+    esperado = {"B2": d["neto"], "B3": d["bruto"], "B4": d["dev"], "B6": d["facturas"],
+                "B7": d["facturas_emitidas"], "B9": d["unidades"], "B10": d["clientes"]}
+    distintas = {k: (res[k].value, e) for k, e in esperado.items() if abs(float(res[k].value) - e) > 0.5}
+    assert not distintas, f"El Resumen del Excel no coincide con los datos: {distintas}"
+    control = [c.value for c in wb["Control"]["E"][1:] if c.value is not None]
+    assert control and all(x == "OK" for x in control), f"Hoja Control: {control}"
+    return len(control)
+
+
+# ---------------------------------------------------------------- HTML
+def hbars(filas, total_ref=None):
+    """Barras horizontales accesibles (lista con texto, la barra es decorativa)."""
+    maximo = max((f["valor"] for f in filas), default=1) or 1
+    items = []
+    for f in filas:
+        ancho = max(0, 100 * f["valor"] / maximo)
+        items.append(
+            f'<li class="hbar"><span class="hbar__name">{f["nombre"]}</span>'
+            f'<span class="hbar__val num">{f["texto"]}</span>'
+            f'<span class="hbar__track" aria-hidden="true"><span class="hbar__fill" style="width:{ancho:.1f}%"></span></span>'
+            + (f'<span class="hbar__meta muted">{f["meta"]}</span>' if f.get("meta") else "") + "</li>")
+    return f'<ul class="hbars" role="list">{"".join(items)}</ul>'
+
+
+FILAS_VISIBLES_CELULAR = 3   # en celular, las tablas largas muestran estas filas y un botón "Ver todas"
+MIN_FILAS_PLEGAR = 6         # se pliegan las tablas con al menos esta cantidad de filas
+
+
+def tabla(columnas, filas, clase="", pie=None, caption=None, plegable=True):
+    """columnas: lista de (titulo, alineacion). Las celdas llevan data-label para la vista apilada en celular.
+    Si la tabla es larga (y plegable), en celular se muestran solo las primeras filas con un botón para ver todas."""
+    th = "".join(f'<th scope="col"{" class=r" if a == "r" else ""}>{escape(t)}</th>' for t, a in columnas)
+    cuerpo = []
+    for fila in filas:
+        celdas = []
+        for (t, a), valor in zip(columnas, fila):
+            cls = ' class="r num"' if a == "r" else ""
+            celdas.append(f'<td{cls} data-label="{escape(t)}">{valor}</td>')
+        cuerpo.append(f"<tr>{''.join(celdas)}</tr>")
+    tfoot = ""
+    if pie:
+        celdas = []
+        for (t, a), valor in zip(columnas, pie):
+            cls = ' class="r num"' if a == "r" else ""
+            celdas.append(f'<td{cls} data-label="{escape(t)}">{valor}</td>')
+        tfoot = f"<tfoot><tr>{''.join(celdas)}</tr></tfoot>"
+    cap = f'<caption class="sr-only">{escape(caption)}</caption>' if caption else ""
+    html = (f'<div class="table-wrap"><table class="stack {clase}">{cap}<thead><tr>{th}</tr></thead>'
+            f'<tbody>{"".join(cuerpo)}</tbody>{tfoot}</table></div>')
+    if plegable and len(filas) >= MIN_FILAS_PLEGAR:
+        ocultas = len(filas) - FILAS_VISIBLES_CELULAR
+        html = (f'<div class="fold" data-fold>{html}'
+                f'<button type="button" class="fold__btn" aria-expanded="false" '
+                f'data-more="Ver las {len(filas)} filas" data-less="Mostrar menos">Ver las {len(filas)} filas</button>'
+                f'<p class="fold__hint">{ocultas} filas más</p></div>')
+    return html
+
+
+def grafico_dias(por_dia: pd.DataFrame, neto: int) -> str:
+    maximo = max(por_dia["Neto"].max(), 1)
+    paso = 2_000_000 if maximo <= 12_000_000 else 5_000_000
+    tope = paso * int(-(-maximo // paso))  # redondeo hacia arriba
+    pico = por_dia.loc[por_dia["Neto"].idxmax()]
+    lineas = "".join(
+        f'<span class="dchart__grid" style="bottom:{100 * y / tope:.2f}%"><span>{millones(y)}</span></span>'
+        for y in range(paso, tope + 1, paso))
+    cols = []
+    for r in por_dia.itertuples():
+        h = 100 * max(r.Neto, 0) / tope
+        finde = r.Es_Fin_De_Semana == "Sí"
+        es_pico = r.Fecha == pico["Fecha"]
+        etiqueta_visible = r.Fecha.day in (1, 5, 10, 15, 20, 25) or r.Fecha.day == por_dia["Fecha"].max().day
+        clases = ["dchart__col"] + (["is-weekend"] if finde else []) + (["is-peak"] if es_pico else [])
+        texto = (f"{DIAS_CORTOS[r.Dia_Semana_Nro]} {fecha_corta(r.Fecha)}: {pesos(r.Neto)} "
+                 f"en {int(r.Facturas)} facturas" + (" (fin de semana)" if finde else ""))
+        cols.append(
+            f'<li class="{" ".join(clases)}" title="{escape(texto)}">'
+            f'<span class="sr-only">{escape(texto)}</span>'
+            f'<span class="dchart__bar" style="height:{h:.2f}%" aria-hidden="true">'
+            + (f'<span class="dchart__peak num">{millones(r.Neto)}</span>' if es_pico else "") +
+            f'</span><span class="dchart__lbl{"" if etiqueta_visible else " is-minor"}" aria-hidden="true">'
+            f'{r.Fecha.day}</span></li>')
+    return (f'<div class="dchart"><div class="dchart__plot">{lineas}'
+            f'<ol class="dchart__cols" aria-label="Facturación neta por día">{"".join(cols)}</ol></div></div>')
+
+
+def generar_html(d: dict, salida: Path, entrada: Path, info: dict):
+    p = d["periodo"]
+    mes, anio = MESES[p.month], p.year
+    neto, bruto, dev = d["neto"], d["bruto"], d["dev"]
+    pdia, psem = d["por_dia"], d["por_semana"]
+    rub, ven, cli, prod = d["por_especialidad"], d["por_profesional"], d["por_financiador"], d["por_prestacion"]
+    devs = d["devs"]
+
+    pico = pdia.loc[pdia["Neto"].idxmax()]
+    dias_con_facturacion = int((pdia["Neto"] != 0).sum())
+    prom_dia = neto / len(pdia)
+    sem_top = psem.loc[psem["Neto"].idxmax()]
+    top_cli, top_rub, top_prod, top_ven = cli.iloc[0], rub.iloc[0], prod.iloc[0], ven.iloc[0]
+    top2_cli = cli["Participacion"].iloc[:2].sum()
+    dev_pct = 100 * -dev / bruto
+    calculados = int(d["origen"].drop("Original", errors="ignore").sum())
+
+    # ---- KPIs
+    kpis = [
+        ("Facturación neta", pesos(neto), f"Facturación bruta {pesos(bruto)}", True),
+        ("Facturas", entero(d["facturas"]), f"{d['facturas_emitidas']} emitidas · {len(devs)} con débito", False),
+        ("Promedio por factura", pesos(d["ticket"]), "Facturación bruta / facturas emitidas", False),
+        ("Prestaciones netas", entero(d["unidades"]), f"{len(prod)} tipos de prestación · {d['clientes']} obras sociales", False),
+        ("Promedio por día", pesos(prom_dia), f"{dias_con_facturacion} de {len(pdia)} días con facturación", False),
+        ("Débitos", pesos(dev), f"{pct(dev_pct)} de la facturación bruta", False),
+    ]
+    kpis_html = "".join(
+        f'<div class="card kpi{" kpi--main" if main else ""}"><div class="kpi__label">{l}</div>'
+        f'<div class="kpi__value num">{valor}</div><div class="kpi__meta muted">{meta}</div></div>'
+        for l, valor, meta, main in kpis)
+
+    # ---- Lo más importante
+    insights = [
+        f"<b>{escape(top_rub['Especialidad'])}</b> explicó el {pct(top_rub['Participacion'], 0)} de la facturación neta "
+        f"({millones(top_rub['Neto'])}). La prestación que más facturó fue <b>{escape(top_prod['Prestacion'])}</b>: {millones(top_prod['Neto'])} "
+        f"({pct(top_prod['Participacion'], 0)}).",
+        f"<b>{escape(top_cli['Financiador'])}</b> encabezó la facturación por cobertura: {millones(top_cli['Neto'])} "
+        f"({pct(top_cli['Participacion'], 0)}). Las dos primeras suman el {pct(top2_cli, 0)} del mes.",
+        f"El día más fuerte fue el <b>{fecha_corta(pico['Fecha'])}</b>: {millones(pico['Neto'])} en {int(pico['Facturas'])} facturas "
+        f"({pct(100 * pico['Neto'] / neto, 0)} del mes). La semana del {fecha_corta(sem_top['Desde'])} al "
+        f"{fecha_corta(sem_top['Hasta'])} concentró {millones(sem_top['Neto'])} ({pct(sem_top['Participacion'], 0)}).",
+        f"<b>{escape(top_ven['Profesional'])}</b> tuvo la mayor facturación del equipo: {millones(top_ven['Neto'])} "
+        f"({pct(top_ven['Participacion'], 0)} del total).",
+    ]
+    if len(devs):
+        insights.append(f"Las obras sociales debitaron {len(devs)} renglones por {pesos(dev)}, el {pct(dev_pct)} de lo facturado.")
+    insights_html = "".join(f"<li>{t}</li>" for t in insights)
+
+    # ---- Semanas
+    sem_filas = []
+    for r in psem.itertuples():
+        parcial = r.Dias < 7
+        sem_filas.append({
+            "nombre": f"Semana {int(r.Semana_ISO)} · {r.Desde.day} al {r.Hasta.day}/{r.Hasta.month:02d}",
+            "valor": r.Neto, "texto": f"{millones(r.Neto)} <span class='muted'>· {pct(r.Participacion, 0)}</span>",
+            "meta": f"{int(r.Facturas)} facturas" + (f" · semana parcial ({r.Dias} días del mes)" if parcial else ""),
+        })
+
+    # ---- Especialidades
+    rub_filas = [{"nombre": escape(r.Especialidad), "valor": r.Neto,
+                  "texto": f"{millones(r.Neto)} <span class='muted'>· {pct(r.Participacion, 0)}</span>",
+                  "meta": f"{entero(r.Unidades)} prestaciones netas"} for r in rub.itertuples()]
+
+    # ---- Profesionales
+    pendiente = ('<span class="status status--pending"><span class="status__dot" aria-hidden="true"></span>'
+                 'Pendiente de confirmación</span>')
+
+    def cumplimiento(r):
+        if not OBJETIVOS_CONFIRMADOS:
+            return pendiente
+        return "—" if pd.isna(r.Veces_Objetivo) else pct(100 * r.Veces_Objetivo, 0)
+    ven_tabla = tabla(
+        [("Profesional", "l"), ("Facturas", "r"), ("Facturación neta", "r"), ("% del mes", "r"), ("Promedio por factura", "r"),
+         ("Débitos", "r"), ("Cumplimiento de objetivo", "l")],
+        [[escape(r.Profesional), entero(r.Facturas), pesos(r.Neto), pct(r.Participacion), pesos(r.Ticket),
+          pesos(r.Debitos) if r.Debitos else "—", cumplimiento(r)] for r in ven.itertuples()],
+        pie=["Total", entero(ven["Facturas"].sum()), pesos(ven["Neto"].sum()), pct(100), pesos(d["ticket"]),
+             pesos(ven["Debitos"].sum()), ""],
+        caption="Facturación por profesional")
+    objetivos_txt = ", ".join(f"{escape(r.Profesional)} {millones(r.Objetivo)}" for r in ven.itertuples()
+                              if not pd.isna(r.Objetivo))
+    ratio = ven["Veces_Objetivo"].dropna()  # mismo cálculo y redondeo que la nota del Excel
+    if OBJETIVOS_CONFIRMADOS:
+        nota_obj = ""
+    else:
+        nota_obj = ("<p><strong>Cumplimiento de objetivos: pendiente de confirmación.</strong> "
+                    + (f"Los objetivos cargados ({objetivos_txt}) son mucho menores que la facturación neta: la facturación es "
+                       f"{rango_veces(ratio)} el objetivo, así que probablemente estén en otra unidad "
+                       "(¿miles de pesos?, ¿semanales?, ¿solo pacientes particulares?). " if len(ratio) else
+                       "No hay objetivos cargados para este período. ")
+                    + "Lo calculamos cuando lo confirmes.</p>")
+        nota_obj = ('<div class="note" role="note"><svg class="note__icon" viewBox="0 0 24 24" fill="none" '
+                    'stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">'
+                    '<circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.5"/></svg>' + nota_obj + "</div>")
+    ven_barras = hbars([{"nombre": escape(r.Profesional), "valor": r.Neto,
+                         "texto": f"{millones(r.Neto)} <span class='muted'>· {pct(r.Participacion, 0)}</span>"}
+                        for r in ven.itertuples()])
+
+    # ---- Obras sociales
+    cli_tabla = tabla(
+        [("Obra social / prepaga", "l"), ("Facturas", "r"), ("Facturación neta", "r"), ("% del mes", "r"),
+         ("Promedio por factura", "r")],
+        [[f"<span class='muted num'>{i}.</span> <b>{escape(r.Financiador)}</b>", entero(r.Facturas), pesos(r.Neto), pct(r.Participacion),
+          pesos(r.Ticket)] for i, r in enumerate(cli.itertuples(), start=1)],
+        pie=["Total", entero(cli["Facturas"].sum()), pesos(cli["Neto"].sum()), pct(100), pesos(d["ticket"])],
+        caption="Ranking de obras sociales y prepagas por facturación neta")
+
+    # ---- Prestaciones
+    prod_tabla = tabla(
+        [("Prestación", "l"), ("Especialidad", "l"), ("Prestaciones netas", "r"), ("Arancel", "r"), ("Facturación neta", "r"),
+         ("% del mes", "r")],
+        [[f"<b>{escape(r.Prestacion)}</b>", escape(r.Especialidad), entero(r.Unidades), pesos(r.Precio_Lista), pesos(r.Neto),
+          pct(r.Participacion)] for r in prod.itertuples()],
+        pie=["Total", "", entero(prod["Unidades"].sum()), "", pesos(prod["Neto"].sum()), pct(100)],
+        caption="Facturación por prestación")
+
+    # ---- Débitos
+    dev_tabla = tabla(
+        [("Fecha", "l"), ("Factura", "l"), ("Obra social / prepaga", "l"), ("Prestación", "l"), ("Profesional", "l"),
+         ("Cantidad", "r"), ("Monto", "r")],
+        [[fecha_corta(r.Fecha), f'<span class="num">{escape(r.Nro_Factura)}</span>', escape(r.Financiador),
+          escape(r.Prestacion), escape(r.Profesional), entero(r.Cantidad), pesos(r.Total)] for r in devs.itertuples()],
+        pie=["Total", "", "", "", "", entero(devs["Cantidad"].sum()), pesos(dev)],
+        caption="Detalle de débitos")
+    if len(devs):
+        dev_por_cli = devs.groupby("Financiador")["Total"].agg(["sum", "size"]).sort_values("sum")
+        dev_top = dev_por_cli.iloc[0]
+        dev_prod = devs.groupby("Prestacion")["Total"].sum().sort_values()
+        dev_texto = (f'<b style="color:var(--fds-text)">{escape(dev_por_cli.index[0])}</b> concentró '
+                     f"{int(dev_top['size'])} de los {len(devs)} débitos ({pesos(dev_top['sum'])}). "
+                     f"Por monto, la prestación más debitada fue {escape(dev_prod.index[0])} ({pesos(dev_prod.iloc[0])}).")
+    else:
+        dev_texto, dev_tabla = "No hubo débitos en el período.", ""
+
+    # ---- Notas sobre los datos (todo sale de los datos o del informe de limpieza; si falta el dato, se omite)
+    notas = []
+    if len(devs):
+        notas.append(f"La facturación neta ya descuenta los {len(devs)} débitos de las obras sociales. Están cargados como "
+                     "facturas con cantidad negativa (no como notas de crédito): confirmá si son débitos reales.")
+    if calculados:
+        notas.append(f"{calculados} renglones tenían el total o la cantidad vacíos y se completaron con cantidad × precio. "
+                     "Si hubo descuentos, avisanos y lo corregimos.")
+    if info.get("duplicados"):
+        n_dup = info["duplicados"]
+        txt = (f"En la limpieza se quitó {n_dup} renglón duplicado" if n_dup == 1 else
+               f"En la limpieza se quitaron {n_dup} renglones duplicados") + " de la exportación."
+        if info.get("pie_total_general") and info.get("suma_original") is not None:
+            txt += (f" Por eso, y por los totales que se completaron, el total no coincide con la fórmula de "
+                    f"\"TOTAL GENERAL\" de la planilla original ({pesos(info['suma_original'])}).")
+        notas.append(txt)
+    inv = d["cuit_invalidos"]
+    if len(inv):
+        nombres = ", ".join(escape(c) for c in inv["Financiador"])
+        notas.append((f"{len(inv)} de los {d['clientes_dim']} CUIT de obras sociales no pasan" if len(inv) > 1 else
+                      f"1 de los {d['clientes_dim']} CUIT de obras sociales no pasa")
+                     + f" el dígito verificador ({nombres}). No los modificamos: conviene revisarlos en el "
+                     "sistema de facturación.")
+    if not OBJETIVOS_CONFIRMADOS:
+        notas.append("El cumplimiento de objetivos queda pendiente hasta confirmar la unidad de los objetivos.")
+    if not d["mes_completo"]:
+        notas.append(f"El archivo trae facturación del {d['desde']:%d/%m} al {d['hasta']:%d/%m}: el reporte cubre solo "
+                     "esos días, no el mes completo.")
+    notas_html = "".join(f"<li>{n}</li>" for n in notas)
+
+    # ---- Tabla diaria (para lectores de pantalla y para quien prefiera números)
+    dia_tabla = tabla(
+        [("Día", "l"), ("Facturas", "r"), ("Facturación neta", "r")],
+        [[f"{DIAS_CORTOS[r.Dia_Semana_Nro]} {fecha_corta(r.Fecha)}", entero(r.Facturas), pesos(r.Neto)]
+         for r in pdia.itertuples()],
+        pie=["Total", entero(pdia["Facturas"].sum()), pesos(neto)], clase="compact",
+        caption="Facturación neta por día", plegable=False)
+
+    generado = date.today()
+    titulo = f"Facturación de {mes} {anio}"
+    html = f"""<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{titulo} · {CLIENTE}</title>
+<meta name="description" content="Reporte mensual de facturación: indicadores, facturación por día y semana, especialidades, profesionales, obras sociales, prestaciones y débitos.">
+<meta name="robots" content="noindex, nofollow">
+<script>
+  (function () {{
+    var t = 'dark';
+    try {{ t = localStorage.getItem('fds-theme') || 'dark'; }} catch (e) {{}}
+    document.documentElement.dataset.theme = t;
+  }})();
+</script>
+<style>
+  :root, :root[data-theme="dark"] {{
+    --fds-bg:#0B1325; --fds-card:#131F37; --fds-border:#1E2D4A; --fds-text:#F4F6F8;
+    --fds-muted:rgba(244,246,248,.64); --fds-accent-text:#00E5FF; --fds-green-text:#10B981;
+    --fds-red-text:#F87171; --fds-amber-text:#FBBF24; --fds-glass:rgba(19,31,55,.62); --fds-row:rgba(255,255,255,.04);
+    --bar-from:#00E5FF; --bar-to:#0066FF; --weekend:rgba(255,255,255,.035); color-scheme:dark;
+  }}
+  :root[data-theme="light"] {{
+    --fds-bg:#F8FAFC; --fds-card:#FFFFFF; --fds-border:#E2E8F0; --fds-text:#0F172A;
+    --fds-muted:rgba(15,23,42,.64); --fds-accent-text:#0066FF; --fds-green-text:#047857;
+    --fds-red-text:#B91C1C; --fds-amber-text:#B45309; --fds-glass:rgba(255,255,255,.78); --fds-row:rgba(15,23,42,.04);
+    --bar-from:#38BDF8; --bar-to:#0066FF; --weekend:rgba(15,23,42,.045); color-scheme:light;
+  }}
+  :root {{ --fds-cyan:#00E5FF; --fds-blue:#0066FF; --fds-green:#10B981; --radius:14px;
+    /* Sin fuentes externas (reporte confidencial): Inter / Plus Jakarta Sans si están instaladas, si no las del sistema */
+    --font-body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    --font-head:"Plus Jakarta Sans","Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; }}
+
+  *,*::before,*::after {{ box-sizing:border-box; }}
+  body {{ margin:0; font-family:var(--font-body); color:var(--fds-text); background:var(--fds-bg);
+    line-height:1.5; -webkit-font-smoothing:antialiased; font-feature-settings:"calt" 0; }}
+  h1,h2,h3 {{ font-family:var(--font-head); letter-spacing:-.02em; margin:0; line-height:1.2; }}
+  p {{ margin:0; }}
+  .num {{ font-variant-numeric:tabular-nums; }}
+  .muted {{ color:var(--fds-muted); }}
+  :focus-visible {{ outline:2px solid var(--fds-cyan); outline-offset:2px; border-radius:6px; }}
+  :root[data-theme="light"] :focus-visible {{ outline-color:#0066FF; }}
+  .wrap {{ max-width:1200px; margin:0 auto; padding:0 16px; }}
+  .sr-only {{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }}
+  .skip {{ position:absolute; left:16px; top:-48px; z-index:30; padding:8px 12px; border-radius:8px;
+    background:var(--fds-blue); color:#fff; font-weight:600; text-decoration:none; }}
+  .skip:focus {{ top:8px; }}
+
+  /* Barra superior */
+  .top {{ position:sticky; top:0; z-index:20; background:var(--fds-glass); -webkit-backdrop-filter:blur(12px);
+    backdrop-filter:blur(12px); border-bottom:1px solid var(--fds-border); }}
+  .top__in {{ display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:60px; }}
+  .brand {{ display:flex; align-items:center; gap:10px; font-weight:700; font-family:var(--font-head); }}
+  .brand small {{ font-family:var(--font-body); font-weight:500; color:var(--fds-muted); display:none; }}
+  .top__actions {{ display:flex; align-items:center; gap:8px; min-width:0; }}
+  .status {{ display:inline-flex; align-items:center; gap:8px; font-size:.8rem; font-weight:600; white-space:nowrap; }}
+  .status__dot {{ width:8px; height:8px; border-radius:50%; background:currentColor; flex:none; }}
+  .status--success {{ color:var(--fds-green-text); }}
+  .status--pending {{ color:var(--fds-amber-text); }}
+  .status--pending .status__dot {{ background:transparent; border:1.5px solid currentColor; }}
+  .top .status span:last-child {{ display:none; }}
+  .btn {{ display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:40px; padding:8px 14px;
+    border-radius:10px; border:1px solid var(--fds-border); background:var(--fds-card); color:var(--fds-text); font:inherit;
+    font-size:.875rem; font-weight:600; cursor:pointer; transition:border-color .2s; }}
+  .btn:hover {{ border-color:var(--fds-blue); }}
+  .btn svg {{ width:16px; height:16px; }}
+  .icon-btn {{ width:40px; padding:0; }}
+  .icon-sun {{ display:none; }} :root[data-theme="light"] .icon-sun {{ display:block; }} :root[data-theme="light"] .icon-moon {{ display:none; }}
+
+  /* Encabezado */
+  .head {{ padding:28px 0 8px; }}
+  .tag {{ display:inline-block; font-size:.75rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--fds-accent-text); margin-bottom:6px; }}
+  .head h1 {{ font-size:clamp(1.6rem,5vw,2.25rem); }}
+  .head p {{ margin-top:8px; font-size:.9rem; }}
+
+  /* Navegación por secciones */
+  .toc {{ display:flex; flex-wrap:wrap; gap:6px; margin:16px 0 4px; padding:0; list-style:none; }}
+  .toc a {{ display:inline-block; padding:6px 10px; border:1px solid var(--fds-border); border-radius:99px; font-size:.8rem;
+    color:var(--fds-muted); text-decoration:none; background:var(--fds-card); transition:border-color .2s, color .2s; }}
+  .toc a:hover {{ color:var(--fds-text); border-color:var(--fds-blue); }}
+
+  /* Tarjetas y KPIs */
+  .card {{ background:var(--fds-card); background-image:linear-gradient(180deg,rgba(255,255,255,.035),transparent 40%);
+    border:1px solid var(--fds-border); border-radius:var(--radius); padding:16px; min-width:0; }}
+  section {{ scroll-margin-top:72px; }}
+  .kpis {{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:16px; }}
+  .kpi__label {{ font-size:.8rem; color:var(--fds-muted); font-weight:500; }}
+  .kpi__value {{ font-family:var(--font-head); font-weight:700; font-size:clamp(1.05rem,4.4vw,1.6rem); margin-top:4px;
+    white-space:nowrap; }}
+  .kpi__meta {{ font-size:.75rem; margin-top:4px; }}
+  .kpi--main {{ grid-column:1/-1; border-color:color-mix(in srgb,var(--fds-blue) 55%,var(--fds-border));
+    box-shadow:0 0 24px rgba(0,229,255,.06); }}
+  .kpi--main .kpi__value {{ font-size:clamp(1.8rem,8vw,2.4rem); color:var(--fds-accent-text); }}
+
+  .insights {{ margin-top:12px; }}
+  .insights ul {{ margin:10px 0 0; padding-left:1.1rem; display:grid; gap:6px; font-size:.92rem; }}
+  .insights li::marker {{ color:var(--fds-accent-text); }}
+
+  .grid {{ display:grid; gap:12px; margin-top:12px; }}
+  .card__head {{ display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:4px 12px; margin-bottom:14px; }}
+  .card__head h2 {{ font-size:1.05rem; }}
+  .card__head p {{ font-size:.8rem; }}
+  .section-title {{ font-size:.75rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--fds-muted);
+    margin:28px 0 0; }}
+
+  /* Gráfico diario */
+  .dchart__plot {{ position:relative; height:220px; margin-left:44px; }}
+  .dchart__grid {{ position:absolute; left:0; right:0; border-top:1px dashed var(--fds-border); }}
+  .dchart__grid span {{ position:absolute; right:calc(100% + 6px); top:-8px; font-size:.68rem; color:var(--fds-muted);
+    white-space:nowrap; font-variant-numeric:tabular-nums; }}
+  .dchart__cols {{ position:absolute; inset:0; display:flex; align-items:stretch; gap:2px; margin:0; padding:0; list-style:none;
+    border-bottom:1px solid var(--fds-border); }}
+  .dchart__col {{ position:relative; flex:1 1 0; min-width:0; display:flex; align-items:flex-end; border-radius:4px 4px 0 0; }}
+  .dchart__col.is-weekend {{ background:var(--weekend); }}
+  .dchart__bar {{ position:relative; display:block; width:100%; min-height:2px; border-radius:3px 3px 0 0;
+    background:linear-gradient(180deg,var(--bar-from),var(--bar-to)); }}
+  .dchart__col.is-weekend .dchart__bar {{ opacity:.55; }}
+  .dchart__col.is-peak .dchart__bar {{ box-shadow:0 0 0 1.5px var(--fds-cyan), 0 0 14px rgba(0,229,255,.35); }}
+  .dchart__peak {{ position:absolute; bottom:calc(100% + 4px); right:0; font-size:.72rem; font-weight:700;
+    color:var(--fds-text); white-space:nowrap; }}
+  .dchart__lbl {{ position:absolute; top:calc(100% + 4px); left:50%; transform:translateX(-50%); font-size:.68rem;
+    color:var(--fds-muted); font-variant-numeric:tabular-nums; }}
+  .dchart__lbl.is-minor {{ display:none; }}
+  .dchart {{ padding-bottom:22px; padding-top:18px; }}
+  .legend {{ display:flex; flex-wrap:wrap; gap:6px 16px; margin-top:8px; font-size:.75rem; color:var(--fds-muted); }}
+  .legend i {{ display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-2px; margin-right:6px; }}
+  .legend .lg-bar {{ background:linear-gradient(180deg,var(--bar-from),var(--bar-to)); }}
+  .legend .lg-weekend {{ background:var(--weekend); border:1px solid var(--fds-border); }}
+  .legend .lg-peak {{ border:2px solid var(--fds-cyan); }}
+  details {{ margin-top:14px; border-top:1px solid var(--fds-border); padding-top:10px; }}
+  summary {{ cursor:pointer; font-size:.85rem; font-weight:600; color:var(--fds-accent-text); border-radius:6px; }}
+
+  /* Barras horizontales */
+  .hbars {{ display:grid; gap:14px; margin:0; padding:0; list-style:none; }}
+  .hbar {{ display:grid; grid-template-columns:minmax(0,1fr) auto; gap:4px 10px; font-size:.875rem; }}
+  .hbar__name {{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:500; }}
+  .hbar__track {{ grid-column:1/-1; height:8px; border-radius:99px; background:var(--fds-row); overflow:hidden; }}
+  .hbar__fill {{ display:block; height:100%; border-radius:99px; background:linear-gradient(90deg,var(--bar-from),var(--bar-to)); }}
+  .hbar__meta {{ grid-column:1/-1; font-size:.75rem; }}
+
+  /* Tablas: en celular cada fila se apila como tarjeta */
+  .table-wrap {{ border:1px solid var(--fds-border); border-radius:10px; overflow:hidden; }}
+  table {{ width:100%; border-collapse:collapse; font-size:.85rem; }}
+  th, td {{ padding:10px 12px; text-align:left; border-bottom:1px solid var(--fds-border); }}
+  th {{ background:var(--fds-row); font-size:.72rem; color:var(--fds-muted); font-weight:600; text-transform:uppercase; letter-spacing:.04em; }}
+  td.r, th.r {{ text-align:right; }}
+  td.num {{ white-space:nowrap; }}
+  tbody tr:hover {{ background:var(--fds-row); }}
+  tfoot td {{ font-weight:700; border-bottom:0; }}
+  @media (max-width:719px) {{
+    table.stack thead {{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }}
+    table.stack tr {{ display:block; padding:10px 12px; border-bottom:1px solid var(--fds-border); }}
+    table.stack tfoot tr {{ border-bottom:0; background:var(--fds-row); }}
+    table.stack td {{ display:flex; justify-content:space-between; gap:12px; padding:3px 0; border:0; text-align:right; }}
+    table.stack td::before {{ content:attr(data-label); color:var(--fds-muted); font-size:.75rem; font-weight:500; text-align:left; }}
+    table.stack td:empty {{ display:none; }}
+    table.stack td:first-child {{ justify-content:flex-start; font-weight:600; padding-bottom:6px; text-align:left; }}
+    table.stack td:first-child::before {{ content:none; }}
+    .top .status {{ display:none; }}
+    .kpis > .card:last-child {{ grid-column:1/-1; }}
+    table.stack.compact tr {{ display:flex; justify-content:space-between; gap:8px; padding:6px 12px; }}
+    table.stack.compact td {{ display:block; padding:0; }}
+    table.stack.compact td::before {{ content:none; }}
+    .fold:not(.is-open) tbody tr:nth-child(n+{FILAS_VISIBLES_CELULAR + 1}) {{ display:none; }}
+    .fold:not(.is-open) tfoot {{ display:none; }}
+    .fold .fold__btn {{ display:flex; }}
+    .fold:not(.is-open) .fold__hint {{ display:block; }}
+  }}
+  .fold__btn {{ display:none; width:100%; justify-content:center; margin-top:10px; min-height:44px; padding:10px 14px;
+    border-radius:10px; border:1px solid var(--fds-border); background:var(--fds-card); color:var(--fds-accent-text);
+    font:inherit; font-size:.875rem; font-weight:600; cursor:pointer; }}
+  .fold__btn:hover {{ border-color:var(--fds-blue); }}
+  .fold__hint {{ display:none; margin:6px 0 0; text-align:center; font-size:.75rem; color:var(--fds-muted); }}
+
+  .note {{ display:flex; gap:10px; align-items:flex-start; margin-top:14px; padding:12px 14px; border-radius:10px;
+    border:1px solid color-mix(in srgb,var(--fds-amber-text) 45%,var(--fds-border));
+    background:color-mix(in srgb,var(--fds-amber-text) 7%,transparent); font-size:.85rem; }}
+  .note strong {{ color:var(--fds-amber-text); }}
+  .note__icon {{ flex:none; width:18px; height:18px; color:var(--fds-amber-text); margin-top:2px; }}
+  .mini-kpis {{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin-bottom:14px; }}
+  .mini-kpis div {{ padding:10px 12px; border:1px solid var(--fds-border); border-radius:10px; }}
+  .mini-kpis b {{ display:block; font-family:var(--font-head); font-size:1.1rem; }}
+  .mini-kpis span {{ font-size:.75rem; color:var(--fds-muted); }}
+  .neg {{ color:var(--fds-red-text); }}
+  .data-notes {{ margin:10px 0 0; padding-left:1.1rem; display:grid; gap:6px; font-size:.85rem; }}
+
+  footer {{ padding:32px 0 40px; font-size:.8rem; color:var(--fds-muted); display:grid; gap:4px; }}
+  footer b {{ color:var(--fds-text); font-weight:600; }}
+
+  @media (min-width:640px) {{
+    .brand small {{ display:inline; }}
+    .top .status span:last-child {{ display:inline; }}
+    .kpis {{ grid-template-columns:repeat(3,minmax(0,1fr)); }}
+    .kpi--main {{ grid-column:auto; }}
+    .kpi--main .kpi__value {{ font-size:clamp(1.3rem,3vw,1.75rem); }}
+    .kpi__value {{ font-size:clamp(1.2rem,2.6vw,1.6rem); }}
+    .mini-kpis {{ grid-template-columns:repeat(4,minmax(0,1fr)); }}
+    .dchart__lbl.is-minor {{ display:block; }}
+    .dchart__plot {{ height:260px; margin-left:52px; }}
+  }}
+  @media (min-width:960px) {{
+    .kpis {{ grid-template-columns:1.5fr repeat(5,minmax(0,1fr)); }}
+    .kpi__value {{ font-size:1.3rem; }}
+    .kpi--main .kpi__value {{ font-size:1.75rem; }}
+    .grid--2 {{ grid-template-columns:3fr 2fr; }}
+    .grid--even {{ grid-template-columns:1fr 1fr; }}
+  }}
+  @media (prefers-reduced-motion:reduce) {{ *,*::before,*::after {{ transition:none !important; animation:none !important; }} }}
+  @media print {{
+    .top, .toc, .skip {{ display:none; }}
+    body {{ background:#fff; color:#0F172A; }}
+    .card {{ break-inside:avoid; }}
+    details > *:not(summary) {{ display:block; }}
+    .fold tbody tr, .fold tfoot {{ display:table-row-group !important; }}
+    .fold tbody tr {{ display:table-row !important; }}
+    .fold__btn, .fold__hint {{ display:none !important; }}
+  }}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al reporte</a>
+<header class="top">
+  <div class="wrap top__in">
+    <div class="brand">
+      <svg width="28" height="28" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+        <defs><linearGradient id="fds-g" x1="0" y1="0" x2="34" y2="34" gradientUnits="userSpaceOnUse"><stop stop-color="#00E5FF"/><stop offset="1" stop-color="#0066FF"/></linearGradient></defs>
+        <rect x="1" y="1" width="32" height="32" rx="9" stroke="url(#fds-g)" stroke-width="1.5"/>
+        <path d="M8 11h7l4 6h7M8 23h5l3-6" stroke="url(#fds-g)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="8" cy="11" r="2" fill="#00E5FF"/><circle cx="8" cy="23" r="2" fill="#00E5FF"/><circle cx="26" cy="17" r="2.5" fill="#0066FF"/>
+      </svg>
+      <span>FlowData <small>· Reporte de facturación</small></span>
+    </div>
+    <div class="top__actions">
+      <span class="status status--success" title="Totales controlados contra los datos limpios">
+        <span class="status__dot" aria-hidden="true"></span><span>Totales controlados</span></span>
+      <button class="btn icon-btn" id="theme-toggle" type="button" aria-label="Cambiar a modo claro" aria-pressed="false">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="contenido">
+  <div class="head">
+    <span class="tag">{CLIENTE} · Reporte mensual</span>
+    <h1>{titulo}</h1>
+    {f'<p class="muted">{escape(AVISO_EJEMPLO)}</p>' if AVISO_EJEMPLO else ""}
+    <p class="muted">Período: {d['desde']:%d/%m/%Y} al {d['hasta']:%d/%m/%Y}{"" if d['mes_completo'] else " (mes parcial)"} · {d['facturas']} facturas · Generado el {generado:%d/%m/%Y}</p>
+  </div>
+
+  <nav aria-label="Secciones del reporte">
+    <ul class="toc">
+      <li><a href="#indicadores">Indicadores</a></li><li><a href="#tiempo">Día y semana</a></li>
+      <li><a href="#especialidades">Especialidades</a></li><li><a href="#profesionales">Profesionales</a></li>
+      <li><a href="#obras-sociales">Obras sociales</a></li><li><a href="#prestaciones">Prestaciones</a></li>
+      <li><a href="#debitos">Débitos</a></li><li><a href="#notas">Notas</a></li>
+    </ul>
+  </nav>
+
+  <section id="indicadores" aria-labelledby="t-ind">
+    <h2 id="t-ind" class="sr-only">Indicadores clave</h2>
+    <div class="kpis">{kpis_html}</div>
+    <div class="card insights">
+      <h2 style="font-size:1.05rem">Lo más importante {"del mes" if d["mes_completo"] else "del período"}</h2>
+      <ul>{insights_html}</ul>
+    </div>
+  </section>
+
+  <h2 class="section-title">Evolución</h2>
+  <div class="grid grid--2">
+    <section class="card" id="tiempo" aria-labelledby="t-dia">
+      <div class="card__head"><h2 id="t-dia">Facturación neta por día</h2>
+        <p class="muted">Promedio diario {millones(prom_dia)}</p></div>
+      {grafico_dias(pdia, neto)}
+      <div class="legend" aria-hidden="true"><span><i class="lg-bar"></i>Facturación neta del día</span>
+        <span><i class="lg-weekend"></i>Sábado y domingo (banda de fondo)</span><span><i class="lg-peak"></i>Día más alto</span></div>
+      <details><summary>Ver la tabla día por día</summary>{dia_tabla}</details>
+    </section>
+    <section class="card" aria-labelledby="t-sem">
+      <div class="card__head"><h2 id="t-sem">Por semana</h2><p class="muted">Lunes a domingo (semana ISO)</p></div>
+      {hbars(sem_filas)}
+    </section>
+  </div>
+
+  <h2 class="section-title">Qué se factura y quién atiende</h2>
+  <div class="grid grid--even">
+    <section class="card" id="especialidades" aria-labelledby="t-rub">
+      <div class="card__head"><h2 id="t-rub">Por especialidad</h2><p class="muted">Facturación neta · % del mes</p></div>
+      {hbars(rub_filas)}
+    </section>
+    <section class="card" id="profesionales" aria-labelledby="t-ven">
+      <div class="card__head"><h2 id="t-ven">Por profesional</h2><p class="muted">Facturación neta · % del mes</p></div>
+      {ven_barras}
+      {nota_obj}
+    </section>
+  </div>
+  <section class="card" style="margin-top:12px" aria-labelledby="t-ven2">
+    <div class="card__head"><h2 id="t-ven2">Detalle por profesional</h2><p class="muted">Promedio = facturación bruta / facturas emitidas</p></div>
+    {ven_tabla}
+  </section>
+
+  <h2 class="section-title">Obras sociales y prestaciones</h2>
+  <div class="grid">
+    <section class="card" id="obras-sociales" aria-labelledby="t-cli">
+      <div class="card__head"><h2 id="t-cli">Obras sociales y prepagas</h2><p class="muted">Ordenadas por facturación neta</p></div>
+      {cli_tabla}
+    </section>
+    <section class="card" id="prestaciones" aria-labelledby="t-prod">
+      <div class="card__head"><h2 id="t-prod">Prestaciones</h2><p class="muted">Ordenadas por facturación neta</p></div>
+      {prod_tabla}
+    </section>
+  </div>
+
+  <h2 class="section-title">Débitos</h2>
+  <section class="card" id="debitos" style="margin-top:12px" aria-labelledby="t-dev">
+    <div class="card__head"><h2 id="t-dev">Débitos del mes</h2><p class="muted">Renglones con cantidad negativa (débitos a confirmar) · ya restados de la facturación neta</p></div>
+    <div class="mini-kpis">
+      <div><span>Monto debitado</span><b class="num neg">{pesos(dev)}</b></div>
+      <div><span>% de la facturación bruta</span><b class="num">{pct(dev_pct)}</b></div>
+      <div><span>Renglones</span><b class="num">{len(devs)}</b></div>
+      <div><span>Prestaciones debitadas</span><b class="num">{entero(-devs['Cantidad'].sum())}</b></div>
+    </div>
+    <p class="muted" style="font-size:.85rem;margin-bottom:12px">{dev_texto}</p>
+    {dev_tabla}
+  </section>
+
+  <section class="card" id="notas" style="margin-top:12px" aria-labelledby="t-notas">
+    <div class="card__head"><h2 id="t-notas">Notas sobre los datos</h2>
+      <span class="status status--pending"><span class="status__dot" aria-hidden="true"></span>Puntos a confirmar</span></div>
+    <ul class="data-notes">{notas_html}</ul>
+  </section>
+</main>
+
+<footer class="wrap">
+  <span>Preparado por <b>FlowData Solutions</b> · Automatización de Procesos &amp; Soluciones de Datos</span>
+  <span>Fuente: {escape(entrada.name)} · Reporte confidencial para uso interno del cliente.</span>
+</footer>
+
+<script>
+(function () {{
+  var root = document.documentElement, toggle = document.getElementById('theme-toggle');
+  function sync() {{
+    var light = root.dataset.theme === 'light';
+    toggle.setAttribute('aria-pressed', String(light));
+    toggle.setAttribute('aria-label', light ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+  }}
+  toggle.addEventListener('click', function () {{
+    root.dataset.theme = root.dataset.theme === 'light' ? 'dark' : 'light';
+    try {{ localStorage.setItem('fds-theme', root.dataset.theme); }} catch (e) {{}}
+    sync();
+  }});
+  sync();
+}})();
+  document.querySelectorAll('[data-fold]').forEach(function (f) {{
+    var b = f.querySelector('.fold__btn');
+    b.addEventListener('click', function () {{
+      var open = f.classList.toggle('is-open');
+      b.setAttribute('aria-expanded', String(open));
+      b.textContent = open ? b.dataset.less : b.dataset.more;
+      if (!open) f.scrollIntoView({{ block: 'nearest' }});
+    }});
+  }});
+</script>
+</body>
+</html>
+"""
+    salida.write_text(html, encoding="utf-8")
+
+
+# ---------------------------------------------------------------- main
+def main():
+    ap = argparse.ArgumentParser(description="Genera el reporte mensual de facturación (HTML + Excel).")
+    ap.add_argument("entrada", nargs="?", default=ENTRADA_POR_DEFECTO, help="planilla limpia (.xlsx)")
+    ap.add_argument("--salida", default=".", help="carpeta donde guardar el reporte (relativa a este script)")
+    ap.add_argument("--sin-recalcular", action="store_true", help="no recalcular el Excel con LibreOffice")
+    a = ap.parse_args()
+    entrada = (AQUI / Path(a.entrada).expanduser()).resolve()
+    carpeta = (AQUI / Path(a.salida).expanduser()).resolve()
+    carpeta.mkdir(parents=True, exist_ok=True)
+
+    d = preparar(leer_tablas(entrada))
+    info = leer_informe(entrada, d)
+    sufijo = f"{d['periodo'].year}-{d['periodo'].month:02d}"
+    html, xlsx = carpeta / f"reporte_facturacion_{sufijo}.html", carpeta / f"reporte_facturacion_{sufijo}.xlsx"
+    generar_excel(d, xlsx)
+    metodo = recalcular_excel(xlsx) if RECALCULAR_EXCEL and not a.sin_recalcular else ""
+    if metodo:
+        n = controlar_excel(xlsx, d)
+        print(f"Excel recalculado con {metodo}; Resumen con valores y {n} controles OK")
+    generar_html(d, html, entrada, info)
+    print(f"Listo: {html} y {xlsx.name}")
+    print(f"Facturación neta {pesos(d['neto'])} · bruta {pesos(d['bruto'])} · débitos {pesos(d['dev'])} · "
+          f"{d['facturas']} facturas · {entero(d['unidades'])} prestaciones")
+
+
+if __name__ == "__main__":
+    main()

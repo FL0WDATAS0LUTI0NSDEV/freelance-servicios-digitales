@@ -5,7 +5,7 @@
 ## Hecho
 - **Web** con identidad FDS (modo oscuro/claro), servicios (incluye facturas PDF a Excel), planes mensuales, portafolio y caso completo: https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/
 - **Logo** y piezas de marca en `marca/` (portadas de LinkedIn: perfil 1584×396 y página 4200×700).
-- **Portafolio:** limpieza de datos, reporte automático, redacción web, dashboard interactivo, caso completo de la ferretería y **ejemplo 6: facturas PDF a Libro IVA Compras y Ventas en Excel** (datos ficticios; notas de crédito, todas las alícuotas, percepciones, exento, facturas B y saltos de numeración; 0 diferencias en 24 comprobantes).
+- **Portafolio:** limpieza de datos, reporte automático, redacción web, dashboard interactivo, caso completo de un **centro médico** (`referencias/caso-centro-medico/`, facturación a obras sociales) y **ejemplo 6: facturas PDF a Libro IVA Compras y Ventas en Excel**, también de un centro médico (datos ficticios; notas de crédito, todas las alícuotas, percepciones, exento, facturas B y saltos de numeración; 0 diferencias en 25 comprobantes). **Rubro de los ejemplos: salud** (decisión del dueño, 10/11/2026).
 - **Fiverr (en español), 2 gigs activos** (verificados con el conector el 9/11):
   - Power BI: 45 / 150 / 300, FAQ limpias, tags, dashboards 1/3/5, sin video (rechazado).
   - Facturas PDF a Excel: 40 / 90 / 180, Data Processing → Automations, galería propia. Textos en `gestion/gig-facturas-fiverr.md`.
@@ -21,6 +21,12 @@
 - [ ] **Verificación de identidad** (DNI + selfie). W-9: no corresponde; si piden, W-8BEN.
 - [ ] Rutina diaria: app de Fiverr, responder en menos de 1 h, revisar Briefs.
 - [ ] **30/11: primera medición** de los dos gigs (impresiones, clics, mensajes) y revisión de precios (ver simulación en `gestion/fiverr-plan-de-accion.md`).
+
+### Rubro salud: subir a las plataformas (10/11/2026)
+- [ ] **Fiverr, gig de facturas:** reemplazar la galería por `portafolio/capturas/fiverr/gig-facturas/` (portada, ejemplo y PDF nuevos, ya sin la ferretería).
+- [ ] **Fiverr, gig de Power BI:** reemplazar `3-reporte-kpis.png` y, si está subido, el PDF por `fiverr/reporte-facturacion-ejemplo.pdf`.
+- [ ] **Fiverr, Workana y LinkedIn:** pegar los textos nuevos de `gestion/perfil-*.md` (caso del centro médico, 26 PDF) y las imágenes `portafolio-4x3/2-caso-completo-4x3.png` y `4-facturas-pdf-excel-4x3.png`. El link viejo del reporte redirige solo al nuevo.
+- [ ] **Metricool, post 6 (26/11):** usa `2-caso-completo-reporte.png`. Si se programó con la imagen vieja (ferretería), cambiarla por la nueva.
 
 ### Workana
 - [ ] Cuando aprueben: cargar lo del servicio de facturas y **5 propuestas por día** (agente `redactor-propuestas`, sin links).

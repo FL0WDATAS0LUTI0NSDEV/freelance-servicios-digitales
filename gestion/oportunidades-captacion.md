@@ -13,8 +13,8 @@
 ## Prioridad 2 — Clientes directos (próximas 2–4 semanas)
 
 1. **Estudios contables como socios.** Cada estudio atiende decenas de PyMEs con planillas desordenadas. Es el público ideal del servicio de **facturas PDF a Libro IVA en Excel** (ejemplo 6 del portafolio). Ofrecerles: carga de facturas para cierres, reportes mensuales automáticos para sus clientes, o comisión por referido. Empezar por el contador propio (de paso, la consulta por monotributo).
-2. **Red cercana:** la lista de "10 conocidos / PyMEs cercanas" del plan de lanzamiento sigue pendiente. Llevar el caso de la ferretería como ejemplo (es justo el tipo de comercio al que apunta).
-3. **Comercios con stock y ventas en Excel:** ferreterías, distribuidoras, corralones, ópticas, farmacias. Propuesta concreta: "te dejo un reporte mensual de ventas y stock que se arma solo".
+2. **Red cercana:** la lista de "10 conocidos / PyMEs cercanas" del plan de lanzamiento sigue pendiente. Llevar el caso del centro médico como ejemplo.
+3. **Centros médicos, consultorios y clínicas** (rubro elegido para los ejemplos): facturación a obras sociales, débitos, turnos y ausentismo. Propuesta concreta: "te dejo un reporte mensual de facturación por obra social y profesional que se arma solo". Nunca pedir ni procesar historias clínicas: solo datos administrativos.
 4. **Comunidades:** grupos de Power BI y Excel en español (LinkedIn, Facebook, Telegram), respondiendo dudas con ayuda real, sin vender de entrada.
 
 ## Prioridad 3 — Mediano plazo
@@ -41,7 +41,7 @@ La oferta está en `servicios/oferta-estudios-contables.md` (planes de USD 60, 1
 - [ ] Confirmar con el contador cómo facturar (monotributo) y si cobrar en USD o en pesos.
 - [ ] Tener a mano un acuerdo de confidencialidad simple.
 - [x] Ampliar `extraer_facturas.py`: Libro IVA Ventas, notas de crédito, todas las alícuotas, percepciones de IVA, no gravado y exento, facturas B con IVA contenido y saltos de numeración (10/11/2026, 0 diferencias en 24 comprobantes).
-- [ ] Actualizar las cifras del ejemplo 6 en los perfiles de Workana, Fiverr y LinkedIn si se edita esa parte (hoy dicen "14 PDF"; ahora son 18 de compras + 7 de ventas).
+- [ ] Actualizar las cifras del ejemplo 6 en los perfiles de Workana, Fiverr y LinkedIn si se edita esa parte (hoy dicen "14 PDF"; ahora son 18 de compras + 8 de ventas = 26 PDF). Los textos de `gestion/perfil-*.md` ya están actualizados; falta pegarlos en cada plataforma.
 - [ ] Sumar el ejemplo 6 a la sección `#portafolio` de la web (hoy el mail apunta a la carpeta en GitHub).
 - [ ] Armar la lista de 20 estudios para contactar (LinkedIn, "estudio contable" + ciudad).
 
@@ -55,7 +55,7 @@ Ficha en `servicios/chatbots.md` (USD 60 / 180 / 400 y mantenimiento de USD 40/m
 **Ojo con los costos de Meta:** desde el 1/10/2026 la API de WhatsApp cobra también las respuestas dentro de la ventana de 24 h, según varios proveedores. Las tarifas para Argentina que publican terceros no coinciden (marketing entre USD 0,03 y 0,07 por mensaje): confirmar en la tabla oficial de Meta antes de cada presupuesto.
 
 **Antes de ofrecerlo:**
-- [ ] **Ejemplo 7 de portafolio** (con datos ficticios): bot de la ferretería que responde horarios y medios de pago, consulta stock y precio desde una planilla y guarda los pedidos. Con video corto de la conversación.
+- [ ] **Ejemplo 7 de portafolio** (con datos ficticios): bot de turnos del centro médico que responde horarios, obras sociales aceptadas y preparación de estudios, ofrece turnos libres desde una planilla, manda recordatorios y deriva a recepción. Sin datos clínicos. Con video corto de la conversación.
 - [ ] Elegir la herramienta (plataforma sin código tipo ManyChat o Botpress, o Python + API de WhatsApp) según costo para el cliente y facilidad de mantenimiento.
 - [ ] Probar el flujo completo con un número de prueba propio, nunca con el de un cliente.
 - [ ] Recién después: sumarlo a la web (`index.html` y `README.md`, en sintonía con la ficha), crear un gig en Fiverr y mencionarlo en Workana.

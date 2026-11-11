@@ -3,14 +3,15 @@
 > Ficha del servicio. Todavía **no se publica en la web ni en las plataformas**: primero va el ejemplo de portafolio (ver `gestion/oportunidades-captacion.md`).
 
 ## Para quién
-PYMEs y comercios que reciben todos los días las mismas preguntas por WhatsApp o Instagram (precios, horarios, stock, estado del pedido) y pierden ventas por no contestar a tiempo.
+Consultorios, centros médicos y PYMEs que reciben todos los días las mismas preguntas por WhatsApp o Instagram (turnos, horarios, obras sociales aceptadas, precios, estado de un pedido) y pierden pacientes o ventas por no contestar a tiempo.
 
 ## Qué hago
 - **Respuestas automáticas** a las preguntas frecuentes, las 24 horas.
 - **Menús simples** para que el cliente encuentre lo que busca sin esperar.
 - **Toma de datos** (nombre, consulta, pedido) que se guardan solos en una planilla de Google Sheets o Excel.
 - **Derivación a una persona** cuando el bot no sabe la respuesta o el cliente lo pide.
-- **Lo que me diferencia:** el bot puede **consultar tus datos** (stock, lista de precios, estado de un pedido) desde una planilla, y cada mes recibís un **reporte de consultas**: qué preguntan, a qué hora y cuántas terminan en venta.
+- **Lo que me diferencia:** el bot puede **consultar tus datos** (turnos libres, lista de precios, estado de un pedido) desde una planilla, y cada mes recibís un **reporte de consultas**: qué preguntan, a qué hora y cuántas terminan en turno o en venta.
+- **En salud:** el bot gestiona turnos y recordatorios, pero no pide ni guarda datos clínicos ni da indicaciones médicas.
 
 ## Paquetes sugeridos
 
@@ -18,7 +19,7 @@ PYMEs y comercios que reciben todos los días las mismas preguntas por WhatsApp 
 |---|---|---|---|
 | **Precio** | **USD 60** | **USD 180** | **USD 400** |
 | Canal | WhatsApp Business (app) | WhatsApp, Instagram o web (1 canal) | Hasta 2 canales |
-| Qué incluye | Mensaje de bienvenida y de ausencia, respuestas rápidas y catálogo | Menús y hasta 10 preguntas frecuentes, toma de datos a planilla, derivación a una persona | Respuestas con IA a partir de la información del negocio, consulta de stock o pedidos desde una planilla, toma de datos y derivación |
+| Qué incluye | Mensaje de bienvenida y de ausencia, respuestas rápidas y catálogo | Menús y hasta 10 preguntas frecuentes, toma de datos a planilla, derivación a una persona | Respuestas con IA a partir de la información del negocio, consulta de turnos libres, stock o pedidos desde una planilla, recordatorios, toma de datos y derivación |
 | Reporte de consultas | — | — | Primer reporte mensual incluido |
 | Plazo estimado | 2 días | 5–7 días | 2–3 semanas |
 | Revisiones | 1 | 2 | 3 |

@@ -131,7 +131,7 @@ Una distribuidora tenía un año de ventas en una planilla y armaba tablas diná
 Herramientas: Python (preparación de datos), HTML, CSS y JavaScript.
 ```
 
-**Proyecto 2 — Archivos:** `2-caso-completo-reporte.png`, `fiverr/reporte-ventas-ejemplo.pdf`
+**Proyecto 2 — Archivos:** `2-caso-completo-reporte.png`, `fiverr/reporte-facturacion-ejemplo.pdf`
 ```
 Reporte de ventas automático en HTML y Excel
 ```
