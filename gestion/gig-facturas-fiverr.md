@@ -86,8 +86,13 @@ El servicio es en español.
 ```
 
 ## 6. Galería (`portafolio/capturas/fiverr/gig-facturas/`)
+**Imágenes (3):**
 1. `1-portada-facturas-pdf-excel.png` — portada (1280×769)
-2. `2-ejemplo-libro-iva.png` — de PDF a Excel con controles
-3. `3-libro-iva-ejemplo.pdf` — el libro de ejemplo (PDF)
+2. `2-ejemplo-libro-iva.png` — de PDF a Excel con controles (Compras)
+3. `3-compras-ventas-controles.png` — Libro IVA Ventas (A, B, NC, exento) + panel de controles
 
-4. `4-video-facturas-pdf-excel.mp4` — video de 40 s (1920×1080, 5,5 MB), animado desde el primer cuadro (sin imágenes fijas): portada → paso 1 PDF → paso 2 extracción → paso 3 Libro IVA con controles → resultado. El primer cuadro funciona como miniatura del gig.
+**Video:** `4-video-facturas-pdf-excel.mp4` — 40 s, 1920×1080, animado desde el primer cuadro (sin imágenes fijas). Subido el 12/11.
+
+**PDF (2):**
+- `3-libro-iva-ejemplo.pdf` — Libro IVA Compras (3 hojas: libro, por proveedor, controles)
+- `5-libro-iva-ventas-ejemplo.pdf` — Libro IVA Ventas (libro, por cliente, controles), formato argentino
