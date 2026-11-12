@@ -90,4 +90,4 @@ El servicio es en español.
 2. `2-ejemplo-libro-iva.png` — de PDF a Excel con controles
 3. `3-libro-iva-ejemplo.pdf` — el libro de ejemplo (PDF)
 
-Sin video por ahora (el anterior fue rechazado por tener imagen fija).
+4. `4-video-facturas-pdf-excel.mp4` — video de 40 s (1920×1080, 5,5 MB), animado desde el primer cuadro (sin imágenes fijas): portada → paso 1 PDF → paso 2 extracción → paso 3 Libro IVA con controles → resultado. El primer cuadro funciona como miniatura del gig.
