@@ -1,6 +1,6 @@
 # Estado del proyecto — FlowData Solutions
 
-> Resumen para retomar en la próxima sesión. Última actualización: 10 de noviembre de 2026.
+> Resumen para retomar en la próxima sesión. Última actualización: 12 de noviembre de 2026.
 
 ## Hecho
 - **Web** con identidad FDS (modo oscuro/claro), servicios (incluye facturas PDF a Excel), planes mensuales, portafolio y caso completo: https://fl0wdatas0luti0nsdev.github.io/freelance-servicios-digitales/
@@ -11,6 +11,7 @@
   - Facturas PDF a Excel: 40 / 90 / 180, Data Processing → Automations, galería propia. Textos en `gestion/gig-facturas-fiverr.md`.
   - Perfil: título "Desarrollador Power BI y Analista de Datos", "Acerca de" con facturas, 12 habilidades, certificación corregida, portafolio de 4 proyectos, **2FA activada**.
 - **Workana:** perfil completo; **en revisión**. Textos con el servicio de facturas listos en `gestion/perfil-workana.md`; plantilla de propuesta de facturas en el kit.
+- **Foto de perfil** (foto del dueño con gráfico de crecimiento, camisa azul noche) subida a LinkedIn, Fiverr y Workana el 11/11. **No está en el repo** (es público).
 - **LinkedIn (opción A, decisión del dueño):** perfil personal "Dante I" con la marca en portada, titular y experiencia (Fundador · FlowData Solutions). Destacado con la web. **Primera publicación hecha** (9/11). Riesgos y reglas en `gestion/perfil-linkedin.md`.
 - **Herramientas:** kit de propuestas, planilla de seguimiento (meta USD 1.500 netos/mes), 5 agentes, 5 skills de diseño, tarea semanal de los lunes, plan de repaso.
 
@@ -25,7 +26,8 @@
 ### Rubro salud: subir a las plataformas (10/11/2026)
 - [ ] **Fiverr, gig de facturas:** reemplazar la galería por `portafolio/capturas/fiverr/gig-facturas/` (portada, ejemplo y PDF nuevos, ya sin la ferretería).
 - [ ] **Fiverr, gig de Power BI:** reemplazar `3-reporte-kpis.png` y, si está subido, el PDF por `fiverr/reporte-facturacion-ejemplo.pdf`.
-- [ ] **Fiverr, Workana y LinkedIn:** pegar los textos nuevos de `gestion/perfil-*.md` (caso del centro médico, 26 PDF) y las imágenes `portafolio-4x3/2-caso-completo-4x3.png` y `4-facturas-pdf-excel-4x3.png`. El link viejo del reporte redirige solo al nuevo.
+- [x] **Fiverr, perfil (12/11):** "Acerca de" nuevo (pymes, centros de salud, estudios contables; verificado con el conector) y proyectos 2 y 4 del portafolio editados al rubro salud. Pendiente: corregir el título (doble espacio en "Power  BI" y falta la tilde en "automáticos").
+- [ ] **Workana y LinkedIn:** pegar los textos nuevos de `gestion/perfil-*.md` (caso del centro médico, 26 PDF) y las imágenes `portafolio-4x3/2-caso-completo-4x3.png` y `4-facturas-pdf-excel-4x3.png`. El link viejo del reporte redirige solo al nuevo.
 - [x] **Metricool, post 6 (sale el 23/11):** adaptado a salud con la imagen del centro médico (10/11/2026).
 
 ### Workana
